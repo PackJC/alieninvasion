@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\data",
+    "\\data\\aliens",
+    "\\data\\aliens\\sounds",
+    "\\scripts",
+    "\\scripts\\4_world",
+    "\\scripts\\4_world\\entities",
+    "\\scripts\\4_world\\entities\\building",
+    "\\scripts\\4_world\\entities\\building\\wrecks",
+    "\\scripts\\4_world\\entities\\plasmarifle"
+  ],
+  "SelectedNode": "\\data\\aliens\\sounds\\config.cpp",
+  "PreviewInSolutionExplorer": false
+}

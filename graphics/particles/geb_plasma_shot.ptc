@@ -1,0 +1,158 @@
+EffectDef {
+ Emitors {
+  EmitorDef plasma_shot {
+   ShapeType Cone
+   ShapeSize 0 0 0
+   ConeAngle 1 1 0
+   LOD 0
+   MaxNum 1
+   BirthRate 1
+   BirthRateRND 1
+   BirthRateVel 1
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 1
+   Material "{9833D8BE7A512C63}graphics/particles/materials/flash/electric.emat"
+   CenterY -0.039
+   ScaleX 0.2
+   ScaleY 1
+   SizeMultiplier 1
+   SizeRND 1
+   RandomRotDir 0
+   RotMultiplier 1
+   StretchMultiplier 1
+   StreakFullUV 1
+   VelAngle 1
+   RandomAngle 0
+   Sort 0
+   BillboardingType Full
+   Velocity 50
+   VelocityRND 50
+   VelAffect 22
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 20
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 2
+   LifetimeShortening 0
+   Color {
+    0 1 1 1 1 0 0 0
+   }
+   Alpha {
+    0 1 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 1 1 0
+   }
+   EffectTime 2
+   Repeat 0
+   ColorMast {
+    0 0 0.9873 0.0443 1 0 1 0
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 0
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+  EmitorDef plasma_smoke {
+   ConeAngle 360 0 15
+   MaxNum 10
+   BirthRate 120
+   Angles 0 0 -90
+   LocalTransform 0
+   Material "{9833D8BE7A512C63}graphics/particles/materials/flash/electric.emat"
+   ScaleX 0.575
+   ScaleY 0.557
+   SizeMultiplier 2
+   SizeRND 5
+   RandomRotDir 1
+   RotMultiplier 50
+   StreakFullUV 1
+   RandomAngle 1
+   Velocity 10
+   VelocityRND 30
+   VelAffect 1
+   AirResistance 25
+   AirResistanceRND 50
+   Wind 1
+   LifeTime 1
+   LifeTimeRND 1
+   Color {
+    0 0.2353 0.2353 0.2353 1 0.1686 0.1686 0.1686
+   }
+   Alpha {
+    0 0.04487 0.1233 0.15823 1 0
+   }
+   RotationSpeed {
+    0 0.09615 0.75488 0.23418 1 1
+   }
+   Size {
+    0 0.41667 1 1
+   }
+   EffectTime 2
+   Repeat 0
+   ColorMast {
+    0 0.0443 0.8671 0 1 0 0.9304 0
+   }
+  }
+  EmitorDef plasma_fumes {
+   ShapeType Cone
+   ConeAngle 360 0 15
+   MaxNum 10
+   BirthRate 120
+   Angles 0 0 -90
+   LocalTransform 0
+   Material "{9833D8BE7A512C63}graphics/particles/materials/flash/electric.emat"
+   SizeMultiplier 1
+   SizeRND 0.3
+   RandomRotDir 1
+   RotMultiplier 50
+   StreakFullUV 1
+   RandomAngle 1
+   Velocity 10
+   VelocityRND 30
+   VelAffect 1
+   AirResistance 25
+   AirResistanceRND 50
+   Wind 1
+   LifeTime 1
+   LifeTimeRND 1
+   Color {
+    0 0.027 1 0.2353 1 0 1 0.1686
+   }
+   Alpha {
+    0 0.2973 0.12144 0.24324 1 0.02703
+   }
+   RotationSpeed {
+    0 0.09615 0.75488 0.23418 1 1
+   }
+   Size {
+    0 0.41667 1 1
+   }
+   EffectTime 1
+   Repeat 0
+   ColorMast {
+    0 0.0127 0.7911 0.0127 1 0 0.2025 0
+   }
+  }
+ }
+}
