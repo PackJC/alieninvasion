@@ -1455,7 +1455,7 @@ class cfgMagazines
 		model = "\alieninvasion\data\weapons\geb_plasmacartridge.p3d";
 		weight=50;
 		count=15;
-		itemSize[]={3,2};
+		itemSize[]={2,1};
 		ammo="Plasma_Cell";
 		ammoItems[]=
 		{

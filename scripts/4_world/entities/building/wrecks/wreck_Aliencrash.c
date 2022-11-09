@@ -20,7 +20,8 @@ class geb_Aliencrash extends CrashBase
 		{
 			//particles - Aurora trail
 			m_ParticleEfx = ParticleManager.GetInstance().PlayOnObject(ParticleList.UFO_WRECK, this, Vector(0, -1, 0));
-			Particle m_ParticleEfx2 = ParticleManager.GetInstance().PlayOnObject(ParticleList.UFO_FIRE, this, Vector(-0.45, 2.35, -0.5));
+			//was 2.35
+			Particle m_ParticleEfx2 = ParticleManager.GetInstance().PlayOnObject(ParticleList.UFO_FIRE, this, Vector(-0.45, 1.85, -0.5));
 			Particle m_ParticleEfx4 = ParticleManager.GetInstance().PlayOnObject(ParticleList.SPOOKY_MIST, this, Vector(0, -5, 0));
 			m_Light = XmasSleighLight.Cast( ScriptedLightBase.CreateLight( XmasSleighLight, "0 0 0") );
 			m_Light.SetAmbientColor(0.3, 1.0, 0.2);
@@ -65,7 +66,7 @@ class geb_Aliencrash extends CrashBase
 	{
 		EntityAI deer;
 		vector crash_pos = GetPosition();
-		
+		Print("UFO Wreck: " + crash_pos)
 		int deersAmount = Math.RandomIntInclusive(m_MinDeersAmount,m_MaxDeersAmount);
 		
 		for (int i = 0; i < m_MaxDeersAmount; i++)
