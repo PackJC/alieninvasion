@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07100d">
+  <meta name="description" content="Alien Invasion for DayZ — UFO crash encounters, hostile aliens, plasma weaponry, server installation, and classnames.">
+  <title>Alien Invasion — DayZ Mod Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="hero" id="top">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="signal signal-one" aria-hidden="true"></div>
+    <div class="signal signal-two" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="eyebrow"><span class="pulse"></span> Signal acquired / Chernarus sector</p>
+      <h1>ALIEN <span>INVASION</span></h1>
+      <p class="hero-copy">An extraterrestrial encounter expansion for DayZ. Investigate burning UFO wrecks, survive hostile little green men, and recover technology that was never meant to reach Earth.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308">Subscribe on Steam</a>
+        <button class="button button-secondary" type="button" data-open-tab="install">Server installation</button>
+      </div>
+      <div class="badges" aria-label="Project badges">
+        <img src="https://img.shields.io/badge/Mod-v1.0-75ff9b?style=for-the-badge&labelColor=13221b" alt="Mod version 1.0">
+        <img src="https://img.shields.io/badge/DayZ-v1.29-5ce1e6?style=for-the-badge&labelColor=13221b" alt="DayZ version 1.29">
+        <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><img src="https://img.shields.io/steam/subscriptions/2840597308?style=for-the-badge&color=9678ff&label=Workshop%20Subs&labelColor=13221b" alt="Current Steam Workshop subscribers"></a>
+      </div>
+    </div>
+    <div class="telemetry" aria-hidden="true">
+      <span>AZ 047.22</span><span>EL 13.08</span><span>RANGE UNKNOWN</span>
+    </div>
+  </header>
+
+  <nav class="site-nav" aria-label="Documentation sections">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Alien Invasion home"><span class="brand-mark">AI</span><span>Field Manual</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="tab-list"><span></span><span></span><span></span><span class="sr-only">Toggle navigation</span></button>
+      <div class="tab-list" id="tab-list" role="tablist">
+        <button class="tab-button active" id="overview-tab" role="tab" aria-selected="true" aria-controls="overview" data-tab="overview">Overview</button>
+        <button class="tab-button" id="install-tab" role="tab" aria-selected="false" aria-controls="install" data-tab="install">Install</button>
+        <button class="tab-button" id="encounter-tab" role="tab" aria-selected="false" aria-controls="encounter" data-tab="encounter">Encounter</button>
+        <button class="tab-button" id="arsenal-tab" role="tab" aria-selected="false" aria-controls="arsenal" data-tab="arsenal">Arsenal</button>
+        <button class="tab-button" id="classnames-tab" role="tab" aria-selected="false" aria-controls="classnames" data-tab="classnames">Classnames</button>
+        <button class="tab-button" id="faq-tab" role="tab" aria-selected="false" aria-controls="faq" data-tab="faq">FAQ</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <section class="tab-panel active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+      <div class="section-heading">
+        <p class="kicker">Mission briefing</p>
+        <h2>Something came down in the night.</h2>
+        <p>Alien Invasion adds a self-contained science-fiction encounter to DayZ without replacing vanilla helicopter crashes. A Central Economy-spawned UFO becomes a dangerous point of interest surrounded by 10–15 hostile aliens.</p>
+      </div>
+
+      <div class="stat-grid">
+        <article class="stat-card"><strong>10–15</strong><span>Aliens per wreck</span></article>
+        <article class="stat-card"><strong>5–25 m</strong><span>Encounter radius</span></article>
+        <article class="stat-card"><strong>15</strong><span>Plasma rounds</span></article>
+        <article class="stat-card"><strong>12+</strong><span>Supported languages</span></article>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card"><span class="feature-number">01</span><h3>UFO crash site</h3><p>A custom wreck with green light, fire, mist, persistent particles, and distant crash audio.</p></article>
+        <article class="feature-card"><span class="feature-number">02</span><h3>Hostile visitors</h3><p>Little Green Men use infected behavior with custom models, movement audio, attacks, and hit sounds.</p></article>
+        <article class="feature-card"><span class="feature-number">03</span><h3>Alien technology</h3><p>Recover the Montauk Rifle and its sealed plasma cartridges for a distinctly unearthly arsenal.</p></article>
+        <article class="feature-card"><span class="feature-number">04</span><h3>Harvest the evidence</h3><p>Prepare defeated aliens for Area 51 Steak and Roswell Hide using supported cutting tools.</p></article>
+      </div>
+
+      <aside class="callout">
+        <div><p class="kicker">No dependency chain</p><h3>Built to stand alone</h3><p>The mod declares no third-party runtime requirement. Load it on the server and every connecting client.</p></div>
+        <a class="text-link" href="https://github.com/PackJC/alieninvasion">Browse the source <span>→</span></a>
+      </aside>
+    </section>
+
+    <section class="tab-panel" id="install" role="tabpanel" aria-labelledby="install-tab" hidden>
+      <div class="section-heading"><p class="kicker">Deployment protocol</p><h2>Install Alien Invasion</h2><p>Choose the player path for local use or the server path for a community server. The Workshop remains the authorized distribution source.</p></div>
+
+      <div class="install-switch" role="group" aria-label="Installation type">
+        <button class="switch-button active" type="button" data-install="player">Player</button>
+        <button class="switch-button" type="button" data-install="server">Server owner</button>
+      </div>
+
+      <div class="install-panel active" data-install-panel="player">
+        <ol class="steps">
+          <li><span>01</span><div><h3>Open the Workshop page</h3><p>Visit Alien Invasion on Steam and select <strong>Subscribe</strong>.</p></div></li>
+          <li><span>02</span><div><h3>Let Steam download the mod</h3><p>Wait for the DayZ Workshop download to finish before starting the launcher.</p></div></li>
+          <li><span>03</span><div><h3>Join a compatible server</h3><p>The official DayZ launcher can resolve and load the server's required Workshop mods automatically.</p></div></li>
+        </ol>
+        <a class="button button-primary" href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308">Open Workshop item</a>
+      </div>
+
+      <div class="install-panel" data-install-panel="server" hidden>
+        <ol class="steps">
+          <li><span>01</span><div><h3>Download the Workshop item</h3><p>Subscribe with the server's Steam account or retrieve Workshop item <code>2840597308</code> using your normal SteamCMD workflow.</p></div></li>
+          <li><span>02</span><div><h3>Install and key the server</h3><p>Place the published mod folder beside the DayZ server executable. Copy its <code>.bikey</code> file into the server's <code>keys</code> directory.</p></div></li>
+          <li><span>03</span><div><h3>Add the launch parameter</h3><p>Load the mod in your server startup command. Keep the actual installed folder name if it differs from the example.</p><div class="code-block"><code>-mod=@alieninvasion</code><button class="copy-button" type="button" data-copy="-mod=@alieninvasion">Copy</button></div></div></li>
+          <li><span>04</span><div><h3>Configure the encounter</h3><p>Add <code>geb_Aliencrash</code> to your mission's Central Economy or custom event files and define valid event positions. Mission economy files are intentionally server-specific and are not overwritten by the mod.</p></div></li>
+          <li><span>05</span><div><h3>Restart and verify</h3><p>Restart the server, inspect the script and RPT logs, then confirm a CE-created wreck emits crash audio and spawns aliens.</p></div></li>
+        </ol>
+        <div class="warning"><strong>Do not repack the Workshop release.</strong><span>Use a Steam Collection to distribute the required mod to your players.</span></div>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="encounter" role="tabpanel" aria-labelledby="encounter-tab" hidden>
+      <div class="section-heading"><p class="kicker">Contact sequence</p><h2>How the crash encounter works</h2><p>The scripted encounter begins only when the Central Economy creates the active wreck classname.</p></div>
+      <div class="timeline">
+        <article><span>01</span><div><h3>Impact</h3><p><code>geb_Aliencrash</code> enters the world through the Central Economy and requests the custom distant crash sound.</p></div></article>
+        <article><span>02</span><div><h3>Visual signal</h3><p>Clients attach green illumination, UFO fire, wreck particles, and ground mist to the crash object.</p></div></article>
+        <article><span>03</span><div><h3>Contact</h3><p>The server creates a random group of 10–15 Little Green Men at randomized positions 5–25 meters from the wreck.</p></div></article>
+        <article><span>04</span><div><h3>Recovery</h3><p>Survivors can harvest alien remains and use separately configured loot systems to place the rifle, cartridges, or hat.</p></div></article>
+      </div>
+      <div class="two-column">
+        <article class="info-card"><p class="kicker">Active wreck</p><h3><code>geb_Aliencrash</code></h3><p>Use this classname when you want the complete scripted event: audio, client effects, and alien spawning.</p></article>
+        <article class="info-card"><p class="kicker">Visual prop</p><h3><code>StaticObj_geb_Aliencrash</code></h3><p>Use this for scenery or custom compositions. It displays the wreck model without running the encounter script.</p></article>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="arsenal" role="tabpanel" aria-labelledby="arsenal-tab" hidden>
+      <div class="section-heading"><p class="kicker">Recovered materials</p><h2>Field inventory</h2><p>Eight public classnames cover the encounter, creature, weapon, magazine, clothing, food, and harvested material.</p></div>
+      <div class="loadout-grid">
+        <article class="loadout-card"><span class="item-tag">Weapon</span><h3>Montauk Rifle</h3><code>geb_PlasmaRifle</code><p>A semi-automatic experimental rifle with plasma shot particles and custom firing audio.</p><dl><div><dt>Fire mode</dt><dd>Semi-auto</dd></div><div><dt>Magazine</dt><dd>Montauk</dd></div></dl></article>
+        <article class="loadout-card"><span class="item-tag">Magazine</span><h3>Montauk Cartridge</h3><code>geb_PlasmaCartridge</code><p>A sealed plasma magazine. Its unload action is intentionally disabled.</p><dl><div><dt>Capacity</dt><dd>15</dd></div><div><dt>Ammo</dt><dd>Plasma Cell</dd></div></dl></article>
+        <article class="loadout-card"><span class="item-tag">Clothing</span><h3>Tin Foil Hat</h3><code>geb_FoilHat</code><p>Protective equipment for survivors who have read the classified reports.</p><dl><div><dt>Slot</dt><dd>Headgear</dd></div><div><dt>Style</dt><dd>Silver</dd></div></dl></article>
+        <article class="loadout-card"><span class="item-tag">Food</span><h3>Area 51 Steak</h3><code>geb_GreenAlienMeat</code><p>One or two steaks can be prepared from an alien using a supported cutting tool.</p><dl><div><dt>Source</dt><dd>Alien</dd></div><div><dt>Cookable</dt><dd>Yes</dd></div></dl></article>
+        <article class="loadout-card"><span class="item-tag">Material</span><h3>Roswell Hide</h3><code>geb_GreenAlienSkin</code><p>A strange extraterrestrial hide recovered during skinning.</p><dl><div><dt>Source</dt><dd>Alien</dd></div><div><dt>Type</dt><dd>Pelt</dd></div></dl></article>
+        <article class="loadout-card"><span class="item-tag">Creature</span><h3>Little Green Man</h3><code>geb_GreenAlien</code><p>A hostile extraterrestrial based on DayZ infected behavior with custom sounds.</p><dl><div><dt>Behavior</dt><dd>Hostile</dd></div><div><dt>Harvestable</dt><dd>Yes</dd></div></dl></article>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="classnames" role="tabpanel" aria-labelledby="classnames-tab" hidden>
+      <div class="section-heading"><p class="kicker">Server reference</p><h2>Classname database</h2><p>Search or filter every public classname. Use the copy button to move a value directly into an economy, trader, or admin-tool configuration.</p></div>
+      <div class="table-controls">
+        <label><span class="sr-only">Search classnames</span><input id="classname-search" type="search" placeholder="Search classname or description…" autocomplete="off"></label>
+        <select id="classname-filter" aria-label="Filter by type"><option value="all">All types</option><option value="Encounter">Encounter</option><option value="Creature">Creature</option><option value="Weapon">Weapon</option><option value="Magazine">Magazine</option><option value="Food">Food</option><option value="Material">Material</option><option value="Clothing">Clothing</option></select>
+        <span class="result-count" id="result-count">8 entries</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Classname</th><th>Type</th><th>Description</th><th><span class="sr-only">Copy</span></th></tr></thead>
+          <tbody id="classname-body"></tbody>
+        </table>
+      </div>
+      <p class="empty-state" id="empty-state" hidden>No classnames match that search.</p>
+    </section>
+
+    <section class="tab-panel" id="faq" role="tabpanel" aria-labelledby="faq-tab" hidden>
+      <div class="section-heading"><p class="kicker">Troubleshooting</p><h2>Frequently asked questions</h2><p>Answers for common player and server-owner setup issues.</p></div>
+      <div class="accordion">
+        <details><summary>Does the mod replace vanilla helicopter crashes?<span>+</span></summary><p>No. Alien Invasion adds its own wreck class and sound set. Vanilla crash events remain available.</p></details>
+        <details><summary>Why did I spawn the static wreck and get no aliens?<span>+</span></summary><p><code>StaticObj_geb_Aliencrash</code> is visual scenery only. Use <code>geb_Aliencrash</code> through the Central Economy for the scripted encounter.</p></details>
+        <details><summary>Does every player need the mod?<span>+</span></summary><p>Yes. It contains custom models, textures, sounds, particles, scripts, and localization, so it must run on the server and all clients.</p></details>
+        <details><summary>Does Alien Invasion require Community Framework?<span>+</span></summary><p>No third-party mod is declared as a runtime dependency in the source.</p></details>
+        <details><summary>Where are the mission XML files?<span>+</span></summary><p>The source repository does not ship ready-made mission economy files. Add the active wreck to your server's own event configuration and positions so the mod does not overwrite your balance.</p></details>
+        <details><summary>Can I include this in a server pack?<span>+</span></summary><p>No. Subscribe to the authorized Workshop release and use a Steam Collection for your server's mod list.</p></details>
+      </div>
+      <div class="support-grid">
+        <a href="https://discord.gg/G8uSGZ8yyf"><span>Community support</span><strong>Join Discord →</strong></a>
+        <a href="https://github.com/PackJC/alieninvasion/issues"><span>Found a code issue?</span><strong>Open a GitHub issue →</strong></a>
+        <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><span>Published release</span><strong>Visit Workshop →</strong></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>ALIEN INVASION</strong><span>A DayZ community mod by Geb / Cole</span></div>
+    <div class="footer-links"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308">Steam Workshop</a><a href="https://github.com/PackJC/alieninvasion">GitHub</a><a href="https://discord.gg/G8uSGZ8yyf">Discord</a></div>
+    <p>DayZ and Bohemia Interactive are trademarks or registered trademarks of Bohemia Interactive. This project is not affiliated with or endorsed by Bohemia Interactive.</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied to clipboard</div>
+</body>
+</html>
