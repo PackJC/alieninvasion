@@ -95,11 +95,11 @@
       <div class="section-heading"><p class="kicker">Deployment protocol</p><h2>Install Alien Invasion</h2><p>Choose the player path for local use or the server path for a community server. The Workshop remains the authorized distribution source.</p></div>
 
       <div class="install-switch" role="group" aria-label="Installation type">
-        <button class="switch-button active" type="button" data-install="player">Player</button>
-        <button class="switch-button" type="button" data-install="server">Server owner</button>
+        <button class="switch-button" type="button" data-install="player">Player</button>
+        <button class="switch-button active" type="button" data-install="server">Server owner</button>
       </div>
 
-      <div class="install-panel active" data-install-panel="player">
+      <div class="install-panel" data-install-panel="player" hidden>
         <ol class="steps">
           <li><span>01</span><div><h3>Open the Workshop page</h3><p>Visit Alien Invasion on Steam and select <strong>Subscribe</strong>.</p></div></li>
           <li><span>02</span><div><h3>Let Steam download the mod</h3><p>Wait for the DayZ Workshop download to finish before starting the launcher.</p></div></li>
@@ -108,14 +108,74 @@
         <a class="button button-primary" href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308">Open Workshop item</a>
       </div>
 
-      <div class="install-panel" data-install-panel="server" hidden>
+      <div class="install-panel active" data-install-panel="server">
         <ol class="steps">
           <li><span>01</span><div><h3>Download the Workshop item</h3><p>Subscribe with the server's Steam account or retrieve Workshop item <code>2840597308</code> using your normal SteamCMD workflow.</p></div></li>
           <li><span>02</span><div><h3>Install and key the server</h3><p>Place the published mod folder beside the DayZ server executable. Copy its <code>.bikey</code> file into the server's <code>keys</code> directory.</p></div></li>
           <li><span>03</span><div><h3>Add the launch parameter</h3><p>Load the mod in your server startup command. Keep the actual installed folder name if it differs from the example.</p><div class="code-block"><code>-mod=@alieninvasion</code><button class="copy-button" type="button" data-copy="-mod=@alieninvasion">Copy</button></div></div></li>
-          <li><span>04</span><div><h3>Configure the encounter</h3><p>Add <code>geb_Aliencrash</code> to your mission's Central Economy or custom event files and define valid event positions. Mission economy files are intentionally server-specific and are not overwritten by the mod.</p></div></li>
+          <li><span>04</span><div><h3>Configure the Central Economy</h3><p>Follow the complete guide below. You will register the wreck type, define its dynamic event, and add map-specific spawn coordinates.</p></div></li>
           <li><span>05</span><div><h3>Restart and verify</h3><p>Restart the server, inspect the script and RPT logs, then confirm a CE-created wreck emits crash audio and spawns aliens.</p></div></li>
         </ol>
+        <section class="ce-guide" aria-labelledby="ce-guide-title">
+          <div class="ce-intro">
+            <p class="kicker">Central Economy walkthrough</p>
+            <h3 id="ce-guide-title">Add automatic UFO crash events</h3>
+            <p>Stop the server and back up the active mission folder before editing it. The usual path is <code>mpmissions/dayzOffline.&lt;map&gt;/</code>; hosting panels may expose the same files through an economy editor.</p>
+          </div>
+
+          <div class="important-note"><strong>Important update</strong><p>Do not copy the old Steam tutorial's <code>InfectedAlien</code> event or its <code>&lt;secondary&gt;InfectedAlien&lt;/secondary&gt;</code> line. The current wreck script already creates 10–15 aliens around each UFO. Keeping the old secondary event can produce duplicate or excessive alien spawns.</p></div>
+
+          <article class="ce-step">
+            <div class="ce-step-heading"><span>CE / 01</span><div><h4>Register the wreck in <code>db/types.xml</code></h4><p>Paste this entry anywhere inside the file's existing <code>&lt;types&gt; ... &lt;/types&gt;</code> element. Do not add a second root element.</p></div></div>
+            <div class="xml-block"><button class="copy-button" type="button" data-copy-target="ce-types">Copy XML</button><pre><code id="ce-types">&lt;type name="geb_Aliencrash"&gt;
+    &lt;nominal&gt;0&lt;/nominal&gt;
+    &lt;lifetime&gt;2100&lt;/lifetime&gt;
+    &lt;restock&gt;0&lt;/restock&gt;
+    &lt;min&gt;0&lt;/min&gt;
+    &lt;quantmin&gt;-1&lt;/quantmin&gt;
+    &lt;quantmax&gt;-1&lt;/quantmax&gt;
+    &lt;cost&gt;100&lt;/cost&gt;
+    &lt;flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/&gt;
+&lt;/type&gt;</code></pre></div>
+          </article>
+
+          <article class="ce-step">
+            <div class="ce-step-heading"><span>CE / 02</span><div><h4>Define the event in <code>db/events.xml</code></h4><p>Paste this inside the existing <code>&lt;events&gt; ... &lt;/events&gt;</code> element. <code>nominal</code> is the target number of active crashes; lower it if three encounters are too many for your server.</p></div></div>
+            <div class="xml-block"><button class="copy-button" type="button" data-copy-target="ce-events">Copy XML</button><pre><code id="ce-events">&lt;event name="StaticAlienCrash"&gt;
+    &lt;nominal&gt;3&lt;/nominal&gt;
+    &lt;min&gt;0&lt;/min&gt;
+    &lt;max&gt;0&lt;/max&gt;
+    &lt;lifetime&gt;2100&lt;/lifetime&gt;
+    &lt;restock&gt;0&lt;/restock&gt;
+    &lt;saferadius&gt;1000&lt;/saferadius&gt;
+    &lt;distanceradius&gt;1000&lt;/distanceradius&gt;
+    &lt;cleanupradius&gt;1000&lt;/cleanupradius&gt;
+    &lt;flags deletable="1" init_random="0" remove_damaged="0"/&gt;
+    &lt;position&gt;fixed&lt;/position&gt;
+    &lt;limit&gt;child&lt;/limit&gt;
+    &lt;active&gt;1&lt;/active&gt;
+    &lt;children&gt;
+        &lt;child lootmax="15" lootmin="10" max="3" min="1" type="geb_Aliencrash"/&gt;
+    &lt;/children&gt;
+&lt;/event&gt;</code></pre></div>
+          </article>
+
+          <article class="ce-step">
+            <div class="ce-step-heading"><span>CE / 03</span><div><h4>Add locations to <code>cfgeventspawns.xml</code></h4><p>Paste the event inside <code>&lt;eventposdef&gt;</code>, then replace every example coordinate with a safe, open location from your map. Add as many <code>&lt;pos&gt;</code> lines as you want; <code>x</code> and <code>z</code> are map coordinates and <code>a</code> is rotation.</p></div></div>
+            <div class="xml-block"><button class="copy-button" type="button" data-copy-target="ce-spawns">Copy XML</button><pre><code id="ce-spawns">&lt;event name="StaticAlienCrash"&gt;
+    &lt;zone smin="1" smax="3" dmin="3" dmax="5" r="45"/&gt;
+    &lt;!-- Replace these examples with coordinates for your map. --&gt;
+    &lt;pos x="7500.0" z="7500.0" a="0.0"/&gt;
+    &lt;pos x="8000.0" z="7200.0" a="90.0"/&gt;
+&lt;/event&gt;</code></pre></div>
+          </article>
+
+          <article class="ce-step compact">
+            <div class="ce-step-heading"><span>CE / 04</span><div><h4>Validate, restart, and test</h4><p>Check that each classname and event name matches exactly, validate all three XML files, and restart the server. Watch the server RPT/script logs for XML or CE errors. The event can select only the positions you supplied, so use admin tools or temporarily set <code>nominal</code> to <code>1</code> while testing.</p></div></div>
+          </article>
+
+          <div class="ce-reference"><p><strong>What each file does:</strong> <code>types.xml</code> registers the spawnable object, <code>events.xml</code> controls the dynamic event, and <code>cfgeventspawns.xml</code> supplies its possible positions.</p><p>Based on the <a href="https://steamcommunity.com/workshop/filedetails/discussion/2840597308/3453716885189551537/">original Alien Invasion tutorial</a>, updated for the current scripted encounter. See Bohemia's <a href="https://community.bistudio.com/wiki/DayZ%3ACentral_Economy_setup_for_custom_terrains">Central Economy reference</a> for the underlying file format.</p></div>
+        </section>
         <div class="warning"><strong>Do not repack the Workshop release.</strong><span>Use a Steam Collection to distribute the required mod to your players.</span></div>
       </div>
     </section>

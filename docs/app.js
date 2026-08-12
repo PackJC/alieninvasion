@@ -104,6 +104,13 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
   button.addEventListener("click", () => copyText(button.dataset.copy));
 });
 
+document.querySelectorAll("[data-copy-target]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const target = document.getElementById(button.dataset.copyTarget);
+    if (target) copyText(target.textContent.trim());
+  });
+});
+
 const classnameBody = document.querySelector("#classname-body");
 const searchInput = document.querySelector("#classname-search");
 const filterSelect = document.querySelector("#classname-filter");

@@ -98,6 +98,26 @@ main { width: min(1180px, calc(100% - 32px)); min-height: 650px; margin: 0 auto;
 .copy-button { border: 0; color: var(--acid); background: transparent; cursor: pointer; font: 500 .75rem var(--mono); text-transform: uppercase; }
 .warning { display: flex; gap: 12px; align-items: baseline; margin-top: 24px; padding: 18px; border: 1px solid rgba(255,180,92,.35); color: var(--danger); background: rgba(255,180,92,.06); }
 .warning span { color: #cbb59b; }
+.ce-guide { margin-top: 36px; border-top: 1px solid var(--line); padding-top: 36px; }
+.ce-intro { max-width: 780px; }
+.ce-intro h3 { margin-bottom: 10px; font: 700 2rem var(--display); text-transform: uppercase; }
+.ce-intro > p:last-child, .ce-step-heading p, .ce-reference p { color: var(--muted); }
+.important-note { margin: 24px 0; padding: 20px; border: 1px solid rgba(255,180,92,.35); background: rgba(255,180,92,.06); }
+.important-note strong { color: var(--danger); font: 700 1rem var(--display); text-transform: uppercase; }
+.important-note p { margin: 6px 0 0; color: #cbb59b; }
+.ce-step { padding: 28px 0; border-top: 1px solid var(--line); }
+.ce-step.compact { padding-bottom: 12px; }
+.ce-step-heading { display: grid; grid-template-columns: 74px 1fr; gap: 18px; margin-bottom: 16px; }
+.ce-step-heading > span { color: var(--acid); font: 500 .75rem var(--mono); }
+.ce-step-heading h4 { margin: 0 0 5px; font: 700 1.25rem var(--display); text-transform: uppercase; }
+.ce-step-heading p { margin: 0; }
+.xml-block { position: relative; border: 1px solid var(--line); background: #050b08; }
+.xml-block pre { max-height: 430px; margin: 0; padding: 22px; overflow: auto; }
+.xml-block code { color: #b9eec9; font-size: .78rem; line-height: 1.65; }
+.xml-block .copy-button { position: absolute; z-index: 1; top: 10px; right: 12px; padding: 6px 8px; background: #0b1712; border: 1px solid var(--line); }
+.ce-reference { margin-top: 22px; padding: 20px; border-left: 3px solid var(--cyan); background: rgba(92,225,230,.045); }
+.ce-reference p:last-child { margin-bottom: 0; }
+.ce-reference a { color: var(--cyan); }
 
 .timeline { position: relative; margin-bottom: 34px; }
 .timeline::before { content: ""; position: absolute; left: 25px; top: 22px; bottom: 22px; width: 1px; background: linear-gradient(var(--acid), var(--line)); }
@@ -183,6 +203,8 @@ footer p { max-width: 780px; margin-bottom: 0; }
   .callout { align-items: start; flex-direction: column; padding: 24px; }
   .install-panel { padding: 22px 18px; }
   .steps li { grid-template-columns: 40px 1fr; gap: 10px; }
+  .ce-step-heading { grid-template-columns: 1fr; gap: 7px; }
+  .xml-block pre { padding: 50px 16px 18px; }
   .warning { flex-direction: column; }
   .table-controls { align-items: stretch; flex-direction: column; }
   .table-controls select { width: 100%; }
