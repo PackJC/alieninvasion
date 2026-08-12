@@ -87,7 +87,7 @@
       <div class="section-heading">
         <p class="kicker">Mission briefing</p>
         <h2>Something came down in the night.</h2>
-        <p>Alien Invasion adds a self-contained science-fiction encounter to DayZ without replacing vanilla helicopter crashes. A Central Economy-spawned UFO becomes a dangerous point of interest surrounded by 10–15 hostile aliens.</p>
+        <p>Alien Invasion adds a UFO crash dynamic event that works exactly like DayZ's vanilla helicopter crashes — the wreck is even built on the same <code>CrashBase</code> class. The difference: instead of infected wandering a loot site, each UFO automatically spawns 10–15 hostile aliens around itself. Vanilla heli crashes are untouched and keep running alongside it.</p>
       </div>
 
       <div class="stat-grid">
@@ -132,13 +132,14 @@
           <li><span>01</span><div><h3>Download the Workshop item</h3><p>Subscribe with the server's Steam account or retrieve Workshop item <code>2840597308</code> using your normal SteamCMD workflow.</p></div></li>
           <li><span>02</span><div><h3>Install and key the server</h3><p>Place the published mod folder beside the DayZ server executable. Copy its <code>.bikey</code> file into the server's <code>keys</code> directory.</p></div></li>
           <li><span>03</span><div><h3>Add the launch parameter</h3><p>Load the mod in your server startup command. Keep the actual installed folder name if it differs from the example.</p><div class="code-block"><code>-mod=@alieninvasion</code><button class="copy-button" type="button" data-copy="-mod=@alieninvasion">Copy</button></div></div></li>
-          <li><span>04</span><div><h3>Configure the Central Economy</h3><p>Follow the complete guide below. You will register the wreck type, define its dynamic event, and add map-specific spawn coordinates.</p></div></li>
+          <li><span>04</span><div><h3>Configure the Central Economy</h3><p>Set the UFO up the same way you would a custom helicopter crash: follow the guide below to register the wreck type, define its dynamic event, and add map-specific spawn coordinates. The aliens need no configuration — the wreck spawns them itself.</p></div></li>
           <li><span>05</span><div><h3>Restart and verify</h3><p>Restart the server, inspect the script and RPT logs, then confirm a CE-created wreck emits crash audio and spawns aliens.</p></div></li>
         </ol>
         <section class="ce-guide" aria-labelledby="ce-guide-title">
           <div class="ce-intro">
             <p class="kicker">Central Economy walkthrough</p>
             <h3 id="ce-guide-title">Add automatic UFO crash events</h3>
+            <p><strong>If you have ever configured DayZ's <code>StaticHeliCrash</code> event, this is the identical pattern.</strong> The UFO is a helicopter-crash-style dynamic event: you register the wreck in <code>types.xml</code>, define the event in <code>events.xml</code>, and give it positions in <code>cfgeventspawns.xml</code> — exactly like a heli crash. The only difference is what happens on site: instead of infected around a loot wreck, the UFO script spawns 10–15 aliens by itself. You never add alien spawns, infected events, or territories for it.</p>
             <p>Stop the server and back up the active mission folder before editing it. The usual path is <code>mpmissions/dayzOffline.&lt;map&gt;/</code>; hosting panels may expose the same files through an economy editor.</p>
           </div>
 
@@ -200,7 +201,7 @@
     </section>
 
     <section class="tab-panel" id="encounter" role="tabpanel" aria-labelledby="encounter-tab" hidden>
-      <div class="section-heading"><p class="kicker">Contact sequence</p><h2>How the crash encounter works</h2><p>The scripted encounter begins only when the Central Economy creates the active wreck classname.</p></div>
+      <div class="section-heading"><p class="kicker">Contact sequence</p><h2>How the crash encounter works</h2><p>Think of it as a helicopter crash from another world: the Central Economy places the wreck exactly like a vanilla heli crash event, and the wreck then runs the encounter — effects, audio, and its own alien spawns.</p></div>
       <div class="timeline">
         <article><span>01</span><div><h3>Impact</h3><p><code>geb_Aliencrash</code> enters the world through the Central Economy and requests the custom distant crash sound.</p></div></article>
         <article><span>02</span><div><h3>Visual signal</h3><p>Clients attach green illumination, UFO fire, wreck particles, and ground mist to the crash object.</p></div></article>
@@ -244,7 +245,8 @@
     <section class="tab-panel" id="faq" role="tabpanel" aria-labelledby="faq-tab" hidden>
       <div class="section-heading"><p class="kicker">Troubleshooting</p><h2>Frequently asked questions</h2><p>Answers for common player and server-owner setup issues.</p></div>
       <div class="accordion">
-        <details><summary>Does the mod replace vanilla helicopter crashes?<span>+</span></summary><p>No. Alien Invasion adds its own wreck class and sound set. Vanilla crash events remain available.</p></details>
+        <details><summary>Does the mod replace vanilla helicopter crashes?<span>+</span></summary><p>No. Alien Invasion adds its own separate event that <em>behaves like</em> a heli crash — same dynamic-event system, same setup files — but with its own UFO wreck class and sound set. Vanilla crash events keep running untouched.</p></details>
+        <details><summary>Where do the aliens come from? Do I configure their spawns?<span>+</span></summary><p>The wreck spawns them itself. When the Central Economy creates a <code>geb_Aliencrash</code>, the wreck script places 10–15 aliens at random positions 5–25&nbsp;m around it. Do not add infected events, zombie territories, or any alien spawn configuration — that would only create duplicates.</p></details>
         <details><summary>Why did I spawn the static wreck and get no aliens?<span>+</span></summary><p><code>StaticObj_geb_Aliencrash</code> is visual scenery only. Use <code>geb_Aliencrash</code> through the Central Economy for the scripted encounter.</p></details>
         <details><summary>Does every player need the mod?<span>+</span></summary><p>Yes. It contains custom models, textures, sounds, particles, scripts, and localization, so it must run on the server and all clients.</p></details>
         <details><summary>Does Alien Invasion require Community Framework?<span>+</span></summary><p>No third-party mod is declared as a runtime dependency in the source.</p></details>
