@@ -70,7 +70,7 @@ class PrepareGreenAlien extends PrepareFish
 		m_IngredientDestroy[1] = false;// false = do nothing
 		m_IngredientUseSoftSkills[1] = true;// set 'true' to allow modification of the values by softskills on this ingredient
 		//----------------------------------------------------------------------------------------------------------------------
-		ran = Math.RandomFloatInclusive(1.0,2.0);
+		ran = Math.RandomIntInclusive(1, 2);
 		for (int i = 0; i < ran; ++i){
 			AddResult("geb_GreenAlienMeat");//add results here
 			m_ResultSetFullQuantity[i] = false;//true = set full quantity, false = do nothing

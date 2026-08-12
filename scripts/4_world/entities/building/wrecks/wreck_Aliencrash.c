@@ -1,18 +1,11 @@
 class geb_Aliencrash extends CrashBase
 {
-	XmasSleighLight 		m_SleighLight;
 	XmasSleighLight 		m_Light;
 	
-	int m_MaxDeersAmount = 15;
-	int m_MinDeersAmount = 10;
-	int m_MaxDeersSpawnRange = 25;
-	int m_MinDeersSpawnRange = 5;
-
-	override static bool Init()
-    {
-        CrashSoundSets.RegisterSoundSet("AlienCrash_Distant_SoundSet");
-        return true;
-    }
+	int m_MaxAliensAmount = 15;
+	int m_MinAliensAmount = 10;
+	int m_MaxAliensSpawnRange = 25;
+	int m_MinAliensSpawnRange = 5;
 
 	void geb_Aliencrash()
 	{
@@ -41,7 +34,7 @@ class geb_Aliencrash extends CrashBase
 	override void EEOnCECreate()
 	{
 		super.EEOnCECreate();
-		SpawnRandomDeerLater();
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(SpawnAliens, 0);
 	}
 	
 	override void EEDelete(EntityAI parent)
@@ -50,33 +43,28 @@ class geb_Aliencrash extends CrashBase
 		
 		if ( !GetGame().IsDedicatedServer() )
 		{
-			if ( m_SleighLight )
-				m_SleighLight.Destroy();
+			if (m_Light)
+				m_Light.Destroy();
 		}	
 	}
-	
-	void SpawnRandomDeerLater()
+
+	// Spawn a random number of aliens around the wreck.
+	void SpawnAliens()
 	{
-		//SpawnRandomDeers();
-		GetGame().GetCallQueue( CALL_CATEGORY_GAMEPLAY ).CallLater( SpawnRandomDeers, 0);
-	}
-	
-	//Spawn a random amount of (dead) deers around the sleigh
-	void SpawnRandomDeers()
-	{
-		EntityAI deer;
 		vector crash_pos = GetPosition();
-		Print("UFO Wreck: " + crash_pos)
-		int deersAmount = Math.RandomIntInclusive(m_MinDeersAmount,m_MaxDeersAmount);
+		Print("UFO Wreck: " + crash_pos);
+		int aliensAmount = Math.RandomIntInclusive(m_MinAliensAmount, m_MaxAliensAmount);
 		
-		for (int i = 0; i < m_MaxDeersAmount; i++)
+		for (int i = 0; i < aliensAmount; i++)
 		{
-			vector deer_pos = RandomizePosition(crash_pos);
-			//Print("Position: " + deer_pos);
-			deer = EntityAI.Cast(GetGame().CreateObject("geb_GreenAlien", deer_pos,false, true));
-			deer.SetHealth01("","Health", 1.0);
-			vector orientation = deer.GetOrientation();
-			deer.SetOrientation(Vector(Math.RandomIntInclusive(0,360),orientation[1],orientation[2]));
+			vector alien_pos = RandomizePosition(crash_pos);
+			EntityAI alien = EntityAI.Cast(GetGame().CreateObject("geb_GreenAlien", alien_pos, false, true));
+			if (!alien)
+				continue;
+
+			alien.SetHealth01("", "Health", 1.0);
+			vector orientation = alien.GetOrientation();
+			alien.SetOrientation(Vector(Math.RandomIntInclusive(0, 360), orientation[1], orientation[2]));
 		}		
 	}
 	
@@ -86,11 +74,11 @@ class geb_Aliencrash extends CrashBase
 		int randX;
 		int randZ;
 		
-		randX = Math.RandomIntInclusive(m_MinDeersSpawnRange, m_MaxDeersSpawnRange);
+		randX = Math.RandomIntInclusive(m_MinAliensSpawnRange, m_MaxAliensSpawnRange);
 		if (Math.RandomIntInclusive(0,1) < 1)
 			randX = -randX;
 			
-		randZ = Math.RandomIntInclusive(m_MinDeersSpawnRange, m_MaxDeersSpawnRange);
+		randZ = Math.RandomIntInclusive(m_MinAliensSpawnRange, m_MaxAliensSpawnRange);
 		if (Math.RandomIntInclusive(0,1) < 1)
 			randZ = -randZ; 
 			

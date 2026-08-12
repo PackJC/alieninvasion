@@ -31,7 +31,7 @@ When a `geb_Aliencrash` object is created through DayZ's Central Economy, it:
 
 The wreck is the encounter anchor. Add it to your mission economy or event configuration wherever you want UFO encounters to occur. The repository does not modify a mission's economy files automatically.
 
-> **Current behavior:** the source defines a 10–15 alien target range, but the encounter loop currently creates 15 aliens at each newly spawned wreck.
+Each newly spawned wreck creates a random group of 10–15 aliens.
 
 ## Content
 

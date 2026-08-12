@@ -27,8 +27,8 @@ class cfgVehicles
 	class Clothing_Base;
 	class geb_FoilHat: Clothing_Base
 	{
-		descriptionShort="$STR_geb_FoilHat";
-		displayName="$STR_geb_FoilHatDesc";
+		descriptionShort="$STR_geb_FoilHatDesc";
+		displayName="$STR_geb_FoilHat";
 		scope=2;
 		model = "\alieninvasion\data\clothes\geb_foilhat_g.p3d";
 		repairableWithKits[]={2,3,5,8};

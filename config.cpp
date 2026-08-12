@@ -12,6 +12,7 @@ class CfgPatches
 			"DZ_Characters",
 			"DZ_Structures",
 			"DZ_Weapons_Firearms",
+			"DZ_Weapons_Firearms_Ruger1022",
 			"DZ_Weapons_Ammunition",
 			"DZ_Weapons_Magazines",
 			"DZ_Weapons_Optics"
