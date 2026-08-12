@@ -1,0 +1,18 @@
+# Visual Studio workspace files
+.vs/
+*.suo
+*.user
+
+# Windows metadata
+desktop.ini
+Thumbs.db
+
+# Generated DayZ build outputs
+*.pbo
+*.bisign
+*.bikey
+
+# Logs and temporary files
+*.log
+*.tmp
+*~
