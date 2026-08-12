@@ -1,8 +1,28 @@
-# Alien Invasion
+<h1 align="center">
+  <br>
+  <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><img src="https://i.imgur.com/p7Fv1Z6.gif" alt="Alien Invasion" width="500"></a>
+  <br>
+  <a href="https://discord.gg/G8uSGZ8yyf"><img src="https://i.imgur.com/4IyA522.png" alt="Join Our Discord" width="250"></a><img src="https://i.imgur.com/3rhti8A.gif" alt="Like and Favorite" width="500">
+  <br>
+</h1>
 
-### An Extraterrestrial Encounter Expansion for DayZ
+<h3 align="center">An Extraterrestrial Encounter Expansion for DayZ</h3>
 
-[Information](#information) | [Key Features](#key-features) | [Content](#content) | [Server Setup](#server-setup) | [Classnames](#classnames) | [Credits](#credits) | [License](#license)
+<p align="center">
+  <img alt="Mod Version" src="https://img.shields.io/badge/Mod-v1.0-blue?style=for-the-badge">
+  <img alt="DayZ Version" src="https://img.shields.io/badge/DayZ-v1.29-teal?style=for-the-badge">
+  <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><img alt="Workshop Subscribers" src="https://img.shields.io/steam/subscriptions/2840597308?style=for-the-badge&color=purple&label=Workshop%20Subs"></a>
+</p>
+
+<p align="center">
+  <a href="#information">Information</a> •
+  <a href="#key-features">Key Features</a> •
+  <a href="#content">Content</a> •
+  <a href="#server-setup">Server Setup</a> •
+  <a href="#classnames">Classnames</a> •
+  <a href="#credits">Credits</a> •
+  <a href="#license">License</a>
+</p>
 
 ## Information
 
@@ -19,7 +39,7 @@ The mod includes custom models, textures, sounds, particles, localized item name
 - Harvestable alien remains, including **Area 51 Steak** and **Roswell Hide**.
 - A **Tin Foil Hat** with male, female, and ground models.
 - A preparation recipe for harvesting alien meat with vanilla cutting tools and GebsFish knives.
-- English string-table entries ready for additional translations.
+- Complete string-table support for English, Czech, German, Russian, Polish, Hungarian, Italian, Spanish, French, Traditional and Simplified Chinese, Japanese, and Portuguese.
 
 ## The Encounter
 
@@ -58,6 +78,7 @@ A lightweight novelty headpiece for survivors who prefer to take no chances with
 - DayZ
 - The mod must be loaded on both the server and client.
 - No third-party mod is declared as a runtime dependency.
+- **[Subscribe on the Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308)** to receive the published mod and updates.
 
 ## Server Setup
 
