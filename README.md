@@ -13,6 +13,7 @@
   <img alt="Mod Version" src="https://img.shields.io/badge/Mod-v1.0-blue?style=for-the-badge">
   <img alt="DayZ Version" src="https://img.shields.io/badge/DayZ-v1.29-teal?style=for-the-badge">
   <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><img alt="Workshop Subscribers" src="https://img.shields.io/steam/subscriptions/2840597308?style=for-the-badge&color=purple&label=Workshop%20Subs"></a>
+  <a href="https://packjc.github.io/alieninvasion/"><img alt="Website" src="https://img.shields.io/badge/Website-Field%20Manual-75ff9b?style=for-the-badge"></a>
 </p>
 
 <p align="center">
