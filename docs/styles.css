@@ -214,6 +214,53 @@ footer p { max-width: 780px; margin-bottom: 0; }
   .footer-links { flex-wrap: wrap; }
 }
 
+/* --- Ambient effects ------------------------------------------------- */
+
+.starfield { position: absolute; inset: 0; z-index: 0; }
+.hero-grid, .signal, .hero::after { z-index: 1; }
+
+.scanlines { position: fixed; inset: 0; z-index: 900; pointer-events: none; opacity: .5; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .14) 0 1px, transparent 1px 3px); }
+.scanlines::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 58%, rgba(2, 8, 5, .42) 100%); }
+
+.ufo { position: absolute; z-index: 1; top: 12%; left: 0; pointer-events: none; opacity: 0; animation: ufo-flyby 22s linear infinite 5s; filter: drop-shadow(0 0 14px rgba(117, 255, 155, .45)); }
+.ufo-inner { animation: ufo-bob 3.4s ease-in-out infinite; }
+.ufo-beam-cone { opacity: 0; animation: beam-pulse 22s linear infinite 5s; }
+@keyframes ufo-flyby {
+  0% { transform: translateX(-160px) rotate(-4deg); opacity: 0; }
+  3% { opacity: 1; }
+  42% { opacity: 1; }
+  46% { transform: translateX(108vw) rotate(3deg); opacity: 0; }
+  100% { transform: translateX(108vw); opacity: 0; }
+}
+@keyframes ufo-bob { 50% { transform: translateY(9px); } }
+@keyframes beam-pulse { 0%, 12%, 34%, 46%, 100% { opacity: 0; } 16%, 22% { opacity: .9; } 26%, 30% { opacity: .35; } }
+
+.glitch { position: relative; }
+.glitch::before, .glitch::after { content: attr(data-text); position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.glitch::before { color: rgba(92, 225, 230, .85); animation: glitch-a 7s steps(1) infinite 2s; }
+.glitch::after { color: rgba(150, 120, 255, .85); animation: glitch-b 7s steps(1) infinite 2s; }
+@keyframes glitch-a {
+  0%, 92%, 100% { opacity: 0; }
+  93% { opacity: 1; transform: translate(-5px, 2px); clip-path: inset(8% 0 62% 0); }
+  94.5% { opacity: 1; transform: translate(4px, -2px); clip-path: inset(55% 0 18% 0); }
+  96% { opacity: 0; }
+}
+@keyframes glitch-b {
+  0%, 92.6%, 100% { opacity: 0; }
+  93.6% { opacity: 1; transform: translate(5px, -1px); clip-path: inset(38% 0 34% 0); }
+  95% { opacity: 1; transform: translate(-4px, 2px); clip-path: inset(72% 0 4% 0); }
+  96.4% { opacity: 0; }
+}
+
+.fx-reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.fx-reveal.fx-in { opacity: 1; transform: none; }
+
+@media (max-width: 620px) {
+  .ufo { top: 6%; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .ufo, .glitch::before, .glitch::after { display: none; }
+  .fx-reveal { opacity: 1; transform: none; }
 }

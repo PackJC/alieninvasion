@@ -16,6 +16,7 @@
   <meta name="twitter:description" content="A complete extraterrestrial encounter expansion for DayZ.">
   <meta name="twitter:image" content="https://raw.githubusercontent.com/PackJC/alieninvasion/main/docs/assets/alien-invasion-banner.png">
   <title>Alien Invasion — DayZ Mod Guide</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9B%B8%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,14 +25,32 @@
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="scanlines" aria-hidden="true"></div>
 
   <header class="hero" id="top">
+    <canvas class="starfield" id="starfield" aria-hidden="true"></canvas>
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="signal signal-one" aria-hidden="true"></div>
     <div class="signal signal-two" aria-hidden="true"></div>
+    <div class="ufo" aria-hidden="true">
+      <svg class="ufo-inner" viewBox="0 0 120 78" width="110" height="72" xmlns="http://www.w3.org/2000/svg">
+        <polygon class="ufo-beam-cone" points="46,26 74,26 92,74 28,74" fill="url(#beamGrad)"/>
+        <defs>
+          <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#75ff9b" stop-opacity=".5"/>
+            <stop offset="1" stop-color="#75ff9b" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="60" cy="18" rx="14" ry="10" fill="#1b3a2c" stroke="#75ff9b" stroke-width="1.5"/>
+        <ellipse cx="60" cy="26" rx="34" ry="9" fill="#0c1713" stroke="#75ff9b" stroke-width="2"/>
+        <circle cx="38" cy="27" r="2.4" fill="#5ce1e6"/>
+        <circle cx="60" cy="30" r="2.4" fill="#5ce1e6"/>
+        <circle cx="82" cy="27" r="2.4" fill="#5ce1e6"/>
+      </svg>
+    </div>
     <div class="hero-inner">
-      <p class="eyebrow"><span class="pulse"></span> Signal acquired / Chernarus sector</p>
-      <h1>ALIEN <span>INVASION</span></h1>
+      <p class="eyebrow"><span class="pulse"></span> <span id="decode-line">Signal acquired / Chernarus sector</span></p>
+      <h1 class="glitch" data-text="ALIEN INVASION">ALIEN <span>INVASION</span></h1>
       <p class="hero-copy">An extraterrestrial encounter expansion for DayZ. Investigate burning UFO wrecks, survive hostile little green men, and recover technology that was never meant to reach Earth.</p>
       <div class="hero-actions">
         <a class="button button-primary" href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308">Subscribe on Steam</a>
