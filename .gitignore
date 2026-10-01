@@ -12,6 +12,10 @@ Thumbs.db
 *.bisign
 *.bikey
 
+# Debinarized vanilla models used only to render the website's item pictures
+# (Bohemia's assets: rendered locally, never committed)
+tools/debinned/
+
 # Logs and temporary files
 *.log
 *.tmp

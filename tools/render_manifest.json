@@ -1,0 +1,9 @@
+[
+  { "name": "geb_PlasmaRifle",     "p3d": "data/weapons/geb_plasmarifle.p3d",     "view": "AUTO" },
+  { "name": "geb_PlasmaCartridge", "p3d": "data/weapons/geb_plasmacartridge.p3d", "view": "ISO" },
+  { "name": "geb_FoilHat",         "p3d": "data/clothes/geb_foilhat_g.p3d",       "view": "ISO" },
+  { "name": "geb_GreenAlien",      "p3d": "data/aliens/geb_GreenAlien.p3d",       "view": "AUTO" },
+  { "name": "geb_Aliencrash",      "p3d": "data/ufocrash/crash.p3d",              "view": "ISO" },
+  { "name": "geb_GreenAlienMeat",  "p3d": "tools/debinned/_meat_steak.p3d",       "texture": "data/aliens/alienmeat.paa", "view": "AUTO" },
+  { "name": "geb_GreenAlienSkin",  "p3d": "tools/debinned/_Pelt_Bear.p3d",        "texture": "data/aliens/alienpelt.paa", "view": "AUTO" }
+]

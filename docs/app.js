@@ -1,13 +1,13 @@
 const classnames = [
-  { name: "geb_Aliencrash", type: "Encounter", description: "Active UFO wreck: effects, audio, toxic gas, salvage, and alien spawning." },
-  { name: "StaticObj_geb_Aliencrash", type: "Encounter", description: "Static visual UFO wreck without scripted encounter behavior." },
+  { name: "geb_Aliencrash", type: "Encounter", img: "geb_Aliencrash", description: "Active UFO wreck: effects, audio, toxic gas, salvage, and alien spawning." },
+  { name: "StaticObj_geb_Aliencrash", type: "Encounter", img: "geb_Aliencrash", description: "Static visual UFO wreck without scripted encounter behavior." },
   { name: "geb_AlienRadiationArea", type: "Encounter", description: "18 m toxic cloud each active wreck creates and removes; not meant to be spawned on its own." },
-  { name: "geb_GreenAlien", type: "Creature", description: "Hostile Little Green Man with melee and a psychic zap." },
-  { name: "geb_GreenAlienMeat", type: "Food", description: "Area 51 Steak from skinning; cooked gives night vision, bad meat poisons." },
-  { name: "geb_GreenAlienSkin", type: "Material", description: "Roswell Hide from skinning an alien." },
-  { name: "geb_PlasmaRifle", type: "Weapon", description: "Semi-automatic Montauk Rifle; green plasma bolts, double damage to aliens." },
-  { name: "geb_PlasmaCartridge", type: "Magazine", description: "15-round Montauk Cartridge; recharge with a 9V battery." },
-  { name: "geb_FoilHat", type: "Clothing", description: "Tin Foil Hat; aliens can't track or zap the wearer." }
+  { name: "geb_GreenAlien", type: "Creature", img: "geb_GreenAlien", description: "Hostile Little Green Man with melee and a psychic zap." },
+  { name: "geb_GreenAlienMeat", type: "Food", img: "geb_GreenAlienMeat", description: "Area 51 Steak from skinning; cooked gives night vision, bad meat poisons." },
+  { name: "geb_GreenAlienSkin", type: "Material", img: "geb_GreenAlienSkin", description: "Roswell Hide from skinning an alien." },
+  { name: "geb_PlasmaRifle", type: "Weapon", img: "geb_PlasmaRifle", description: "Semi-automatic Montauk Rifle; green plasma bolts, double damage to aliens." },
+  { name: "geb_PlasmaCartridge", type: "Magazine", img: "geb_PlasmaCartridge", description: "15-round Montauk Cartridge; recharge with a 9V battery." },
+  { name: "geb_FoilHat", type: "Clothing", img: "geb_FoilHat", description: "Tin Foil Hat; aliens can't track or zap the wearer." }
 ];
 
 const tabButtons = [...document.querySelectorAll("[data-tab]")];
@@ -164,7 +164,17 @@ function renderClassnames() {
     const chip = document.createElement("span");
     const copy = document.createElement("button");
 
-    name.textContent = item.name;
+    // Thumbnail column keeps rows aligned whether or not the item has a render
+    const thumb = document.createElement("span");
+    thumb.className = "row-thumb";
+    if (item.img) {
+      const img = document.createElement("img");
+      img.src = `items/${item.img}.webp`;
+      img.alt = "";
+      img.loading = "lazy";
+      thumb.append(img);
+    }
+    name.append(thumb, document.createTextNode(item.name));
     chip.className = "type-chip";
     chip.textContent = item.type;
     itemType.append(chip);
