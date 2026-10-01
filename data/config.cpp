@@ -1,15 +1,25 @@
 class CfgPatches
 {
-	class alieninvasion
+	// Separate from the root config's "alieninvasion" patch (same name merged the two); lists every vanilla
+	// patch whose classes are inherited below so they always load first.
+	class alieninvasion_data
 	{
+		units[]={};
+		weapons[]={};
 		requiredVersion=0.1;
 		requiredAddons[]=
 		{
 			"DZ_Data",
 			"DZ_Scripts",
 			"DZ_Characters",
+			"DZ_Characters_Zombies",
+			"DZ_Gear_Food",
+			"DZ_Gear_Consumables",
 			"DZ_Structures",
-			"DZ_Weapons_Firearms"
+			"DZ_Weapons_Firearms",
+			"DZ_Weapons_Firearms_Ruger1022",
+			"DZ_Weapons_Magazines",
+			"DZ_Weapons_Ammunition"
 		};
 	};
 };
@@ -25,10 +35,11 @@ class cfgVehicles
 	class CowSteakMeat;
 	class HouseNoDestruct;
 	class Clothing_Base;
+	class ContaminatedArea_Local;
 	class geb_FoilHat: Clothing_Base
 	{
-		descriptionShort="$STR_geb_FoilHatDesc";
 		displayName="$STR_geb_FoilHat";
+		descriptionShort="$STR_geb_FoilHatDesc";
 		scope=2;
 		model = "\alieninvasion\data\clothes\geb_foilhat_g.p3d";
 		repairableWithKits[]={2,3,5,8};
@@ -42,8 +53,8 @@ class cfgVehicles
 			"Clothing",
 			"Headgear"
 		};
-		weight=470;
-		itemSize[]={4,3};
+		weight=60;
+		itemSize[]={3,2};
 		absorbency=0;
 		heatIsolation=0.25;
 		noMask=0;
@@ -61,8 +72,8 @@ class cfgVehicles
 							1,
 							
 							{
-								"Pith_Helmet\Data\PithHelmet.rvmat",
-								"Pith_Helmet\Data\PithHelmet.rvmat"
+								"alieninvasion\data\clothes\foilhat_silver.rvmat",
+								"alieninvasion\data\clothes\foilhat_silver.rvmat"
 							}
 						},
 						
@@ -70,8 +81,8 @@ class cfgVehicles
 							0.69999999,
 							
 							{
-								"Pith_Helmet\Data\PithHelmet.rvmat",
-								"Pith_Helmet\Data\PithHelmet.rvmat"
+								"alieninvasion\data\clothes\foilhat_silver.rvmat",
+								"alieninvasion\data\clothes\foilhat_silver.rvmat"
 							}
 						},
 						
@@ -79,8 +90,8 @@ class cfgVehicles
 							0.5,
 							
 							{
-								"Pith_Helmet\Data\PithHelmet_damage.rvmat",
-								"Pith_Helmet\Data\PithHelmet_damage.rvmat"
+								"alieninvasion\data\clothes\foilhat_silver.rvmat",
+								"alieninvasion\data\clothes\foilhat_silver.rvmat"
 							}
 						},
 						
@@ -88,8 +99,8 @@ class cfgVehicles
 							0.30000001,
 							
 							{
-								"Pith_Helmet\Data\PithHelmet_damage.rvmat",
-								"Pith_Helmet\Data\PithHelmet_damage.rvmat"
+								"alieninvasion\data\clothes\foilhat_silver.rvmat",
+								"alieninvasion\data\clothes\foilhat_silver.rvmat"
 							}
 						},
 						
@@ -97,8 +108,8 @@ class cfgVehicles
 							0,
 							
 							{
-								"Pith_Helmet\Data\PithHelmet_destruct.rvmat",
-								"Pith_Helmet\Data\PithHelmet_destruct.rvmat"
+								"alieninvasion\data\clothes\foilhat_silver.rvmat",
+								"alieninvasion\data\clothes\foilhat_silver.rvmat"
 							}
 						}
 					};
@@ -731,120 +742,118 @@ class cfgVehicles
 				damage = 100;
 			};
 		};
+		// Vanilla infected melee (ZombieMaleBase). The long-range attack is the scripted psychic zap (geb_GreenAlien.c);
+		// this block used to have 100 m range / 100 s cooldown, which landed invisible hits from across a field.
 		class AttackActions
 		{
 			class AttackLong
 			{
-				attackName = "attackLong";
-				ammoType = "MeleeZombieMale";
-				stanceName = "erect";
-				moveAnimNames[] =
+				attackName="attackLong";
+				ammoType="MeleeInfectedLong";
+				stanceName="erect";
+				moveAnimNames[]=
 				{
 					"run",
 					"sprint"
 				};
-				minDistance = 0;
-				distance = 100.75;
-				time = 0.001;
-				yawAngle = 90;
-				pitchAngle = 30;
-				attackWidth = 5.1999998;
-				repeatable = 0;
-				cooldown = 100.75;
+				minDistance=0.75;
+				distance=1.75;
+				time=2.5;
+				yawAngle=0;
+				pitchAngle=0;
+				attackWidth=2.2;
+				repeatable=0;
+				cooldown=2.75;
 			};
 			class AttackRun
 			{
-				attackName = "attackRun";
-				ammoType = "MeleeZombieMale";
-				stanceName = "erect";
-				moveAnimNames[] =
+				attackName="attackRun";
+				ammoType="MeleeInfected";
+				stanceName="erect";
+				moveAnimNames[]=
 				{
 					"run",
 					"sprint"
 				};
-				minDistance = 0;
-				distance = 100.75;
-				time = 0.001;
-				yawAngle = 90;
-				pitchAngle = 30;
-				attackWidth = 5.1999998;
-				repeatable = 0;
-				cooldown = 100.75;
+				minDistance=0.5;
+				distance=1.3;
+				time=1;
+				yawAngle=0;
+				pitchAngle=0;
+				attackWidth=1.5;
+				repeatable=1;
+				cooldown=1.25;
 			};
 			class AttackShort
 			{
-				attackName = "attackShort";
-				ammoType = "MeleeZombieMale";
-				stanceName = "erect";
-				moveAnimNames[] =
+				attackName="attackShort";
+				ammoType="MeleeInfected";
+				stanceName="erect";
+				moveAnimNames[]=
 				{
 					"idle",
 					"walk"
 				};
-				minDistance = 0;
-				distance = 100.75;
-				time = 0.001;
-				yawAngle = 90;
-				pitchAngle = 30;
-				attackWidth = 5.1999998;
-				repeatable = 0;
-				cooldown = 100.75;
+				minDistance=0.5;
+				distance=1.3;
+				time=1;
+				yawAngle=0;
+				pitchAngle=0;
+				attackWidth=1.5;
+				repeatable=1;
+				cooldown=1.25;
 			};
 			class AttackShortLow
 			{
-				attackName = "attackShortLow";
-				ammoType = "MeleeZombieMale";
-				stanceName = "erect";
-				moveAnimNames[] =
+				attackName="attackShortLow";
+				ammoType="MeleeInfected";
+				stanceName="erect";
+				moveAnimNames[]=
 				{
 					"idle",
 					"walk",
 					"run"
 				};
-				minDistance = 0;
-				distance = 100.75;
-				time = 0.001;
-				yawAngle = 90;
-				pitchAngle = 30;
-				attackWidth = 5.1999998;
-				repeatable = 0;
-				cooldown = 100.75;
+				minDistance=0;
+				distance=2;
+				time=1;
+				yawAngle=0;
+				pitchAngle=-45;
+				attackWidth=2;
+				repeatable=1;
+				cooldown=1.25;
 			};
 			class CrawlAttackMove
 			{
-				attackName = "crawlAttackMove";
-				ammoType = "MeleeZombieMale";
-				stanceName = "crawl";
-				moveAnimNames[] =
+				attackName="crawlAttackMove";
+				ammoType="MeleeInfected";
+				stanceName="crawl";
+				moveAnimNames[]=
 				{
 					"walk"
 				};
-				minDistance = 0;
-				distance = 100.75;
-				time = 0.001;
-				yawAngle = 90;
-				pitchAngle = 30;
-				attackWidth = 5.1999998;
-				repeatable = 0;
-				cooldown = 100.75;
+				distance=2;
+				time=1.5;
+				yawAngle=0;
+				pitchAngle=45;
+				attackWidth=2;
+				cooldown=1.25;
 			};
 			class CrawlAttackStill
 			{
-				attackName = "crawlAttackStill";
-				ammoType = "MeleeZombieMale";
-				stanceName = "crawl";
-				moveAnimNames[] =
+				attackName="crawlAttackStill";
+				ammoType="MeleeInfected";
+				stanceName="crawl";
+				moveAnimNames[]=
 				{
 					"idle"
 				};
-				minDistance = 0;
-				distance = 100.75;
-				time = 0.001;
-				yawAngle = 90;
-				pitchAngle = 30;
-				attackWidth = 5.1999998;
-				repeatable = 0;
-				cooldown = 100.75;
+				distance=2;
+				time=1.1;
+				yawAngle=0;
+				pitchAngle=45;
+				attackWidth=2;
+				cooldown=1.25;
 			};
 		};
 		class Skinning
@@ -870,7 +879,7 @@ class cfgVehicles
 			};
 			class ObtainedPelt
 			{
-				item="geb_AlienSkin";
+				item="geb_GreenAlienSkin";
 				count=1;
 				itemZones[]=
 				{
@@ -925,73 +934,73 @@ class cfgVehicles
 				{
 					class Walk1
 					{
-						soundLookupTable = "Alien_Calm_soundset";
+						soundLookupTable = "walkErc_Sneakers_Zmb_LookupTable";
 						noise = "ZombieStepNoise";
 						id = 1;
 					};
 					class Walk2
 					{
-						soundLookupTable = "Alien_Calm_soundset";
+						soundLookupTable = "walkErc_Sneakers_Zmb_LookupTable";
 						noise = "ZombieStepNoise";
 						id = 2;
 					};
 					class Walk3
 					{
-						soundLookupTable = "Alien_Calm_soundset";
+						soundLookupTable = "walkErc_Sneakers_Zmb_LookupTable";
 						noise = "ZombieStepNoise";
 						id = 3;
 					};
 					class Walk4
 					{
-						soundLookupTable = "Alien_Calm_soundset";
+						soundLookupTable = "walkErc_Sneakers_Zmb_LookupTable";
 						noise = "ZombieStepNoise";
 						id = 4;
 					};
 					class Run1
 					{
-						soundLookupTable = "Alien_Calm_soundset";
+						soundLookupTable = "runErc_Sneakers_Zmb_LookupTable";
 						noise = "ZombieStepNoise";
 						id = 5;
 					};
 					class Run2
 					{
-						soundLookupTable = "Alien_Calm_soundset";
+						soundLookupTable = "runErc_Sneakers_Zmb_LookupTable";
 						noise = "ZombieStepNoise";
 						id = 6;
 					};
 					class Run3
 					{
-						soundLookupTable = "Alien_Calm_soundset";
+						soundLookupTable = "runErc_Sneakers_Zmb_LookupTable";
 						noise = "ZombieStepNoise";
 						id = 7;
 					};
 					class Run4
 					{
-						soundLookupTable = "Alien_Calm_soundset";
+						soundLookupTable = "runErc_Sneakers_Zmb_LookupTable";
 						noise = "ZombieStepNoise";
 						id = 8;
 					};
 					class Sprint1
 					{
-						soundLookupTable = "Alien_Calm_soundset";
+						soundLookupTable = "sprintErc_Sneakers_Zmb_LookupTable";
 						noise = "ZombieStepNoise";
 						id = 9;
 					};
 					class Sprint2
 					{
-						soundLookupTable = "Alien_Calm_soundset";
+						soundLookupTable = "sprintErc_Sneakers_Zmb_LookupTable";
 						noise = "ZombieStepNoise";
 						id = 10;
 					};
 					class Sprint3
 					{
-						soundLookupTable = "Alien_Calm_soundset";
+						soundLookupTable = "sprintErc_Sneakers_Zmb_LookupTable";
 						noise = "ZombieStepNoise";
 						id = 11;
 					};
 					class Sprint4
 					{
-						soundLookupTable = "Alien_Calm_soundset";
+						soundLookupTable = "sprintErc_Sneakers_Zmb_LookupTable";
 						noise = "ZombieStepNoise";
 						id = 12;
 					};
@@ -1159,7 +1168,7 @@ class cfgVehicles
 			};
 			class ObtainedPelt
 			{
-				item="geb_AlienSkin";
+				item="geb_GreenAlienSkin";
 				count=1;
 				itemZones[]=
 				{
@@ -1233,6 +1242,12 @@ class cfgVehicles
 		model = "\alieninvasion\data\ufocrash\crash.p3d";
 
 	};
+
+	//Toxic cloud around a UFO crash (script: geb_AlienRadiationArea)
+	class geb_AlienRadiationArea: ContaminatedArea_Local
+	{
+		scope=2;
+	};
 };
 
 //Weapons
@@ -1279,7 +1294,6 @@ class cfgWeapons
 			1,
 			20
 		};
-		reloadAction="ReloadFal";
 		hiddenSelections[]={};
 		modes[]=
 		{
@@ -1392,9 +1406,10 @@ class cfgAmmo
 		lootCategory="Crafted";
 		casing="";
 		round="";
-		//model = "\alieninvasion\data\weapons\geb_plasmaorb.p3d";
+		// Vanilla green tracer as the plasma bolt (traces from the muzzle on every shot; see tracersEvery on the cartridge)
+		model="\dz\weapons\projectiles\tracer_green.p3d";
 		spawnPileType="Ammo_Plasma_Cell";
-		muzzleFlashParticle="Plasma_Shot";
+		muzzleFlashParticle="geb_plasma_shot";
         hit=12;
         indirectHit=0;
         indirectHitRange=0;
@@ -1404,9 +1419,9 @@ class cfgAmmo
         cost=1.2;
         airLock=1;
         typicalSpeed=360;
-        tracerScale=1.2;
-        tracerStartTime=-1;
-        tracerEndTime=1;
+        tracerScale=1.5;
+        tracerStartTime=0;
+        tracerEndTime=3;
         caliber=1;
         airFriction=-0.00018;
         damageBarrel=6;
@@ -1461,7 +1476,7 @@ class cfgMagazines
 		{
 			"Ammo_Plasma_Cell"
 		};
-		tracersEvery=0;
+		tracersEvery=1;
 		class DamageSystem
 		{
 			class GlobalHealth

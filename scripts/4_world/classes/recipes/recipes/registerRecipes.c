@@ -14,14 +14,9 @@ modded class PluginRecipesManager
 	{
 		super.RegisterRecipies();
 
-		/*
-			FOOD RECIPES
-		*/
-
-		//Freshwater Life 	
-		RegisterRecipe(new PrepareGreenAlien);
-
-
+		// Aliens are gutted with the normal skinning action (Skinning class in config), not a recipe:
+		// recipes only take inventory items, never a corpse.
+		RegisterRecipe(new geb_RechargePlasmaCartridge);
 	}
 
 };

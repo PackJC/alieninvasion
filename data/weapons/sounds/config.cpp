@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class WeaponSounds
+	class alieninvasion_sounds_weapons
 	{
 		units[]={};
 		weapons[]={};
