@@ -1,0 +1,122 @@
+ALIEN INVASION 1.1.0 - SERVER OWNER GUIDE
+=========================================
+Full guide with copy buttons: https://packjc.github.io/alieninvasion/
+Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308
+Support:  https://discord.gg/G8uSGZ8yyf
+
+This replaces the old README.txt instructions. Since 1.1.0 the mod writes its
+Central Economy files for you, so there is far less to copy by hand.
+
+
+1. INSTALL
+----------
+- Subscribe to the Workshop item (2840597308) or download it with SteamCMD.
+- Put the @alieninvasion folder next to DayZServer_x64.exe and copy its .bikey
+  into the server's "keys" folder.
+- Add it to the launch line, e.g.  -mod=@alieninvasion
+- Every player needs the mod too (models, sounds, scripts).
+
+
+2. START THE SERVER ONCE
+------------------------
+On startup the mod creates these in your server profile folder (the folder
+your -profiles= launch parameter points to), next to Gebsfish's files if you
+run Gebsfish:
+
+  <profile>\Gebs\
+    alieninvasion.json                  server settings (section 5)
+    mpmissions\
+      alieninvasion-types.xml
+      alieninvasion-spawnabletypes.xml
+      alieninvasion-events.xml
+      alieninvasion-cfgeconomycore.xml
+      alieninvasion-cfgeventspawns.xml
+      alieninvasion-mapgroupproto.xml
+
+The XML files are only rewritten when the mod version changes, so edits you
+make to them survive restarts. The mod never edits your mission folder itself.
+
+
+3. REGISTER THE ECONOMY FILES (no merging needed)
+-------------------------------------------------
+a) Create the folder  mpmissions\dayzOffline.<map>\alieninvasion\
+b) Copy into it:  alieninvasion-types.xml
+                  alieninvasion-spawnabletypes.xml
+                  alieninvasion-events.xml
+c) Open the mission's cfgeconomycore.xml and paste the <ce folder="alieninvasion">
+   block from alieninvasion-cfgeconomycore.xml inside <economycore>.
+
+Your own types.xml / events.xml stay untouched.
+
+
+4. MERGE POSITIONS AND LOOT POINTS (by hand)
+--------------------------------------------
+a) cfgeventspawns.xml: paste the <event name="StaticAlienCrash"> block from
+   alieninvasion-cfgeventspawns.xml inside <eventposdef>.
+   - Chernarus: 79 hand-picked crash sites are included.
+   - Other maps: the generator copies that mission's StaticHeliCrash
+     positions. Remove any you want kept heli-only.
+b) mapgroupproto.xml: paste the <group name="geb_Aliencrash"> block from
+   alieninvasion-mapgroupproto.xml inside <prototype>. It gives the wreck its
+   loot points and uses vanilla "Military" (heli crash) loot. To use custom
+   loot instead, add <usage name="UFO"/> to cfglimitsdefinition.xml, change
+   the group's usage to UFO, and give items <usage name="UFO"/> with deloot="1".
+
+IMPORTANT: do not add the old "InfectedAlien" event or a
+<secondary>InfectedAlien</secondary> line. Each wreck spawns its own aliens;
+a secondary event only duplicates them.
+
+Restart, check the script/RPT logs for [AlienInvasion] lines, then visit a
+crash: loot and gas are there straight away, aliens appear once a player is
+within 300 m. For quick testing on a dedicated server, spawn geb_Aliencrash
+with an admin tool - it runs the full encounter (minus the distant crash sound).
+
+
+5. ALIENINVASION.JSON SETTINGS
+------------------------------
+Edit with the server stopped; changes apply on the next start. A file with a
+syntax error is never overwritten: the server logs the error and uses the
+defaults until you fix it.
+
+  CrashAliensMin / CrashAliensMax      10 / 15   aliens per wreck
+  CrashAliensSpawnDistance             300       metres before aliens appear (0 = immediately)
+  CrashRifleChance                     0.35      chance of a Montauk Rifle in the wreckage
+  CrashSpareCartridgesMax              2         spare cartridges per wreck (0..N)
+  CrashGasZone                         true      18 m toxic cloud around the wreck
+  PsychicZapEnabled                    true      aliens zap their target at range
+  PsychicZapMinRange / PsychicZapRange 4 / 80    zap distance band in metres (line of sight)
+  PsychicZapCooldown                   60        seconds between zaps per alien
+  PlasmaDamageVsAliens                 2.0       damage multiplier, plasma vs aliens
+  OtherFirearmDamageVsAliens           0.75      damage multiplier, other guns vs aliens
+  FoilHatDetectRange                   3         aliens can't target a foil hat wearer beyond this
+  AlienVisionSeconds                   90        night vision from cooked alien meat
+  BadMeatPoison                        100       food-poisoning agents per bite of bad meat
+
+
+6. CLASSNAMES
+-------------
+  geb_Aliencrash            active UFO wreck (gas, salvage, aliens)
+  StaticObj_geb_Aliencrash  scenery-only wreck, no encounter
+  geb_AlienRadiationArea    the wreck's gas cloud (created/removed by the wreck)
+  geb_GreenAlien            Little Green Man
+  geb_GreenAlienMeat        Area 51 Steak
+  geb_GreenAlienSkin        Roswell Hide
+  geb_PlasmaRifle           Montauk Rifle
+  geb_PlasmaCartridge       Montauk Cartridge (recharge with a 9V battery)
+  geb_FoilHat               Tin Foil Hat
+
+
+7. CUSTOM ALIEN LOOT (optional)
+-------------------------------
+alieninvasion-spawnabletypes.xml gives aliens a 10% chance of a spare plasma
+cartridge. Add more <cargo> entries to the geb_GreenAlien type if you like,
+for example:
+
+  <type name="geb_GreenAlien">
+      <cargo chance="0.10">
+          <item name="geb_PlasmaCartridge" chance="1.00" />
+      </cargo>
+      <cargo chance="0.05">
+          <item name="geb_FoilHat" chance="1.00" />
+      </cargo>
+  </type>

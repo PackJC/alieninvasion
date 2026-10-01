@@ -1,12 +1,13 @@
 const classnames = [
-  { name: "geb_Aliencrash", type: "Encounter", description: "Active UFO wreck with effects, audio, and alien spawning." },
+  { name: "geb_Aliencrash", type: "Encounter", description: "Active UFO wreck: effects, audio, toxic gas, salvage, and alien spawning." },
   { name: "StaticObj_geb_Aliencrash", type: "Encounter", description: "Static visual UFO wreck without scripted encounter behavior." },
-  { name: "geb_GreenAlien", type: "Creature", description: "Hostile Little Green Man." },
-  { name: "geb_GreenAlienMeat", type: "Food", description: "Area 51 Steak harvested from an alien." },
-  { name: "geb_GreenAlienSkin", type: "Material", description: "Roswell Hide harvested from an alien." },
-  { name: "geb_PlasmaRifle", type: "Weapon", description: "Semi-automatic Montauk Rifle." },
-  { name: "geb_PlasmaCartridge", type: "Magazine", description: "15-round Montauk Cartridge." },
-  { name: "geb_FoilHat", type: "Clothing", description: "Tin Foil Hat headgear." }
+  { name: "geb_AlienRadiationArea", type: "Encounter", description: "18 m toxic cloud each active wreck creates and removes; not meant to be spawned on its own." },
+  { name: "geb_GreenAlien", type: "Creature", description: "Hostile Little Green Man with melee and a psychic zap." },
+  { name: "geb_GreenAlienMeat", type: "Food", description: "Area 51 Steak from skinning; cooked gives night vision, bad meat poisons." },
+  { name: "geb_GreenAlienSkin", type: "Material", description: "Roswell Hide from skinning an alien." },
+  { name: "geb_PlasmaRifle", type: "Weapon", description: "Semi-automatic Montauk Rifle; green plasma bolts, double damage to aliens." },
+  { name: "geb_PlasmaCartridge", type: "Magazine", description: "15-round Montauk Cartridge; recharge with a 9V battery." },
+  { name: "geb_FoilHat", type: "Clothing", description: "Tin Foil Hat; aliens can't track or zap the wearer." }
 ];
 
 const tabButtons = [...document.querySelectorAll("[data-tab]")];
@@ -110,6 +111,35 @@ document.querySelectorAll("[data-copy-target]").forEach((button) => {
     if (target) copyText(target.textContent.trim());
   });
 });
+
+// Light XML syntax colouring for code blocks marked .language-xml. Copy buttons read textContent,
+// which the added spans don't change.
+function escapeHtml(text) {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function highlightXml(code) {
+  const source = code.textContent;
+  const tokenPattern = /(<!--[\s\S]*?-->)|(<\/?)([\w:.-]+)((?:\s+[\w:.-]+(?:="[^"]*")?)*)(\s*\/?>)/g;
+  const span = (cls, text) => `<span class="${cls}">${escapeHtml(text)}</span>`;
+  let html = "";
+  let last = 0;
+  let match;
+  while ((match = tokenPattern.exec(source))) {
+    html += escapeHtml(source.slice(last, match.index));
+    if (match[1]) {
+      html += span("tok-com", match[1]);
+    } else {
+      const attributes = match[4].replace(/([\w:.-]+)(="[^"]*")?/g, (_, name, value) =>
+        span("tok-attr", name) + (value ? span("tok-punct", "=") + span("tok-val", value.slice(1)) : ""));
+      html += span("tok-punct", match[2]) + span("tok-tag", match[3]) + attributes + span("tok-punct", match[5]);
+    }
+    last = tokenPattern.lastIndex;
+  }
+  code.innerHTML = html + escapeHtml(source.slice(last));
+}
+
+document.querySelectorAll("code.language-xml").forEach(highlightXml);
 
 const classnameBody = document.querySelector("#classname-body");
 const searchInput = document.querySelector("#classname-search");
