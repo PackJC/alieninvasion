@@ -1395,10 +1395,9 @@ class cfgWeapons
 		ejectType=1;
 		recoilModifier[]={1,1,1};
 		swayModifier[]={1.2,1.2,1};
-		simpleHiddenSelections[]=
-		{
-			"hide_barrel"
-		};
+		// This custom P3D has no hide_barrel selection. Registering the Ruger selection here makes
+		// ForceSyncSelectionState access an invalid model selection when a cartridge is chambered.
+		simpleHiddenSelections[]={};
 		drySound[]=
 		{
 			"dz\sounds\weapons\firearms\m4a1\m4_dry",

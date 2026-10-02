@@ -10,11 +10,6 @@ class geb_PlasmaRifle : Ruger1022_Base
 		return new FALRecoil(this);
 	}
 
-	override void OnDebugSpawn()
-	{
-		SpawnAttachedMagazine("geb_PlasmaCartridge");
-	}
-
 	// The plasma shot particle comes from config (Particles > OnFire > MuzzleFlash and the ammo's
 	// muzzleFlashParticle), so it isn't played again here.
 };
