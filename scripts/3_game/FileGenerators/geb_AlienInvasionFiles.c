@@ -139,7 +139,7 @@ class geb_AlienInvasionFiles
 		}
 		else if ( !CopyHeliCrashSpots(file) )
 		{
-			FPrintln(file, "        <!-- No crash spots known for " + world + ": add <pos x=\"\" z=\"\" a=\"\" /> lines here -->");
+			FPrintln(file, "        <!-- No crash spots known for " + world + ": add <pos x='' z='' a='' /> lines here -->");
 		}
 		FPrintln(file, "    </event>");
 		FPrintln(file, "</eventposdef>");
