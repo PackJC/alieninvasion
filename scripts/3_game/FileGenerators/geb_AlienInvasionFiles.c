@@ -48,6 +48,11 @@ class geb_AlienInvasionFiles
 		FPrintln(file, "    <!-- From skinning aliens -->");
 		WriteType(file, "geb_GreenAlienMeat", 0, 14400, 0, true, "food");
 		WriteType(file, "geb_GreenAlienSkin", 0, 28800, 0, true, "tools");
+		FPrintln(file, "    <!-- Crafted from the Roswell Hide -->");
+		WriteType(file, "geb_GreenAlienLeather", 0, 14400, 0, true, "tools");
+		WriteType(file, "geb_GreenAlienLeatherSack", 0, 28800, 0, true, "clothes");
+		WriteType(file, "geb_GreenAlienCourierBag", 0, 28800, 0, true, "clothes");
+		WriteType(file, "geb_GreenAlienImprovisedBag", 0, 28800, 0, true, "clothes");
 		FPrintln(file, "</types>");
 
 		EndFile(file, name);

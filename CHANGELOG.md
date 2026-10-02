@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.2.0
+
+Server owners: the generated `alieninvasion-types.xml` gains four items. It is rewritten on the first start after the update; copy it into your mission's `alieninvasion` folder again.
+
+### Added
+- **Roswell Leather:** the Roswell Hide tans into green leather with garden lime, by hand or in a barrel (it used to give ordinary Tanned Leather).
+- **Roswell Leather Backpack:** two Roswell Leather and a leather sewing kit.
+- **Roswell Hide Courier Bag** (hide + rope) and **Roswell Hide Backpack** (courier bag + three sticks).
+- Each new bag breaks back down like its vanilla counterpart. Vanilla's own recipes skip the green items, so the action menu never offers a brown result for them.
+- New strings translated into all 13 languages.
+
+### Changed
+- Area 51 Steak is green at every cooking stage; cooked steak used to show vanilla's beef textures.
+- The Roswell Hide looks like the alien's own skin instead of flat neon green.
+- Montauk Rifle texture and normal map doubled to 1024×1024.
+- The tin foil hat's reflection map is silver; it used to reflect a gold sunset.
+
 ## 1.1.0
 
 Server owners: on first start the mod now writes `$profile:Gebs/alieninvasion.json` and ready-made economy files in `$profile:Gebs/mpmissions/`. See the [server guide](https://packjc.github.io/alieninvasion/#install).

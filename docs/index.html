@@ -22,8 +22,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Bump ?v= whenever styles.css or app.js changes: GitHub Pages lets browsers cache them for
        10 minutes, and fresh HTML paired with a stale stylesheet breaks the layout -->
-  <link rel="stylesheet" href="styles.css?v=20261001">
-  <script src="app.js?v=20261001" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261001e">
+  <script src="app.js?v=20261001e" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -59,7 +59,7 @@
         <button class="button button-secondary" type="button" data-open-tab="install">Server installation</button>
       </div>
       <div class="badges" aria-label="Project badges">
-        <img src="https://img.shields.io/badge/Mod-v1.1.0-75ff9b?style=for-the-badge&labelColor=13221b" alt="Mod version 1.1.0">
+        <img src="https://img.shields.io/badge/Mod-v1.2.0-75ff9b?style=for-the-badge&labelColor=13221b" alt="Mod version 1.2.0">
         <img src="https://img.shields.io/badge/DayZ-v1.29-5ce1e6?style=for-the-badge&labelColor=13221b" alt="DayZ version 1.29">
         <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><img src="https://img.shields.io/steam/subscriptions/2840597308?style=for-the-badge&color=9678ff&label=Workshop%20Subs&labelColor=13221b" alt="Current Steam Workshop subscribers"></a>
       </div>
@@ -107,7 +107,7 @@
         <article class="feature-card"><h3>Alien technology</h3><p>Salvage the Montauk Rifle and plasma cartridges from the wreck. Its green bolts hit aliens twice as hard as earthly bullets.</p></article>
         <article class="feature-card"><h3>Rechargeable cells</h3><p>Plasma can't be unloaded or found loose — combine a cartridge with a 9V battery to recharge it. A full battery fills a full cartridge.</p></article>
         <article class="feature-card"><h3>Tin foil hat</h3><p>It works. Aliens lose track of anyone wearing an intact foil hat unless they're within arm's reach, and their psychic zaps can't get through.</p></article>
-        <article class="feature-card"><h3>Area 51 Steak</h3><p>Skin an alien for steaks and a Roswell Hide. Cooked meat gives 90 seconds of green alien night vision; raw, burnt, or rotten meat gives food poisoning.</p></article>
+        <article class="feature-card"><h3>Alien harvest</h3><p>Skin an alien for Area 51 Steaks and a Roswell Hide. Cooked steak gives 90 seconds of green night vision; the hide tans into green leather for backpacks and bags.</p></article>
         <article class="feature-card"><h3>Server-tunable</h3><p>Every number — alien counts, loot odds, gas zone, zap range, damage bonuses — lives in <code>$profile:Gebs/alieninvasion.json</code>.</p></article>
         <article class="feature-card"><h3>Economy files generated</h3><p>The server writes ready-made types, events, crash positions, and loot points into <code>$profile:Gebs/mpmissions/</code> on first start.</p></article>
       </div>
@@ -241,14 +241,23 @@
     </section>
 
     <section class="tab-panel" id="arsenal" role="tabpanel" aria-labelledby="arsenal-tab" hidden>
-      <div class="section-heading"><p class="kicker">Recovered materials</p><h2>Field inventory</h2><p>Nine public classnames cover the encounter, toxic cloud, creature, weapon, magazine, clothing, food, and harvested material.</p></div>
+      <div class="section-heading"><p class="kicker">Recovered materials</p><h2>Field inventory</h2><p>Thirteen public classnames cover the encounter, toxic cloud, creature, weapon, magazine, clothing, food, the Roswell Hide, and what you can make from it.</p></div>
       <div class="loadout-grid">
         <article class="loadout-card"><span class="item-tag">Weapon</span><div class="item-stage"><img src="items/geb_PlasmaRifle.webp" alt="Render of the Montauk Rifle" width="640" height="198" loading="lazy"></div><h3>Montauk Rifle</h3><code>geb_PlasmaRifle</code><p>A semi-automatic experimental rifle that fires visible green plasma bolts. Plasma deals double damage to aliens; every other firearm deals 75%.</p><dl><div><dt>Fire mode</dt><dd>Semi-auto</dd></div><div><dt>Vs aliens</dt><dd>×2 damage</dd></div></dl></article>
         <article class="loadout-card"><span class="item-tag">Magazine</span><div class="item-stage"><img src="items/geb_PlasmaCartridge.webp" alt="Render of the Montauk Cartridge" width="640" height="377" loading="lazy"></div><h3>Montauk Cartridge</h3><code>geb_PlasmaCartridge</code><p>A sealed plasma magazine that can't be unloaded. Combine it with a 9V battery to recharge — a full battery fills a full cartridge, a partial one adds what it can.</p><dl><div><dt>Capacity</dt><dd>15</dd></div><div><dt>Recharge</dt><dd>9V battery</dd></div></dl></article>
         <article class="loadout-card"><span class="item-tag">Clothing</span><div class="item-stage"><img src="items/geb_FoilHat.webp" alt="Render of the Tin Foil Hat" width="400" height="420" loading="lazy"></div><h3>Tin Foil Hat</h3><code>geb_FoilHat</code><p>Aliens can't track an intact foil hat's wearer beyond 3&nbsp;m, so they can't zap you either. A light 3×2 hat, not a helmet.</p><dl><div><dt>Slot</dt><dd>Headgear</dd></div><div><dt>Protects</dt><dd>Mind</dd></div></dl></article>
-        <article class="loadout-card"><span class="item-tag">Food</span><div class="item-stage"><img src="items/geb_GreenAlienMeat.webp" alt="Render of an Area 51 Steak" width="640" height="365" loading="lazy"></div><h3>Area 51 Steak</h3><code>geb_GreenAlienMeat</code><p>Skinning an alien gives two steaks. Eat it cooked (baked, boiled, or dried) for 90 seconds of green night vision; raw, burnt, or rotten meat gives food poisoning.</p><dl><div><dt>Source</dt><dd>Alien</dd></div><div><dt>Cooked</dt><dd>Night vision</dd></div></dl></article>
-        <article class="loadout-card"><span class="item-tag">Material</span><div class="item-stage"><img src="items/geb_GreenAlienSkin.webp" alt="Render of a Roswell Hide" width="640" height="342" loading="lazy"></div><h3>Roswell Hide</h3><code>geb_GreenAlienSkin</code><p>A strange extraterrestrial hide recovered when skinning an alien.</p><dl><div><dt>Source</dt><dd>Alien</dd></div><div><dt>Type</dt><dd>Pelt</dd></div></dl></article>
+        <article class="loadout-card"><span class="item-tag">Food</span><div class="item-stage"><span class="stage-label">Raw</span><img src="items/geb_GreenAlienMeat.webp" alt="Render of a raw Area 51 Steak" width="640" height="365" loading="lazy"></div><div class="stage-row"><figure><img src="items/geb_GreenAlienMeat_Baked.webp" alt="Render of a baked Area 51 Steak" width="640" height="365" loading="lazy"><figcaption>Baked</figcaption></figure><figure><img src="items/geb_GreenAlienMeat_Boiled.webp" alt="Render of a boiled Area 51 Steak" width="640" height="365" loading="lazy"><figcaption>Boiled</figcaption></figure><figure><img src="items/geb_GreenAlienMeat_Dried.webp" alt="Render of a dried Area 51 Steak" width="640" height="365" loading="lazy"><figcaption>Dried</figcaption></figure><figure><img src="items/geb_GreenAlienMeat_Burnt.webp" alt="Render of a burnt Area 51 Steak" width="640" height="365" loading="lazy"><figcaption>Burnt</figcaption></figure></div><h3>Area 51 Steak</h3><code>geb_GreenAlienMeat</code><p>Skinning an alien gives two steaks. Eat it cooked (baked, boiled, or dried) for 90 seconds of green night vision; raw, burnt, or rotten meat gives food poisoning.</p><dl><div><dt>Source</dt><dd>Alien</dd></div><div><dt>Cooked</dt><dd>Night vision</dd></div></dl></article>
+        <article class="loadout-card"><span class="item-tag">Material</span><div class="item-stage"><img src="items/geb_GreenAlienSkin.webp" alt="Render of a Roswell Hide" width="640" height="342" loading="lazy"></div><h3>Roswell Hide</h3><code>geb_GreenAlienSkin</code><p>Skinning an alien gives one. Tan it with garden lime into Roswell Leather, or tie it into a courier bag with a rope.</p><dl><div><dt>Source</dt><dd>Alien</dd></div><div><dt>Used for</dt><dd>Leather, bags</dd></div></dl></article>
         <article class="loadout-card"><span class="item-tag">Creature</span><div class="item-stage"><img src="items/geb_GreenAlien.webp" alt="Render of a Little Green Man" width="462" height="420" loading="lazy"></div><h3>Little Green Man</h3><code>geb_GreenAlien</code><p>A hostile extraterrestrial with its own voice and footsteps. Infected melee up close, a psychic zap at range, and a green burst and scream when it dies.</p><dl><div><dt>Zap range</dt><dd>4–80 m</dd></div><div><dt>Harvestable</dt><dd>Yes</dd></div></dl></article>
+      </div>
+      <div class="subsection">
+        <div class="section-heading"><p class="kicker">Crafting</p><h3>Roswell Hide crafting</h3><p>Green versions of vanilla's leather chain, on vanilla's models. Recipes work like vanilla's: tan the hide in your hands or in a barrel with garden lime, sew with a leather sewing kit, and break items back down with any knife or blade.</p></div>
+        <div class="loadout-grid">
+        <article class="loadout-card"><span class="item-tag">Material</span><div class="item-stage"><img src="items/geb_GreenAlienLeather.webp" alt="Render of the Roswell Leather" width="538" height="320" loading="lazy"></div><h3>Roswell Leather</h3><code>geb_GreenAlienLeather</code><p>A Roswell Hide tanned with garden lime, by hand or in a barrel. Up to 12 pieces from a hide in pristine condition, fewer from a damaged one.</p><dl><div><dt>Made from</dt><dd>Hide + lime</dd></div><div><dt>Per hide</dt><dd>Up to 12</dd></div></dl></article>
+        <article class="loadout-card"><span class="item-tag">Backpack</span><div class="item-stage item-stage-pair"><figure><img src="items/geb_GreenAlienLeatherSack.webp" alt="Render of the Roswell Leather Backpack on the ground" width="473" height="420" loading="lazy"><figcaption>Ground</figcaption></figure><figure><img src="items/geb_GreenAlienLeatherSack_Worn.webp" alt="Render of the Roswell Leather Backpack as worn" width="295" height="420" loading="lazy"><figcaption>Worn</figcaption></figure></div><h3>Roswell Leather Backpack</h3><code>geb_GreenAlienLeatherSack</code><p>Two Roswell Leather and a leather sewing kit. Holds as much as vanilla's leather backpack; cut it up to get one leather back.</p><dl><div><dt>Recipe</dt><dd>2 leather + sewing kit</dd></div><div><dt>Cargo</dt><dd>6×7</dd></div></dl></article>
+        <article class="loadout-card"><span class="item-tag">Backpack</span><div class="item-stage item-stage-pair"><figure><img src="items/geb_GreenAlienCourierBag.webp" alt="Render of the Roswell Hide Courier Bag on the ground" width="640" height="379" loading="lazy"><figcaption>Ground</figcaption></figure><figure><img src="items/geb_GreenAlienCourierBag_Worn.webp" alt="Render of the Roswell Hide Courier Bag as worn" width="640" height="345" loading="lazy"><figcaption>Worn</figcaption></figure></div><h3>Roswell Hide Courier Bag</h3><code>geb_GreenAlienCourierBag</code><p>A Roswell Hide and a rope. Breaking it down returns both.</p><dl><div><dt>Recipe</dt><dd>Hide + rope</dd></div><div><dt>Cargo</dt><dd>5×6</dd></div></dl></article>
+        <article class="loadout-card"><span class="item-tag">Backpack</span><div class="item-stage item-stage-pair"><figure><img src="items/geb_GreenAlienImprovisedBag.webp" alt="Render of the Roswell Hide Backpack on the ground" width="640" height="295" loading="lazy"><figcaption>Ground</figcaption></figure><figure><img src="items/geb_GreenAlienImprovisedBag_Worn.webp" alt="Render of the Roswell Hide Backpack as worn" width="560" height="420" loading="lazy"><figcaption>Worn</figcaption></figure></div><h3>Roswell Hide Backpack</h3><code>geb_GreenAlienImprovisedBag</code><p>A Roswell Hide courier bag lashed to a frame of three sticks. Breaking it down returns a stick and the hide.</p><dl><div><dt>Recipe</dt><dd>Courier bag + 3 sticks</dd></div><div><dt>Cargo</dt><dd>7×5</dd></div></dl></article>
+        </div>
       </div>
     </section>
 
@@ -284,8 +293,8 @@
       <div class="section-heading"><p class="kicker">Server reference</p><h2>Classname database</h2><p>Search or filter every public classname. Use the copy button to move a value directly into an economy, trader, or admin-tool configuration.</p></div>
       <div class="table-controls">
         <label><span class="sr-only">Search classnames</span><input id="classname-search" type="search" placeholder="Search classname or description…" autocomplete="off"></label>
-        <select id="classname-filter" aria-label="Filter by type"><option value="all">All types</option><option value="Encounter">Encounter</option><option value="Creature">Creature</option><option value="Weapon">Weapon</option><option value="Magazine">Magazine</option><option value="Food">Food</option><option value="Material">Material</option><option value="Clothing">Clothing</option></select>
-        <span class="result-count" id="result-count">9 entries</span>
+        <select id="classname-filter" aria-label="Filter by type"><option value="all">All types</option><option value="Encounter">Encounter</option><option value="Creature">Creature</option><option value="Weapon">Weapon</option><option value="Magazine">Magazine</option><option value="Food">Food</option><option value="Material">Material</option><option value="Backpack">Backpack</option><option value="Clothing">Clothing</option></select>
+        <span class="result-count" id="result-count">13 entries</span>
       </div>
       <div class="table-wrap">
         <table>
@@ -319,8 +328,21 @@
     </section>
 
     <section class="tab-panel" id="changelog" role="tabpanel" aria-labelledby="changelog-tab" hidden>
-      <div class="section-heading"><p class="kicker">Transmission log</p><h2>Changelog</h2><p>What changed in each release. Server owners: 1.1.0 generates new economy files and a config on first start — see the Install tab.</p></div>
+      <div class="section-heading"><p class="kicker">Transmission log</p><h2>Changelog</h2><p>What changed in each release. Server owners: 1.2.0 rewrites the generated economy files with the new items — copy the new types file into your mission again.</p></div>
       <div class="timeline">
+        <article><span>1.2</span><div><h3>Version 1.2.0 — Roswell Hide crafting</h3><ul>
+          <li>The Roswell Hide tans into green Roswell Leather with garden lime, by hand or in a barrel. (It used to give ordinary brown leather.)</li>
+          <li>Roswell Leather sews into a green Roswell Leather Backpack; the hide and a rope make a Roswell Hide Courier Bag, which takes three sticks to become a Roswell Hide Backpack. All of them break back down like vanilla's.</li>
+          <li>Reworked textures: the hide looks like the alien's skin, the steak is green at every cooking stage (it turned back into beef when cooked), the Montauk Rifle is twice the resolution, and the tin foil hat reflects silver instead of gold.</li>
+          <li>Four new items in the generated types file; new strings translated into all 13 languages.</li>
+        </ul>
+          <div class="compare-grid">
+            <figure class="compare"><div class="compare-pair"><div><img src="items/compare/steak_1.1.webp" alt="Area 51 Steak in 1.1" width="480" height="274" loading="lazy"><span>1.1</span></div><div><img src="items/compare/steak_1.2.webp" alt="Area 51 Steak in 1.2" width="480" height="274" loading="lazy"><span>1.2</span></div></div><figcaption>Area 51 Steak, raw</figcaption></figure>
+            <figure class="compare"><div class="compare-pair"><div><img src="items/compare/steak_cooked_1.1.webp" alt="Area 51 Steak in 1.1" width="480" height="274" loading="lazy"><span>1.1</span></div><div><img src="items/compare/steak_cooked_1.2.webp" alt="Area 51 Steak in 1.2" width="480" height="274" loading="lazy"><span>1.2</span></div></div><figcaption>Area 51 Steak, baked: cooked steak used to turn back into vanilla beef</figcaption></figure>
+            <figure class="compare"><div class="compare-pair"><div><img src="items/compare/hide_1.1.webp" alt="Roswell Hide in 1.1" width="480" height="257" loading="lazy"><span>1.1</span></div><div><img src="items/compare/hide_1.2.webp" alt="Roswell Hide in 1.2" width="480" height="257" loading="lazy"><span>1.2</span></div></div><figcaption>Roswell Hide: now the alien's own skin tone</figcaption></figure>
+            <figure class="compare"><div class="compare-pair"><div><img src="items/compare/foilhat_1.1.webp" alt="Tin Foil Hat in 1.1" width="286" height="300" loading="lazy"><span>1.1</span></div><div><img src="items/compare/foilhat_1.2.webp" alt="Tin Foil Hat in 1.2" width="286" height="300" loading="lazy"><span>1.2</span></div></div><figcaption>Tin Foil Hat: its reflection map was a gold sunset</figcaption></figure>
+            <figure class="compare wide"><div class="compare-pair"><div><img src="items/compare/rifle_1.1.webp" alt="Montauk Rifle close-up in 1.1" width="480" height="213" loading="lazy"><span>1.1</span></div><div><img src="items/compare/rifle_1.2.webp" alt="Montauk Rifle close-up in 1.2" width="480" height="213" loading="lazy"><span>1.2</span></div></div><figcaption>Montauk Rifle close-up: texture and normal map doubled to 1024</figcaption></figure>
+          </div></div></article>
         <article><span>1.1</span><div><h3>Version 1.1.0 — fixes</h3><ul>
           <li>Montauk Rifle no longer locks up after the last shot in a cartridge. The script ran the FAL's bolt-lock logic on the Ruger 10/22 animations the config uses.</li>
           <li>Aliens have voices and footsteps. They were silent and filled server logs with "No sound callback" warnings.</li>

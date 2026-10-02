@@ -1,4 +1,4 @@
-ALIEN INVASION 1.1.0 - SERVER OWNER GUIDE
+ALIEN INVASION 1.2.0 - SERVER OWNER GUIDE
 =========================================
 Full guide with copy buttons: https://packjc.github.io/alieninvasion/
 Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308
@@ -101,6 +101,10 @@ defaults until you fix it.
   geb_GreenAlien            Little Green Man
   geb_GreenAlienMeat        Area 51 Steak
   geb_GreenAlienSkin        Roswell Hide
+  geb_GreenAlienLeather     Roswell Leather (hide + garden lime)
+  geb_GreenAlienLeatherSack Roswell Leather Backpack
+  geb_GreenAlienCourierBag  Roswell Hide Courier Bag
+  geb_GreenAlienImprovisedBag  Roswell Hide Backpack
   geb_PlasmaRifle           Montauk Rifle
   geb_PlasmaCartridge       Montauk Cartridge (recharge with a 9V battery)
   geb_FoilHat               Tin Foil Hat

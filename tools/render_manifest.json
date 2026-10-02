@@ -5,5 +5,16 @@
   { "name": "geb_GreenAlien",      "p3d": "data/aliens/geb_GreenAlien.p3d",       "view": "AUTO" },
   { "name": "geb_Aliencrash",      "p3d": "data/ufocrash/crash.p3d",              "view": "ISO" },
   { "name": "geb_GreenAlienMeat",  "p3d": "tools/debinned/_meat_steak.p3d",       "texture": "data/aliens/alienmeat.paa", "view": "AUTO" },
-  { "name": "geb_GreenAlienSkin",  "p3d": "tools/debinned/_Pelt_Bear.p3d",        "texture": "data/aliens/alienpelt.paa", "view": "AUTO" }
+  { "name": "geb_GreenAlienSkin",  "p3d": "tools/debinned/_Pelt_Bear.p3d",        "texture": "data/aliens/alienpelt.paa", "view": "AUTO" },
+  { "name": "geb_GreenAlienLeather",       "p3d": "tools/debinned/_tanned_leather.p3d",     "texture": "data/leather/geb_alienleather_co.paa",       "view": "ISO" },
+  { "name": "geb_GreenAlienLeatherSack",   "p3d": "tools/debinned/_bag_leathersack_g.p3d",  "texture": "data/leather/geb_alienleathersack_g_co.paa", "view": "ISO" },
+  { "name": "geb_GreenAlienCourierBag",    "p3d": "tools/debinned/_impcourierbagfur_g.p3d", "texture": "data/leather/geb_aliencourierbag_co.paa",    "view": "ISO" },
+  { "name": "geb_GreenAlienImprovisedBag", "p3d": "tools/debinned/_bp_improvised_g.p3d",    "texture": "data/leather/geb_alienimprovisedbag_co.paa", "view": "ISO" },
+  { "name": "geb_GreenAlienMeat_Baked",  "p3d": "tools/debinned/_meat_steak.p3d", "texture": "data/aliens/alienmeat_baked_co.paa",  "view": "AUTO" },
+  { "name": "geb_GreenAlienMeat_Boiled", "p3d": "tools/debinned/_meat_steak.p3d", "texture": "data/aliens/alienmeat_boiled_co.paa", "view": "AUTO" },
+  { "name": "geb_GreenAlienMeat_Dried",  "p3d": "tools/debinned/_meat_steak.p3d", "texture": "data/aliens/alienmeat_dried_co.paa",  "view": "AUTO" },
+  { "name": "geb_GreenAlienMeat_Burnt",  "p3d": "tools/debinned/_meat_steak.p3d", "texture": "data/aliens/alienmeat_burnt_co.paa",  "view": "AUTO" },
+  { "name": "geb_GreenAlienLeatherSack_Worn",   "p3d": "tools/debinned/_bag_leathersack_m.p3d",  "texture": "data/leather/geb_alienleathersack_co.paa",   "view": "ISO" },
+  { "name": "geb_GreenAlienCourierBag_Worn",    "p3d": "tools/debinned/_impcourierbagfur_m.p3d", "texture": "data/leather/geb_aliencourierbag_co.paa",    "view": "ISO" },
+  { "name": "geb_GreenAlienImprovisedBag_Worn", "p3d": "tools/debinned/_bp_improvised_m.p3d",    "texture": "data/leather/geb_alienimprovisedbag_co.paa", "view": "ISO" }
 ]

@@ -35,7 +35,7 @@ class CfgMods
 		credits="DayZ Modding Community";
 		author="Geb";
 		authorID="0";
-		version="1.1.0";
+		version="1.2.0";
 		extra=0;
 		type="mod";
 		dependencies[]=

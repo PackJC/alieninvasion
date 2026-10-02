@@ -4,7 +4,11 @@ const classnames = [
   { name: "geb_AlienRadiationArea", type: "Encounter", description: "18 m toxic cloud each active wreck creates and removes; not meant to be spawned on its own." },
   { name: "geb_GreenAlien", type: "Creature", img: "geb_GreenAlien", description: "Hostile Little Green Man with melee and a psychic zap." },
   { name: "geb_GreenAlienMeat", type: "Food", img: "geb_GreenAlienMeat", description: "Area 51 Steak from skinning; cooked gives night vision, bad meat poisons." },
-  { name: "geb_GreenAlienSkin", type: "Material", img: "geb_GreenAlienSkin", description: "Roswell Hide from skinning an alien." },
+  { name: "geb_GreenAlienSkin", type: "Material", img: "geb_GreenAlienSkin", description: "Roswell Hide from skinning an alien; tans into Roswell Leather." },
+  { name: "geb_GreenAlienLeather", type: "Material", img: "geb_GreenAlienLeather", description: "Roswell Leather: a hide tanned with garden lime, by hand or in a barrel." },
+  { name: "geb_GreenAlienLeatherSack", type: "Backpack", img: "geb_GreenAlienLeatherSack", description: "Roswell Leather Backpack: two Roswell Leather and a leather sewing kit." },
+  { name: "geb_GreenAlienCourierBag", type: "Backpack", img: "geb_GreenAlienCourierBag", description: "Roswell Hide Courier Bag: a hide and a rope." },
+  { name: "geb_GreenAlienImprovisedBag", type: "Backpack", img: "geb_GreenAlienImprovisedBag", description: "Roswell Hide Backpack: the courier bag on a frame of three sticks." },
   { name: "geb_PlasmaRifle", type: "Weapon", img: "geb_PlasmaRifle", description: "Semi-automatic Montauk Rifle; green plasma bolts, double damage to aliens." },
   { name: "geb_PlasmaCartridge", type: "Magazine", img: "geb_PlasmaCartridge", description: "15-round Montauk Cartridge; recharge with a 9V battery." },
   { name: "geb_FoilHat", type: "Clothing", img: "geb_FoilHat", description: "Tin Foil Hat; aliens can't track or zap the wearer." }

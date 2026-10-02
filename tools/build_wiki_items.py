@@ -1,12 +1,14 @@
 # Turn Blender renders of the mod's models into the website's item pictures
 # (docs/items/<classname>.webp), the same way the Gebsfish wiki gets its gear art.
 #
-#   0. The steak and hide use vanilla's binarized meat_steak.p3d and Pelt_Bear.p3d (DZ\gear\food,
-#      DZ\gear\consumables), which Blender can't import. Debinarize them with DeODOL53.exe, which
-#      writes <model's folder>\Debinned\_<name>.p3d, and copy the results into tools/debinned/.
-#      That folder is gitignored: those are Bohemia's models, so never commit them.
-#   1. Render (Blender 4.x + the Arma 3 Object Builder add-on; render_p3d.py lives in the gebsfish repo):
-#        blender --background --python <gebsfish>/tools/render_p3d.py -- \
+#   0. Items on vanilla models (steak, hide, tanned leather, leather backpack, courier bag, hide backpack)
+#      need vanilla's binarized p3d files (DZ\gear\food, DZ\gear\consumables, DZ\characters\backpacks),
+#      which Blender can't import. Debinarize each with DeODOL6_2.exe <model.p3d> <out folder> (DeODOL53
+#      crashes on most of them) and save the result as tools/debinned/_<name>.p3d, the names the manifest
+#      uses. That folder is gitignored: those are Bohemia's models, so never commit them.
+#   1. Render (Blender 4.x + the Arma 3 Object Builder add-on). render_items.py runs the gebsfish repo's
+#      render_p3d.py after stripping the attachment proxies the vanilla backpacks carry:
+#        blender --background --python tools/render_items.py -- \
 #            --manifest tools/render_manifest.json --src data --texroot data --out <renders_dir>
 #      Run it from this repo's root: the manifest's model paths are relative.
 #   2. Crop and convert:

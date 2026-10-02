@@ -10,7 +10,7 @@
 <h3 align="center">An Extraterrestrial Encounter Expansion for DayZ</h3>
 
 <p align="center">
-  <img alt="Mod Version" src="https://img.shields.io/badge/Mod-v1.1.0-blue?style=for-the-badge">
+  <img alt="Mod Version" src="https://img.shields.io/badge/Mod-v1.2.0-blue?style=for-the-badge">
   <img alt="DayZ Version" src="https://img.shields.io/badge/DayZ-v1.29-teal?style=for-the-badge">
   <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><img alt="Workshop Subscribers" src="https://img.shields.io/steam/subscriptions/2840597308?style=for-the-badge&color=purple&label=Workshop%20Subs"></a>
   <a href="https://packjc.github.io/alieninvasion/"><img alt="Website" src="https://img.shields.io/badge/Website-Field%20Manual-75ff9b?style=for-the-badge"></a>
@@ -45,6 +45,7 @@ The mod includes custom models, textures, sounds, particles, localized item name
 - **Montauk Cartridge**, a 15-round plasma magazine that can't be unloaded — recharge it with a 9V battery.
 - **Tin Foil Hat:** aliens can't track the wearer beyond 3 m and can't zap them.
 - **Area 51 Steak** and **Roswell Hide** from skinning aliens. Cooked steak gives 90 s of green night vision; bad meat gives food poisoning.
+- **Roswell Hide crafting:** tan the hide into green **Roswell Leather**, then sew a **Roswell Leather Backpack**, or make a **Roswell Hide Courier Bag** and **Roswell Hide Backpack**.
 - Every number is tunable in `$profile:Gebs/alieninvasion.json`, and the server generates its own economy files.
 - Complete string-table support for English, Czech, German, Russian, Polish, Hungarian, Italian, Spanish, French, Traditional and Simplified Chinese, Japanese, and Portuguese.
 
@@ -77,7 +78,11 @@ A sealed 15-round plasma magazine. It can't be unloaded; combine it with a 9V ba
 ### Alien Materials
 
 - **Area 51 Steak** inherits DayZ's meat preparation and cooking states. Eaten cooked (baked, boiled, or dried) it gives 90 seconds of green night vision; raw, burnt, or rotten it gives food poisoning.
-- **Roswell Hide** is the alien's harvestable pelt.
+- **Roswell Hide** is the alien's harvestable pelt. It is green at every step of vanilla's leather chain:
+  - Hide + garden lime (by hand or in a barrel) → **Roswell Leather**, up to 12 per hide.
+  - 2 Roswell Leather + leather sewing kit → **Roswell Leather Backpack** (6×7 cargo).
+  - Hide + rope → **Roswell Hide Courier Bag** (5×6); + 3 wooden sticks → **Roswell Hide Backpack** (7×5).
+  - Each bag breaks back down with a knife or blade, like vanilla's.
 
 ### Tin Foil Hat
 
@@ -143,6 +148,10 @@ A file that fails to parse is never overwritten; the server logs the error and r
 | `geb_GreenAlien` | Creature | Hostile Little Green Man |
 | `geb_GreenAlienMeat` | Food | Area 51 Steak harvested from an alien |
 | `geb_GreenAlienSkin` | Material | Roswell Hide harvested from an alien |
+| `geb_GreenAlienLeather` | Material | Roswell Leather, tanned from the hide |
+| `geb_GreenAlienLeatherSack` | Backpack | Roswell Leather Backpack |
+| `geb_GreenAlienCourierBag` | Backpack | Roswell Hide Courier Bag |
+| `geb_GreenAlienImprovisedBag` | Backpack | Roswell Hide Backpack |
 | `geb_PlasmaRifle` | Weapon | Semi-automatic Montauk Rifle |
 | `geb_PlasmaCartridge` | Magazine | 15-round Montauk Cartridge (rechargeable) |
 | `geb_FoilHat` | Clothing | Tin Foil Hat |

@@ -15,6 +15,7 @@ class CfgPatches
 			"DZ_Characters_Zombies",
 			"DZ_Gear_Food",
 			"DZ_Gear_Consumables",
+			"DZ_Characters_Backpacks",
 			"DZ_Structures",
 			"DZ_Weapons_Firearms",
 			"DZ_Weapons_Firearms_Ruger1022",
@@ -29,6 +30,10 @@ class cfgVehicles
 	//Inherited from classes
 	class ZombieBase;
 	class BearPelt;
+	class TannedLeather;
+	class LeatherSack_ColorBase;
+	class FurCourierBag;
+	class FurImprovisedBag;
 	class Edible_Base;
 	class FoodAnimationSources;
 	class MeatStageTransitions;
@@ -1191,13 +1196,14 @@ class cfgVehicles
 		{
 			"cs_raw"
 		};
+		// One per food stage, like vanilla's: raw, baked, boiled, dried, burnt
 		hiddenSelectionsTextures[] =
 		{
-			"\alieninvasion\data\aliens\alienmeat.paa";
-			"dz\gear\food\data\meat_steak_baked_CO.paa",
-			"dz\gear\food\data\meat_steak_boiled_co.paa",
-			"dz\gear\food\data\meat_steak_dried_CO.paa",
-			"dz\gear\food\data\meat_steak_burned_CO.paa"
+			"\alieninvasion\data\aliens\alienmeat.paa",
+			"\alieninvasion\data\aliens\alienmeat_baked_co.paa",
+			"\alieninvasion\data\aliens\alienmeat_boiled_co.paa",
+			"\alieninvasion\data\aliens\alienmeat_dried_co.paa",
+			"\alieninvasion\data\aliens\alienmeat_burnt_co.paa"
 		};
 		hiddenSelectionsMaterials[] =
 		{
@@ -1222,9 +1228,115 @@ class cfgVehicles
 		};
 		hiddenSelectionsTextures[]=
 		{
-			"\alieninvasion\data\aliens\alienpelt.paa";
+			"\alieninvasion\data\aliens\alienpelt.paa"
 		};
-	}	
+	}
+
+	// Roswell Hide crafting chain: green versions of vanilla's tanned leather, leather backpack, fur courier
+	// bag and fur backpack, on vanilla's models. Recipes are in scripts/4_world/classes/recipes/recipes/.
+	class geb_GreenAlienLeather: TannedLeather
+	{
+		scope=2;
+		displayName="$STR_geb_GreenAlienLeather";
+		descriptionShort="$STR_geb_GreenAlienLeatherDesc";
+		// tanned_leather.p3d has no camo selection, but its "zbytek" (whole model) is a texture section
+		hiddenSelections[]=
+		{
+			"zbytek"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\alieninvasion\data\leather\geb_alienleather_co.paa"
+		};
+	};
+	// Extends the colour base, not LeatherSack_Natural: barrels "dye" anything Natural into class names
+	// that no longer exist, which would delete it.
+	class geb_GreenAlienLeatherSack: LeatherSack_ColorBase
+	{
+		scope=2;
+		displayName="$STR_geb_GreenAlienLeatherSack";
+		descriptionShort="$STR_geb_GreenAlienLeatherSackDesc";
+		visibilityModifier=0.80000001;
+		hiddenSelectionsTextures[]=
+		{
+			"\alieninvasion\data\leather\geb_alienleathersack_g_co.paa",
+			"\alieninvasion\data\leather\geb_alienleathersack_co.paa",
+			"\alieninvasion\data\leather\geb_alienleathersack_co.paa"
+		};
+		hiddenSelectionsMaterials[]=
+		{
+			"dz\characters\backpacks\data\Bag_LeatherSack_natural.rvmat",
+			"dz\characters\backpacks\data\Bag_LeatherSack_natural.rvmat",
+			"dz\characters\backpacks\data\Bag_LeatherSack_natural.rvmat"
+		};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints=200;
+					transferToAttachmentsCoef=0.5;
+					healthLevels[]=
+					{
+						{
+							1,
+							{
+								"DZ\characters\backpacks\data\Bag_LeatherSack_natural.rvmat",
+								"dz\characters\backpacks\data\Bag_LeatherSack_g_natural.rvmat"
+							}
+						},
+						{
+							0.69999999,
+							{}
+						},
+						{
+							0.5,
+							{
+								"DZ\characters\backpacks\Data\Bag_LeatherSack_natural_damage.rvmat",
+								"dz\characters\backpacks\data\Bag_LeatherSack_g_natural_damage.rvmat"
+							}
+						},
+						{
+							0.30000001,
+							{}
+						},
+						{
+							0,
+							{
+								"DZ\characters\backpacks\Data\Bag_LeatherSack_natural_destruct.rvmat",
+								"dz\characters\backpacks\data\Bag_LeatherSack_g_natural_destruct.rvmat"
+							}
+						}
+					};
+				};
+			};
+		};
+	};
+	class geb_GreenAlienCourierBag: FurCourierBag
+	{
+		scope=2;
+		displayName="$STR_geb_GreenAlienCourierBag";
+		descriptionShort="$STR_geb_GreenAlienCourierBagDesc";
+		hiddenSelectionsTextures[]=
+		{
+			"\alieninvasion\data\leather\geb_aliencourierbag_co.paa",
+			"\alieninvasion\data\leather\geb_aliencourierbag_co.paa",
+			"\alieninvasion\data\leather\geb_aliencourierbag_co.paa"
+		};
+	};
+	class geb_GreenAlienImprovisedBag: FurImprovisedBag
+	{
+		scope=2;
+		displayName="$STR_geb_GreenAlienImprovisedBag";
+		descriptionShort="$STR_geb_GreenAlienImprovisedBagDesc";
+		hiddenSelectionsTextures[]=
+		{
+			"\alieninvasion\data\leather\geb_alienimprovisedbag_co.paa",
+			"\alieninvasion\data\leather\geb_alienimprovisedbag_co.paa",
+			"\alieninvasion\data\leather\geb_alienimprovisedbag_co.paa"
+		};
+	};
 	
 	//House
 	class geb_Aliencrash: HouseNoDestruct
