@@ -10,6 +10,13 @@ class geb_PlasmaRifle : Ruger1022_Base
 		return new FALRecoil(this);
 	}
 
+	// Debug and admin-tool spawns ("with ammo"): a loaded plasma cartridge. Vanilla's Ruger version tries to attach
+	// a Mag_Ruger1022_30Rnd, which this rifle refuses (a script error on every spawn).
+	override void OnDebugSpawn()
+	{
+		SpawnAttachedMagazine("geb_PlasmaCartridge");
+	}
+
 	// The plasma shot particle comes from config (Particles > OnFire > MuzzleFlash and the ammo's
 	// muzzleFlashParticle), so it isn't played again here.
 };

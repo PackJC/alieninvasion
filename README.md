@@ -1,5 +1,7 @@
 <h1 align="center">
   <br>
+  <img src=".github/logo.png" alt="Alien Invasion" width="500"/>
+  <br>
   <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><img src="docs/assets/alien-invasion-banner.png" alt="Alien Invasion — a crashed UFO and alien encounter" width="900"></a>
   <br>
   <a href="https://discord.gg/G8uSGZ8yyf"><img src="https://img.shields.io/badge/Join-Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Join the Discord"></a>
@@ -11,7 +13,7 @@
 
 <p align="center">
   <img alt="Mod Version" src="https://img.shields.io/badge/Mod-v1.2.0-blue?style=for-the-badge">
-  <img alt="DayZ Version" src="https://img.shields.io/badge/DayZ-v1.29-teal?style=for-the-badge">
+  <img alt="DayZ Version" src="https://img.shields.io/badge/DayZ-v1.30-teal?style=for-the-badge">
   <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><img alt="Workshop Subscribers" src="https://img.shields.io/steam/subscriptions/2840597308?style=for-the-badge&color=purple&label=Workshop%20Subs"></a>
   <a href="https://packjc.github.io/alieninvasion/"><img alt="Website" src="https://img.shields.io/badge/Website-Field%20Manual-75ff9b?style=for-the-badge"></a>
 </p>
@@ -37,15 +39,16 @@ The mod includes custom models, textures, sounds, particles, localized item name
 
 ## Key Features
 
-- A custom UFO crash site with green light, fire, mist, wreck particles, distant crash audio, and an 18 m **toxic gas zone** (NBC gear protects).
+- A custom UFO crash site with green light, fire, a smoke column, crackling electrical sparks, mist, wreck particles, distant crash audio, and an 18 m **toxic gas zone** (NBC gear protects).
 - **Crash salvage:** a 35% chance of a Montauk Rifle with a cartridge, plus up to two spare cartridges.
-- Hostile **Little Green Men** with their own voices and footsteps. Infected melee up close, a visible **psychic zap** from 4–80 m in line of sight, and a green burst and scream when they die.
+- Hostile **Little Green Men** with their own voices and footsteps, and green blood. Infected melee up close, a visible **psychic zap** from 4–80 m in line of sight, and a green burst and scream when they die.
 - Aliens appear when a player comes within 300 m, so unvisited crash sites cost the server nothing.
 - **Montauk Rifle**, a semi-automatic plasma weapon firing green bolts that deal double damage to aliens (other firearms deal 75%).
 - **Montauk Cartridge**, a 15-round plasma magazine that can't be unloaded — recharge it with a 9V battery.
 - **Tin Foil Hat:** aliens can't track the wearer beyond 3 m and can't zap them.
 - **Area 51 Steak** and **Roswell Hide** from skinning aliens. Cooked steak gives 90 s of green night vision; bad meat gives food poisoning.
 - **Roswell Hide crafting:** tan the hide into green **Roswell Leather**, then sew a **Roswell Leather Backpack**, or make a **Roswell Hide Courier Bag** and **Roswell Hide Backpack**.
+- **Specimen Tank** prop for admins and map makers: a sleeping alien floating in glowing green fluid, with rising bubbles, drifting motes, a green light and a low hum (`geb_AlienTank`).
 - Every number is tunable in `$profile:Gebs/alieninvasion.json`, and the server generates its own economy files.
 - Complete string-table support for English, Czech, German, Russian, Polish, Hungarian, Italian, Spanish, French, Traditional and Simplified Chinese, Japanese, and Portuguese.
 
@@ -54,7 +57,7 @@ The mod includes custom models, textures, sounds, particles, localized item name
 When a `geb_Aliencrash` object is created through DayZ's Central Economy (or with an admin tool on a dedicated server), it:
 
 1. Plays the mod's distant UFO-crash sound (Central Economy spawns only).
-2. Displays the wreck's custom fire, mist, glow, and particle effects for clients.
+2. Displays the wreck's custom fire, smoke column, electrical sparks, mist, glow, and particle effects for clients.
 3. Surrounds itself with a toxic gas cloud and drops its salvage nearby.
 4. Waits for a player to come within 300 m, then spawns 10–15 Little Green Men 5–25 m around the wreck.
 5. When the event ends, removes its gas cloud and any surviving aliens along with the wreck.
@@ -146,6 +149,7 @@ A file that fails to parse is never overwritten; the server logs the error and r
 | `StaticObj_geb_Aliencrash` | Static object | Visual UFO wreck without the scripted encounter behavior |
 | `geb_AlienRadiationArea` | Effect area | The wreck's toxic cloud (created and removed by the wreck) |
 | `geb_GreenAlien` | Creature | Hostile Little Green Man |
+| `geb_AlienTank` | Prop | Specimen Tank with a sleeping alien; place it with an admin tool or editor |
 | `geb_GreenAlienMeat` | Food | Area 51 Steak harvested from an alien |
 | `geb_GreenAlienSkin` | Material | Roswell Hide harvested from an alien |
 | `geb_GreenAlienLeather` | Material | Roswell Leather, tanned from the hide |
@@ -163,11 +167,11 @@ alieninvasion/
 |-- config.cpp          # Mod registration and script-module definitions
 |-- data/               # Entity configs, models, textures, and sounds
 |-- docs/               # GitHub Pages site and plain-text server guide
-|-- graphics/particles/ # Plasma and UFO particle effects
+|-- graphics/particles/ # Plasma, UFO, green blood and specimen tank particles
 |-- languagecore/       # Localized display names and descriptions
 `-- scripts/
     |-- 3_game/         # Version, server config, file generator, alien-vision tint
-    |-- 4_world/        # Wreck, aliens, gas zone, rifle, items, recipe, player hooks
+    |-- 4_world/        # Wreck, aliens, specimen tank, gas zone, rifle, items, recipes, player hooks
     `-- 5_mission/      # Server startup: loads the config, writes the Gebs files
 ```
 

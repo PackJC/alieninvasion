@@ -1,0 +1,264 @@
+EffectDef {
+ Emitors {
+  EmitorDef emitor1 {
+   ConeAngle 360 0 90
+   MaxNum 50
+   BirthRate 80
+   Offset 0 0.1 0
+   Material "{2884C61C9A35471E}Graphics/Particles/materials/character/fluid_thick_01.emat"
+   CenterX 0
+   CenterY -1
+   SizeMultiplier 0.5
+   SizeRND 0.3
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0
+   VelocityRND 0
+   AirResistance 0
+   GravityMultiply 1
+   AnimOnce 1
+   AnimFPS 30
+   LifetimeByAnim 1
+   RandomFrame 0
+   LifeTime 2
+   LifeTimeRND 1
+   Color {
+    0 0.0752 0.326 0.0313 1 0.0701 0.3036 0.0292
+   }
+   Alpha {
+    0 1 0.04171 0.98718 0.375 0.35 1 0
+   }
+   Size {
+    0 0.25 1 1
+   }
+   EffectTime 0.05
+   Repeat 0
+  }
+  EmitorDef emitor2 {
+   ConeAngle 360 0 90
+   BirthRate 70
+   Offset 0 0.05 0
+   Material "{2884C61C9A35471E}Graphics/Particles/materials/character/fluid_thick_01.emat"
+   CenterX 0
+   CenterY -0.483
+   ScaleX 1
+   SizeMultiplier 1
+   SizeRND 0
+   RandomRotDir 0
+   VelAngle 0
+   RandomAngle 0
+   Velocity 0.5
+   VelocityRND 3
+   AirResistance 5
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   AnimOnce 1
+   AnimFPS 30
+   LifetimeByAnim 1
+   RandomFrame 0
+   Color {
+    0 0.0649 0.2811 0.027 1 0 0 0
+   }
+   Alpha {
+    0 1 1 0
+   }
+   Size {
+    0 0.25 1 1
+   }
+   EffectTime 0.05
+   Repeat 0
+  }
+  EmitorDef emitor3 {
+   ShapeType Box
+   ShapeSize 0.1 0 0.1
+   ConeAngle 360 0 45
+   MaxNum 20
+   BirthRate 300
+   Offset 0 0.05 0
+   LocalTransform 0
+   Material "{5A939336004F3C25}Graphics/Particles/materials/character/blood_01.emat"
+   ScaleX 1
+   ScaleY 0.497
+   SizeMultiplier 0.5
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 0
+   VelAngle 0
+   RandomAngle 1
+   Velocity 2.5
+   VelocityRND 4
+   AirResistance 2
+   GravityMultiply 1
+   GravityMultiplyRND 0
+   AnimOnce 1
+   AnimFPS 10
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 0.5
+   LifeTimeRND 0.6
+   Color {
+    0 0.0455 0.1973 0.019 1 0 0 0
+   }
+   Alpha {
+    0 0.51899 1 0
+   }
+   Size {
+    0 0.07595 1 1
+   }
+   EffectTime 0.05
+   Repeat 0
+  }
+  EmitorDef emitor4 {
+   ConeAngle 360 0 90
+   MaxNum 50
+   BirthRate 60
+   Offset 0 0.1 0
+   Material "{2884C61C9A35471E}Graphics/Particles/materials/character/fluid_thick_01.emat"
+   CenterY -1
+   SizeMultiplier 0.5
+   SizeRND 0
+   VelAngle 1
+   RandomAngle 1
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 1
+   AirResistance 0
+   GravityMultiply 0
+   AnimOnce 1
+   AnimFPS 30
+   LifetimeByAnim 1
+   RandomFrame 0
+   Color {
+    0 0.2154 0.9333 0.0897 1 0.205 0.8883 0.0854
+   }
+   Alpha {
+    0 1 1 0
+   }
+   Size {
+    0 0.5 1 1
+   }
+   EffectTime 0.05
+   Repeat 0
+  }
+  EmitorDef emitor3_blood_dust {
+   ShapeType Box
+   ShapeSize 0.1 0 0.1
+   ConeAngle 360 0 45
+   MaxNum 20
+   BirthRate 200
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{5A939336004F3C25}Graphics/Particles/materials/character/blood_01.emat"
+   ScaleX 0.959
+   SizeMultiplier 0.4
+   SizeRND 0.5
+   RandomRotDir 0
+   RotMultiplier 0
+   VelAngle 0
+   RandomAngle 0
+   Velocity 1
+   VelocityRND 5
+   AirResistance 3
+   GravityMultiply 0.5
+   GravityMultiplyRND 0.5
+   AnimOnce 1
+   AnimFPS 10
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 0.9
+   LifeTimeRND 0.2
+   Color {
+    0 0.0455 0.1973 0.019 1 0 0 0
+   }
+   Alpha {
+    0 1 0.475 0.15 1 0
+   }
+   Size {
+    0 0.07595 1 1
+   }
+   EffectTime 0.05
+   Repeat 0
+  }
+  EmitorDef emitor4_stones {
+   ConeAngle 360 0 70
+   MaxNum 50
+   BirthRate 50
+   Offset 0 0 0
+   Material "{118F069016CE1546}Graphics/Particles/materials/enviroment/stones.emat"
+   ScaleX 1
+   SizeMultiplier 0.01
+   SizeRND 0.1
+   RandomRotDir 1
+   RotMultiplier 999
+   RandomAngle 1
+   BillboardingType Full
+   Velocity 0.5
+   VelocityRND 4.5
+   AirResistance 0.5
+   GravityMultiply 1
+   GravityMultiplyRND 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 0.5
+   LifeTimeRND 0.5
+   Color {
+    0 0.1025 0.4443 0.0427 1 0.1985 0.1443 0.1087
+   }
+   Alpha {
+    0 1 0.87723 1 1 0
+   }
+   RotationSpeed {
+    0 1 1 0.51266
+   }
+   Size {
+    0 0 0.075 0.15 1 0
+   }
+   EffectTime 0.1
+   Repeat 0
+  }
+  EmitorDef emitor5_stones2 {
+   ConeAngle 360 0 70
+   MaxNum 50
+   BirthRate 100
+   Offset 0 0 0
+   Material "{118F069016CE1546}Graphics/Particles/materials/enviroment/stones.emat"
+   CenterY 0.68
+   ScaleX 0.502
+   SizeMultiplier 0.1
+   SizeRND 0.1
+   RandomRotDir 1
+   RotMultiplier 999
+   VelAngle 0
+   RandomAngle 1
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 5
+   AirResistance 0.5
+   GravityMultiply 1
+   GravityMultiplyRND 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 0.5
+   LifeTimeRND 1
+   Color {
+    0 0.1025 0.4443 0.0427 1 0.1985 0.1443 0.1087
+   }
+   Alpha {
+    0 1 0.87723 1 1 0
+   }
+   RotationSpeed {
+    0 1 1 0.51266
+   }
+   Size {
+    0 0 0.075 0.15 1 0
+   }
+   EffectTime 0.1
+   Repeat 0
+  }
+ }
+}

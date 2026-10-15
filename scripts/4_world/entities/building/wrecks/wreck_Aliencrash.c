@@ -6,9 +6,16 @@ class geb_Aliencrash extends CrashBase
 	static const float LOOT_RANGE_MIN = 3;
 	static const float LOOT_RANGE_MAX = 8;
 
+	// Electrical sparks: a crackling burst every few seconds at one of these points on the hull (model space)
+	static const int SPARK_DELAY_MIN_MS = 2500;
+	static const int SPARK_DELAY_MAX_MS = 8000;
+	static const float SPARK_PLAYER_RANGE = 250;	// no sparks for clients further away than this
+
 	protected Particle m_FireEfx;
 	protected Particle m_MistEfx;
+	protected Particle m_SmokeEfx;
 	protected XmasSleighLight m_Light;
+	protected ref array<vector> m_SparkPoints;
 	protected geb_AlienRadiationArea m_RadiationArea;
 	// Script-spawned aliens aren't managed by the Central Economy, so the wreck cleans up the ones still alive
 	// when it despawns (CE only removes the wreck with no players inside the event's cleanup radius).
@@ -24,6 +31,17 @@ class geb_Aliencrash extends CrashBase
 			//was 2.35
 			m_FireEfx = ParticleManager.GetInstance().PlayOnObject(ParticleList.UFO_FIRE, this, Vector(-0.45, 1.85, -0.5));
 			m_MistEfx = ParticleManager.GetInstance().PlayOnObject(ParticleList.SPOOKY_MIST, this, Vector(0, -5, 0));
+			// The column of smoke vanilla heli crashes have, rising from the fire on the hull
+			m_SmokeEfx = ParticleManager.GetInstance().PlayOnObject(ParticleList.SMOKING_HELI_WRECK, this, Vector(-0.45, 1.7, -0.5));
+
+			m_SparkPoints = new array<vector>;
+			m_SparkPoints.Insert(Vector(-0.37, 1.91, -0.63));
+			m_SparkPoints.Insert(Vector(3.14, 0.64, -1.76));
+			m_SparkPoints.Insert(Vector(1.75, 0.66, 1.52));
+			m_SparkPoints.Insert(Vector(-0.47, 0.99, 1.42));
+			m_SparkPoints.Insert(Vector(1.00, 1.04, -2.13));
+			m_SparkPoints.Insert(Vector(1.55, 1.42, -0.30));
+			GetGame().GetCallQueue( CALL_CATEGORY_GAMEPLAY ).CallLater( Spark, Math.RandomInt(1000, 4000), false);
 			m_Light = XmasSleighLight.Cast( ScriptedLightBase.CreateLight( XmasSleighLight, "0 0 0") );
 			m_Light.SetAmbientColor(0.3, 1.0, 0.2);
 			m_Light.SetDiffuseColor(0.3, 1.0, 0.2);
@@ -100,10 +118,13 @@ class geb_Aliencrash extends CrashBase
 
 		if ( !GetGame().IsDedicatedServer() )
 		{
+			GetGame().GetCallQueue( CALL_CATEGORY_GAMEPLAY ).Remove( Spark );
 			if ( m_FireEfx )
 				m_FireEfx.Stop();
 			if ( m_MistEfx )
 				m_MistEfx.Stop();
+			if ( m_SmokeEfx )
+				m_SmokeEfx.Stop();
 			if ( m_Light )
 				m_Light.Destroy();
 		}
@@ -119,6 +140,27 @@ class geb_Aliencrash extends CrashBase
 					alien.Delete();
 			}
 		}
+	}
+
+	// Client side: one burst of electrical sparks with vanilla's short-circuit crackle at a random hull point, then
+	// the next one a few seconds later. Skipped (but still scheduled) while this client's player is far away.
+	protected void Spark()
+	{
+		Man player = GetGame().GetPlayer();
+		if ( player && vector.Distance(player.GetPosition(), GetPosition()) <= SPARK_PLAYER_RANGE )
+		{
+			vector pos = ModelToWorld(m_SparkPoints.GetRandomElement());
+			int sparks = ParticleList.LEVER_SPARKS;
+			if ( Math.RandomFloat01() < 0.5 )
+				sparks = ParticleList.BARBED_WIRE_SPARKS;
+			ParticleManager.GetInstance().PlayInWorld(sparks, pos);
+
+			EffectSound crackle = SEffectManager.PlaySound("Power_Station_generator_overpowered_SoundSet", pos);
+			if ( crackle )
+				crackle.SetAutodestroy(true);
+		}
+
+		GetGame().GetCallQueue( CALL_CATEGORY_GAMEPLAY ).CallLater( Spark, Math.RandomInt(SPARK_DELAY_MIN_MS, SPARK_DELAY_MAX_MS), false);
 	}
 
 	void SpawnAliens()

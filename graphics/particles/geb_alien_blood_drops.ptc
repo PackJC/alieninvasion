@@ -1,0 +1,52 @@
+EffectDef {
+ Emitors {
+  EmitorDef puddle1 {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 0 0 0
+   MaxNum 2
+   BirthRate 50
+   Offset 0 0.03 0
+   Angles 0 -90 0
+   LocalTransform 0
+   Material "{5A939336004F3C25}Graphics/Particles/materials/character/blood_01.emat"
+   ScaleX 1
+   SizeMultiplier 0.65
+   SizeRND 0
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 0
+   VelAngle 0
+   RandomAngle 0
+   BillboardingType None
+   Velocity 0
+   VelocityRND 0
+   AirResistance 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   AnimOnce 0
+   AnimFPS 1
+   LifetimeByAnim 1
+   RandomFrame 1
+   LifeTime 100
+   LifeTimeRND 60
+   Color {
+    0 0.1253 0.5431 0.0522 1 0.0152 0.0658 0.0063
+   }
+   Alpha {
+    0 1 0.87649 1 1 0
+   }
+   RotationSpeed {
+    0 1 1 1
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 1
+   Repeat 0
+   RotationSpeedMast {
+    0 0 1 0
+   }
+  }
+ }
+}

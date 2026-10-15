@@ -29,7 +29,7 @@ class CfgMods
 		picture = "alieninvasion\data\logo.paa";					// picture in expanded description
 		logoSmall = "alieninvasion\data\logo.paa";					// icon next to mod name when description is not expanded
 		logo = "alieninvasion\data\logo.paa";						// logo below game menu
-		logoHover = "alieninvasion\data\logo_hover.paa";			// logo hovered
+		logoOver = "alieninvasion\data\logo_hover.paa";				// logo hovered (CfgMods reads logoOver, not logoHover)
 		action="";
 		name="alieninvasion";
 		credits="DayZ Modding Community";

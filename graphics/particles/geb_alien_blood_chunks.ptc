@@ -1,0 +1,49 @@
+EffectDef {
+ Emitors {
+  EmitorDef chunks {
+   ShapeType Box
+   ShapeSize 1 1 0
+   ConeAngle 0 0 0
+   MaxNum 5
+   BirthRate 0
+   BirthRateRND 4
+   Offset 0 0.03 0
+   Angles 0 -90 0
+   LocalTransform 0
+   Material "{118F069016CE1546}Graphics/Particles/materials/enviroment/stones.emat"
+   ScaleX 1
+   SizeMultiplier 0.02
+   SizeRND 0.03
+   RandomRotDir 1
+   RotMultiplier 0
+   StretchMultiplier 1
+   RandomAngle 0
+   BillboardingType None
+   Velocity 0
+   VelocityRND 0
+   AirResistance 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 100
+   LifeTimeRND 60
+   Color {
+    0 0.1025 0.4443 0.0427 1 0.038 0.1646 0.0158
+   }
+   Alpha {
+    0 1 0.87723 1 1 0
+   }
+   RotationSpeed {
+    0 0 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 1
+   Repeat 0
+  }
+ }
+}

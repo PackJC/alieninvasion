@@ -1,5 +1,46 @@
 modded class PlayerBase
 {
+	// Hands bloodied by gutting an alien show green blood (geb_PluginLifespan.c). Synced so everyone sees it.
+	protected bool m_geb_AlienBloodHands;
+
+	override void Init()
+	{
+		super.Init();
+		RegisterNetSyncVariableBool("m_geb_AlienBloodHands");
+	}
+
+	bool geb_HasAlienBloodHands()
+	{
+		return m_geb_AlienBloodHands;
+	}
+
+	//! Server side: set by gutting (geb_ActionSkinning.c), cleared when the hands get clean or bloody another way.
+	void geb_SetAlienBloodHands(bool alien)
+	{
+		if ( m_geb_AlienBloodHands == alien )
+			return;
+
+		m_geb_AlienBloodHands = alien;
+		SetSynchDirty();
+	}
+
+	override void SetBloodyHands(bool show)
+	{
+		if ( !show )
+			geb_SetAlienBloodHands(false);
+
+		super.SetBloodyHands(show);
+	}
+
+	override void SetBloodyHandsEx(eBloodyHandsTypes type)
+	{
+		// Clean hands, or the survivor's own blood (coughing/vomiting it up), aren't alien blood
+		if ( type == eBloodyHandsTypes.CLEAN || type == eBloodyHandsTypes.JUST_BLOOD )
+			geb_SetAlienBloodHands(false);
+
+		super.SetBloodyHandsEx(type);
+	}
+
 	// Aliens can't lock on to someone in an intact foil hat unless they're right next to them (FoilHatDetectRange).
 	override bool CanBeTargetedByAI(EntityAI ai)
 	{

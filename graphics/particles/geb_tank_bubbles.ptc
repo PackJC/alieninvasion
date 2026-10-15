@@ -1,0 +1,354 @@
+EffectDef {
+ Emitors {
+  EmitorDef stream1 {
+   ShapeType Box
+   ShapeSize 0.012 0 0.012
+   ConeAngle 360 0 2
+   MaxNum 60
+   BirthRate 5
+   BirthRateRND 2
+   BirthRateVel 0
+   Offset 0.281908 0 0.102606
+   LocalTransform 0
+   Material "{3E3B5AA16932182E}Graphics/Particles/materials/enviroment/bubbles_01_em.emat"
+   CenterX -0.167
+   CenterY -0.213
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.016
+   SizeRND 0.006
+   RandomRotDir 1
+   RotMultiplier 500
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0.5
+   VelocityRND 0.04
+   VelAffect 4
+   AirResistance 0
+   GravityMultiply 0
+   Spring 0.02
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 4.7
+   LifeTimeRND 0.2
+   Color {
+    0 0.95 1 0.97 1 1 1 1
+   }
+   Alpha {
+    0 0 0.04 1 0.94 1 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.6 1 1.25
+   }
+   EffectTime 10
+   Repeat 1
+  }
+  EmitorDef stream2 {
+   ShapeType Box
+   ShapeSize 0.012 0 0.012
+   ConeAngle 360 0 2
+   MaxNum 60
+   BirthRate 6
+   BirthRateRND 2
+   BirthRateVel 0
+   Offset -0.0104698 0 0.299817
+   LocalTransform 0
+   Material "{3E3B5AA16932182E}Graphics/Particles/materials/enviroment/bubbles_01_em.emat"
+   CenterX -0.167
+   CenterY -0.213
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.016
+   SizeRND 0.006
+   RandomRotDir 1
+   RotMultiplier 500
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0.5
+   VelocityRND 0.04
+   VelAffect 4
+   AirResistance 0
+   GravityMultiply 0
+   Spring 0.02
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 4.7
+   LifeTimeRND 0.2
+   Color {
+    0 0.95 1 0.97 1 1 1 1
+   }
+   Alpha {
+    0 0 0.04 1 0.94 1 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.6 1 1.25
+   }
+   EffectTime 10
+   Repeat 1
+  }
+  EmitorDef stream3 {
+   ShapeType Box
+   ShapeSize 0.012 0 0.012
+   ConeAngle 360 0 2
+   MaxNum 60
+   BirthRate 7
+   BirthRateRND 2
+   BirthRateVel 0
+   Offset -0.288379 0 0.0826912
+   LocalTransform 0
+   Material "{3E3B5AA16932182E}Graphics/Particles/materials/enviroment/bubbles_01_em.emat"
+   CenterX -0.167
+   CenterY -0.213
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.016
+   SizeRND 0.006
+   RandomRotDir 1
+   RotMultiplier 500
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0.5
+   VelocityRND 0.04
+   VelAffect 4
+   AirResistance 0
+   GravityMultiply 0
+   Spring 0.02
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 4.7
+   LifeTimeRND 0.2
+   Color {
+    0 0.95 1 0.97 1 1 1 1
+   }
+   Alpha {
+    0 0 0.04 1 0.94 1 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.6 1 1.25
+   }
+   EffectTime 10
+   Repeat 1
+  }
+  EmitorDef stream4 {
+   ShapeType Box
+   ShapeSize 0.012 0 0.012
+   ConeAngle 360 0 2
+   MaxNum 60
+   BirthRate 5
+   BirthRateRND 2
+   BirthRateVel 0
+   Offset -0.167758 0 -0.248711
+   LocalTransform 0
+   Material "{3E3B5AA16932182E}Graphics/Particles/materials/enviroment/bubbles_01_em.emat"
+   CenterX -0.167
+   CenterY -0.213
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.016
+   SizeRND 0.006
+   RandomRotDir 1
+   RotMultiplier 500
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0.5
+   VelocityRND 0.04
+   VelAffect 4
+   AirResistance 0
+   GravityMultiply 0
+   Spring 0.02
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 4.7
+   LifeTimeRND 0.2
+   Color {
+    0 0.95 1 0.97 1 1 1 1
+   }
+   Alpha {
+    0 0 0.04 1 0.94 1 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.6 1 1.25
+   }
+   EffectTime 10
+   Repeat 1
+  }
+  EmitorDef stream5 {
+   ShapeType Box
+   ShapeSize 0.012 0 0.012
+   ConeAngle 360 0 2
+   MaxNum 60
+   BirthRate 6
+   BirthRateRND 2
+   BirthRateVel 0
+   Offset 0.184698 0 -0.236403
+   LocalTransform 0
+   Material "{3E3B5AA16932182E}Graphics/Particles/materials/enviroment/bubbles_01_em.emat"
+   CenterX -0.167
+   CenterY -0.213
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.016
+   SizeRND 0.006
+   RandomRotDir 1
+   RotMultiplier 500
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0.5
+   VelocityRND 0.04
+   VelAffect 4
+   AirResistance 0
+   GravityMultiply 0
+   Spring 0.02
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 4.7
+   LifeTimeRND 0.2
+   Color {
+    0 0.95 1 0.97 1 1 1 1
+   }
+   Alpha {
+    0 0 0.04 1 0.94 1 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.6 1 1.25
+   }
+   EffectTime 10
+   Repeat 1
+  }
+  EmitorDef centre {
+   ShapeType Box
+   ShapeSize 0.02 0 0.02
+   ConeAngle 360 0 2
+   MaxNum 70
+   BirthRate 9
+   BirthRateRND 3
+   BirthRateVel 0
+   Offset 0 0 0.05
+   LocalTransform 0
+   Material "{3E3B5AA16932182E}Graphics/Particles/materials/enviroment/bubbles_01_em.emat"
+   CenterX -0.167
+   CenterY -0.213
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.02
+   SizeRND 0.008
+   RandomRotDir 1
+   RotMultiplier 500
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0.5
+   VelocityRND 0.04
+   VelAffect 4
+   AirResistance 0
+   GravityMultiply 0
+   Spring 0.03
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 4.7
+   LifeTimeRND 0.2
+   Color {
+    0 0.95 1 0.97 1 1 1 1
+   }
+   Alpha {
+    0 0 0.04 1 0.94 1 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.6 1 1.3
+   }
+   EffectTime 10
+   Repeat 1
+  }
+  EmitorDef fizz {
+   ShapeType Box
+   ShapeSize 0.33 0 0.33
+   ConeAngle 360 0 3
+   MaxNum 110
+   BirthRate 14
+   BirthRateRND 4
+   BirthRateVel 0
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{3E3B5AA16932182E}Graphics/Particles/materials/enviroment/bubbles_01_em.emat"
+   CenterX -0.167
+   CenterY -0.213
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.007
+   SizeRND 0.004
+   RandomRotDir 1
+   RotMultiplier 500
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0.42
+   VelocityRND 0.04
+   VelAffect 4
+   AirResistance 0
+   GravityMultiply 0
+   Spring 0.04
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 5.4
+   LifeTimeRND 0.2
+   Color {
+    0 0.95 1 0.97 1 1 1 1
+   }
+   Alpha {
+    0 0 0.05 0.8 0.93 0.8 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 1 1 1
+   }
+   EffectTime 10
+   Repeat 1
+  }
+ }
+}

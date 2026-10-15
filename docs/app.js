@@ -3,6 +3,7 @@ const classnames = [
   { name: "StaticObj_geb_Aliencrash", type: "Encounter", img: "geb_Aliencrash", description: "Static visual UFO wreck without scripted encounter behavior." },
   { name: "geb_AlienRadiationArea", type: "Encounter", description: "18 m toxic cloud each active wreck creates and removes; not meant to be spawned on its own." },
   { name: "geb_GreenAlien", type: "Creature", img: "geb_GreenAlien", description: "Hostile Little Green Man with melee and a psychic zap." },
+  { name: "geb_AlienTank", type: "Prop", img: "geb_AlienTank", description: "Specimen Tank: a sleeping alien in glowing green fluid. A prop: place it with an admin tool or editor." },
   { name: "geb_GreenAlienMeat", type: "Food", img: "geb_GreenAlienMeat", description: "Area 51 Steak from skinning; cooked gives night vision, bad meat poisons." },
   { name: "geb_GreenAlienSkin", type: "Material", img: "geb_GreenAlienSkin", description: "Roswell Hide from skinning an alien; tans into Roswell Leather." },
   { name: "geb_GreenAlienLeather", type: "Material", img: "geb_GreenAlienLeather", description: "Roswell Leather: a hide tanned with garden lime, by hand or in a barrel." },

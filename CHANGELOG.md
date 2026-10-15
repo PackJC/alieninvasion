@@ -1,5 +1,35 @@
 # Changelog
 
+## Unreleased
+
+Works on DayZ 1.30 (scripts, configs and mission files checked against the 1.30 release; nothing needed changing).
+
+### Added
+- **Specimen Tank** (`geb_AlienTank`), a prop for admins and map makers.
+  - A sleeping alien floats in a 3.6 m containment tank of glowing green fluid, wired to the lid.
+  - Bubbles rise from the floor grille, green motes drift, and wisps leave the vent valve.
+  - It casts a green glow, has a console with a live read-out and a warning plate, and hums.
+  - Nothing spawns it: place it with an admin tool or a map editor.
+- UFO crash sites smoke like a heli crash, and electrical sparks crackle from different spots on the hull every few seconds.
+- Aliens bleed green. Bullet and melee hits spray green blood and leave green splatter on the ground. Gutting one leaves green blood on bare hands; gutting anything else turns the blood red again.
+- Aliens have a fuller voice. Their two old sounds are kept and cut, pitched and stretched into 75 takes, mixed with vanilla's skinny infected voice. They cover idling, noticing, hunting, chasing, attacking, getting hit, jumping, landing and calling others in, plus five death screams. Every take is levelled like vanilla's infected, and the scream no longer clips.
+
+### Fixed
+- **Server crash** whenever a loaded Montauk Rifle had a round in the chamber shown.
+  - This crashed admin-tool spawns with ammo (e.g. COT), and could also crash a crash site that rolled a rifle and a restart with a loaded rifle in storage.
+  - Cause: the plasma round named no chambered-round class, and DayZ draws the chambered round without checking.
+  - Admin debug spawns also give the rifle a plasma cartridge now, instead of trying a 10/22 magazine.
+- Hitting an alien sounds like hitting an infected. Its hit geometry had no surface material, so hits clanged like metal.
+- Alien swings make vanilla's infected swing sounds. Every swing and every grunt used to play the same alien recording.
+- Aliens walk with bare-foot steps like the patient infected. The spawnable base alien used to walk silently.
+- Aliens move like infected. The model was built in a T-pose and almost every vertex was weighted to the head bone, so the infected animations twisted and dragged the body around. It is now rebuilt on the infected skeleton's own pose, with infected-style weights including the arm and leg twist bones.
+- Shots count for the body part they hit (head, neck, torso, arms, legs, feet). The model had no hit zones, so the config's per-zone damage never applied.
+
+### Changed
+- Aliens stand about 1.9 m tall instead of 1.6 m: their joints now sit where the infected skeleton's are. Head, hands and feet keep their size.
+- The alien model has four levels of detail instead of one.
+- New mod logo in the Gebsfish style: a UFO over the tree line, greyscale normally and alien green when hovered. The hovered logo now actually shows; the config set `logoHover`, which DayZ doesn't read (it reads `logoOver`).
+
 ## 1.2.0
 
 Server owners: the generated `alieninvasion-types.xml` gains four items. It is rewritten on the first start after the update; copy it into your mission's `alieninvasion` folder again.

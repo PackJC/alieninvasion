@@ -196,6 +196,20 @@ class cfgVehicles
 
 		scope = 2;
 		model = "\alieninvasion\data\aliens\geb_GreenAlien.p3d";
+		// The whole body is the body_m selection. Faces in a hidden selection are only drawn once it has a
+		// texture, so these must stay set (ZombieBase's own "camo" entry has none and would hide the alien).
+		hiddenSelections[] =
+		{
+			"body_m"
+		};
+		hiddenSelectionsTextures[] =
+		{
+			"\alieninvasion\data\aliens\newgreenalien_ca.paa"
+		};
+		hiddenSelectionsMaterials[] =
+		{
+			"\alieninvasion\data\aliens\greenalien.rvmat"
+		};
 
 		class GlobalHealth
 		{
@@ -512,115 +526,117 @@ class cfgVehicles
 				};
 			};
 		};
+		// Barefoot like the patient infected the model is rigged from; vanilla's infected swing sounds; the alien
+		// voice (data/aliens/sounds/config.cpp). geb_GreenAlien inherits all of it.
 		class AnimEvents
 		{
 			class Steps
 			{
 				class Walk1
 				{
-					soundLookupTable = "";
+					soundLookupTable = "walkErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 1;
 				};
 				class Walk2
 				{
-					soundLookupTable = "";
+					soundLookupTable = "walkErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 2;
 				};
 				class Walk3
 				{
-					soundLookupTable = "";
+					soundLookupTable = "walkErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 3;
 				};
 				class Walk4
 				{
-					soundLookupTable = "";
+					soundLookupTable = "walkErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 4;
 				};
 				class Run1
 				{
-					soundLookupTable = "";
+					soundLookupTable = "runErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 5;
 				};
 				class Run2
 				{
-					soundLookupTable = "";
+					soundLookupTable = "runErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 6;
 				};
 				class Run3
 				{
-					soundLookupTable = "";
+					soundLookupTable = "runErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 7;
 				};
 				class Run4
 				{
-					soundLookupTable = "";
+					soundLookupTable = "runErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 8;
 				};
 				class Sprint1
 				{
-					soundLookupTable = "";
+					soundLookupTable = "sprintErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 9;
 				};
 				class Sprint2
 				{
-					soundLookupTable = "";
+					soundLookupTable = "sprintErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 10;
 				};
 				class Sprint3
 				{
-					soundLookupTable = "";
+					soundLookupTable = "sprintErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 11;
 				};
 				class Sprint4
 				{
-					soundLookupTable = "";
+					soundLookupTable = "sprintErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 12;
 				};
 				class Scuff1
 				{
-					soundLookupTable = "scuffErc_Sneakers_Zmb_LookupTable";
+					soundLookupTable = "scuffErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 17;
 				};
 				class Scuff2
 				{
-					soundLookupTable = "scuffErc_Sneakers_Zmb_LookupTable";
+					soundLookupTable = "scuffErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 18;
 				};
 				class Sccuff3
 				{
-					soundLookupTable = "scuffErc_Sneakers_Zmb_LookupTable";
+					soundLookupTable = "scuffErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 19;
 				};
 				class Scuff4
 				{
-					soundLookupTable = "scuffErc_Sneakers_Zmb_LookupTable";
+					soundLookupTable = "scuffErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 20;
 				};
 				class landFeetErc
 				{
-					soundLookupTable = "landFeetErc_Sneakers_Zmb_LookupTable";
+					soundLookupTable = "landFeetErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 21;
 				};
 				class landFootErc
 				{
-					soundLookupTable = "landFootErc_Sneakers_Zmb_LookupTable";
+					soundLookupTable = "landFootErc_Bare_Zmb_LookupTable";
 					noise = "ZombieStepNoise";
 					id = 22;
 				};
@@ -671,27 +687,27 @@ class cfgVehicles
 			{
 				class Attack_Light1
 				{
-					soundSet = "";
+					soundSet = "Zmb_Attack_Light1_SoundSet";
 					id = 1;
 				};
 				class Attack_Light2
 				{
-					soundSet = "";
+					soundSet = "Zmb_Attack_Light2_SoundSet";
 					id = 2;
 				};
 				class Attack_Heavy1
 				{
-					soundSet = "";
+					soundSet = "Zmb_Attack_Heavy1_SoundSet";
 					id = 3;
 				};
 				class Attack_Heavy2
 				{
-					soundSet = "";
+					soundSet = "Zmb_Attack_Heavy2_SoundSet";
 					id = 4;
 				};
 				class TwoHands
 				{
-					soundSet = "";
+					soundSet = "Zmb_Attack_TwoHands_SoundSet";
 					id = 5;
 				};
 			};
@@ -699,32 +715,32 @@ class cfgVehicles
 			{
 				class LightHit
 				{
-					soundSet = "";
+					soundSet = "geb_Alien_LightHit_SoundSet";
 					id = 1;
 				};
 				class HeavyHit
 				{
-					soundSet = "";
+					soundSet = "geb_Alien_HeavyHit_SoundSet";
 					id = 2;
 				};
 				class Attack
 				{
-					soundSet = "";
+					soundSet = "geb_Alien_Attack_SoundSet";
 					id = 5;
 				};
 				class Jump
 				{
-					soundSet = "";
+					soundSet = "geb_Alien_Jump_SoundSet";
 					id = 10;
 				};
 				class Land
 				{
-					soundSet = "";
+					soundSet = "geb_Alien_Land_SoundSet";
 					id = 11;
 				};
 				class CallToArmsShort
 				{
-					soundSet = "";
+					soundSet = "geb_Alien_CallToArmsShort_SoundSet";
 					id = 20;
 				};
 			};
@@ -913,10 +929,6 @@ class cfgVehicles
 				};
 		};
 
-		hiddenSelections[] =
-		{
-			"body_m"
-		};
 		class Cargo
 		{
 				itemsCargoSize[] = { 10,15 };
@@ -930,223 +942,6 @@ class cfgVehicles
 					class Health
 					{
 						hitpoints = 150;
-					};
-				};
-		};
-		class AnimEvents
-		{
-				class Steps
-				{
-					class Walk1
-					{
-						soundLookupTable = "walkErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 1;
-					};
-					class Walk2
-					{
-						soundLookupTable = "walkErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 2;
-					};
-					class Walk3
-					{
-						soundLookupTable = "walkErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 3;
-					};
-					class Walk4
-					{
-						soundLookupTable = "walkErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 4;
-					};
-					class Run1
-					{
-						soundLookupTable = "runErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 5;
-					};
-					class Run2
-					{
-						soundLookupTable = "runErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 6;
-					};
-					class Run3
-					{
-						soundLookupTable = "runErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 7;
-					};
-					class Run4
-					{
-						soundLookupTable = "runErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 8;
-					};
-					class Sprint1
-					{
-						soundLookupTable = "sprintErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 9;
-					};
-					class Sprint2
-					{
-						soundLookupTable = "sprintErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 10;
-					};
-					class Sprint3
-					{
-						soundLookupTable = "sprintErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 11;
-					};
-					class Sprint4
-					{
-						soundLookupTable = "sprintErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 12;
-					};
-					class Scuff1
-					{
-						soundLookupTable = "scuffErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 17;
-					};
-					class Scuff2
-					{
-						soundLookupTable = "scuffErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 18;
-					};
-					class Sccuff3
-					{
-						soundLookupTable = "scuffErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 19;
-					};
-					class Scuff4
-					{
-						soundLookupTable = "scuffErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 20;
-					};
-					class landFeetErc
-					{
-						soundLookupTable = "landFeetErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 21;
-					};
-					class landFootErc
-					{
-						soundLookupTable = "landFootErc_Sneakers_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 22;
-					};
-					class Bodyfall
-					{
-						soundLookupTable = "bodyfall_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 23;
-					};
-					class Bodyfall_Hand
-					{
-						soundLookupTable = "bodyfall_hand_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 24;
-					};
-					class Bodyfall_Slide
-					{
-						soundLookupTable = "bodyfall_slide_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 25;
-					};
-					class Prone_Walk_L
-					{
-						soundLookupTable = "walkProne_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 27;
-					};
-					class Prone_Walk_R
-					{
-						soundLookupTable = "walkProne_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 28;
-					};
-					class Prone_Run_L
-					{
-						soundLookupTable = "runProne_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 29;
-					};
-					class Prone_Run_R
-					{
-						soundLookupTable = "runProne_Zmb_LookupTable";
-						noise = "ZombieStepNoise";
-						id = 30;
-					};
-				};
-				class Sounds
-				{
-					class Attack_Light1
-					{
-						soundSet = "Alien_Attack_soundset";
-						id = 1;
-					};
-					class Attack_Light2
-					{
-						soundSet = "Alien_Attack_soundset";
-						id = 2;
-					};
-					class Attack_Heavy1
-					{
-						soundSet = "Alien_Attack_soundset";
-						id = 3;
-					};
-					class Attack_Heavy2
-					{
-						soundSet = "Alien_Attack_soundset";
-						id = 4;
-					};
-					class TwoHands
-					{
-						soundSet = "Alien_Attack_soundset";
-						id = 5;
-					};
-				};
-				class SoundVoice
-				{
-					class LightHit
-					{
-						soundSet = "Alien_Attack_soundset";
-						id = 1;
-					};
-					class HeavyHit
-					{
-						soundSet = "Alien_Attack_soundset";
-						id = 2;
-					};
-					class Attack
-					{
-						soundSet = "Alien_Attack_soundset";
-						id = 5;
-					};
-					class Jump
-					{
-						soundSet = "Alien_Attack_soundset";
-						id = 10;
-					};
-					class Land
-					{
-						soundSet = "Alien_Attack_soundset";
-						id = 11;
-					};
-					class CallToArmsShort
-					{
-						soundSet = "Alien_Attack_soundset";
-						id = 20;
 					};
 				};
 		};
@@ -1516,7 +1311,10 @@ class cfgAmmo
 		scope=2;
 		lootCategory="Crafted";
 		casing="";
-		round="";
+		// Must name a real round: the engine's EffectBulletShow builds the chambered round from it with no null
+		// check, so round="" crashed the server whenever a chambered plasma cell was shown (COT/admin spawns with
+		// ammo, weapons loaded from storage). The rifle model has no chamber proxy, so this round is never seen.
+		round="FxRound_22";
 		// Vanilla green tracer as the plasma bolt (traces from the muzzle on every shot; see tracersEvery on the cartridge)
 		model="\dz\weapons\projectiles\tracer_green.p3d";
 		spawnPileType="Ammo_Plasma_Cell";

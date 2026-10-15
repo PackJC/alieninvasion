@@ -28,7 +28,7 @@ def texture_path(material):
     return getattr(props, "texture_path", "") if props else ""
 
 
-def import_model(path):
+def import_model(path, model_normals=False):
     bpy.ops.a3ob.import_p3d(
         filepath=path,
         first_lod_only=True,
@@ -36,7 +36,7 @@ def import_model(path):
         groupby='NONE',
         proxy_action='CLEAR',
         additional_data_allowed=True,
-        additional_data={'UV', 'MATERIALS', 'SELECTIONS'},
+        additional_data={'UV', 'MATERIALS', 'SELECTIONS', 'NORMALS'} if model_normals else {'UV', 'MATERIALS', 'SELECTIONS'},
         validate_meshes=True,
         absolute_paths=False,
     )
@@ -63,4 +63,6 @@ def import_model(path):
 
 
 render_p3d.import_model = import_model
+# render_p3d resolves the manifest's relative paths against the repo its own file sits in; make that this one
+render_p3d.__file__ = os.path.abspath(__file__)
 render_p3d.main()
