@@ -32,6 +32,9 @@ class CfgMods
 		logoOver = "alieninvasion\data\logo_hover.paa";				// logo hovered (CfgMods reads logoOver, not logoHover)
 		action="";
 		name="alieninvasion";
+		// Without this the engine looks for alieninvasion/Anims/cfg/skeletons.anim.xml
+		// and logs "ANIMATION (E): Can't load ..." on every start; point it at vanilla's.
+		skeletonDefinitions="DZ/anims/cfg/skeletons.anim.xml";
 		credits="DayZ Modding Community";
 		author="Geb";
 		authorID="0";
