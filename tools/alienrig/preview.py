@@ -4,7 +4,8 @@
 
 VIEW is front, back, side or top, optionally zoomed: front:x,y,z,size (centre in model coordinates, ortho size
 in metres). Faces are coloured by their strongest bone; set PREVIEW_TEXTURE to a PNG (ImageToPAA the .paa) to
-show that texture through the face UVs instead. A trailing ~ draws the model as wireframe, for overlays.
+show that texture through the face UVs instead, or to "ufo.paa=ufo.png;dirt.paa=dirt.png" to pick the PNG by
+the face's texture name. A trailing ~ draws the model as wireframe, for overlays.
 Models sit 1.5 m apart (along X, or along Z in side view) unless @offset is given; :lod picks a visual LOD
 (0 = first).
 """
@@ -43,6 +44,17 @@ def mat(name):
     return mats[name]
 
 
+def tex_mat(png):
+    if png not in mats:
+        m = bpy.data.materials.new("tex")
+        m.use_nodes = True
+        node = m.node_tree.nodes.new("ShaderNodeTexImage")
+        node.image = bpy.data.images.load(png)
+        m.node_tree.links.new(node.outputs["Color"], m.node_tree.nodes["Principled BSDF"].inputs["Base Color"])
+        mats[png] = m
+    return mats[png]
+
+
 def add(path, lodi, offset):
     L = [l for l in mlod.read(path)["lods"] if l["res"] < 1000][lodi]
     P = L["pts"]
@@ -74,12 +86,12 @@ def add(path, lodi, offset):
             uvs = [(f["v"][k][2], 1 - f["v"][k][3]) for k in range(f["n"])][::-1]
             for j, li in enumerate(poly.loop_indices):
                 uvl.data[li].uv = uvs[j]
-        m = bpy.data.materials.new("tex")
-        m.use_nodes = True
-        node = m.node_tree.nodes.new("ShaderNodeTexImage")
-        node.image = bpy.data.images.load(TEXTURE)
-        m.node_tree.links.new(node.outputs["Color"], m.node_tree.nodes["Principled BSDF"].inputs["Base Color"])
-        me.materials.append(m)
+        pairs = [p.split("=", 1) for p in TEXTURE.split(";")] if "=" in TEXTURE else [("", TEXTURE)]
+        for name, png in pairs:
+            me.materials.append(tex_mat(png))
+        for poly, fi in zip(me.polygons, kept):
+            tex = L["faces"][fi]["tex"].lower()
+            poly.material_index = next((i for i, (name, _) in enumerate(pairs) if name.lower() in tex), 0)
     else:
         order = sorted(set(fm))
         for n in order:

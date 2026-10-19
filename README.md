@@ -43,7 +43,7 @@ The mod includes custom models, textures, sounds, particles, localized item name
 - **Crash salvage:** a 35% chance of a Montauk Rifle with a cartridge, plus up to two spare cartridges.
 - Hostile **Little Green Men** with their own voices and footsteps, and green blood. Infected melee up close, a visible **psychic zap** from 4–80 m in line of sight, and a green burst and scream when they die.
 - Aliens appear when a player comes within 300 m, so unvisited crash sites cost the server nothing.
-- **Montauk Rifle**, a semi-automatic plasma weapon firing green bolts that deal double damage to aliens (other firearms deal 75%).
+- **Montauk Rifle**, a semi-automatic plasma weapon whose bolts deal double damage to aliens (other firearms deal 75%). Its cartridges come in green, blue, lime and violet, and each colour has its own muzzle effect, bolt and light.
 - **Montauk Cartridge**, a 15-round plasma magazine that can't be unloaded — recharge it with a 9V battery.
 - **Tin Foil Hat:** aliens can't track the wearer beyond 3 m and can't zap them.
 - **Area 51 Steak** and **Roswell Hide** from skinning aliens. Cooked steak gives 90 s of green night vision; bad meat gives food poisoning.
@@ -157,7 +157,10 @@ A file that fails to parse is never overwritten; the server logs the error and r
 | `geb_GreenAlienCourierBag` | Backpack | Roswell Hide Courier Bag |
 | `geb_GreenAlienImprovisedBag` | Backpack | Roswell Hide Backpack |
 | `geb_PlasmaRifle` | Weapon | Semi-automatic Montauk Rifle |
-| `geb_PlasmaCartridge` | Magazine | 15-round Montauk Cartridge (rechargeable) |
+| `geb_PlasmaCartridge` | Magazine | 15-round Montauk Cartridge (rechargeable), green plasma |
+| `geb_PlasmaCartridge_Arc` | Magazine | Montauk Cartridge (Blue): blue arc plasma |
+| `geb_PlasmaCartridge_Lance` | Magazine | Montauk Cartridge (Lime): lime lance plasma |
+| `geb_PlasmaCartridge_Void` | Magazine | Montauk Cartridge (Violet): violet void plasma |
 | `geb_FoilHat` | Clothing | Tin Foil Hat |
 
 ## Project Structure

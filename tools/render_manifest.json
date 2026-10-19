@@ -1,6 +1,12 @@
 [
   { "name": "geb_PlasmaRifle",     "p3d": "data/weapons/geb_plasmarifle.p3d",     "view": "AUTO" },
   { "name": "geb_PlasmaCartridge", "p3d": "data/weapons/geb_plasmacartridge.p3d", "view": "ISO" },
+  { "name": "geb_PlasmaCartridge_Arc",   "p3d": "data/weapons/geb_plasmacartridge.p3d", "view": "ISO",
+    "textures": [null, "data/weapons/geb_plasmacartridge_blue_co.paa"],   "materials": [null, "data/weapons/geb_plasmacartridge_blue.rvmat"] },
+  { "name": "geb_PlasmaCartridge_Lance", "p3d": "data/weapons/geb_plasmacartridge.p3d", "view": "ISO",
+    "textures": [null, "data/weapons/geb_plasmacartridge_lime_co.paa"],   "materials": [null, "data/weapons/geb_plasmacartridge_lime.rvmat"] },
+  { "name": "geb_PlasmaCartridge_Void",  "p3d": "data/weapons/geb_plasmacartridge.p3d", "view": "ISO",
+    "textures": [null, "data/weapons/geb_plasmacartridge_violet_co.paa"], "materials": [null, "data/weapons/geb_plasmacartridge_violet.rvmat"] },
   { "name": "geb_FoilHat",         "p3d": "data/clothes/geb_foilhat_g.p3d",       "view": "ISO" },
   { "name": "geb_GreenAlien",      "p3d": "data/aliens/geb_GreenAlien.p3d",       "view": "AUTO", "roll": true, "flip_v": true },
   { "name": "geb_Aliencrash",      "p3d": "data/ufocrash/crash.p3d",              "view": "ISO" },

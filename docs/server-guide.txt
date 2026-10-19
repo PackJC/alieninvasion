@@ -106,19 +106,26 @@ defaults until you fix it.
   geb_GreenAlienCourierBag  Roswell Hide Courier Bag
   geb_GreenAlienImprovisedBag  Roswell Hide Backpack
   geb_PlasmaRifle           Montauk Rifle
-  geb_PlasmaCartridge       Montauk Cartridge (recharge with a 9V battery)
+  geb_PlasmaCartridge       Montauk Cartridge (recharge with a 9V battery), green
+  geb_PlasmaCartridge_Arc   Montauk Cartridge (Blue)
+  geb_PlasmaCartridge_Lance Montauk Cartridge (Lime)
+  geb_PlasmaCartridge_Void  Montauk Cartridge (Violet)
   geb_FoilHat               Tin Foil Hat
 
 
 7. CUSTOM ALIEN LOOT (optional)
 -------------------------------
 alieninvasion-spawnabletypes.xml gives aliens a 10% chance of a spare plasma
-cartridge. Add more <cargo> entries to the geb_GreenAlien type if you like,
-for example:
+cartridge, one of the four colours picked at random (the CE spawns one item
+per block, weighted by chance; change the chances to favour a colour). Add
+more <cargo> entries to the geb_GreenAlien type if you like, for example:
 
   <type name="geb_GreenAlien">
       <cargo chance="0.10">
-          <item name="geb_PlasmaCartridge" chance="1.00" />
+          <item name="geb_PlasmaCartridge" chance="0.25" />
+          <item name="geb_PlasmaCartridge_Arc" chance="0.25" />
+          <item name="geb_PlasmaCartridge_Lance" chance="0.25" />
+          <item name="geb_PlasmaCartridge_Void" chance="0.25" />
       </cargo>
       <cargo chance="0.05">
           <item name="geb_FoilHat" chance="1.00" />

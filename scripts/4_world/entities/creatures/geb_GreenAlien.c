@@ -96,7 +96,7 @@ class GreenAlienBase : ZombieBase
 
 		geb_AlienInvasionConfig cfg = GetAlienInvasionConfig();
 		float multiplier = cfg.OtherFirearmDamageVsAliens;
-		if ( ammo == "Plasma_Cell" )
+		if ( GetGame().IsKindOf(ammo, "Plasma_Cell") )		// every cell colour inherits Plasma_Cell
 			multiplier = cfg.PlasmaDamageVsAliens;
 
 		float dealt = damageResult.GetDamage("", "Health");

@@ -10,6 +10,13 @@ Works on DayZ 1.30 (scripts, configs and mission files checked against the 1.30 
   - Bubbles rise from the floor grille, green motes drift, and wisps leave the vent valve.
   - It casts a green glow, has a console with a live read-out and a warning plate, and hums.
   - Nothing spawns it: place it with an admin tool or a map editor.
+- **Four plasma colours.** Montauk Cartridges now come in green, blue, lime and violet (`geb_PlasmaCartridge`, `_Arc`, `_Lance`, `_Void`). The loaded cell decides how each shot looks, and a window along each side of the cartridge glows in its colour.
+  - Green: a white-hot core, a short jet, crackle, streak sparks and ions that hang in the air.
+  - Blue: lightning flickering on the muzzle, falling sparks that bounce, and static zaps after the shot, with a blue bolt.
+  - Lime: a two-metre lance, three shock diamonds, a shock ring and dripping embers, with a yellow bolt.
+  - Violet: a spinning arc vortex in a dark puff, a wide ring and floating sparks, with a violet bolt.
+  - The muzzle light takes the cell's colour instead of vanilla's orange.
+  - Crash sites, aliens and admin spawns hand out a random colour. All four recharge, fit the rifle and hit aliens just as hard.
 - UFO crash sites smoke like a heli crash, and electrical sparks crackle from different spots on the hull every few seconds.
 - Aliens bleed green. Bullet and melee hits spray green blood and leave green splatter on the ground. Gutting one leaves green blood on bare hands; gutting anything else turns the blood red again.
 - Aliens have a fuller voice. Their two old sounds are kept and cut, pitched and stretched into 75 takes, mixed with vanilla's skinny infected voice. They cover idling, noticing, hunting, chasing, attacking, getting hit, jumping, landing and calling others in, plus five death screams. Every take is levelled like vanilla's infected, and the scream no longer clips.
@@ -19,6 +26,11 @@ Works on DayZ 1.30 (scripts, configs and mission files checked against the 1.30 
   - This crashed admin-tool spawns with ammo (e.g. COT), and could also crash a crash site that rolled a rifle and a restart with a loaded rifle in storage.
   - Cause: the plasma round named no chambered-round class, and DayZ draws the chambered round without checking.
   - Admin debug spawns also give the rifle a plasma cartridge now, instead of trying a 10/22 magazine.
+- Aliens cast shadows like the infected. The rebuilt model had shadows switched off on every level of detail.
+- UFO crash sites and the Montauk Rifle cast shadows, and both get lighter to draw with distance.
+  - DayZ draws a model's shadow from its farthest level of detail and turns shadows off when that level is too detailed. The crash site's six levels were all full-detail copies (32,431 faces, the far five even with the wrong hull and dirt materials), and the rifle had a single level of 11,536 faces.
+  - The crash site now steps down to 16,207, 8,102, 3,886, 1,940 and 1,293 faces, with the right materials on every level. The rifle steps down to 5,768, 2,307 and 1,099. Its first-person model is unchanged.
+- The UFO hull and the Montauk Rifle show their surface detail. Their normal maps shipped with the mod but weren't used: the hull used the dirt's, and the rifle used a flat one.
 - Hitting an alien sounds like hitting an infected. Its hit geometry had no surface material, so hits clanged like metal.
 - Alien swings make vanilla's infected swing sounds. Every swing and every grunt used to play the same alien recording.
 - Aliens walk with bare-foot steps like the patient infected. The spawnable base alien used to walk silently.

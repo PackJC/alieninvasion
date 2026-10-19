@@ -43,7 +43,9 @@ class geb_AlienInvasionFiles
 		WriteType(file, "geb_GreenAlien", 0, 1800, 1, false, "");
 		FPrintln(file, "    <!-- Gear (the crash site itself drops the rifle and cartridges) -->");
 		WriteType(file, "geb_PlasmaRifle", 0, 1800, 1, false, "weapons");
-		WriteType(file, "geb_PlasmaCartridge", 0, 1800, 1, false, "weapons");
+		TStringArray cartridges = geb_PlasmaCartridgeTypes();
+		foreach (string cartridge : cartridges)
+			WriteType(file, cartridge, 0, 1800, 1, false, "weapons");
 		WriteType(file, "geb_FoilHat", 0, 1800, 1, false, "clothes");
 		FPrintln(file, "    <!-- From skinning aliens -->");
 		WriteType(file, "geb_GreenAlienMeat", 0, 14400, 0, true, "food");
@@ -65,16 +67,17 @@ class geb_AlienInvasionFiles
 		if ( !file )
 			return;
 
+		// One <item> per cartridge colour in each block: the CE picks one of them, weighted by chance
 		FPrintln(file, "<spawnabletypes>");
 		FPrintln(file, "    <type name=\"geb_PlasmaRifle\">");
 		FPrintln(file, "        <attachments chance=\"0.50\">");
-		FPrintln(file, "            <item name=\"geb_PlasmaCartridge\" chance=\"1.00\" />");
+		WriteCartridgeItems(file);
 		FPrintln(file, "        </attachments>");
 		FPrintln(file, "    </type>");
 		FPrintln(file, "    <!-- Aliens sometimes carry a spare cell. Full guide: https://packjc.github.io/alieninvasion/ -->");
 		FPrintln(file, "    <type name=\"geb_GreenAlien\">");
 		FPrintln(file, "        <cargo chance=\"0.10\">");
-		FPrintln(file, "            <item name=\"geb_PlasmaCartridge\" chance=\"1.00\" />");
+		WriteCartridgeItems(file);
 		FPrintln(file, "        </cargo>");
 		FPrintln(file, "    </type>");
 		FPrintln(file, "</spawnabletypes>");
@@ -280,6 +283,14 @@ class geb_AlienInvasionFiles
 		if ( category != "" )
 			FPrintln(file, "        <category name=\"" + category + "\"/>");
 		FPrintln(file, "    </type>");
+	}
+
+	// The cartridge colours as equally likely <item> lines (green, blue, lime, violet).
+	protected void WriteCartridgeItems(FileHandle file)
+	{
+		TStringArray cartridges = geb_PlasmaCartridgeTypes();
+		foreach (string cartridge : cartridges)
+			FPrintln(file, "            <item name=\"" + cartridge + "\" chance=\"0.25\" />");
 	}
 
 	// Copies the <zone>/<pos> lines of the mission's StaticHeliCrash event, so UFOs can crash on any map.

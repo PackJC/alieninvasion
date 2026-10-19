@@ -341,8 +341,9 @@ def main():
         sels["camo"] = all_sel(len(P), len(F))
         sels["body_m"] = all_sel(len(P), len(F))
         normals = -vertex_normals(P, F)          # MLOD stores them pointing inward
+        # No lodnoshadow: vanilla infected cast their shadow from the last LOD (509 faces here), and so should aliens
         model_lods.append(make_lod(float(li + 1), P, [(f, uv, TEX, MAT) for f, uv in zip(F, UV)], sels,
-                                   {"lodnoshadow": "1"}, normals=normals))
+                                   {}, normals=normals))
 
     # 3) Geometry: capsule, class=man
     cp, cf = capsule()

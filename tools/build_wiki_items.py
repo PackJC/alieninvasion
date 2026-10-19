@@ -29,7 +29,8 @@ MAX_W, MAX_H = 640, 420
 
 # Degrees clockwise, applied after cropping. render_p3d.py's "roll" only works for side views,
 # and the cartridge's three-quarter view stands it on end like a box rather than a magazine.
-ROTATE = {"geb_PlasmaCartridge": 90}
+ROTATE = {"geb_PlasmaCartridge": 90, "geb_PlasmaCartridge_Arc": 90, "geb_PlasmaCartridge_Lance": 90,
+          "geb_PlasmaCartridge_Void": 90}
 
 
 def main():

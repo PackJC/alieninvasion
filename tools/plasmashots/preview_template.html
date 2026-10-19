@@ -1,0 +1,892 @@
+<title>Plasma Muzzle Bench</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Chakra+Petch:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a sticky control strip over a grid of viewport cards. The chrome stays gunmetal so the plasma
+   colours inside the viewports are the only colour on the page. Single dark look by choice: additive glow
+   only reads against dark surroundings. */
+:root {
+  --bg: #0e1113;
+  --panel: #151a1c;
+  --panel-2: #1b2124;
+  --well: #0a0c0d;
+  --line: #273034;
+  --line-2: #354147;
+  --fg: #e2e5e1;
+  --fg-2: #bfc6c1;
+  --muted: #8b9590;
+  --bone: #e8e2cf;
+  --bone-ink: #171918;
+  --hud: rgb(226 231 226 / 0.74);
+  --display: "Chakra Petch", "Bahnschrift", "Segoe UI", system-ui, sans-serif;
+  --body: "Barlow", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  color-scheme: dark;
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); font: 16px/1.5 var(--body); }
+.wrap {
+  max-width: 1560px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+}
+.intro { display: grid; gap: 8px; max-width: 74ch; }
+.eyebrow { margin: 0; font: 500 12px/1.3 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+h1 { margin: 0; font: 600 clamp(30px, 4.2vw, 46px)/1.05 var(--display); letter-spacing: 0.01em; text-wrap: balance; }
+.lede { margin: 0; color: var(--fg-2); max-width: 68ch; }
+
+.controls {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px;
+  margin-block: 20px 18px; padding-block: 12px;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+}
+button {
+  font: 500 14px/1 var(--body); color: var(--fg); background: var(--panel-2);
+  border: 1px solid var(--line-2); border-radius: 4px; padding: 8px 11px; cursor: pointer;
+}
+button:hover { border-color: var(--muted); }
+button:focus-visible, summary:focus-visible, canvas:focus-visible { outline: 2px solid var(--bone); outline-offset: 2px; }
+.fire { background: var(--bone); color: var(--bone-ink); border-color: var(--bone); font-weight: 600; padding: 9px 14px; display: inline-flex; gap: 8px; align-items: center; }
+.fire:hover { border-color: var(--fg); }
+.fire kbd { font: 500 11px/1 var(--mono); border: 1px solid currentColor; border-radius: 3px; padding: 2px 4px; opacity: 0.7; }
+.seg { display: flex; align-items: center; }
+.seg-label { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-right: 8px; }
+.seg button { border-radius: 0; margin-left: -1px; }
+.seg button:first-of-type { border-radius: 4px 0 0 4px; margin-left: 0; }
+.seg button:last-of-type { border-radius: 0 4px 4px 0; }
+.seg button[aria-pressed="true"] { background: var(--bone); color: var(--bone-ink); border-color: var(--bone); position: relative; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 430px), 1fr)); gap: 18px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
+.card-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 12px 14px 10px; }
+.swatch { width: 10px; height: 10px; border-radius: 2px; background: var(--c); box-shadow: 0 0 10px var(--c); flex: none; }
+.card h2 { margin: 0; font: 600 19px/1.1 var(--display); letter-spacing: 0.02em; }
+.tag { font: 500 10.5px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line-2); border-radius: 3px; padding: 3px 6px; }
+.file { margin-left: auto; font: 400 12px/1.2 var(--mono); color: var(--muted); }
+.vp { position: relative; aspect-ratio: 16 / 10; max-width: 100%; background: var(--well); }
+.vp canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+.vp canvas:active { cursor: grabbing; }
+.hud { position: absolute; left: 10px; right: 10px; bottom: 8px; display: flex; justify-content: space-between; gap: 8px; font: 500 11px/1.2 var(--mono); color: var(--hud); pointer-events: none; text-shadow: 0 1px 2px var(--well); font-variant-numeric: tabular-nums; }
+.reset { position: absolute; right: 8px; top: 8px; font-size: 12px; padding: 5px 8px; background: var(--panel); }
+.nogl { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; text-align: center; color: var(--muted); font-size: 14px; }
+.card-body { display: grid; gap: 10px; padding: 12px 14px 14px; }
+.desc { margin: 0; color: var(--fg-2); font-size: 15px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.chips li { font: 400 11.5px/1.3 var(--mono); color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 3px 6px; }
+.chips b { color: var(--fg); font-weight: 500; }
+details summary { cursor: pointer; font: 500 13px/1.4 var(--body); color: var(--muted); }
+details summary:hover { color: var(--fg); }
+.code-bar { display: flex; justify-content: flex-end; margin-top: 8px; }
+.code-bar button { font-size: 12px; padding: 5px 9px; }
+pre { margin: 6px 0 0; max-height: 340px; overflow: auto; padding: 10px 12px; font: 400 12px/1.45 var(--mono); color: var(--fg-2); background: var(--well); border: 1px solid var(--line); border-radius: 4px; }
+
+.notes { padding: 16px 18px 18px; gap: 12px; }
+.notes h2 { margin: 0; font: 600 19px/1.1 var(--display); letter-spacing: 0.02em; }
+.notes h3 { margin: 4px 0 0; font: 600 14px/1.2 var(--display); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.notes p, .notes li { margin: 0; color: var(--fg-2); font-size: 15px; }
+.notes ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.notes code { font: 400 12.5px var(--mono); color: var(--fg); overflow-wrap: anywhere; }
+</style>
+
+<div class="wrap">
+  <header class="intro">
+    <p class="eyebrow">alieninvasion &middot; geb_PlasmaRifle &middot; OnFire &rsaquo; MuzzleFlash</p>
+    <h1>Plasma Muzzle Bench</h1>
+    <p class="lede">The plasma rifle's four cartridge colours, firing next to the original geb_plasma_shot. Every viewport plays the emitters from the actual .ptc file with DayZ's own sprites. Slow it down to see the layers. Drag a viewport to orbit it.</p>
+  </header>
+
+  <div class="controls" role="toolbar" aria-label="Playback">
+    <button id="fire" class="fire" type="button">Fire <kbd>Space</kbd></button>
+    <div class="seg" role="group" aria-labelledby="l-auto"><span id="l-auto" class="seg-label">Auto</span>
+      <button type="button" id="auto-off" data-k="auto" data-v="off">Off</button><button type="button" id="auto-single" data-k="auto" data-v="single">Single</button><button type="button" id="auto-burst" data-k="auto" data-v="burst">Burst</button>
+    </div>
+    <div class="seg" role="group" aria-labelledby="l-speed"><span id="l-speed" class="seg-label">Speed</span>
+      <button type="button" id="speed-1" data-k="speed" data-v="1">1&times;</button><button type="button" id="speed-4" data-k="speed" data-v="0.25">&frac14;&times;</button><button type="button" id="speed-20" data-k="speed" data-v="0.05">1&frasl;20&times;</button>
+    </div>
+    <div class="seg" role="group" aria-labelledby="l-view"><span id="l-view" class="seg-label">View</span>
+      <button type="button" id="view-side" data-k="view" data-v="side">Side</button><button type="button" id="view-third" data-k="view" data-v="third">Third person</button><button type="button" id="view-fp" data-k="view" data-v="fp">First person</button><button type="button" id="view-down" data-k="view" data-v="down">Downrange</button>
+    </div>
+    <div class="seg" role="group" aria-labelledby="l-scene"><span id="l-scene" class="seg-label">Scene</span>
+      <button type="button" id="scene-night" data-k="scene" data-v="night">Night</button><button type="button" id="scene-day" data-k="scene" data-v="day">Day</button>
+    </div>
+    <div class="seg" role="group" aria-labelledby="l-light"><span id="l-light" class="seg-label">Light</span>
+      <button type="button" id="light-vanilla" data-k="light" data-v="vanilla">Vanilla</button><button type="button" id="light-matched" data-k="light" data-v="matched">Matched</button>
+    </div>
+  </div>
+
+  <main class="grid" id="grid">
+    <article class="card notes" id="notes">
+      <h2>Reading the bench</h2>
+      <p>Timing, spread, layering and colour come straight from each file. Brightness and bloom are approximate, because the game adds HDR and eye adaptation on top. Judge final glow strength in Workbench.</p>
+      <p>A few values have no engine documentation: the three ConeAngle numbers, how the RND spreads apply, and StretchMultiplier. The bench reads them the way vanilla's own effects suggest.</p>
+      <p>Light: Vanilla is the orange muzzle light DayZ spawns for <code>illuminateWorld=1</code>. Matched is a light in the cell's own colour.</p>
+      <h3>In game</h3>
+      <p>Each cartridge colour plays its own effect: <code>geb_PlasmaCartridge</code> green, <code>_Arc</code> blue, <code>_Lance</code> lime, <code>_Void</code> violet. The cell's <code>muzzleFlashParticle</code> in <code>data/config.cpp</code> picks it.</p>
+      <h3>Changing one</h3>
+      <ol>
+        <li>Tune colours and sizes in <code>tools/plasmashots/shots.py</code> and run it.</li>
+        <li>Rebuild this page with <code>tools/plasmashots/preview.py</code>.</li>
+        <li>Repack the mod and check the effect in Workbench.</li>
+      </ol>
+    </article>
+  </main>
+</div>
+
+<template id="card-tpl">
+  <article class="card">
+    <header class="card-head"><span class="swatch"></span><h2></h2><span class="tag"></span><code class="file"></code></header>
+    <div class="vp">
+      <canvas tabindex="0" aria-label=""></canvas>
+      <button type="button" class="reset" hidden>Reset view</button>
+      <div class="hud"><span class="hud-l"></span><span class="hud-r"></span></div>
+    </div>
+    <div class="card-body">
+      <p class="desc"></p>
+      <ul class="chips"></ul>
+      <details><summary></summary><div class="code-bar"><button type="button" class="copy">Copy .ptc</button></div><pre></pre></details>
+    </div>
+  </article>
+</template>
+
+<script>const DATA = /*__DATA__*/null;</script>
+<script>
+(() => {
+'use strict';
+const D = DATA;
+const G = 9.81, GROUND_Y = -1.45, WIND = [0.35, 0, 0.55];
+const ADD_GAIN = 2.4;           // additive emissive sprites in HDR units (DayZ particles bloom)
+const LIGHT_GAIN = 6;
+const MAX_P = 6000;
+
+// ------------------------------------------------------------------------------------------------ math
+const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+const len = a => Math.hypot(a[0], a[1], a[2]);
+const norm = a => { const l = len(a) || 1; return [a[0] / l, a[1] / l, a[2] / l]; };
+const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+function perspective(fovy, asp, n, f) {
+  const t = 1 / Math.tan(fovy / 2);
+  return new Float32Array([t / asp, 0, 0, 0, 0, t, 0, 0, 0, 0, (f + n) / (n - f), -1, 0, 0, 2 * f * n / (n - f), 0]);
+}
+function lookAt(e, c) {
+  const z = norm(sub(e, c)), x = norm(cross([0, 1, 0], z)), y = cross(z, x);
+  return new Float32Array([x[0], y[0], z[0], 0, x[1], y[1], z[1], 0, x[2], y[2], z[2], 0, -dot(x, e), -dot(y, e), -dot(z, e), 1]);
+}
+function mul4(a, b) {
+  const o = new Float32Array(16);
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) {
+    let s = 0;
+    for (let k = 0; k < 4; k++) s += a[k * 4 + j] * b[i * 4 + k];
+    o[i * 4 + j] = s;
+  }
+  return o;
+}
+// Emitter Angles as yaw/pitch/roll: v' = Ry(a0) Rx(a1) Rz(a2) v. "0 0 -90" turns +Y onto the barrel (+X here).
+function rotation(a) {
+  const [y, x, z] = a.map(d => d * Math.PI / 180);
+  return v => {
+    let [px, py, pz] = v, c = Math.cos(z), s = Math.sin(z);
+    [px, py] = [px * c - py * s, px * s + py * c];
+    c = Math.cos(x); s = Math.sin(x);
+    [py, pz] = [py * c - pz * s, py * s + pz * c];
+    c = Math.cos(y); s = Math.sin(y);
+    [px, pz] = [px * c + pz * s, -px * s + pz * c];
+    return [px, py, pz];
+  };
+}
+
+// Curves are flat "t v t v" (stride 2) or "t r g b" (stride 4), linear between keys, held past the ends.
+function curveS(a, t) {
+  const n = a.length >> 1;
+  if (!n) return 1;
+  if (t <= a[0]) return a[1];
+  for (let i = 1; i < n; i++) {
+    const t1 = a[i * 2];
+    if (t <= t1) {
+      const t0 = a[i * 2 - 2], f = t1 > t0 ? (t - t0) / (t1 - t0) : 1;
+      return a[i * 2 - 1] + (a[i * 2 + 1] - a[i * 2 - 1]) * f;
+    }
+  }
+  return a[n * 2 - 1];
+}
+function curveC(a, t, o) {
+  const n = (a.length / 4) | 0;
+  if (!n) { o[0] = o[1] = o[2] = 1; return o; }
+  if (t <= a[0]) { o[0] = a[1]; o[1] = a[2]; o[2] = a[3]; return o; }
+  for (let i = 1; i < n; i++) {
+    const t1 = a[i * 4];
+    if (t <= t1) {
+      const t0 = a[i * 4 - 4], f = t1 > t0 ? (t - t0) / (t1 - t0) : 1;
+      for (let k = 0; k < 3; k++) o[k] = a[i * 4 - 3 + k] + (a[i * 4 + 1 + k] - a[i * 4 - 3 + k]) * f;
+      return o;
+    }
+  }
+  o[0] = a[n * 4 - 3]; o[1] = a[n * 4 - 2]; o[2] = a[n * 4 - 1];
+  return o;
+}
+
+// ------------------------------------------------------------------------------------------------ emitters
+// Readings of the undocumented values, from how vanilla effects use them:
+//  ConeAngle a b c   directions within max(c, b/2) degrees of the emitter axis, azimuth spread a degrees
+//  *RND              added on top: value + random(0..1) * RND
+//  AirResistance     exponential drag, v *= exp(-k dt), so a particle stops velocity / k metres out
+//  StretchMultiplier with VelAngle, lengthens the sprite by speed * value * 6 mm
+//  Restitution       > 0 bounces off the ground, otherwise no collision
+function prep(e) {
+  const g = (k, d) => (e[k] === undefined ? d : e[k]);
+  const vec = (k, d) => { const x = e[k]; return Array.isArray(x) ? x : (x === undefined ? d : [x, x, x]); };
+  const R = rotation(vec('Angles', [0, 0, 0]));
+  const cone = vec('ConeAngle', [0, 0, 0]);
+  const axis = norm(R([0, 1, 0]));
+  const t = Math.abs(axis[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0];
+  const b1 = norm(cross(axis, t));
+  const mat = D.materials[e.Material];
+  return {
+    name: e.name, mat, shape: g('ShapeType', 'Point'), ss: vec('ShapeSize', [0, 0, 0]), off: vec('Offset', [0, 0, 0]),
+    az: cone[0] * Math.PI / 180, th: Math.min(Math.PI, Math.max(cone[2], cone[1] / 2) * Math.PI / 180),
+    axis, xaxis: norm(R([1, 0, 0])), b1, b2: cross(axis, b1),
+    maxNum: g('MaxNum', 10), rate: g('BirthRate', 10), rateRnd: g('BirthRateRND', 0),
+    cx: g('CenterX', 0), cy: g('CenterY', 0), sx: g('ScaleX', 1), sy: g('ScaleY', 1),
+    size: g('SizeMultiplier', 1), sizeRnd: g('SizeRND', 0), rrd: g('RandomRotDir', 0), rotMul: g('RotMultiplier', 0),
+    stretch: g('StretchMultiplier', 0), velAngle: g('VelAngle', 0), randAngle: g('RandomAngle', 0),
+    bb: g('BillboardingType', 'Full'), vel: g('Velocity', 0), velRnd: g('VelocityRND', 0),
+    air: g('AirResistance', 0), airRnd: g('AirResistanceRND', 0), grav: g('GravityMultiply', 0), gravRnd: g('GravityMultiplyRND', 0),
+    rest: g('Restitution', -1), wind: g('Wind', 0), animFps: g('AnimFPS', 0), randFrame: g('RandomFrame', 0),
+    life: g('LifeTime', 1), lifeRnd: g('LifeTimeRND', 0),
+    color: g('Color', []), alpha: g('Alpha', []), rotSpeed: g('RotationSpeed', []), sizeC: g('Size', []),
+    et: Math.max(1e-3, g('EffectTime', 1)), repeat: g('Repeat', 0),
+    colorM: g('ColorMast', []), alphaM: g('AlphaMast', []), sizeM: g('SizeMast', []), rateM: g('BRateMast', []),
+    frames: mat ? mat.tiles[0] * mat.tiles[1] : 1,
+  };
+}
+
+function spawnPos(d) {
+  const s = d.ss, r = Math.random;
+  let p = [0, 0, 0];
+  if (d.shape === 'Box') p = [(r() - 0.5) * s[0], (r() - 0.5) * s[1], (r() - 0.5) * s[2]];
+  else if (d.shape === 'Sphere' || d.shape === 'OnSphere' || d.shape === 'Ellipse') {
+    let v;
+    do v = [r() * 2 - 1, r() * 2 - 1, r() * 2 - 1]; while (dot(v, v) > 1 || dot(v, v) < 1e-6);
+    if (d.shape === 'OnSphere') v = norm(v);
+    p = d.shape === 'Ellipse' ? [v[0] * s[0], v[1] * s[1], v[2] * s[2]] : [v[0] * s[0], v[1] * s[0], v[2] * s[0]];
+  }
+  return [p[0] + d.off[0], p[1] + d.off[1], p[2] + d.off[2]];
+}
+
+class Burst {
+  constructor(d) { this.d = d; this.age = 0; this.acc = 1; this.ps = []; }
+  get done() { return !this.d.repeat && this.age >= this.d.et && this.ps.length === 0; }
+  spawn() {
+    const d = this.d, r = Math.random;
+    const ct = 1 - r() * (1 - Math.cos(d.th)), st = Math.sqrt(Math.max(0, 1 - ct * ct)), ph = r() * d.az;
+    const cp = Math.cos(ph) * st, sp = Math.sin(ph) * st;
+    const dir = [0, 1, 2].map(i => d.axis[i] * ct + d.b1[i] * cp + d.b2[i] * sp);
+    const speed = d.vel + r() * d.velRnd;
+    const [x, y, z] = spawnPos(d);
+    this.ps.push({
+      x, y, z, vx: dir[0] * speed, vy: dir[1] * speed, vz: dir[2] * speed, age: 0,
+      life: Math.max(1e-3, d.life + r() * d.lifeRnd), size: d.size + r() * d.sizeRnd,
+      rot: d.randAngle ? r() * 360 : 0, rdir: d.rrd && r() < 0.5 ? -1 : 1,
+      air: d.air + r() * d.airRnd, grav: d.grav + r() * d.gravRnd,
+      frame: d.randFrame ? Math.floor(r() * d.frames) : 0,
+    });
+  }
+  step(dt) {
+    const d = this.d;
+    if (d.repeat || this.age < d.et) {
+      this.acc += (d.rate + Math.random() * d.rateRnd) * curveS(d.rateM, Math.min(1, this.age / d.et)) * dt;
+      while (this.acc >= 1) { this.acc -= 1; if (this.ps.length < d.maxNum) this.spawn(); }
+    }
+    this.age += dt;
+    const ps = this.ps;
+    for (let i = ps.length - 1; i >= 0; i--) {
+      const p = ps[i];
+      p.age += dt;
+      if (p.age >= p.life) { ps[i] = ps[ps.length - 1]; ps.pop(); continue; }
+      const k = Math.exp(-p.air * dt);
+      p.vx *= k; p.vy *= k; p.vz *= k;
+      p.vy -= G * p.grav * dt;
+      p.x += (p.vx + WIND[0] * d.wind) * dt; p.y += (p.vy + WIND[1] * d.wind) * dt; p.z += (p.vz + WIND[2] * d.wind) * dt;
+      if (d.rest > 0 && p.y < GROUND_Y) { p.y = GROUND_Y; p.vy = -p.vy * d.rest; p.vx *= 0.6; p.vz *= 0.6; }
+      p.rot += curveS(d.rotSpeed, p.age / p.life) * d.rotMul * p.rdir * dt;
+    }
+  }
+}
+
+// Vanilla muzzle lights (MuzzleFlashLight, _1, _2), picked the way WeaponParticlesBase picks them.
+function muzzleLight() {
+  const x = Math.floor(Math.random() * 10);
+  if (x > 8) return { age: 0, life: 0.01, bright: 0.2, rad: 12, col: [0.36, 0.32, 0.13] };
+  if (x > 4) return { age: 0, life: 0.08, bright: 0.5, rad: 17, col: [0.56, 0.42, 0.3] };
+  return { age: 0, life: 0.04, bright: 1, rad: 15, col: [0.76, 0.68, 0.31] };
+}
+
+// ------------------------------------------------------------------------------------------------ scene
+const SCENES = {
+  night: { top: [0.0035, 0.005, 0.009], hor: [0.016, 0.02, 0.026], amb: [0.01, 0.012, 0.016], sunDir: norm([-0.35, 0.8, 0.45]),
+           sun: [0.025, 0.03, 0.045], ground: [0.1, 0.11, 0.08], fogK: 0.035, exp: 1.25, thr: 1.0 },
+  day: { top: [0.22, 0.38, 0.72], hor: [0.62, 0.7, 0.78], amb: [0.22, 0.25, 0.3], sunDir: norm([0.45, 0.75, -0.4]),
+         sun: [1.6, 1.5, 1.3], ground: [0.11, 0.13, 0.06], fogK: 0.02, exp: 0.85, thr: 1.6 },
+};
+const VIEWS = {
+  side: { eye: [0.45, 0.12, 2.15], target: [0.45, -0.02, 0], fov: 40, look: false },
+  third: { eye: [-1.05, 0.42, 1.25], target: [0.55, -0.05, 0], fov: 42, look: false },
+  fp: { eye: [-0.72, 0.105, 0], target: [8, -0.02, 0], fov: 52, look: true },
+  down: { eye: [3.6, 0.15, 0.55], target: [0, 0, 0], fov: 30, look: false },
+};
+
+function gunMesh(glow) {
+  const P = [], I = [];
+  const metal = [0.045, 0.05, 0.055], dark = [0.03, 0.033, 0.036], none = [0, 0, 0];
+  const quad = (a, b, c, d, n, alb, em) => {
+    const base = P.length / 12;
+    for (const v of [a, b, c, d]) P.push(v[0], v[1], v[2], n[0], n[1], n[2], alb[0], alb[1], alb[2], em[0], em[1], em[2]);
+    I.push(base, base + 1, base + 2, base, base + 2, base + 3);
+  };
+  const box = (c, h, alb, em = none) => {
+    const [x, y, z] = c, [a, b, e] = h;
+    const v = (sx, sy, sz) => [x + sx * a, y + sy * b, z + sz * e];
+    quad(v(1, -1, -1), v(1, 1, -1), v(1, 1, 1), v(1, -1, 1), [1, 0, 0], alb, em);
+    quad(v(-1, -1, 1), v(-1, 1, 1), v(-1, 1, -1), v(-1, -1, -1), [-1, 0, 0], alb, em);
+    quad(v(-1, 1, -1), v(-1, 1, 1), v(1, 1, 1), v(1, 1, -1), [0, 1, 0], alb, em);
+    quad(v(-1, -1, 1), v(-1, -1, -1), v(1, -1, -1), v(1, -1, 1), [0, -1, 0], alb, em);
+    quad(v(-1, -1, 1), v(1, -1, 1), v(1, 1, 1), v(-1, 1, 1), [0, 0, 1], alb, em);
+    quad(v(1, -1, -1), v(-1, -1, -1), v(-1, 1, -1), v(1, 1, -1), [0, 0, -1], alb, em);
+  };
+  const prism = (x0, x1, r, alb, em = none, n = 10) => {      // along X
+    for (let i = 0; i < n; i++) {
+      const a0 = (i / n) * Math.PI * 2, a1 = ((i + 1) / n) * Math.PI * 2, am = (a0 + a1) / 2;
+      const p = a => [Math.cos(a) * r, Math.sin(a) * r];
+      const [y0, z0] = p(a0), [y1, z1] = p(a1);
+      quad([x0, y0, z0], [x1, y0, z0], [x1, y1, z1], [x0, y1, z1], [0, Math.cos(am), Math.sin(am)], alb, em);
+      quad([x1, 0, 0], [x1, y1, z1], [x1, y0, z0], [x1, 0, 0], [1, 0, 0], alb, em);
+      quad([x0, 0, 0], [x0, y0, z0], [x0, y1, z1], [x0, 0, 0], [-1, 0, 0], alb, em);
+    }
+  };
+  prism(-0.07, -0.012, 0.026, metal);
+  prism(-0.012, 0, 0.027, dark, glow.map(c => c * 0.9));
+  prism(-0.42, -0.07, 0.014, metal);
+  for (const x of [-0.12, -0.16, -0.2, -0.24]) box([x, 0, 0], [0.006, 0.03, 0.03], dark);
+  box([-0.42, -0.012, 0], [0.17, 0.034, 0.03], metal);
+  box([-0.76, 0.004, 0], [0.17, 0.046, 0.032], metal);
+  box([-0.76, 0.062, 0], [0.12, 0.012, 0.012], dark);
+  box([-0.66, -0.095, 0], [0.035, 0.055, 0.022], dark);
+  box([-0.66, -0.095, 0.0225], [0.02, 0.04, 0.0012], dark, glow.map(c => c * 0.5));
+  box([-0.66, -0.095, -0.0225], [0.02, 0.04, 0.0012], dark, glow.map(c => c * 0.5));
+  box([-0.85, -0.1, 0], [0.025, 0.06, 0.02], dark);
+  box([-1.12, -0.03, 0], [0.2, 0.045, 0.024], metal);
+  return { P: new Float32Array(P), I: new Uint16Array(I) };
+}
+function groundMesh() {
+  const S = 60, y = GROUND_Y, c = [0, 0, 0];
+  const v = [[-S, y, -S], [-S, y, S], [S, y, S], [S, y, -S]];
+  const P = [];
+  for (const p of v) P.push(p[0], p[1], p[2], 0, 1, 0, 1, 1, 1, c[0], c[1], c[2]);
+  return { P: new Float32Array(P), I: new Uint16Array([0, 1, 2, 0, 2, 3]) };
+}
+
+// ------------------------------------------------------------------------------------------------ GL
+const VS_FULL = `#version 300 es
+in vec2 aP; out vec2 vUV; void main(){ vUV = aP * 0.5 + 0.5; gl_Position = vec4(aP, 0.0, 1.0); }`;
+const FS_SKY = `#version 300 es
+precision highp float; in vec2 vUV; out vec4 o; uniform vec3 uTop, uHor; uniform float uH;
+void main(){ float h = clamp((vUV.y - uH) * 1.8, 0.0, 1.0); o = vec4(mix(uHor, uTop, pow(h, 0.55)), 1.0); }`;
+const VS_MESH = `#version 300 es
+in vec3 aP; in vec3 aN; in vec3 aC; in vec3 aE; uniform mat4 uVP;
+out vec3 vP; out vec3 vN; out vec3 vC; out vec3 vE;
+void main(){ vP = aP; vN = aN; vC = aC; vE = aE; gl_Position = uVP * vec4(aP, 1.0); }`;
+const FS_MESH = `#version 300 es
+precision highp float; in vec3 vP; in vec3 vN; in vec3 vC; in vec3 vE; out vec4 o;
+uniform vec3 uAmb, uSunDir, uSun, uLPos, uLCol, uEye, uFog, uAlb; uniform float uLRad, uGround, uFogK;
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+float noise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y); }
+void main(){
+  vec3 n = normalize(vN); vec3 alb = vC;
+  if (uGround > 0.5) { float g = noise(vP.xz * 3.1) * 0.5 + noise(vP.xz * 0.6) * 0.35 + noise(vP.xz * 14.0) * 0.15; alb = uAlb * (0.5 + g); }
+  vec3 L = uLPos - vP; float d = max(length(L), 1e-4); L /= d;
+  float att = pow(clamp(1.0 - d / uLRad, 0.0, 1.0), 2.0) / (1.0 + 0.9 * d * d);
+  vec3 c = alb * (uAmb + uSun * max(dot(n, uSunDir), 0.0) + uLCol * att * max(dot(n, L), 0.0)) + vE;
+  if (uGround < 0.5) { vec3 V = normalize(uEye - vP); c += uLCol * att * pow(max(dot(n, normalize(L + V)), 0.0), 40.0) * 0.3; }
+  c = mix(c, uFog, 1.0 - exp(-length(uEye - vP) * uFogK));
+  o = vec4(c, 1.0);
+}`;
+const VS_PART = `#version 300 es
+in vec3 aP; in vec2 aUV; in vec4 aC; uniform mat4 uVP; out vec2 vUV; out vec4 vC;
+void main(){ vUV = aUV; vC = aC; gl_Position = uVP * vec4(aP, 1.0); }`;
+const FS_PART = `#version 300 es
+precision highp float; in vec2 vUV; in vec4 vC; out vec4 o; uniform sampler2D uTex; uniform int uAdd;
+void main(){ vec4 t = texture(uTex, vUV); vec3 rgb = pow(t.rgb, vec3(2.2));
+  if (uAdd == 1) o = vec4(rgb * t.a * vC.rgb * vC.a, 0.0); else o = vec4(rgb * vC.rgb, t.a * vC.a); }`;
+const FS_BRIGHT = `#version 300 es
+precision highp float; in vec2 vUV; out vec4 o; uniform sampler2D uT; uniform vec2 uPx; uniform float uThr;
+void main(){ vec3 c = (texture(uT, vUV + uPx * vec2(-1, -1)).rgb + texture(uT, vUV + uPx * vec2(1, -1)).rgb
+  + texture(uT, vUV + uPx * vec2(-1, 1)).rgb + texture(uT, vUV + uPx * vec2(1, 1)).rgb) * 0.25;
+  float l = max(c.r, max(c.g, c.b)); o = vec4(c * (max(l - uThr, 0.0) / max(l, 1e-4)), 1.0); }`;
+const FS_BLUR = `#version 300 es
+precision highp float; in vec2 vUV; out vec4 o; uniform sampler2D uT; uniform vec2 uDir;
+void main(){ float w[5] = float[](0.227027, 0.1945946, 0.1216216, 0.054054, 0.016216);
+  vec3 c = texture(uT, vUV).rgb * w[0];
+  for (int i = 1; i < 5; i++) { c += texture(uT, vUV + uDir * float(i)).rgb * w[i]; c += texture(uT, vUV - uDir * float(i)).rgb * w[i]; }
+  o = vec4(c, 1.0); }`;
+const FS_COMP = `#version 300 es
+precision highp float; in vec2 vUV; out vec4 o; uniform sampler2D uScene, uBloom, uBloom2; uniform float uExp;
+vec3 aces(vec3 x){ return clamp((x * (2.51 * x + 0.03)) / (x * (2.43 * x + 0.59) + 0.14), 0.0, 1.0); }
+void main(){ vec3 c = texture(uScene, vUV).rgb + texture(uBloom, vUV).rgb * 0.9 + texture(uBloom2, vUV).rgb * 0.6;
+  c = aces(c * uExp); vec2 q = vUV - 0.5; c *= 1.0 - dot(q, q) * 0.45; o = vec4(pow(c, vec3(1.0 / 2.2)), 1.0); }`;
+
+function program(gl, vs, fs, attribs) {
+  const sh = (type, src) => {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+    return s;
+  };
+  const p = gl.createProgram();
+  gl.attachShader(p, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs));
+  attribs.forEach((a, i) => gl.bindAttribLocation(p, i, a));
+  gl.linkProgram(p);
+  if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+  const u = {}, n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS);
+  for (let i = 0; i < n; i++) { const name = gl.getActiveUniform(p, i).name; u[name] = gl.getUniformLocation(p, name); }
+  return { p, u };
+}
+
+const IMAGES = {};
+function loadImages() {
+  return Promise.all(Object.entries(D.sprites).map(([k, src]) => new Promise(res => {
+    const im = new Image();
+    im.onload = () => { IMAGES[k] = im; res(); };
+    im.onerror = () => res();
+    im.src = src;
+  })));
+}
+
+// ------------------------------------------------------------------------------------------------ viewport
+class Viewport {
+  constructor(fx, el) {
+    this.fx = fx; this.el = el;
+    this.defs = fx.emitters.map(prep);
+    this.bursts = []; this.lights = [];
+    this.canvas = el.querySelector('canvas');
+    this.visible = true;
+    const gl = this.gl = this.canvas.getContext('webgl2', { antialias: false, alpha: false, premultipliedAlpha: false });
+    if (!gl) throw new Error('webgl2');
+    this.hdr = !!gl.getExtension('EXT_color_buffer_float');
+    this.fmt = this.hdr ? gl.RGBA16F : gl.RGBA8;
+    this.progSky = program(gl, VS_FULL, FS_SKY, ['aP']);
+    this.progMesh = program(gl, VS_MESH, FS_MESH, ['aP', 'aN', 'aC', 'aE']);
+    this.progPart = program(gl, VS_PART, FS_PART, ['aP', 'aUV', 'aC']);
+    this.progBright = program(gl, VS_FULL, FS_BRIGHT, ['aP']);
+    this.progBlur = program(gl, VS_FULL, FS_BLUR, ['aP']);
+    this.progComp = program(gl, VS_FULL, FS_COMP, ['aP']);
+
+    this.full = gl.createVertexArray(); gl.bindVertexArray(this.full);
+    const fb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, fb);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+    this.gun = this.mesh(gunMesh(fx.light.map(c => c * 0.8)));
+    this.ground = this.mesh(groundMesh());
+
+    this.pvao = gl.createVertexArray(); gl.bindVertexArray(this.pvao);
+    this.pdata = new Float32Array(MAX_P * 4 * 9);
+    this.pbuf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, this.pbuf);
+    gl.bufferData(gl.ARRAY_BUFFER, this.pdata.byteLength, gl.DYNAMIC_DRAW);
+    gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 36, 0);
+    gl.enableVertexAttribArray(1); gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 36, 12);
+    gl.enableVertexAttribArray(2); gl.vertexAttribPointer(2, 4, gl.FLOAT, false, 36, 20);
+    const idx = new Uint16Array(MAX_P * 6);
+    for (let i = 0; i < MAX_P; i++) idx.set([i * 4, i * 4 + 1, i * 4 + 2, i * 4, i * 4 + 2, i * 4 + 3], i * 6);
+    const ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, idx, gl.STATIC_DRAW);
+    gl.bindVertexArray(null);
+
+    this.tex = {};
+    for (const [k, im] of Object.entries(IMAGES)) {
+      const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, im);
+      gl.generateMipmap(gl.TEXTURE_2D);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      this.tex[k] = t;
+    }
+    this.w = this.h = 0;
+    this.setView(state.view);
+  }
+  mesh(m) {
+    const gl = this.gl, vao = gl.createVertexArray();
+    gl.bindVertexArray(vao);
+    const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, m.P, gl.STATIC_DRAW);
+    for (let i = 0; i < 4; i++) { gl.enableVertexAttribArray(i); gl.vertexAttribPointer(i, 3, gl.FLOAT, false, 48, i * 12); }
+    const ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, m.I, gl.STATIC_DRAW);
+    gl.bindVertexArray(null);
+    return { vao, n: m.I.length };
+  }
+  target(w, h, depth) {
+    const gl = this.gl, tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, this.fmt, w, h, 0, gl.RGBA, this.hdr ? gl.HALF_FLOAT : gl.UNSIGNED_BYTE, null);
+    for (const [k, v] of [[gl.TEXTURE_MIN_FILTER, gl.LINEAR], [gl.TEXTURE_MAG_FILTER, gl.LINEAR], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]]) gl.texParameteri(gl.TEXTURE_2D, k, v);
+    const fb = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+    if (depth) {
+      const rb = gl.createRenderbuffer(); gl.bindRenderbuffer(gl.RENDERBUFFER, rb);
+      gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT24, w, h);
+      gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, rb);
+    }
+    return { fb, tex, w, h };
+  }
+  resize() {
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const w = Math.max(2, Math.round(this.canvas.clientWidth * dpr)), h = Math.max(2, Math.round(this.canvas.clientHeight * dpr));
+    if (w === this.w && h === this.h) return;
+    const gl = this.gl;
+    this.w = this.canvas.width = w; this.h = this.canvas.height = h;
+    this.scene = this.target(w, h, false);
+    // multisampled scene, resolved into this.scene
+    this.ms = null;
+    const samples = Math.min(4, gl.getParameter(gl.MAX_SAMPLES) || 0);
+    if (samples > 1) {
+      const fb = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+      const c = gl.createRenderbuffer(); gl.bindRenderbuffer(gl.RENDERBUFFER, c);
+      gl.renderbufferStorageMultisample(gl.RENDERBUFFER, samples, this.fmt, w, h);
+      gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.RENDERBUFFER, c);
+      const d = gl.createRenderbuffer(); gl.bindRenderbuffer(gl.RENDERBUFFER, d);
+      gl.renderbufferStorageMultisample(gl.RENDERBUFFER, samples, gl.DEPTH_COMPONENT24, w, h);
+      gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, d);
+      if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE) this.ms = fb;
+    }
+    if (!this.ms) this.scene = this.target(w, h, true);
+    const q = (s) => [Math.max(1, Math.round(w / s)), Math.max(1, Math.round(h / s))];
+    this.b1 = this.target(...q(4)); this.b2 = this.target(...q(4));
+    this.c1 = this.target(...q(12)); this.c2 = this.target(...q(12));
+  }
+  setView(name) {
+    const v = VIEWS[name];
+    this.cam = { eye: v.eye.slice(), target: v.target.slice(), fov: v.fov, look: v.look };
+    this.custom = false;
+    const r = this.el.querySelector('.reset'); if (r) r.hidden = true;
+  }
+  orbit(dx, dy) {
+    const c = this.cam, pivot = c.look ? c.eye : c.target, moving = c.look ? c.target : c.eye;
+    const off = sub(moving, pivot), r = len(off);
+    let yaw = Math.atan2(off[2], off[0]), pitch = Math.asin(clamp(off[1] / r, -1, 1));
+    yaw += (c.look ? 1 : -1) * dx * 0.008;
+    pitch = clamp(pitch + (c.look ? -1 : 1) * dy * 0.006, -1.2, 1.35);
+    const p = [pivot[0] + r * Math.cos(pitch) * Math.cos(yaw), pivot[1] + r * Math.sin(pitch), pivot[2] + r * Math.cos(pitch) * Math.sin(yaw)];
+    if (c.look) c.target = p; else c.eye = p;
+    this.custom = true;
+    this.el.querySelector('.reset').hidden = false;
+  }
+  fire() {
+    for (const d of this.defs) this.bursts.push(new Burst(d));
+    this.lights.push(muzzleLight());
+  }
+  step(dt) {
+    for (const b of this.bursts) b.step(dt);
+    this.bursts = this.bursts.filter(b => !b.done);
+    for (const l of this.lights) l.age += dt;
+    this.lights = this.lights.filter(l => l.age < l.life);
+  }
+  light() {          // summed muzzle light: colour * intensity, at the script's position (muzzle - 0.2 m)
+    const out = [0, 0, 0];
+    const m = this.fx.light, mx = Math.max(...m);
+    for (const l of this.lights) {
+      const h = l.life / 2, f = l.age < h ? l.age / h : 1 - (l.age - h) / h;
+      const col = state.light === 'matched' ? m.map(c => c / mx * 0.76 * (l.col[0] / 0.76)) : l.col;
+      for (let k = 0; k < 3; k++) out[k] += col[k] * l.bright * f * LIGHT_GAIN;
+    }
+    return out;
+  }
+  count() { let n = 0; for (const b of this.bursts) n += b.ps.length; return n; }
+  render() {
+    this.resize();
+    const gl = this.gl, S = SCENES[state.scene], c = this.cam, w = this.w, h = this.h;
+    const proj = perspective(c.fov * Math.PI / 180, w / h, 0.02, 300), view = lookAt(c.eye, c.target), vp = mul4(proj, view);
+    const fwd = norm(sub(c.target, c.eye)), camR = norm(cross(fwd, [0, 1, 0])), camU = cross(camR, fwd);
+    const lcol = this.light(), lpos = [-0.2, 0, 0];
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, this.ms || this.scene.fb);
+    gl.viewport(0, 0, w, h);
+    gl.disable(gl.BLEND); gl.disable(gl.DEPTH_TEST); gl.depthMask(true);
+    gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+    // sky: horizon where a far point at eye height lands on screen
+    const flat = norm([fwd[0], 0, fwd[2]]), hp = [c.eye[0] + flat[0] * 1000, c.eye[1], c.eye[2] + flat[2] * 1000];
+    const cy = vp[1] * hp[0] + vp[5] * hp[1] + vp[9] * hp[2] + vp[13], cw = vp[3] * hp[0] + vp[7] * hp[1] + vp[11] * hp[2] + vp[15];
+    gl.useProgram(this.progSky.p);
+    gl.uniform3fv(this.progSky.u.uTop, S.top); gl.uniform3fv(this.progSky.u.uHor, S.hor);
+    gl.uniform1f(this.progSky.u.uH, cw > 0 ? (cy / cw) * 0.5 + 0.5 : -1);
+    gl.bindVertexArray(this.full); gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+    gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL);
+    const M = this.progMesh;
+    gl.useProgram(M.p);
+    gl.uniformMatrix4fv(M.u.uVP, false, vp);
+    gl.uniform3fv(M.u.uAmb, S.amb); gl.uniform3fv(M.u.uSunDir, S.sunDir); gl.uniform3fv(M.u.uSun, S.sun);
+    gl.uniform3fv(M.u.uLPos, lpos); gl.uniform3fv(M.u.uLCol, lcol); gl.uniform1f(M.u.uLRad, 15);
+    gl.uniform3fv(M.u.uEye, c.eye); gl.uniform3fv(M.u.uFog, S.hor); gl.uniform1f(M.u.uFogK, S.fogK); gl.uniform3fv(M.u.uAlb, S.ground);
+    gl.uniform1f(M.u.uGround, 1); gl.bindVertexArray(this.ground.vao); gl.drawElements(gl.TRIANGLES, this.ground.n, gl.UNSIGNED_SHORT, 0);
+    gl.uniform1f(M.u.uGround, 0); gl.uniform1f(M.u.uFogK, 0); gl.bindVertexArray(this.gun.vao); gl.drawElements(gl.TRIANGLES, this.gun.n, gl.UNSIGNED_SHORT, 0);
+
+    // particles, grouped by material: lit alpha-blended smoke back to front, then additive glow
+    const groups = new Map();
+    for (const b of this.bursts) {
+      if (!b.d.mat || !this.tex[b.d.mat.sprite]) continue;
+      let g = groups.get(b.d.mat);
+      if (!g) groups.set(b.d.mat, g = []);
+      for (const p of b.ps) g.push(b, p);
+    }
+    const order = [...groups.keys()].sort((a, b) => a.additive - b.additive);
+    const data = this.pdata, col = [0, 0, 0], colM = [0, 0, 0], draws = [];
+    let n = 0;
+    const lum = Math.max(...lcol);
+    for (const mat of order) {
+      const list = groups.get(mat), items = [];
+      for (let i = 0; i < list.length; i += 2) items.push([list[i], list[i + 1]]);
+      if (!mat.additive) items.sort((A, B) => dist2(B[1], c.eye) - dist2(A[1], c.eye));
+      const start = n;
+      const [tu, tv] = mat.tiles;
+      for (const [b, p] of items) {
+        if (n >= MAX_P) break;
+        const d = b.d, t = p.age / p.life, et = Math.min(1, b.age / d.et);
+        const s = p.size * curveS(d.sizeC, t) * curveS(d.sizeM, et);
+        const a = curveS(d.alpha, t) * curveS(d.alphaM, et);
+        if (s <= 0 || a <= 0.002) continue;
+        curveC(d.color, t, col); curveC(d.colorM, et, colM);
+        let hw = s * d.sx * 0.5, hh = s * d.sy * 0.5;
+        const vel = [p.vx, p.vy, p.vz], speed = len(vel), pos = [p.x, p.y, p.z];
+        let R = camR, U = camU;
+        if (d.bb === 'LockedAxis') {
+          U = d.velAngle && speed > 1e-3 ? [vel[0] / speed, vel[1] / speed, vel[2] / speed] : d.axis;
+          const r = cross(U, norm(sub(c.eye, pos))), rl = len(r);
+          R = rl > 1e-4 ? [r[0] / rl, r[1] / rl, r[2] / rl] : camR;
+          if (d.velAngle) hh += speed * d.stretch * 0.006;
+        } else if (d.bb === 'None' || (d.velAngle && speed > 1e-3)) {
+          if (d.bb === 'None') { U = d.axis; R = d.xaxis; }
+          else {
+            const sx = dot(vel, camR), sy = dot(vel, camU), sl = Math.hypot(sx, sy);
+            if (sl > 1e-4) {
+              U = norm([camR[0] * sx + camU[0] * sy, camR[1] * sx + camU[1] * sy, camR[2] * sx + camU[2] * sy]);
+              R = norm([camR[0] * sy - camU[0] * sx, camR[1] * sy - camU[1] * sx, camR[2] * sy - camU[2] * sx]);
+            }
+            hh += sl * d.stretch * 0.006;
+          }
+        }
+        if (p.rot && !(d.velAngle && d.bb !== 'None')) {
+          const an = p.rot * Math.PI / 180, ca = Math.cos(an), sa = Math.sin(an);
+          const R2 = [0, 1, 2].map(k => R[k] * ca + U[k] * sa), U2 = [0, 1, 2].map(k => U[k] * ca - R[k] * sa);
+          R = R2; U = U2;
+        }
+        const cxp = [0, 1, 2].map(k => pos[k] - U[k] * d.cy * hh - R[k] * d.cx * hw);
+        let r, g, bl;
+        if (mat.additive) {
+          const k = mat.gain * ADD_GAIN;
+          r = col[0] * colM[0] * k; g = col[1] * colM[1] * k; bl = col[2] * colM[2] * k;
+        } else {
+          const dl = len(sub(pos, lpos)), att = Math.pow(clamp(1 - dl / 15, 0, 1), 2) / (1 + 0.9 * dl * dl);
+          const lit = [0, 1, 2].map(k => S.amb[k] * mat.ambient * 1.5 + S.sun[k] * mat.diffuse * 0.45 + lcol[k] * att * mat.diffuse * 0.6);
+          r = col[0] * colM[0] * lit[0]; g = col[1] * colM[1] * lit[1]; bl = col[2] * colM[2] * lit[2];
+        }
+        const f = (p.frame + (d.animFps ? Math.floor(p.age * d.animFps) : 0)) % d.frames;
+        const u0 = (f % tu) / tu, v0 = Math.floor(f / tu) / tv, u1 = u0 + 1 / tu, v1 = v0 + 1 / tv;
+        let o = n * 36;
+        const corner = (sr, su, u, v) => {
+          data[o++] = cxp[0] + R[0] * hw * sr + U[0] * hh * su;
+          data[o++] = cxp[1] + R[1] * hw * sr + U[1] * hh * su;
+          data[o++] = cxp[2] + R[2] * hw * sr + U[2] * hh * su;
+          data[o++] = u; data[o++] = v; data[o++] = r; data[o++] = g; data[o++] = bl; data[o++] = a;
+        };
+        corner(-1, 1, u0, v0); corner(1, 1, u1, v0); corner(1, -1, u1, v1); corner(-1, -1, u0, v1);
+        n++;
+      }
+      if (n > start) draws.push([mat, start, n - start]);
+    }
+    if (n) {
+      gl.bindVertexArray(this.pvao);
+      gl.bindBuffer(gl.ARRAY_BUFFER, this.pbuf);
+      gl.bufferSubData(gl.ARRAY_BUFFER, 0, data, 0, n * 36);
+      const P = this.progPart;
+      gl.useProgram(P.p); gl.uniformMatrix4fv(P.u.uVP, false, vp); gl.uniform1i(P.u.uTex, 0);
+      gl.enable(gl.BLEND); gl.depthMask(false); gl.activeTexture(gl.TEXTURE0);
+      for (const [mat, start, cnt] of draws) {
+        gl.uniform1i(P.u.uAdd, mat.additive ? 1 : 0);
+        if (mat.additive) gl.blendFunc(gl.ONE, gl.ONE);
+        else gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+        gl.bindTexture(gl.TEXTURE_2D, this.tex[mat.sprite]);
+        gl.drawElements(gl.TRIANGLES, cnt * 6, gl.UNSIGNED_SHORT, start * 12);
+      }
+      gl.depthMask(true); gl.disable(gl.BLEND);
+    }
+
+    // post: resolve, bright pass, two blur sizes, tone map
+    gl.disable(gl.DEPTH_TEST);
+    if (this.ms) {
+      gl.bindFramebuffer(gl.READ_FRAMEBUFFER, this.ms); gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, this.scene.fb);
+      gl.blitFramebuffer(0, 0, w, h, 0, 0, w, h, gl.COLOR_BUFFER_BIT, gl.NEAREST);
+    }
+    gl.bindVertexArray(this.full);
+    const pass = (prog, src, dst, setup) => {
+      gl.bindFramebuffer(gl.FRAMEBUFFER, dst ? dst.fb : null);
+      gl.viewport(0, 0, dst ? dst.w : w, dst ? dst.h : h);
+      gl.useProgram(prog.p); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, src.tex);
+      gl.uniform1i(prog.u.uT, 0); setup && setup(prog.u);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    };
+    const thr = this.hdr ? S.thr : 0.7;
+    pass(this.progBright, this.scene, this.b1, u => { gl.uniform2f(u.uPx, 1.5 / w, 1.5 / h); gl.uniform1f(u.uThr, thr); });
+    pass(this.progBlur, this.b1, this.b2, u => gl.uniform2f(u.uDir, 1.4 / this.b1.w, 0));
+    pass(this.progBlur, this.b2, this.b1, u => gl.uniform2f(u.uDir, 0, 1.4 / this.b1.h));
+    pass(this.progBlur, this.b1, this.c1, u => gl.uniform2f(u.uDir, 1.2 / this.b1.w, 0));
+    pass(this.progBlur, this.c1, this.c2, u => gl.uniform2f(u.uDir, 1.5 / this.c1.w, 0));
+    pass(this.progBlur, this.c2, this.c1, u => gl.uniform2f(u.uDir, 0, 1.5 / this.c1.h));
+    const C = this.progComp;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, w, h);
+    gl.useProgram(C.p);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.scene.tex); gl.uniform1i(C.u.uScene, 0);
+    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, this.b1.tex); gl.uniform1i(C.u.uBloom, 1);
+    gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, this.c1.tex); gl.uniform1i(C.u.uBloom2, 2);
+    gl.uniform1f(C.u.uExp, S.exp);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.activeTexture(gl.TEXTURE0);
+  }
+}
+const dist2 = (p, e) => (p.x - e[0]) ** 2 + (p.y - e[1]) ** 2 + (p.z - e[2]) ** 2;
+
+// ------------------------------------------------------------------------------------------------ UI
+const DEFAULTS = { auto: 'single', speed: '1', view: 'side', scene: 'night', light: 'vanilla' };
+const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+const state = { ...DEFAULTS };
+const ALLOWED = { auto: ['off', 'single', 'burst'], speed: ['1', '0.25', '0.05'], view: Object.keys(VIEWS), scene: ['night', 'day'], light: ['vanilla', 'matched'] };
+try {
+  const saved = JSON.parse(localStorage.getItem('plasma-bench') || '{}');
+  for (const k in ALLOWED) if (ALLOWED[k].includes(saved[k])) state[k] = saved[k];
+} catch (e) { /* storage blocked */ }
+if (reduced) { state.auto = 'off'; state.speed = '0.25'; }
+const save = () => { try { localStorage.setItem('plasma-bench', JSON.stringify(state)); } catch (e) { /* storage blocked */ } };
+const speedNum = () => parseFloat(state.speed) || 1;
+const GAP = { '1': 1.6, '0.25': 2.6, '0.05': 3.2 };
+
+function syncButtons() {
+  document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', String(state[b.dataset.k] === b.dataset.v)));
+}
+
+const cards = [];
+const grid = document.getElementById('grid'), notes = document.getElementById('notes'), tpl = document.getElementById('card-tpl');
+const shortMat = m => (D.materials[m] ? D.materials[m].short : String(m).split('/').pop().replace('.emat', ''));
+
+function duration(defs) { return Math.max(...defs.map(d => d.et + d.life + d.lifeRnd)); }
+function maxParticles(defs) { return defs.reduce((s, d) => s + Math.min(d.maxNum, Math.ceil((d.rate + d.rateRnd) * d.et) + 1), 0); }
+
+function buildCards() {
+  for (const fx of D.effects) {
+    const el = tpl.content.firstElementChild.cloneNode(true);
+    el.style.setProperty('--c', fx.accent);
+    el.id = 'fx-' + fx.id;
+    el.querySelector('h2').textContent = fx.name;
+    el.querySelector('.file').textContent = fx.file + '.ptc';
+    el.querySelector('.tag').textContent = fx.cartridge || 'Before';
+    el.querySelector('.desc').textContent = fx.desc;
+    el.querySelector('canvas').setAttribute('aria-label', fx.name + ' muzzle effect preview. Drag to orbit, double-click to reset.');
+    const ul = el.querySelector('.chips');
+    for (const e of fx.emitters) {
+      const li = document.createElement('li'), b = document.createElement('b');
+      b.textContent = e.name; li.append(b, ' \u00b7 ' + shortMat(e.Material)); ul.append(li);
+    }
+    const lines = fx.ptc.trim().split('\n').length;
+    el.querySelector('summary').textContent = 'View .ptc (' + fx.emitters.length + ' emitters, ' + lines + ' lines)';
+    const pre = el.querySelector('pre'); pre.textContent = fx.ptc;
+    const copy = el.querySelector('.copy');
+    copy.addEventListener('click', () => {
+      const done = () => { copy.textContent = 'Copied'; setTimeout(() => (copy.textContent = 'Copy .ptc'), 1400); };
+      const fallback = () => { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); copy.textContent = 'Selected, press Ctrl+C'; };
+      try { navigator.clipboard.writeText(fx.ptc).then(done, fallback); } catch (e) { fallback(); }
+    });
+    grid.insertBefore(el, notes);
+    let vpObj = null;
+    try { vpObj = new Viewport(fx, el); } catch (err) {
+      const msg = document.createElement('div'); msg.className = 'nogl';
+      msg.textContent = 'This preview needs WebGL 2, which this browser did not provide.';
+      el.querySelector('.vp').append(msg);
+      continue;
+    }
+    const defs = vpObj.defs;
+    vpObj.hudL = el.querySelector('.hud-l'); vpObj.hudR = el.querySelector('.hud-r');
+    vpObj.hudL.textContent = defs.length + ' emitters \u00b7 \u2264' + maxParticles(defs) + ' particles \u00b7 ' + duration(defs).toFixed(2) + ' s';
+    cards.push(vpObj);
+    const cv = vpObj.canvas;
+    let drag = null;
+    cv.addEventListener('pointerdown', e => { drag = [e.clientX, e.clientY]; cv.setPointerCapture(e.pointerId); });
+    cv.addEventListener('pointermove', e => { if (!drag) return; vpObj.orbit(e.clientX - drag[0], e.clientY - drag[1]); drag = [e.clientX, e.clientY]; });
+    const end = () => (drag = null);
+    cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end);
+    cv.addEventListener('dblclick', () => vpObj.setView(state.view));
+    cv.addEventListener('keydown', e => {
+      const k = { ArrowLeft: [-20, 0], ArrowRight: [20, 0], ArrowUp: [0, -20], ArrowDown: [0, 20] }[e.key];
+      if (k) { e.preventDefault(); vpObj.orbit(k[0], k[1]); }
+    });
+    el.querySelector('.reset').addEventListener('click', () => vpObj.setView(state.view));
+  }
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(en => { const c = cards.find(v => v.el === en.target); if (c) c.visible = en.isIntersecting; }));
+    cards.forEach(c => io.observe(c.el));
+  }
+}
+
+let simTime = 0, last = performance.now(), nextAuto = 0, frameNo = 0;
+const pending = [];
+function fireAll() { cards.forEach(c => c.fire()); }
+function queueShot() { pending.push(simTime); }
+function scheduleAuto(now) {
+  const sp = speedNum(), gap = GAP[state.speed] || 1.6;
+  if (state.auto === 'single') { pending.push(simTime); nextAuto = now + gap * 1000; }
+  else if (state.auto === 'burst') { for (let i = 0; i < 5; i++) pending.push(simTime + i * 0.125); nextAuto = now + (0.5 / sp + gap) * 1000; }
+}
+function frame(now) {
+  const dtReal = Math.min(0.05, Math.max(0, (now - last) / 1000)); last = now;
+  if (state.auto !== 'off' && now >= nextAuto) scheduleAuto(now);
+  const simDt = dtReal * speedNum(), steps = Math.max(1, Math.ceil(simDt / (1 / 240))), h = simDt / steps;
+  for (let i = 0; i < steps; i++) {
+    simTime += h;
+    pending.sort((a, b) => a - b);
+    while (pending.length && pending[0] <= simTime) { pending.shift(); fireAll(); }
+    for (const c of cards) c.step(h);
+  }
+  frameNo++;
+  for (const c of cards) {
+    if (!c.visible) continue;
+    c.render();
+    if (frameNo % 8 === 0) c.hudR.textContent = c.count() + ' live';
+  }
+  requestAnimationFrame(frame);
+}
+
+document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+  state[b.dataset.k] = b.dataset.v; save(); syncButtons();
+  if (b.dataset.k === 'view') cards.forEach(c => c.setView(state.view));
+  if (b.dataset.k === 'auto' || b.dataset.k === 'speed') nextAuto = performance.now() + 250;
+}));
+document.getElementById('fire').addEventListener('click', queueShot);
+document.addEventListener('keydown', e => {
+  if (e.code !== 'Space' || e.repeat) return;
+  const t = e.target;
+  if (t && (t.tagName === 'BUTTON' || t.tagName === 'SUMMARY' || t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) return;
+  e.preventDefault(); queueShot();
+});
+
+syncButtons();
+loadImages().then(() => {
+  buildCards();
+  queueShot();
+  nextAuto = performance.now() + (GAP[state.speed] || 1.6) * 1000;
+  requestAnimationFrame(t => { last = t; frame(t); });
+});
+})();
+</script>

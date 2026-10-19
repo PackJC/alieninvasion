@@ -8,7 +8,7 @@ PixelShaderID="Super";
 VertexShaderID="Super";
 class Stage1
 {
-	texture="alieninvasion\data\ufocrash\dirt_nohq.paa";
+	texture="alieninvasion\data\ufocrash\ufo_nohq.paa";
 	uvSource="tex";
 	class uvTransform
 	{

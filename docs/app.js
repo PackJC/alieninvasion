@@ -11,7 +11,10 @@ const classnames = [
   { name: "geb_GreenAlienCourierBag", type: "Backpack", img: "geb_GreenAlienCourierBag", description: "Roswell Hide Courier Bag: a hide and a rope." },
   { name: "geb_GreenAlienImprovisedBag", type: "Backpack", img: "geb_GreenAlienImprovisedBag", description: "Roswell Hide Backpack: the courier bag on a frame of three sticks." },
   { name: "geb_PlasmaRifle", type: "Weapon", img: "geb_PlasmaRifle", description: "Semi-automatic Montauk Rifle; green plasma bolts, double damage to aliens." },
-  { name: "geb_PlasmaCartridge", type: "Magazine", img: "geb_PlasmaCartridge", description: "15-round Montauk Cartridge; recharge with a 9V battery." },
+  { name: "geb_PlasmaCartridge", type: "Magazine", img: "geb_PlasmaCartridge", description: "15-round Montauk Cartridge; recharge with a 9V battery. Green plasma." },
+  { name: "geb_PlasmaCartridge_Arc", type: "Magazine", img: "geb_PlasmaCartridge_Arc", description: "Montauk Cartridge (Blue): lightning on the muzzle, bouncing sparks." },
+  { name: "geb_PlasmaCartridge_Lance", type: "Magazine", img: "geb_PlasmaCartridge_Lance", description: "Montauk Cartridge (Lime): a long lance, shock rings, yellow bolt." },
+  { name: "geb_PlasmaCartridge_Void", type: "Magazine", img: "geb_PlasmaCartridge_Void", description: "Montauk Cartridge (Violet): an arc vortex, floating sparks, violet bolt." },
   { name: "geb_FoilHat", type: "Clothing", img: "geb_FoilHat", description: "Tin Foil Hat; aliens can't track or zap the wearer." }
 ];
 

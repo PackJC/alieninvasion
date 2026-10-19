@@ -192,13 +192,14 @@ class geb_Aliencrash extends CrashBase
 		{
 			Weapon_Base rifle = Weapon_Base.Cast(GetGame().CreateObjectEx("geb_PlasmaRifle", RandomGroundPosition(crashPos, LOOT_RANGE_MIN, LOOT_RANGE_MAX), ECE_PLACE_ON_SURFACE));
 			if ( rifle )
-				rifle.SpawnAttachedMagazine("geb_PlasmaCartridge");
+				rifle.SpawnAttachedMagazine(geb_RandomPlasmaCartridgeType());
 		}
 
+		// Each spare is a random colour
 		int spares = Math.RandomIntInclusive(0, cfg.CrashSpareCartridgesMax);
 		for (int i = 0; i < spares; i++)
 		{
-			Magazine cartridge = Magazine.Cast(GetGame().CreateObjectEx("geb_PlasmaCartridge", RandomGroundPosition(crashPos, LOOT_RANGE_MIN, LOOT_RANGE_MAX), ECE_PLACE_ON_SURFACE));
+			Magazine cartridge = Magazine.Cast(GetGame().CreateObjectEx(geb_RandomPlasmaCartridgeType(), RandomGroundPosition(crashPos, LOOT_RANGE_MIN, LOOT_RANGE_MAX), ECE_PLACE_ON_SURFACE));
 			if ( cartridge )
 				cartridge.ServerSetAmmoCount(Math.RandomIntInclusive(1, cartridge.GetAmmoMax()));
 		}

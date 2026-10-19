@@ -1,0 +1,818 @@
+EffectDef {
+ Emitors {
+  EmitorDef core {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 0 0
+   LOD 0
+   MaxNum 2
+   BirthRate 300
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.18
+   SizeRND 0.054
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution -1
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 0.06
+   LifeTimeRND 0
+   LifetimeShortening 0
+   Color {
+    0 1 1 1 0.3 1 1 0.75 1 0.65 1 0.1
+   }
+   Alpha {
+    0 1 0.5 0.85 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 0.6 0.12 1 1 0.35
+   }
+   EffectTime 0.01
+   Repeat 0
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 1
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+  EmitorDef halo {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 0 0
+   LOD 0
+   MaxNum 1
+   BirthRate 300
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.45
+   SizeRND 0.1125
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution -1
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 0.08
+   LifeTimeRND 0
+   LifetimeShortening 0
+   Color {
+    0 0.65 1 0.1 1 0.2 0.45 0
+   }
+   Alpha {
+    0 0.3 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 0.5 0.25 1 1 1.15
+   }
+   EffectTime 0.01
+   Repeat 0
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 1
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+  EmitorDef lance {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 0 1.5
+   LOD 0
+   MaxNum 10
+   BirthRate 1000
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 0.3
+   ScaleY 3.2
+   SizeMultiplier 0.09
+   SizeRND 0.036
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 0
+   Sort 0
+   BillboardingType Full
+   Velocity 55
+   VelocityRND 20
+   VelAffect 0
+   AirResistance 22
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution -1
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 0.07
+   LifeTimeRND 0.035
+   LifetimeShortening 0
+   Color {
+    0 1 1 0.75 0.5 0.65 1 0.1 1 0.2 0.45 0
+   }
+   Alpha {
+    0 1 0.6 0.7 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 0.5 0.2 1 1 0.6
+   }
+   EffectTime 0.01
+   Repeat 0
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 1
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+  EmitorDef diamond1 {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 0 0
+   LOD 0
+   MaxNum 1
+   BirthRate 300
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.085
+   SizeRND 0
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   BillboardingType Full
+   Velocity 5.2
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 40
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution -1
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 0.1
+   LifeTimeRND 0
+   LifetimeShortening 0
+   Color {
+    0 1 1 0.75 1 0.65 1 0.1
+   }
+   Alpha {
+    0 0 0.12 1 0.55 0.8 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 0.4 0.3 1 1 0.7
+   }
+   EffectTime 0.01
+   Repeat 0
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 1
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+  EmitorDef diamond2 {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 0 0
+   LOD 0
+   MaxNum 1
+   BirthRate 300
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.07
+   SizeRND 0
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   BillboardingType Full
+   Velocity 10.8
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 40
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution -1
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 0.1
+   LifeTimeRND 0
+   LifetimeShortening 0
+   Color {
+    0 1 1 0.75 1 0.65 1 0.1
+   }
+   Alpha {
+    0 0 0.12 1 0.55 0.8 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 0.4 0.3 1 1 0.7
+   }
+   EffectTime 0.01
+   Repeat 0
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 1
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+  EmitorDef diamond3 {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 0 0
+   LOD 0
+   MaxNum 1
+   BirthRate 300
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.055
+   SizeRND 0
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 0
+   Sort 0
+   BillboardingType Full
+   Velocity 16.8
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 40
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution -1
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 0.1
+   LifeTimeRND 0
+   LifetimeShortening 0
+   Color {
+    0 1 1 0.75 1 0.65 1 0.1
+   }
+   Alpha {
+    0 0 0.12 1 0.55 0.8 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 0.4 0.3 1 1 0.7
+   }
+   EffectTime 0.01
+   Repeat 0
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 1
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+  EmitorDef ring {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 0 0
+   LOD 0
+   MaxNum 1
+   BirthRate 300
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 1
+   Material "{EA2686148E09D4DD}Graphics/Particles/materials/enviroment/ring_01.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.6
+   SizeRND 0.09
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution -1
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 0.11
+   LifeTimeRND 0
+   LifetimeShortening 0
+   Color {
+    0 1 1 0.875 1 0.65 1 0.1
+   }
+   Alpha {
+    0 1 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 0.08 1 1
+   }
+   EffectTime 0.01
+   Repeat 0
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 1
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+  EmitorDef ring_wave {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 0 0
+   LOD 0
+   MaxNum 1
+   BirthRate 300
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 1
+   Material "{EA2686148E09D4DD}Graphics/Particles/materials/enviroment/ring_01.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.4
+   SizeRND 0.06
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 9
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 18
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution -1
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 0.15
+   LifeTimeRND 0
+   LifetimeShortening 0
+   Color {
+    0 1 1 0.875 1 0.65 1 0.1
+   }
+   Alpha {
+    0 0 0.1 1 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 0.08 1 1
+   }
+   EffectTime 0.01
+   Repeat 0
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 1
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+  EmitorDef sparks {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 0 22
+   LOD 0
+   MaxNum 22
+   BirthRate 1100
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 0
+   Material "{0B22CDEBF6A47216}Graphics/Particles/materials/fire/sparks_04.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 0.0625
+   ScaleY 1
+   SizeMultiplier 0.16
+   SizeRND 0.112
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1.01
+   StreakFullUV 0
+   VelAngle 1
+   RandomAngle 0
+   Sort 0
+   BillboardingType LockedAxis
+   Velocity 9
+   VelocityRND 9
+   VelAffect 0
+   AirResistance 3.5
+   AirResistanceRND 0
+   GravityMultiply 0.35
+   GravityMultiplyRND 0.14
+   Restitution -1
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 1
+   LifeTime 0.12
+   LifeTimeRND 0.14
+   LifetimeShortening 0
+   Color {
+    0 1 1 0.6 0.3 0.65 1 0.1 1 0.2 0.45 0
+   }
+   Alpha {
+    0 1 0.75 0.8 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 1 1 0.5
+   }
+   EffectTime 0.02
+   Repeat 0
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 1
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+  EmitorDef embers {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 0 60
+   LOD 0
+   MaxNum 10
+   BirthRate 600
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 0
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.012
+   SizeRND 0.01
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 0.8
+   VelocityRND 1.6
+   VelAffect 0
+   AirResistance 1.5
+   AirResistanceRND 0
+   GravityMultiply 0.9
+   GravityMultiplyRND 0
+   Restitution -1
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 0.5
+   LifeTimeRND 0.4
+   LifetimeShortening 0
+   Color {
+    0 1 1 0.75 0.3 0.65 1 0.1 1 0.2 0.45 0
+   }
+   Alpha {
+    0 1 0.7 0.8 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 1
+   }
+   EffectTime 0.02
+   Repeat 0
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 1
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+  EmitorDef vapor {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 0 20
+   LOD 0
+   MaxNum 4
+   BirthRate 300
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 0
+   Material "{8E25684854DAB008}Graphics/Particles/materials/smoke/steam_small_cook_01.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.1
+   SizeRND 0.08
+   RandomRotDir 1
+   RotMultiplier 25
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 1.2
+   VelocityRND 2.5
+   VelAffect 0
+   AirResistance 4.5
+   AirResistanceRND 0
+   GravityMultiply -0.06
+   GravityMultiplyRND 0
+   Restitution -1
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 1.1
+   LifeTimeRND 0.7
+   LifetimeShortening 0
+   Color {
+    0 0.7 0.78 0.6 1 0.55 0.582 0.51
+   }
+   Alpha {
+    0 0 0.08 0.12 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 0.35 1 1.9
+   }
+   EffectTime 0.015
+   Repeat 0
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 1
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+ }
+}
