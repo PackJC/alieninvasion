@@ -1,8 +1,6 @@
 <h1 align="center">
   <br>
-  <img src=".github/logo.png" alt="Alien Invasion" width="500"/>
-  <br>
-  <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><img src="docs/assets/alien-invasion-banner.png" alt="Alien Invasion — a crashed UFO and alien encounter" width="900"></a>
+  <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><img src=".github/logo.png" alt="Alien Invasion — a crashed UFO and alien encounter" width="900"></a>
   <br>
   <a href="https://discord.gg/G8uSGZ8yyf"><img src="https://img.shields.io/badge/Join-Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Join the Discord"></a>
   <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><img src="https://img.shields.io/badge/Like_%26_Favorite-Steam_Workshop-1b2838?style=for-the-badge&logo=steam&logoColor=white" alt="Like and favorite Alien Invasion on Steam Workshop"></a>
