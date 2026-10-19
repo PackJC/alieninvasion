@@ -1,22 +1,31 @@
-# Visual Studio workspace files
-.vs/
-*.suo
-*.user
+.vs
+.idea
+.claude
+__pycache__/
+*.ini
+*.bin
+*.vs
+.DS_Store
+/.rules
+/CF
+*.webp
+# ...but everything the site serves must ship: GitHub Pages publishes
+# docs/, so item renders and anything added later need to be tracked or
+# they 404 on the site.
+!docs/**/*.webp
+# Local only, never on GitHub: the Python build and render tools (and
+# the debinarized vanilla models under tools/debinned/), and the old
+# Workbench project. Anchored to the top folder.
+/tools/
+/Workbench/
 
-# Windows metadata
-desktop.ini
-Thumbs.db
-
-# Generated DayZ build outputs
+# Not in gebsfish's list, but this repo needs them too:
+# DayZ build outputs
 *.pbo
 *.bisign
 *.bikey
-
-# Debinarized vanilla models used only to render the website's item pictures
-# (Bohemia's assets: rendered locally, never committed)
-tools/debinned/
-
-# Logs and temporary files
+# Windows thumbnails, logs and temporary files
+Thumbs.db
 *.log
 *.tmp
 *~
