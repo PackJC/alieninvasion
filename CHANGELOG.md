@@ -40,7 +40,7 @@ Works on DayZ 1.30 (scripts, configs and mission files checked against the 1.30 
 ### Changed
 - Aliens stand about 1.9 m tall instead of 1.6 m: their joints now sit where the infected skeleton's are. Head, hands and feet keep their size.
 - The alien model has four levels of detail instead of one.
-- New mod logo in the Gebsfish style: a UFO over the tree line, greyscale normally and alien green when hovered. The hovered logo now actually shows; the config set `logoHover`, which DayZ doesn't read (it reads `logoOver`).
+- New mod logo, in the same style as Geb's other mods: a flying saucer with a see-through tractor beam, white in a black frame normally and alien lime when hovered. The hovered logo now actually shows; the config set `logoHover`, which DayZ doesn't read (it reads `logoOver`). The website's tab icon is the saucer too.
 
 ## 1.2.0
 

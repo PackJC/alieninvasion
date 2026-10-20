@@ -5,7 +5,7 @@
 [h1]Mod Information[/h1]
 Alien Invasion adds a UFO crash encounter to DayZ. A burning saucer comes down like a helicopter crash, a toxic cloud settles over the wreck, and 10-15 Little Green Men are waiting when you get close. Salvage the Montauk plasma rifle from the wreckage, wear a tin foil hat to keep them out of your head, and skin what you kill for Area 51 Steaks and Roswell Hide.
 
-This mod currently adds 1 UFO crash event, 1 creature, 1 plasma rifle, 1 rechargeable magazine, 1 clothing item, 1 food, and the Roswell Hide with 4 items you can make from it.
+This mod currently adds 1 UFO crash event, 1 creature, 1 plasma rifle, rechargeable plasma cartridges in 4 colours, 1 clothing item, 1 food, the Roswell Hide with 4 items you can make from it, and a specimen tank for admins and map makers.
 
 It does not replace vanilla helicopter crashes, and it has no third-party mod dependencies. It must be loaded on the server and every client.
 
@@ -14,17 +14,19 @@ Installation guide, searchable classnames, and every setting explained: [url=htt
 
 [h1]Features[/h1]
 [list]
-[*] UFO crash event with green light, fire, mist, wreck particles, and a distant crash sound. It spawns through the Central Economy like a helicopter crash.
+[*] UFO crash event with green light, fire, smoke, mist, electrical sparks crackling from the hull, and a distant crash sound. It spawns through the Central Economy like a helicopter crash.
 
 [*] An 18 m toxic gas cloud over every wreck, using DayZ's own contaminated-area rules. NBC gear protects you. It disappears with the wreck.
 
 [*] Crash salvage: a 35% chance of a Montauk Rifle with a cartridge, plus up to two partly charged spare cartridges.
 
-[*] Little Green Men with their own voices and footsteps. They claw like infected up close, hit you with a psychic zap from 4-80 m when they can see you, and die in a green burst and a scream. They only appear when a player comes within 300 m, so crash sites nobody visits cost your server nothing.
+[*] Little Green Men, 1.9 m tall and built on the infected skeleton, so they move like the infected. They have their own voices and bare-foot steps, claw like infected up close, hit you with a psychic zap from 4-80 m when they can see you, bleed green, and die in a green burst and a scream. Shots count for the body part they hit. They only appear when a player comes within 300 m, so crash sites nobody visits cost your server nothing.
 
-[*] Montauk Rifle: a semi-automatic rifle firing green plasma bolts that do double damage to aliens. Every other firearm does 75%.
+[*] Montauk Rifle: a semi-automatic rifle firing plasma bolts that do double damage to aliens. Every other firearm does 75%.
 
-[*] Montauk Cartridge: 15 rounds of plasma that can't be unloaded. Combine it with a 9V battery to recharge it.
+[*] Montauk Cartridge: 15 rounds of plasma that can't be unloaded, in four colours: green, blue, lime and violet. The loaded cell decides how each shot looks, from a white-hot jet to blue lightning, a long lime lance or a violet vortex. Combine it with a 9V battery to recharge it.
+
+[*] Specimen Tank: a sleeping alien floating in a glowing 3.6 m containment tank, with bubbles, a humming console and a green glow. Nothing spawns it; place it with an admin tool or a map editor.
 
 [*] Tin Foil Hat: it works. Aliens can't track or zap anyone wearing an intact foil hat unless they're within 3 m.
 
