@@ -17,12 +17,12 @@ It adds 1 UFO crash event, 1 creature, 1 plasma rifle, rechargeable plasma cartr
 [h1]Features[/h1]
 [list]
 [*] [b]UFO crash event[/b] with green light, fire, smoke, mist, electrical sparks crackling from the hull, and a distant crash sound. It spawns through the Central Economy like a helicopter crash.
-[*] [b]Toxic crash zone:[/b] an 18 m gas cloud over every wreck, using DayZ's own contaminated-area rules. NBC gear protects you, and the cloud goes with the wreck.
+[*] [b]Toxic crash zone:[/b] an 8 m gas cloud over every wreck, using DayZ's own contaminated-area rules. NBC gear protects you, and the cloud goes with the wreck.
 [*] [b]Crash salvage:[/b] a 35% chance of a Montauk Rifle with a cartridge, plus up to two partly charged spare cartridges.
-[*] [b]Little Green Men:[/b] 1.9 m tall and built on the infected skeleton, so they move like the infected. They have their own voices and bare-foot steps, claw like infected up close, hit you with a psychic zap from 4-80 m when they can see you, bleed green, and die in a green burst and a scream. Shots count for the body part they hit.
+[*] [b]Little Green Men:[/b] 1.9 m tall and built on the infected skeleton, so they move like the infected. They have their own voices and bare-foot steps, claw like infected up close, hit you with a psychic zap from 4-80 m when they can see you (a green beam from the head), bleed green, and die in a green burst and a scream. Shots count for the body part they hit.
 [*] [b]On-approach spawning:[/b] aliens only appear when a player comes within 300 m, so crash sites nobody visits cost your server nothing.
-[*] [b]Montauk Rifle:[/b] a semi-automatic rifle firing plasma bolts that do double damage to aliens. Every other firearm does 75%.
-[*] [b]Montauk Cartridge:[/b] 15 rounds of plasma that can't be unloaded, in four colours: green, blue, lime and violet. The loaded cell decides how each shot looks, from a white-hot jet to blue lightning, a long lime lance or a violet vortex. Combine it with a 9V battery to recharge it.
+[*] [b]Montauk Rifle:[/b] a semi-automatic rifle firing plasma bolts that do double damage to aliens. Every other firearm does 75%. It has a skeleton stock with a cheek rest, a shaped pistol grip, hooded iron sights with a glowing dot, a live read-out on the back, purple fluid swirling in its vent tubes, lime fluid flowing behind its glass windows, and electric arcs on the muzzle when you run it hot.
+[*] [b]Montauk Cartridge:[/b] 15 rounds of plasma that can't be unloaded, in four colours: green, blue, lime and violet. The loaded cell decides the colour of each shot and the plasma ball it fires, from a green jet to blue lightning, a long lime lance or a violet vortex. Combine it with a 9V battery to recharge it.
 [*] [b]Specimen Tank:[/b] a sleeping alien floating in a glowing 3.6 m containment tank, with bubbles, a humming console and a green glow. Nothing spawns it; place it with an admin tool or a map editor.
 [*] [b]Tin Foil Hat:[/b] it works. Aliens can't track or zap anyone wearing an intact foil hat unless they're within 3 m.
 [*] [b]Area 51 Steak:[/b] cooked steak gives 90 seconds of green night vision. Raw, burnt or rotten steak gives food poisoning.
@@ -57,9 +57,10 @@ Every mod by Geb stands on its own, so a server can run the ones it wants:
 [list]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2757509117]Gebsfish[/url]: the fishing overhaul, with 94 catchable species, rods, lures, coolers, the jon boat and more
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2764114664]Geb's Animals[/url]: 15 wildlife species
-[*] [url=https://packjc.github.io/gebsplants/]Geb's Plants[/url]: 27 garden crops and wild ginseng
-[*] [url=https://packjc.github.io/gebsmushrooms/]Geb's Mushrooms[/url]: 63 edible and poisonous fungi
+[*] [url=https://packjc.github.io/gebsplants/]Geb's Plants[/url]: 30 garden crops including wild ginseng
+[*] [url=https://packjc.github.io/gebsmushrooms/]Geb's Mushrooms[/url]: 69 edible, poisonous and psychedelic fungi
 [*] [b]Alien Invasion[/b] (this mod): UFO crash sites, Little Green Men and the Montauk plasma rifle
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2886269800]Thanksgiving[/url]: Pilgrim clothes, turkeys and a flintlock musket for the holiday
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2812533524]Great Smoky Mountains[/url]: a 20 x 20 km map of the Smokies at real scale
 [/list]
 

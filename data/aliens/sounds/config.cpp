@@ -24,7 +24,7 @@ class CfgSoundSets
 		frequencyFactor = 1.08;
 	};
 
-	// Voice events from the animations (data/config.cpp GreenAlienBase AnimEvents SoundVoice)
+	// Voice events from the animations (data/config.cpp geb_GreenAlienBase AnimEvents SoundVoice)
 	class geb_Alien_LightHit_SoundSet: geb_Alien_VoiceFX_Base_SoundSet
 	{
 		soundShaders[] =
@@ -71,7 +71,7 @@ class CfgSoundSets
 	};
 
 	// Infected voices are looked up as <script class>_<mind state>_SoundSet (InfectedSoundEventBase), so these
-	// names must match the geb_GreenAlien / GreenAlienBase script classes. Delays as vanilla's skinny infected,
+	// names must match the geb_GreenAlien / geb_GreenAlienBase script classes. Delays as vanilla's skinny infected,
 	// with more randomness so a group of aliens doesn't call in step.
 	class geb_GreenAlien_CalmIdle_SoundSet: geb_Alien_VoiceFX_Base_SoundSet
 	{
@@ -114,13 +114,13 @@ class CfgSoundSets
 		startDelayRandomizer = 2;
 	};
 
-	// GreenAlienBase is spawnable on its own too
-	class GreenAlienBase_CalmIdle_SoundSet: geb_GreenAlien_CalmIdle_SoundSet {};
-	class GreenAlienBase_CalmMove_SoundSet: geb_GreenAlien_CalmMove_SoundSet {};
-	class GreenAlienBase_DisturbedIdle_SoundSet: geb_GreenAlien_DisturbedIdle_SoundSet {};
-	class GreenAlienBase_AlertedIdle_SoundSet: geb_GreenAlien_AlertedIdle_SoundSet {};
-	class GreenAlienBase_AlertedMove_SoundSet: geb_GreenAlien_AlertedMove_SoundSet {};
-	class GreenAlienBase_ChaseMove_SoundSet: geb_GreenAlien_ChaseMove_SoundSet {};
+	// geb_GreenAlienBase is spawnable on its own too (and runs the scope-1 alias GreenAlienBase's voice)
+	class geb_GreenAlienBase_CalmIdle_SoundSet: geb_GreenAlien_CalmIdle_SoundSet {};
+	class geb_GreenAlienBase_CalmMove_SoundSet: geb_GreenAlien_CalmMove_SoundSet {};
+	class geb_GreenAlienBase_DisturbedIdle_SoundSet: geb_GreenAlien_DisturbedIdle_SoundSet {};
+	class geb_GreenAlienBase_AlertedIdle_SoundSet: geb_GreenAlien_AlertedIdle_SoundSet {};
+	class geb_GreenAlienBase_AlertedMove_SoundSet: geb_GreenAlien_AlertedMove_SoundSet {};
+	class geb_GreenAlienBase_ChaseMove_SoundSet: geb_GreenAlien_ChaseMove_SoundSet {};
 
 	// Played by script at the victim (psychic zap) and at a dying alien (geb_GreenAlien.c)
 	class geb_AlienZap_SoundSet
@@ -149,7 +149,9 @@ class CfgSoundSets
 		loop=0;
 	};
 
-	class AlienCrash_Distant_Base_SoundSet
+	// The distant crash sound (geb_Aliencrash.GetSoundSet, registered in the modded CrashBase); geb_ names since
+	// 2.0.0 (AlienCrash_Distant* before)
+	class geb_AlienCrash_Distant_Base_SoundSet
 	{
 		volumeFactor=1;
 		frequencyRandomizer=2;
@@ -160,11 +162,11 @@ class CfgSoundSets
 		distanceFilter="explosionDistanceFreqAttenuationFilter";
 	};
 
-	class AlienCrash_Distant_SoundSet: AlienCrash_Distant_Base_SoundSet
+	class geb_AlienCrash_Distant_SoundSet: geb_AlienCrash_Distant_Base_SoundSet
 	{
 		soundShaders[]=
 		{
-			"AlienCrash_Distant"
+			"geb_AlienCrash_Distant_SoundShader"
 		};
 		sound3DProcessingType="ThunderNear3DProcessingType";
 	};
@@ -172,7 +174,7 @@ class CfgSoundSets
 
 class CfgSoundShaders
 {
-	class AlienCrash_Distant
+	class geb_AlienCrash_Distant_SoundShader
 	{
 		samples[]=
 		{
@@ -209,7 +211,7 @@ class CfgSoundShaders
 		range = 60;
 	};
 
-	// Alien voice. The geb_alien_* takes are cut and varied from aliensound.ogg and alienscream.ogg by
+	// Alien voice. The geb_alien_* takes are cut and varied from the mod's two original alien recordings by
 	// tools/build_alien_sounds.py, levelled like vanilla's; vanilla's skinny infected takes are mixed in at a
 	// smaller share (the weights), so the aliens sound like DayZ's infected without losing their own voice.
 	class geb_Alien_Calm_SoundShader

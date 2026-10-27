@@ -8,7 +8,7 @@ modded class Hit_MeatBones
 
 	override void EvaluateEffect(Object directHit, int componentIndex, vector pos, int impact_type, vector surfNormal, vector exitPos, vector inSpeed, vector outSpeed, string ammoType)
 	{
-		m_geb_AlienBlood = directHit && directHit.IsKindOf("GreenAlienBase");
+		m_geb_AlienBlood = directHit && directHit.IsKindOf("geb_GreenAlienBase");
 		if ( m_geb_AlienBlood )
 		{
 			if ( m_ParticleEnter == ParticleList.IMPACT_MEATBONES_ENTER )

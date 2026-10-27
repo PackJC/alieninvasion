@@ -1,0 +1,14 @@
+name = "Alien Invasion";
+dir = "alieninvasion";
+overview = "Alien Invasion: UFO crash sites, Little Green Men and the Montauk plasma rifle";
+credits = "Geb";
+author = "Geb";
+authorID = "0";
+version = "2.0.0";
+picture = "alieninvasion/data/logo.paa";				// picture in expanded description
+logoSmall = "alieninvasion/data/logo.paa";				// icon next to mod name when description is not expanded
+logo = "alieninvasion/data/logo.paa";					// logo below game menu
+logoOver = "alieninvasion/data/logo_hover.paa";			// on mouse hover over logo
+tooltip = "ALIENS HAVE INVADED!";				// tool tip on mouse hover
+skeletonDefinitions = "DZ/anims/cfg/skeletons.anim.xml";	// stops the "Can't load alieninvasion/Anims/cfg/skeletons.anim.xml" RPT error
+action = "https://discord.gg/G8uSGZ8yyf";			// link

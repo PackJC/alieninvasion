@@ -1,4 +1,4 @@
-ALIEN INVASION 1.2.0 - SERVER OWNER GUIDE
+ALIEN INVASION 2.0.0 - SERVER OWNER GUIDE
 =========================================
 Full guide with copy buttons: https://packjc.github.io/alieninvasion/
 Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308
@@ -61,6 +61,9 @@ b) mapgroupproto.xml: paste the <group name="geb_Aliencrash"> block from
    loot points and uses vanilla "Military" (heli crash) loot. To use custom
    loot instead, add <usage name="UFO"/> to cfglimitsdefinition.xml, change
    the group's usage to UFO, and give items <usage name="UFO"/> with deloot="1".
+   Updating from 1.2.0 or older: replace the geb_Aliencrash group you merged
+   before. Its loot points were copied from vanilla's Mi-8 wreck and mostly
+   lay outside the UFO, underground; 2.0.0's sit on the crater around the hull.
 
 IMPORTANT: do not add the old "InfectedAlien" event or a
 <secondary>InfectedAlien</secondary> line. Each wreck spawns its own aliens;
@@ -82,7 +85,8 @@ defaults until you fix it.
   CrashAliensSpawnDistance             300       metres before aliens appear (0 = immediately)
   CrashRifleChance                     0.35      chance of a Montauk Rifle in the wreckage
   CrashSpareCartridgesMax              2         spare cartridges per wreck (0..N)
-  CrashGasZone                         true      18 m toxic cloud around the wreck
+  CrashPlasmaGrenadesMax               2         plasma grenades per wreck (0..N)
+  CrashGasZone                         true      8 m toxic cloud around the wreck
   PsychicZapEnabled                    true      aliens zap their target at range
   PsychicZapMinRange / PsychicZapRange 4 / 80    zap distance band in metres (line of sight)
   PsychicZapCooldown                   60        seconds between zaps per alien
@@ -110,15 +114,21 @@ defaults until you fix it.
   geb_PlasmaCartridge_Arc   Montauk Cartridge (Blue)
   geb_PlasmaCartridge_Lance Montauk Cartridge (Lime)
   geb_PlasmaCartridge_Void  Montauk Cartridge (Violet)
+  Ammo_Plasma_Cell          loose Plasma Cell, from clearing a loaded rifle's
+                            chamber; loads back into a cartridge (no loot spawns)
+  geb_PlasmaGrenade         Plasma Grenade (sticks to what it hits)
   geb_FoilHat               Tin Foil Hat
+  geb_AlienTank             Specimen Tank, a lit prop for admins and map makers
+                            (nothing spawns it)
 
 
 7. CUSTOM ALIEN LOOT (optional)
 -------------------------------
 alieninvasion-spawnabletypes.xml gives aliens a 10% chance of a spare plasma
 cartridge, one of the four colours picked at random (the CE spawns one item
-per block, weighted by chance; change the chances to favour a colour). Add
-more <cargo> entries to the geb_GreenAlien type if you like, for example:
+per block, weighted by chance; change the chances to favour a colour), and a
+10% chance of a plasma grenade. Add more <cargo> entries to the
+geb_GreenAlien type if you like, for example a foil hat:
 
   <type name="geb_GreenAlien">
       <cargo chance="0.10">
@@ -126,6 +136,9 @@ more <cargo> entries to the geb_GreenAlien type if you like, for example:
           <item name="geb_PlasmaCartridge_Arc" chance="0.25" />
           <item name="geb_PlasmaCartridge_Lance" chance="0.25" />
           <item name="geb_PlasmaCartridge_Void" chance="0.25" />
+      </cargo>
+      <cargo chance="0.10">
+          <item name="geb_PlasmaGrenade" chance="1.00" />
       </cargo>
       <cargo chance="0.05">
           <item name="geb_FoilHat" chance="1.00" />

@@ -28,7 +28,7 @@ EffectDef {
    VelAffect 4
    AirResistance 0
    GravityMultiply 0
-   Spring 0.02
+   Spring 0
    Wind 0
    AnimOnce 0
    AnimFPS 30
@@ -78,7 +78,7 @@ EffectDef {
    VelAffect 4
    AirResistance 0
    GravityMultiply 0
-   Spring 0.02
+   Spring 0
    Wind 0
    AnimOnce 0
    AnimFPS 30
@@ -128,7 +128,7 @@ EffectDef {
    VelAffect 4
    AirResistance 0
    GravityMultiply 0
-   Spring 0.02
+   Spring 0
    Wind 0
    AnimOnce 0
    AnimFPS 30
@@ -178,7 +178,7 @@ EffectDef {
    VelAffect 4
    AirResistance 0
    GravityMultiply 0
-   Spring 0.02
+   Spring 0
    Wind 0
    AnimOnce 0
    AnimFPS 30
@@ -228,7 +228,7 @@ EffectDef {
    VelAffect 4
    AirResistance 0
    GravityMultiply 0
-   Spring 0.02
+   Spring 0
    Wind 0
    AnimOnce 0
    AnimFPS 30
@@ -278,7 +278,7 @@ EffectDef {
    VelAffect 4
    AirResistance 0
    GravityMultiply 0
-   Spring 0.03
+   Spring 0
    Wind 0
    AnimOnce 0
    AnimFPS 30
@@ -328,7 +328,7 @@ EffectDef {
    VelAffect 4
    AirResistance 0
    GravityMultiply 0
-   Spring 0.04
+   Spring 0
    Wind 0
    AnimOnce 0
    AnimFPS 30

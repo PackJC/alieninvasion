@@ -1,7 +1,8 @@
-// Toxic cloud around a UFO crash: vanilla gas-zone mechanics (NBC gear protects), sized for the crash site.
+// Toxic cloud around a UFO crash: vanilla gas-zone mechanics (NBC gear protects), sized to the wreck itself
+// (8 m, down from 18 m with an inner and an outer ring of clouds, which cost a lot of frame rate at the site).
 // The wreck creates it on spawn and deletes it on despawn; MAX_LIFETIME is only a safety net.
-// Mirrors vanilla ContaminatedArea_Local, which can't be subclassed for this because its SetupZoneData
-// hard-codes a 10 m radius.
+// Mirrors vanilla ContaminatedArea_Local (a gas grenade's 10 m zone: one ring of clouds, no inner or outer
+// rings), which can't be subclassed for this because its SetupZoneData hard-codes the 10 m radius.
 class geb_AlienRadiationArea : ContaminatedArea_DynamicBase
 {
 	const float TICK_RATE = 1;
@@ -18,14 +19,11 @@ class geb_AlienRadiationArea : ContaminatedArea_DynamicBase
 	override void SetupZoneData(EffectAreaParams params)
 	{
 		params.m_ParamPartId 		= ParticleList.CONTAMINATED_AREA_GAS_AROUND;
-		params.m_ParamInnerRings 	= 1;
-		params.m_ParamInnerSpace 	= 8;
-		params.m_ParamPosHeight 	= 6;
-		params.m_ParamNegHeight 	= 4;
-		params.m_ParamRadius 		= 18;
-		params.m_ParamOuterToggle 	= true;
-		params.m_ParamOuterSpace 	= 10;
-		params.m_ParamOuterOffset 	= -2;
+		params.m_ParamInnerRings 	= 0;
+		params.m_ParamPosHeight 	= 4;
+		params.m_ParamNegHeight 	= 3;
+		params.m_ParamRadius 		= 8;
+		params.m_ParamOuterToggle 	= false;
 		params.m_ParamTriggerType 	= "ContaminatedTrigger_Local";
 
 		params.m_ParamAroundPartId 	= 0;

@@ -2,8 +2,8 @@ ambient[]={0.96890157,0.96890157,0.96890157,1};
 diffuse[]={0.96890157,0.96890157,0.96890157,1};
 forcedDiffuse[]={0,0,0,0};
 emmisive[]={0,0,0,1};
-specular[]={0.045000147,0.045000024,0.050000001,0.039999999};
-specularPower=0;
+specular[]={0.5,0.5,0.52,1};
+specularPower=90;
 PixelShaderID="Super";
 VertexShaderID="Super";
 class Stage1
@@ -32,12 +32,19 @@ class Stage2
 };
 class Stage3
 {
-	texture="";
-	uvSource="none";
+	texture="#(argb,8,8,3)color(0,0,0,0,MC)";
+	uvSource="tex";
+	class uvTransform
+	{
+		aside[]={1,0,0};
+		up[]={0,1,0};
+		dir[]={0,0,1};
+		pos[]={0,0,0};
+	};
 };
 class Stage4
 {
-	texture="dz\structures\wrecks\aircraft\data\mi8_body_crash_as.paa";
+	texture="#(argb,8,8,3)color(1,1,1,1,AS)";
 	uvSource="tex";
 	class uvTransform
 	{
@@ -49,7 +56,7 @@ class Stage4
 };
 class Stage5
 {
-	texture="dz\structures\wrecks\aircraft\data\mi8_body_crash_smdi.paa";
+	texture="alieninvasion\data\ufocrash\ufo_smdi.paa";
 	uvSource="tex";
 	class uvTransform
 	{

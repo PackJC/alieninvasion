@@ -1,0 +1,152 @@
+EffectDef {
+ Emitors {
+  EmitorDef arcs {
+   ShapeType Sphere
+   ShapeSize 0.02 0 0
+   ConeAngle 360 360 0
+   LOD 0
+   MaxNum 2
+   BirthRate 7
+   BirthRateRND 5.6
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 1
+   Material "{9833D8BE7A512C63}Graphics/Particles/materials/flash/electric.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.06
+   SizeRND 0.048
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution -1
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 0.045
+   LifeTimeRND 0.036
+   LifetimeShortening 0
+   Color {
+    0 0.373 1 0.563 1 0.3 1 0.649
+   }
+   Alpha {
+    0 1 0.4 0.5 0.6 0.9 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 1
+   }
+   EffectTime 1
+   Repeat 1
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 1
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+  EmitorDef shimmer {
+   ShapeType Point
+   ShapeSize 0 0 0
+   ConeAngle 360 0 0
+   LOD 0
+   MaxNum 1
+   BirthRate 4
+   BirthRateRND 2
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles 0 0 -90
+   LocalTransform 1
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterX 0
+   CenterY 0
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.045
+   SizeRND 0.018
+   RandomRotDir 0
+   RotMultiplier 0
+   StretchMultiplier 1
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   BillboardingType Full
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0
+   AirResistance 0
+   AirResistanceRND 0
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   Restitution -1
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 0
+   LifetimeByAnim 0
+   RandomFrame 0
+   LifeTime 0.3
+   LifeTimeRND 0.15
+   LifetimeShortening 0
+   Color {
+    0 0.6 0.78 1
+   }
+   Alpha {
+    0 0 0.3 0.2 1 0
+   }
+   RotationSpeed {
+    0 1
+   }
+   Size {
+    0 1
+   }
+   EffectTime 1
+   Repeat 1
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 1
+   }
+   RotationSpeedMast {
+    0 1
+   }
+   SizeMast {
+    0 1
+   }
+   BRateMast {
+    0 1
+   }
+  }
+ }
+}

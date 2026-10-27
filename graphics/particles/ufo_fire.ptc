@@ -1,143 +1,109 @@
 EffectDef {
  Emitors {
-  EmitorDef glows {
-   ShapeType Point
-   ShapeSize 0 0 0
-   ConeAngle 0 0 0
-   LOD 0
-   MaxNum 10
-   BirthRate 1
-   BirthRateRND 0
-   BirthRateVel 0
-   Offset 0 0 0
-   Angles 0 0 0
-   Material "{021B8936F746F88B}Graphics/Particles/materials/glow/glow1.emat"
-   SizeMultiplier 1
-   RandomRotDir 0
-   RotMultiplier 0
-   StretchMultiplier 0
-   VelAngle 0
-   RandomAngle 0
-   Sort 0
-   Velocity 0
-   VelocityRND 0
-   AirResistance 0
-   AirResistanceRND 0
-   GravityMultiply 0
-   GravityMultiplyRND 0
-   Restitution 0
-   Spring 0
-   Wind 0
-   AnimOnce 0
-   AnimFPS 0
-   LifetimeByAnim 0
-   RandomFrame 0
-   LifeTime 2
-   LifeTimeRND 0
-   LifetimeShortening 0
-   Color {
-    0 0 1 1 1 0 0.6835 0.5506
-   }
-   Alpha {
-    0 0 0.48121 0.30769 1 0
-   }
-   RotationSpeed {
-    0 0
-   }
-   Size {
-    0 0.76101 1 1
-   }
-   EffectTime 1
-   Repeat 1
-   ColorMast {
-    0 1 1 1
-   }
-   AlphaMast {
-    0 1
-   }
-   RotationSpeedMast {
-    0 0
-   }
-   SizeMast {
-    0 1
-   }
-   BRateMast {
-    0 1
-   }
-  }
-  EmitorDef fire_middle {
-   ShapeType Box
-   ShapeSize 0.2 0 0.2
-   ConeAngle 360 0 60
-   MaxNum 4
-   BirthRate 0.5
-   Offset 0 0.15 0
-   Material "{3E6CE4D61F8AC71F}graphics/particles/materials/fire/fire_medium_camp_02.emat"
-   ScaleX 1
-   ScaleY 0.616
-   SizeMultiplier 2
-   SizeRND 0.2
-   RandomRotDir 0
-   RotMultiplier 0
-   StretchMultiplier 1
-   RandomAngle 0
-   Velocity 0
-   VelocityRND 0
-   Wind 0
-   AnimOnce 0
-   AnimFPS 30
-   LifetimeByAnim 0
-   RandomFrame 0
-   LifeTime 6
-   LifeTimeRND 1
-   Color {
-    0 0 0.8038 0.251 1 0.0886 0.7722 1
-   }
-   Alpha {
-    0 0 0.44882 1 1 0
-   }
-   Size {
-    0 0.576 0.75116 0.68 1 1
-   }
-   EffectTime 1
-   Repeat 1
-  }
-  EmitorDef fire_middle_short {
-   ShapeType Ellipse
-   ShapeSize 0.6 0 0.6
-   MaxNum 20
-   BirthRate 20
-   BirthRateRND 20
-   BirthRateVel 0
-   Offset 0 -0.2 0
-   Material "{853257EDA4B1E35D}graphics/particles/materials/fire/fire_flame_01.emat"
-   SizeMultiplier 0.25
-   SizeRND 1
-   RandomRotDir 0
-   RotMultiplier 0
-   StretchMultiplier 1
-   VelAngle 1
-   RandomAngle 0
-   Velocity 1
-   VelocityRND 2
-   GravityMultiply 0
-   Restitution 0
-   Spring 0.0015
-   AnimOnce 0
-   AnimFPS 0
-   LifetimeByAnim 0
-   RandomFrame 1
-   LifeTime 0.5
-   LifeTimeRND 0.1
-   Color {
-    0 0 0.8471 0.3451 1 0.0063 0.6456 0.2848
-   }
-   Alpha {
-    0 0 0.34055 0.208 0.55952 0.70886 1 0.58861
-   }
-   Size {
-    0 0 0.7619 0.32278 1 1
-   }
-  }
+  EmitorDef fire_anim_root {
+     ShapeType Box
+     ShapeSize 0.68 0 0.64
+     ConeAngle 360 0 0
+     MaxNum 5
+     BirthRate 1.6
+     BirthRateRND 0
+     BirthRateVel 50
+     Offset 0 -0.3356 0
+     Material "{83BCB6516091DB01}Graphics/Particles/materials/fire/fire_medium_camp_04.emat"
+     CenterX -0.005
+     CenterY -0.367
+     ScaleX 0.785
+     ScaleY 1
+     SizeMultiplier 1.75
+     SizeRND 2
+     RandomRotDir 0
+     RotMultiplier 0
+     StretchMultiplier 0
+     StreakFullUV 0
+     VelAngle 1
+     RandomAngle 0
+     Sort 0
+     BillboardingType Full
+     Velocity 2
+     VelocityRND 0
+     VelAffect 0
+     AirResistance 10
+     AirResistanceRND 0
+     GravityMultiply -0.15
+     Spring 0
+     Wind 1
+     AnimOnce 1
+     AnimFPS 30
+     LifetimeByAnim 0
+     RandomFrame 0
+     LifeTime 1
+     LifeTimeRND 1.5
+     Color {
+      0 1 1 1 0.567 1 0.747 0.442 0.834 1 0.076 0.076 1 1 0 0
+     }
+     Alpha {
+      0 0 0.263 0.647 0.67 0.189 1 0
+     }
+     RotationSpeed {
+      0 0 0.405 0.525 0.812 0.703 1 0
+     }
+     Size {
+      0 0.478 1 1
+     }
+    }
+  EmitorDef fire_anim {
+     ShapeType Ellipse
+     ShapeSize 0.6 0 0.6
+     ConeAngle 360 60 60
+     MaxNum 125
+     BirthRate 8
+     BirthRateRND 0
+     BirthRateVel 5
+     Offset 0 -0.2928 0
+     Material "{62F13B8B540EBC80}Graphics/Particles/materials/fire/fireball_1.emat"
+     CenterX 0
+     CenterY -0.141
+     ScaleX 0.435
+     SizeMultiplier 1.995
+     SizeRND 0.5
+     RandomRotDir 1
+     RotMultiplier 600
+     StretchMultiplier 0
+     StreakFullUV 0
+     VelAngle 1
+     RandomAngle 1
+     Sort 1
+     BillboardingType Full
+     Velocity 1
+     VelocityRND 0
+     VelAffect 0.01
+     AirResistance 0.05
+     AirResistanceRND 0.1
+     GravityMultiply -0.3
+     GravityMultiplyRND 0.1
+     Spring 0
+     Wind 1
+     AnimOnce 1
+     AnimFPS 50
+     LifetimeByAnim 0
+     RandomFrame 0
+     LifeTime 0.9
+     LifeTimeRND 1
+     Color {
+      0 0.775 0.261 0 0.314 0.631 0.53 0.341 0.567 0.731 0.474 0 0.729 1 0.523 0 0.863 1 0 0 0.974 0.876 0 0 1 0.707 0.39 0.39
+     }
+     Alpha {
+      0 0 0.099 0.193 0.268 0.944 0.553 0.45 0.695 0.1 1 0
+     }
+     RotationSpeed {
+      0 1 0.088 0 0.821 0.084 1 0.068
+     }
+     Size {
+      0 0.526 0.274 0.863 0.804 0.574 1 0.353
+     }
+     BRateMast {
+      0 1 1 1
+     }
+    }
  }
 }

@@ -6,12 +6,13 @@ class geb_AlienInvasionConfig
 {
 	string ConfigVersion = "";
 
-	string CrashInfo = "UFO crash sites: aliens spawned around each wreck once a player comes within CrashAliensSpawnDistance metres (0 = as soon as it crashes), chance of a plasma rifle in the wreckage, up to N spare cartridges, and whether the wreck is surrounded by a toxic gas zone (NBC gear protects).";
+	string CrashInfo = "UFO crash sites: aliens spawned around each wreck once a player comes within CrashAliensSpawnDistance metres (0 = as soon as it crashes), chance of a plasma rifle in the wreckage, up to N spare cartridges and up to N plasma grenades, and whether the wreck is surrounded by a toxic gas zone (NBC gear protects).";
 	int CrashAliensMin = 10;
 	int CrashAliensMax = 15;
 	float CrashAliensSpawnDistance = 300;
 	float CrashRifleChance = 0.35;
 	int CrashSpareCartridgesMax = 2;
+	int CrashPlasmaGrenadesMax = 2;
 	bool CrashGasZone = true;
 
 	string PsychicZapInfo = "Aliens chasing a player in line of sight zap them from PsychicZapMinRange..PsychicZapRange metres, at most once per PsychicZapCooldown seconds each. A foil hat blocks it. Closer than the min range they use normal melee.";
@@ -73,6 +74,7 @@ class geb_AlienInvasionConfig
 		CrashAliensSpawnDistance = Math.Max(CrashAliensSpawnDistance, 0);
 		CrashRifleChance = Math.Clamp(CrashRifleChance, 0, 1);
 		CrashSpareCartridgesMax = Math.Max(CrashSpareCartridgesMax, 0);
+		CrashPlasmaGrenadesMax = Math.Max(CrashPlasmaGrenadesMax, 0);
 		PsychicZapMinRange = Math.Max(PsychicZapMinRange, 0);
 		PsychicZapRange = Math.Max(PsychicZapRange, PsychicZapMinRange);
 		PsychicZapCooldown = Math.Max(PsychicZapCooldown, 1);

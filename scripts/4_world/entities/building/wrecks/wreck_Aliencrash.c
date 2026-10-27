@@ -28,11 +28,11 @@ class geb_Aliencrash extends CrashBase
 		{
 			//particles - Aurora trail (m_ParticleEfx is stopped by CrashBase)
 			m_ParticleEfx = ParticleManager.GetInstance().PlayOnObject(ParticleList.UFO_WRECK, this, Vector(0, -1, 0));
-			//was 2.35
+			// A real fire burning on the hull: vanilla's oil fire, shrunk (tools/crash_effects.py)
 			m_FireEfx = ParticleManager.GetInstance().PlayOnObject(ParticleList.UFO_FIRE, this, Vector(-0.45, 1.85, -0.5));
 			m_MistEfx = ParticleManager.GetInstance().PlayOnObject(ParticleList.SPOOKY_MIST, this, Vector(0, -5, 0));
-			// The column of smoke vanilla heli crashes have, rising from the fire on the hull
-			m_SmokeEfx = ParticleManager.GetInstance().PlayOnObject(ParticleList.SMOKING_HELI_WRECK, this, Vector(-0.45, 1.7, -0.5));
+			// A smoke column rising from the fire on the hull: vanilla heli-crash smoke, thinned (tools/crash_effects.py)
+			m_SmokeEfx = ParticleManager.GetInstance().PlayOnObject(ParticleList.UFO_SMOKE, this, Vector(-0.45, 1.7, -0.5));
 
 			m_SparkPoints = new array<vector>;
 			m_SparkPoints.Insert(Vector(-0.37, 1.91, -0.63));
@@ -54,7 +54,7 @@ class geb_Aliencrash extends CrashBase
 	// needs to have the soundset registered (see modded CrashBase)
 	override string GetSoundSet()
 	{
-		return "AlienCrash_Distant_SoundSet";
+		return "geb_AlienCrash_Distant_SoundSet";
 	}
 
 	// Wrecks from the StaticAlienCrash event get EEOnCECreate (which also sends the distant crash sound);
@@ -166,14 +166,15 @@ class geb_Aliencrash extends CrashBase
 	void SpawnAliens()
 	{
 		vector crashPos = GetPosition();
-		Print("UFO Wreck: " + crashPos.ToString());
-
 		geb_AlienInvasionConfig cfg = GetAlienInvasionConfig();
 		int count = Math.RandomIntInclusive(cfg.CrashAliensMin, cfg.CrashAliensMax);
+		// Tagged like the mod's other log lines, which the server guide tells admins to look for
+		Print("[AlienInvasion] Spawning " + count.ToString() + " aliens at the UFO wreck at " + crashPos.ToString());
 		for (int i = 0; i < count; i++)
 		{
 			vector pos = RandomGroundPosition(crashPos, ALIEN_RANGE_MIN, ALIEN_RANGE_MAX);
-			EntityAI alien = EntityAI.Cast(GetGame().CreateObjectEx("geb_GreenAlien", pos, ECE_PLACE_ON_SURFACE|ECE_INITAI|ECE_EQUIP_ATTACHMENTS));
+			// ECE_EQUIP = attachments + cargo: the spawnable types give aliens their spare cartridge as <cargo>
+			EntityAI alien = EntityAI.Cast(GetGame().CreateObjectEx("geb_GreenAlien", pos, ECE_PLACE_ON_SURFACE|ECE_INITAI|ECE_EQUIP));
 			if ( !alien )
 				continue;
 
@@ -203,6 +204,10 @@ class geb_Aliencrash extends CrashBase
 			if ( cartridge )
 				cartridge.ServerSetAmmoCount(Math.RandomIntInclusive(1, cartridge.GetAmmoMax()));
 		}
+
+		int grenades = Math.RandomIntInclusive(0, cfg.CrashPlasmaGrenadesMax);
+		for (int j = 0; j < grenades; j++)
+			GetGame().CreateObjectEx("geb_PlasmaGrenade", RandomGroundPosition(crashPos, LOOT_RANGE_MIN, LOOT_RANGE_MAX), ECE_PLACE_ON_SURFACE);
 	}
 
 	void SpawnRadiationArea()

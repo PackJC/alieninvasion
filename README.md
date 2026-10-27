@@ -10,7 +10,7 @@
 <h3 align="center">An Extraterrestrial Encounter Expansion for DayZ</h3>
 
 <p align="center">
-  <img alt="Mod Version" src="https://img.shields.io/badge/Mod-v1.2.0-blue?style=for-the-badge">
+  <img alt="Mod Version" src="https://img.shields.io/badge/Mod-v2.0.0-blue?style=for-the-badge">
   <img alt="DayZ Version" src="https://img.shields.io/badge/DayZ-v1.30-teal?style=for-the-badge">
   <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><img alt="Workshop Subscribers" src="https://img.shields.io/steam/subscriptions/2840597308?style=for-the-badge&color=purple&label=Workshop%20Subs"></a>
   <a href="https://packjc.github.io/alieninvasion/"><img alt="Website" src="https://img.shields.io/badge/Website-Field%20Manual-75ff9b?style=for-the-badge"></a>
@@ -37,11 +37,11 @@ The mod includes custom models, textures, sounds, particles, localized item name
 
 ## Key Features
 
-- A custom UFO crash site with green light, fire, a smoke column, crackling electrical sparks, mist, wreck particles, distant crash audio, and an 18 m **toxic gas zone** (NBC gear protects).
+- A custom UFO crash site with green light, fire, a smoke column, crackling electrical sparks, mist, wreck particles, distant crash audio, and an 8 m **toxic gas zone** (NBC gear protects).
 - **Crash salvage:** a 35% chance of a Montauk Rifle with a cartridge, plus up to two spare cartridges.
-- Hostile **Little Green Men** with their own voices and footsteps, and green blood. Infected melee up close, a visible **psychic zap** from 4–80 m in line of sight, and a green burst and scream when they die.
+- Hostile **Little Green Men** with their own voices and footsteps, and green blood. Infected melee up close, a **psychic zap** from 4–80 m in line of sight that you see as a green beam from the alien's head, and a green burst and scream when they die.
 - Aliens appear when a player comes within 300 m, so unvisited crash sites cost the server nothing.
-- **Montauk Rifle**, a semi-automatic plasma weapon whose bolts deal double damage to aliens (other firearms deal 75%). Its cartridges come in green, blue, lime and violet, and each colour has its own muzzle effect, bolt and light.
+- **Montauk Rifle**, a semi-automatic plasma weapon whose bolts deal double damage to aliens (other firearms deal 75%). Its cartridges come in green, blue, lime and violet, and each colour has its own muzzle effect, plasma ball and light. It has a skeleton stock with a cheek rest and a rubber pad, a shaped pistol grip and trigger guard, hooded iron sights with a glowing front dot, an animated read-out on the back, purple fluid swirling in its vent tubes, lime fluid flowing behind its glass windows, and electric arcs on the muzzle when it runs hot.
 - **Montauk Cartridge**, a 15-round plasma magazine that can't be unloaded — recharge it with a 9V battery.
 - **Tin Foil Hat:** aliens can't track the wearer beyond 3 m and can't zap them.
 - **Area 51 Steak** and **Roswell Hide** from skinning aliens. Cooked steak gives 90 s of green night vision; bad meat gives food poisoning.
@@ -70,17 +70,24 @@ The alien is based on DayZ's infected behavior and uses its own model, voice, an
 
 ### Montauk Rifle
 
-The plasma rifle is a semi-automatic firearm built on the Ruger 10/22 weapon base (config and script both). It uses the dedicated Montauk Cartridge and fires green plasma bolts that hit aliens twice as hard as ordinary bullets.
+The plasma rifle is a semi-automatic firearm built on the Ruger 10/22 weapon base (config and script both), and held the 10/22's way: its shoulder stock sits where the 10/22's butt does. It uses the dedicated Montauk Cartridge and fires plasma bolts in the loaded cell's colour that hit aliens twice as hard as ordinary bullets.
+
+- **Sights:** a slim front post in a round hood with a lime glowing dot, and a thin ghost-ring rear sight between slim wings; aim with the post's tip in the middle of the ring.
+- **Stock and grip:** a skeleton stock with a cheek rest, a contoured butt and a rounded rubber pad; a shaped pistol grip with finger grooves and stippled panels, a trigger guard loop and a curved trigger.
+- **Rear screen:** a live read-out on the back of the receiver (cell gauge, plasma waveform, thermal bar, blinking READY). It animates while the rifle is in someone's hands or lying near you.
+- **Vent tubes:** glowing purple fluid swirls behind the glass of the six tubes on the shroud, the way the gas moves in vanilla's POX grenade.
+- **Lime windows:** lime green-yellow fluid flows the same way behind the shroud's big window and slots, swirls in the disc at the back of the shroud, and turns in glass vials on the magazine housing and along the stock.
+- **Running hot:** fire a quick string of shots (six or more, less than 0.6 s apart) and blue-white arcs crackle on the muzzle, heavier the longer you keep going, until it cools off a few seconds later.
 
 ### Montauk Cartridge
 
-A sealed 15-round plasma magazine. It can't be unloaded; combine it with a 9V battery to recharge it. A full battery fills a full cartridge.
+A sealed 15-round plasma magazine. It can't be unloaded; combine it with a 9V battery to recharge it. A full battery fills a full cartridge. Clearing a cell from the rifle's chamber gives it back as a loose **Plasma Cell**, which loads back into any cartridge and keeps its colour.
 
 ### Alien Materials
 
 - **Area 51 Steak** inherits DayZ's meat preparation and cooking states. Eaten cooked (baked, boiled, or dried) it gives 90 seconds of green night vision; raw, burnt, or rotten it gives food poisoning.
 - **Roswell Hide** is the alien's harvestable pelt. It is green at every step of vanilla's leather chain:
-  - Hide + garden lime (by hand or in a barrel) → **Roswell Leather**, up to 12 per hide.
+  - Hide + garden lime → **Roswell Leather**: up to 4 per hide by hand, 6 in a barrel (a wolf pelt's yield; the hide weighs 6 kg and takes 5×3).
   - 2 Roswell Leather + leather sewing kit → **Roswell Leather Backpack** (6×7 cargo).
   - Hide + rope → **Roswell Hide Courier Bag** (5×6); + 3 wooden sticks → **Roswell Hide Backpack** (7×5).
   - Each bag breaks back down with a knife or blade, like vanilla's.
@@ -127,6 +134,7 @@ The generated files are only rewritten when the mod version changes, and the mod
 | `CrashAliensSpawnDistance` | 300 | Metres a player must come within before aliens appear (0 = immediately) |
 | `CrashRifleChance` | 0.35 | Chance of a Montauk Rifle in the wreckage |
 | `CrashSpareCartridgesMax` | 2 | Spare cartridges per wreck |
+| `CrashPlasmaGrenadesMax` | 2 | Plasma grenades per wreck |
 | `CrashGasZone` | true | Toxic cloud around each wreck |
 | `PsychicZapEnabled` | true | Aliens zap their target at range |
 | `PsychicZapMinRange` / `PsychicZapRange` | 4 / 80 | Zap distance band in metres (needs line of sight) |
@@ -159,6 +167,7 @@ A file that fails to parse is never overwritten; the server logs the error and r
 | `geb_PlasmaCartridge_Arc` | Magazine | Montauk Cartridge (Blue): blue arc plasma |
 | `geb_PlasmaCartridge_Lance` | Magazine | Montauk Cartridge (Lime): lime lance plasma |
 | `geb_PlasmaCartridge_Void` | Magazine | Montauk Cartridge (Violet): violet void plasma |
+| `Ammo_Plasma_Cell` | Ammunition | Loose Plasma Cell, from clearing a loaded rifle's chamber (never spawns as loot) |
 | `geb_FoilHat` | Clothing | Tin Foil Hat |
 
 ## Project Structure
@@ -170,6 +179,7 @@ alieninvasion/
 |-- docs/               # GitHub Pages site and plain-text server guide
 |-- graphics/particles/ # Plasma, UFO, green blood and specimen tank particles
 |-- languagecore/       # Localized display names and descriptions
+|-- mod.cpp             # Launcher entry: name, logos, version, Discord link
 `-- scripts/
     |-- 3_game/         # Version, server config, file generator, alien-vision tint
     |-- 4_world/        # Wreck, aliens, specimen tank, gas zone, rifle, items, recipes, player hooks
@@ -182,9 +192,10 @@ Every mod by Geb stands on its own, so a server can run the ones it wants:
 
 * [Gebsfish](https://github.com/PackJC/gebsfish) ([wiki](https://packjc.github.io/gebsfish/)): the fishing overhaul, with 94 catchable species, rods, lures, coolers, the jon boat and more
 * [Geb's Animals](https://github.com/PackJC/gebsanimals) ([website](https://packjc.github.io/gebsanimals/)): 15 wildlife species
-* [Geb's Plants](https://github.com/PackJC/gebsplants) ([website](https://packjc.github.io/gebsplants/)): 27 garden crops and wild ginseng
-* [Geb's Mushrooms](https://github.com/PackJC/gebsmushrooms) ([website](https://packjc.github.io/gebsmushrooms/)): 63 edible and poisonous fungi
+* [Geb's Plants](https://github.com/PackJC/gebsplants) ([website](https://packjc.github.io/gebsplants/)): 30 garden crops including wild ginseng
+* [Geb's Mushrooms](https://github.com/PackJC/gebsmushrooms) ([website](https://packjc.github.io/gebsmushrooms/)): 69 edible, poisonous and psychedelic fungi
 * [Alien Invasion](https://github.com/PackJC/alieninvasion) ([website](https://packjc.github.io/alieninvasion/)) (this mod): UFO crash sites, Little Green Men and the Montauk plasma rifle
+* [Thanksgiving](https://steamcommunity.com/sharedfiles/filedetails/?id=2886269800) (Workshop): Pilgrim clothes, turkeys and a flintlock musket for the holiday
 * [Great Smoky Mountains](https://github.com/PackJC/greatsmokymountains) ([Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2812533524)): a 20 x 20 km map of the Smokies at real scale
 
 ## Credits

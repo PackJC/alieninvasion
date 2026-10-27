@@ -20,7 +20,10 @@ class CfgPatches
 			"DZ_Weapons_Firearms",
 			"DZ_Weapons_Firearms_Ruger1022",
 			"DZ_Weapons_Magazines",
-			"DZ_Weapons_Ammunition"
+			"DZ_Weapons_Ammunition",
+			"DZ_Weapons_Projectiles",
+			"DZ_Weapons_Explosives",
+			"DZ_Sounds_Effects"
 		};
 	};
 };
@@ -41,6 +44,8 @@ class cfgVehicles
 	class HouseNoDestruct;
 	class Clothing_Base;
 	class ContaminatedArea_Local;
+	class Grenade_Base;
+	class Inventory_Base;
 	class geb_FoilHat: Clothing_Base
 	{
 		displayName="$STR_geb_FoilHat";
@@ -191,10 +196,11 @@ class cfgVehicles
 		};
 	};
 	//Zombie Skeleton
-	class GreenAlienBase : ZombieBase
+	// Was GreenAlienBase until 2.0.0 (a name another mod could also use); the old name is a scope-1 alias below.
+	class geb_GreenAlienBase : ZombieBase
 	{
-
-		scope = 2;
+		// Scripts and the CE spawn geb_GreenAlien; scope 1 keeps this nameless base out of admin spawn lists
+		scope = 1;
 		model = "\alieninvasion\data\aliens\geb_GreenAlien.p3d";
 		// The whole body is the body_m selection. Faces in a hidden selection are only drawn once it has a
 		// texture, so these must stay set (ZombieBase's own "camo" entry has none and would hide the alien).
@@ -211,41 +217,6 @@ class cfgVehicles
 			"\alieninvasion\data\aliens\greenalien.rvmat"
 		};
 
-		class GlobalHealth
-		{
-			class Health
-			{
-				hitpoints =400;
-				healthLevels[] =
-				{
-
-					{
-						1.01,
-						{}
-					},
-
-					{
-						0.69999999,
-						{}
-					},
-
-					{
-						0.5,
-						{}
-					},
-
-					{
-						0.30000001,
-						{}
-					},
-
-					{
-						0.0099999998,
-						{}
-					}
-				};
-			};
-		};
 		class DamageSystem
 		{
 			class GlobalHealth
@@ -898,14 +869,15 @@ class cfgVehicles
 				quantityMinMaxCoef[] = { 0.2,0.30000001 };
 				transferToolDamageCoef = 1;
 			};
+			// The hide's condition is the average health of these zones (ActionSkinning, quantityCoef > 0), so they
+			// must be zones this body has (DamageZones above): animals' Zone_Chest/Zone_Belly don't exist here.
 			class ObtainedPelt
 			{
 				item="geb_GreenAlienSkin";
 				count=1;
 				itemZones[]=
 				{
-					"Zone_Chest",
-					"Zone_Belly"
+					"Torso"
 				};
 				quantityCoef=1;
 				transferToolDamageCoef=1;
@@ -914,20 +886,11 @@ class cfgVehicles
 	}
 
 	//Zombie Skeleton
-	class geb_GreenAlien : GreenAlienBase
+	class geb_GreenAlien : geb_GreenAlienBase
 	{
 		displayName = "$STR_GreenAlien";
 		descriptionShort = "$STR_GreenAlienDesc";
 		scope = 2;
-		model = "\alieninvasion\data\aliens\geb_GreenAlien.p3d";
-
-		class GlobalHealth
-		{
-				class Health
-				{
-					hitpoints = 400;
-				};
-		};
 
 		class Cargo
 		{
@@ -935,51 +898,25 @@ class cfgVehicles
 				allowOwnedCargoManipulation = 1;
 				openable = 0;
 		};
-		class DamageSystem
+		// Inherits the base's damage zones (head, torso, limbs) and health levels; only the global hitpoints
+		// differ. Without the ": DamageSystem" bases this class replaced the whole damage system and lost the zones.
+		class DamageSystem: DamageSystem
 		{
-				class GlobalHealth
+				class GlobalHealth: GlobalHealth
 				{
-					class Health
+					class Health: Health
 					{
 						hitpoints = 150;
 					};
 				};
 		};
-		class Skinning
-		{
-			class ObtainedSteaks
-			{
-				item = "geb_GreenAlienMeat";
-				count = 2;
-				quantityMinMaxCoef[] = { 0.5,1 };
-			};
-			class ObtainedGuts
-			{
-				item = "SmallGuts";
-				count = 1;
-				quantityMinMaxCoef[] = { 0.5,0.80000001 };
-			};
-			class ObtainedBones
-			{
-				item = "Bone";
-				count = 1;
-				quantityMinMaxCoef[] = { 0.2,0.30000001 };
-				transferToolDamageCoef = 1;
-			};
-			class ObtainedPelt
-			{
-				item="geb_GreenAlienSkin";
-				count=1;
-				itemZones[]=
-				{
-					"Zone_Chest",
-					"Zone_Belly"
-				};
-				quantityCoef=1;
-				transferToolDamageCoef=1;
-			};
-		};
 	}
+
+	// The base's name until 2.0.0, kept so anything still naming it (admin presets, old event files) finds a class
+	class GreenAlienBase: geb_GreenAlienBase
+	{
+		scope=1;
+	};
 	
 	//Cow Steak
 	class geb_GreenAlienMeat : CowSteakMeat
@@ -1012,11 +949,17 @@ class cfgVehicles
 	}
 
 	//Bear Pelt
+	// The bear pelt's model and texture slot, but a wolf pelt's size and yield: a bear hide's 15 kg, 8x4 and 12
+	// leather per hide was far too much from a 1.9 m alien, with 10-15 of them at every crash.
 	class geb_GreenAlienSkin: BearPelt
 	{
 		scope=2;
 		displayName="$STR_GreenAlienSkin";
 		descriptionShort="$STR_GreenAlienSkinDesc";
+		weight=6000;
+		itemSize[]={5,3};
+		peltGain=6;
+		leatherYield=4;
 		hiddenSelections[]=
 		{
 			"Camo"
@@ -1132,6 +1075,110 @@ class cfgVehicles
 			"\alieninvasion\data\leather\geb_alienimprovisedbag_co.paa"
 		};
 	};
+
+	// The Montauk rifle's turning fluid (tools/plasmarifle/fluid.py): the purple vent tube cores and the lime drum,
+	// rings, disc and vials, an item of its own in the rifle's hidden slot geb_PlasmaRifleFluid, drawn at the rifle's
+	// proxy. Weapons don't run model.cfg's clock animations on their own model; an item does, so the fluid turns here
+	// (data/weapons/model.cfg class geb_plasmarifle_fluid), the way vanilla keeps the Magnum's turning cylinder an item
+	// (Magnum_Cylinder). geb_PlasmaRifle.c gives every rifle one; nothing spawns it on its own.
+	class geb_PlasmaRifleFluid: Inventory_Base
+	{
+		// scope 1: scripts can create it (the rifle does), but admin tools' spawn lists and the CE leave it out
+		scope=1;
+		model="\alieninvasion\data\weapons\geb_plasmarifle_fluid.p3d";
+		weight=0;
+		itemSize[]={1,1};
+		inventorySlot[]=
+		{
+			"geb_PlasmaRifleFluid"
+		};
+	};
+
+	// Plasma grenade (model: tools/plasmagrenade/build.py; script: geb_PlasmaGrenade.c). Unpinned and thrown, it
+	// sticks to whatever it hits (ground, walls, cars, players, infected, animals) and bursts 3 s after leaving the hand.
+	class geb_PlasmaGrenade: Grenade_Base
+	{
+		scope=2;
+		displayName="$STR_geb_PlasmaGrenade";
+		descriptionShort="$STR_geb_PlasmaGrenadeDesc";
+		model="\alieninvasion\data\plasmagrenade\geb_plasmagrenade.p3d";
+		ammoType="geb_PlasmaGrenade_Ammo";
+		weight=400;
+		// The glowing slits (magenta) and pin lights (cyan), model.cfg sections: the script gives them the
+		// blue-white _armed texture and the brighter _light_armed material while the grenade is armed
+		hiddenSelections[]=
+		{
+			"lights"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\alieninvasion\data\plasmagrenade\geb_plasmagrenade_lights_co.paa"
+		};
+		hiddenSelectionsMaterials[]=
+		{
+			"\alieninvasion\data\plasmagrenade\geb_plasmagrenade_light.rvmat"
+		};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints=50;
+					// the alloy shell wears; the lights don't
+					healthLevels[]=
+					{
+						{
+							1,
+							{
+								"alieninvasion\data\plasmagrenade\geb_plasmagrenade_shell.rvmat"
+							}
+						},
+						{
+							0.69999999,
+							{
+								"alieninvasion\data\plasmagrenade\geb_plasmagrenade_shell.rvmat"
+							}
+						},
+						{
+							0.5,
+							{
+								"alieninvasion\data\plasmagrenade\geb_plasmagrenade_shell_damage.rvmat"
+							}
+						},
+						{
+							0.30000001,
+							{
+								"alieninvasion\data\plasmagrenade\geb_plasmagrenade_shell_damage.rvmat"
+							}
+						},
+						{
+							0,
+							{
+								"alieninvasion\data\plasmagrenade\geb_plasmagrenade_shell_destruct.rvmat"
+							}
+						}
+					};
+				};
+			};
+		};
+		class AnimEvents
+		{
+			class SoundWeapon
+			{
+				class Grenade_unpin
+				{
+					soundSet="Grenade_unpin_SoundSet";
+					id=201;
+				};
+				class turnOnRadio_Pin
+				{
+					soundSet="Grenade_pin_SoundSet";
+					id=1006;
+				};
+			};
+		};
+	};
 	
 	//House
 	class geb_Aliencrash: HouseNoDestruct
@@ -1168,11 +1215,21 @@ class cfgWeapons
 	class geb_PlasmaRifle_Base: Ruger1022
 	{
 		scope=0;
-		weight=350;
+		// A rifle's weight (the 10/22 is 2300 g); it was 350 g until 2.0.0, then 3000 g, and 3400 g with the
+		// shoulder stock (the Geometry LOD's mass, tools/fix_models.py, says the same)
+		weight=3400;
 		absorbency=0;
+		// Not the Ruger's wrap, scope and suppressor slots: this model has no proxies to show them on. Its one slot is
+		// the hidden one holding its turning fluid (geb_PlasmaRifleFluid, tools/plasmarifle/fluid.py).
+		attachments[]=
+		{
+			"geb_PlasmaRifleFluid"
+		};
 		repairableWithKits[]={0};
 		PPDOFProperties[]={1,0.75,40,180,4,10};
-		WeaponLength=0.6;
+		// The Ruger 10/22's own length: with the stock (tools/plasmarifle/model.py) the rifle reaches from the Ruger's
+		// muzzle to its butt like the 10/22 does, so it lowers near walls at the same distance. It was 0.6.
+		WeaponLength=0.95;
 		barrelArmor=1.25;
 		initSpeedMultiplier=1.05;
 		chamberSize=1;
@@ -1197,9 +1254,10 @@ class cfgWeapons
 		// This custom P3D has no hide_barrel selection. Registering the Ruger selection here makes
 		// ForceSyncSelectionState access an invalid model selection when a cartridge is chambered.
 		simpleHiddenSelections[]={};
+		// The plasma relay's clack and sputter (tools/plasmarifle/sounds.py), not the M4's click
 		drySound[]=
 		{
-			"dz\sounds\weapons\firearms\m4a1\m4_dry",
+			"alieninvasion\data\weapons\sounds\geb_plasma_dry",
 			0.5,
 			1,
 			20
@@ -1209,11 +1267,179 @@ class cfgWeapons
 		{
 			"SemiAuto"
 		};
+		// The Ruger animations' handling sound events (ids from DZ\characters SurvivorBase AnimEvents), played as
+		// the plasma rifle's own sounds for this rifle only, none of vanilla's foley: vanilla looks an event up on
+		// the item in hands first (DayZPlayerImplement.ProcessWeaponEvent), so the Ruger 10/22 keeps its own. All
+		// of the rifle's events are here but the hands' (hand 1385, weapon_down 1386); the eighteen jam sounds
+		// share six kinds. data/weapons/sounds/config.cpp has the sets, tools/plasmarifle/sounds.py the sounds.
+		class AnimEvents
+		{
+			class SoundWeapon
+			{
+				class geb_Plasma_charge_open
+				{
+					soundSet="geb_Plasma_charge_open_SoundSet";
+					id=1373;
+				};
+				class geb_Plasma_charge_open_release
+				{
+					soundSet="geb_Plasma_charge_open_release_SoundSet";
+					id=1374;
+				};
+				class geb_Plasma_charge_close
+				{
+					soundSet="geb_Plasma_charge_close_SoundSet";
+					id=1375;
+				};
+				class geb_Plasma_charge_close_release
+				{
+					soundSet="geb_Plasma_charge_close_release_SoundSet";
+					id=1376;
+				};
+				class geb_Plasma_chamber_load
+				{
+					soundSet="geb_Plasma_chamber_load_SoundSet";
+					id=1377;
+				};
+				class geb_Plasma_mag_in
+				{
+					soundSet="geb_Plasma_mag_in_SoundSet";
+					id=1378;
+				};
+				class geb_Plasma_mag_load
+				{
+					soundSet="geb_Plasma_mag_load_SoundSet";
+					id=1379;
+				};
+				class geb_Plasma_mag_out
+				{
+					soundSet="geb_Plasma_mag_out_SoundSet";
+					id=1380;
+				};
+				class geb_Plasma_mag_remove
+				{
+					soundSet="geb_Plasma_mag_remove_SoundSet";
+					id=1381;
+				};
+				class geb_Plasma_dry
+				{
+					soundSet="geb_Plasma_dry_SoundSet";
+					id=1382;
+				};
+				class geb_Plasma_pullout
+				{
+					soundSet="geb_Plasma_pullout_SoundSet";
+					id=1383;
+				};
+				class geb_Plasma_chamber_load2
+				{
+					soundSet="geb_Plasma_chamber_load_SoundSet";
+					id=1384;
+				};
+				class geb_Plasma_jamming1
+				{
+					soundSet="geb_Plasma_fault_tick_SoundSet";
+					id=1387;
+				};
+				class geb_Plasma_jamming2
+				{
+					soundSet="geb_Plasma_fault_strain_SoundSet";
+					id=1388;
+				};
+				class geb_Plasma_jamming3
+				{
+					soundSet="geb_Plasma_fault_soft_SoundSet";
+					id=1389;
+				};
+				class geb_Plasma_jamming4
+				{
+					soundSet="geb_Plasma_fault_clear_SoundSet";
+					id=1390;
+				};
+				class geb_Plasma_jamming5
+				{
+					soundSet="geb_Plasma_fault_soft_SoundSet";
+					id=1391;
+				};
+				class geb_Plasma_jamming6
+				{
+					soundSet="geb_Plasma_fault_soft_SoundSet";
+					id=1392;
+				};
+				class geb_Plasma_jamming7
+				{
+					soundSet="geb_Plasma_fault_long_SoundSet";
+					id=1393;
+				};
+				class geb_Plasma_jamming8
+				{
+					soundSet="geb_Plasma_fault_long_SoundSet";
+					id=1394;
+				};
+				class geb_Plasma_jamming9
+				{
+					soundSet="geb_Plasma_fault_long_SoundSet";
+					id=1395;
+				};
+				class geb_Plasma_jamming10
+				{
+					soundSet="geb_Plasma_fault_tick_SoundSet";
+					id=1396;
+				};
+				class geb_Plasma_jam
+				{
+					soundSet="geb_Plasma_fault_snap_SoundSet";
+					id=1397;
+				};
+				class geb_Plasma_jamming_01
+				{
+					soundSet="geb_Plasma_fault_tick_SoundSet";
+					id=3512;
+				};
+				class geb_Plasma_jamming_02
+				{
+					soundSet="geb_Plasma_fault_strain_SoundSet";
+					id=3513;
+				};
+				class geb_Plasma_jamming_03
+				{
+					soundSet="geb_Plasma_fault_clear_SoundSet";
+					id=3514;
+				};
+				class geb_Plasma_jamming_04
+				{
+					soundSet="geb_Plasma_fault_soft_SoundSet";
+					id=3515;
+				};
+				class geb_Plasma_jamming_05
+				{
+					soundSet="geb_Plasma_fault_soft_SoundSet";
+					id=3516;
+				};
+				class geb_Plasma_jamming_06
+				{
+					soundSet="geb_Plasma_fault_snap_SoundSet";
+					id=3517;
+				};
+				class geb_Plasma_jamming_07
+				{
+					soundSet="geb_Plasma_fault_long_SoundSet";
+					id=3518;
+				};
+			};
+		};
 		class SemiAuto: Mode_SemiAuto
 		{
+			// Built like vanilla's rifles: the shot (close / mid / distant / mechanism), its interior version, and
+			// its echo in the forest, meadows, houses, indoors and far off, in the slots of vanilla's SKS tails but
+			// the plasma's own (until 2.0.0's last change it borrowed the SKS's, a gunshot's echo)
 			soundSetShot[]=
 			{
-				"Plasma_SoundSet"
+				"geb_Plasma_Shot_SoundSet",
+				"geb_Plasma_Shot_Interior_SoundSet",
+				"geb_Plasma_Tail_SoundSet",
+				"geb_Plasma_InteriorTail_SoundSet",
+				"geb_Plasma_Tail_2D_SoundSet"
 			};
 			reloadTime=0.125;
 			recoil="recoil_mp5";
@@ -1237,8 +1463,25 @@ class cfgWeapons
 		displayName="$STR_geb_PlasmaRifle";
 		descriptionShort="$STR_geb_PlasmaRifleDesc";
 		model = "\alieninvasion\data\weapons\geb_plasmarifle.p3d";
-		itemSize[]={5,3};
+		// 0.96 m long with the stock (it was 0.73 m and 5 x 3); the 0.95 m Ruger 10/22 is 9 x 3
+		itemSize[]={8,3};
 		spawnDamageRange[]={0,0.6};
+		// The rear screen (model section "screen", tools/plasmarifle/screen.py). geb_PlasmaRifle.c steps it through
+		// geb_plasmarifle_screen_00_co .. _15_co while the rifle is held or lying near the camera. A hidden
+		// selection's faces only draw once it has a texture, so frame 00 is set here; the glowing screen material
+		// keeps it lit. Both arrays are set, or Ruger1022's camo texture and material would land on index 0.
+		hiddenSelections[]=
+		{
+			"screen"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\alieninvasion\data\weapons\geb_plasmarifle_screen_00_co.paa"
+		};
+		hiddenSelectionsMaterials[]=
+		{
+			"\alieninvasion\data\weapons\geb_plasmarifle_screen.rvmat"
+		};
 		class Particles
 		{
 			class OnFire
@@ -1252,37 +1495,30 @@ class cfgWeapons
 					illuminateWorld=0;
 				};
 			};
+			// Blue-white arcs crackle on the muzzle after a quick string of shots and die off as it cools
+			// (tools/plasmashots/shots.py; looping effects that vanilla's overheating system starts, restarts and
+			// stops). Every shot adds 1 and restarts the decay timer; each overheatingDecayInterval without a shot
+			// takes off 1 + value / maxOverheatingValue. The arcs show from 6 shots fired less than 0.6 s apart,
+			// light up to a coefficient ((value - 6) / 18) of 0.3, heavy above it; the value tops out at 18
+			// (coefficient 0.67). After a full cartridge emptied quickly they crackle on for about 4 s; steady aimed
+			// fire never heats the rifle. Every child class here is an effect entry, so there's no shared base class.
+			// geb_PlasmaRifle.c keeps the ammo's muzzleFlashParticle out of these entries.
 			class OnOverheating
 			{
-				maxOverheatingValue=75;
-				shotsToStartOverheating=5;
-				overheatingDecayInterval=1;
-				class SmokingBarrelBase
+				maxOverheatingValue=18;
+				shotsToStartOverheating=6;
+				overheatingDecayInterval=0.6;
+				class ArcsLight
 				{
-					positionOffset[]={0.2,0,0};
-					onlyWithinRainLimits[]={0,0.2};
+					overrideParticle="geb_plasma_overheat";
+					positionOffset[]={0.02,0,0};
+					onlyWithinOverheatLimits[]={0,0.3};
 				};
-				class SmokingBarrel1: SmokingBarrelBase
+				class ArcsHeavy
 				{
-					overrideParticle="smoking_barrel_small";
-					onlyWithinOverheatLimits[]={0,0.2};
-				};
-				class SmokingBarrelHot1: SmokingBarrelBase
-				{
-					overrideParticle="smoking_barrel";
-					onlyWithinOverheatLimits[]={0.2,0.60000002};
-				};
-				class SmokingBarrelHot3: SmokingBarrelBase
-				{
-					overrideParticle="smoking_barrel_heavy";
-					onlyWithinOverheatLimits[]={0.60000002,1};
-				};
-				class SmokingBarrelHotSteam
-				{
-					overrideParticle="smoking_barrel_steam";
-					positionOffset[]={0.34999999,0,0};
-					onlyWithinOverheatLimits[]={0,1};
-					onlyWithinRainLimits[]={0.2,1};
+					overrideParticle="geb_plasma_overheat_heavy";
+					positionOffset[]={0.02,0,0};
+					onlyWithinOverheatLimits[]={0.3,1};
 				};
 			};
 		};
@@ -1293,6 +1529,16 @@ class cfgWeapons
 				class Health
 				{
 					hitpoints=100;
+					// Wear like vanilla weapons (Ruger1022): body and stock materials swap to copies with vanilla's
+					// weapon damage overlay, then the destruct one, the glow dimming (tools/plasmarifle/texture.py)
+					healthLevels[]=
+					{
+						{1.0,{"alieninvasion\data\weapons\plasma.rvmat","alieninvasion\data\weapons\geb_plasmarifle_stock.rvmat"}},
+						{0.7,{"alieninvasion\data\weapons\plasma.rvmat","alieninvasion\data\weapons\geb_plasmarifle_stock.rvmat"}},
+						{0.5,{"alieninvasion\data\weapons\plasma_damage.rvmat","alieninvasion\data\weapons\geb_plasmarifle_stock_damage.rvmat"}},
+						{0.3,{"alieninvasion\data\weapons\plasma_damage.rvmat","alieninvasion\data\weapons\geb_plasmarifle_stock_damage.rvmat"}},
+						{0.0,{"alieninvasion\data\weapons\plasma_destruct.rvmat","alieninvasion\data\weapons\geb_plasmarifle_stock_destruct.rvmat"}}
+					};
 				};
 			};
 		};
@@ -1301,21 +1547,24 @@ class cfgWeapons
 
 
 //Ammo Types
+// The engine registers each entry by its name= (the cfgAmmo class); the class names are only keys, so they carry
+// the geb_ prefix (AType_Plasma_Cell* until 2.0.0). The cfgAmmo names themselves stay: magazines and chambers
+// store them per round.
 class cfgAmmoTypes
 {
-	class AType_Plasma_Cell
+	class geb_AType_Plasma_Cell
 	{
 		name="Plasma_Cell";
 	};
-	class AType_Plasma_Cell_Arc
+	class geb_AType_Plasma_Cell_Arc
 	{
 		name="Plasma_Cell_Arc";
 	};
-	class AType_Plasma_Cell_Lance
+	class geb_AType_Plasma_Cell_Lance
 	{
 		name="Plasma_Cell_Lance";
 	};
-	class AType_Plasma_Cell_Void
+	class geb_AType_Plasma_Cell_Void
 	{
 		name="Plasma_Cell_Void";
 	};
@@ -1325,6 +1574,36 @@ class cfgAmmoTypes
 class cfgAmmo
 {
 	class Bullet_Base;
+	class RGD5Grenade_Ammo;
+	// The plasma grenade's burst (geb_PlasmaGrenade): smaller than the M67's (4 m against 5) but twice its damage,
+	// with a blue plasma blast (tools/plasmagrenade/effects.py) and its own plasma explosion sound (CfgSoundSets
+	// below) over vanilla's grenade echo.
+	class geb_PlasmaGrenade_Ammo: RGD5Grenade_Ammo
+	{
+		indirectHitRange=4;
+		particle="geb_plasmagrenade_blast";
+		soundSetExplosion[]=
+		{
+			"geb_PlasmaGrenade_explosion_SoundSet",
+			"Grenade_Tail_SoundSet"
+		};
+		class DamageApplied
+		{
+			type="FragGrenade";
+			class Health
+			{
+				damage=100;
+			};
+			class Blood
+			{
+				damage=0;
+			};
+			class Shock
+			{
+				damage=0;
+			};
+		};
+	};
 	class Plasma_Cell: Bullet_Base
 	{
 		scope=2;
@@ -1334,13 +1613,20 @@ class cfgAmmo
 		// check, so round="" crashed the server whenever a chambered plasma cell was shown (COT/admin spawns with
 		// ammo, weapons loaded from storage). The rifle model has no chamber proxy, so this round is never seen.
 		round="FxRound_22";
-		// Vanilla green tracer as the plasma bolt (traces from the muzzle on every shot; see tracersEvery on the cartridge)
-		model="\dz\weapons\projectiles\tracer_green.p3d";
+		// The tracer: a small 3D plasma ball (tools/plasmashots/tracers.py) in the cell's colour on the bullet itself,
+		// every shot (tracersEvery on the cartridge). At 360 m/s it only blinks along the real hit line; the ball you
+		// see is geb_laserParticle below. It was vanilla's flat green tracer until 2.0.0.
+		model="\alieninvasion\data\weapons\geb_plasmaball_green.p3d";
+		// The loose cell (cfgMagazines) a chambered cell goes back into when the rifle is cleared. It named a class
+		// that didn't exist until 2.0.0, so a cleared cell was lost with a "cannot store cartridge" error.
 		spawnPileType="Ammo_Plasma_Cell";
 		// Muzzle effects are generated by tools/plasmashots/shots.py; this one beats the rifle's overrideParticle
 		muzzleFlashParticle="geb_plasma_ionburst";
 		// Muzzle light colour (0..1) for this cell's shots, read by the rifle script instead of vanilla's orange light
 		geb_muzzleLightColor[]={0.3,1,0.4};
+		// The visible plasma ball in this cell's colour, 90 m/s for 90 m, played by geb_PlasmaRifle.c on every shot
+		// (tools/plasmashots/shots.py plasma_ball). It was the original laser streak until 2.0.0.
+		geb_laserParticle="geb_plasma_laser_ionburst";
         hit=12;
         indirectHit=0;
         indirectHitRange=0;
@@ -1387,26 +1673,28 @@ class cfgAmmo
 			type="shot";
 		};
 	};
-	// The other cell colours: same round, own muzzle effect, light and bolt. Lime fires vanilla's yellow tracer;
-	// vanilla has no blue or violet one, so tools/plasmashots/tracers.py builds those bolts in the green tracer's
-	// shape and the cell's colour. Scripts test IsKindOf(ammo, "Plasma_Cell").
+	// The other cell colours: same round, own muzzle effect, light and bolt (a plasma ball in the cell's colour,
+	// tools/plasmashots/tracers.py). Scripts test IsKindOf(ammo, "Plasma_Cell").
 	class Plasma_Cell_Arc: Plasma_Cell
 	{
-		model="\alieninvasion\data\weapons\geb_tracer_blue.p3d";
+		model="\alieninvasion\data\weapons\geb_plasmaball_blue.p3d";
 		muzzleFlashParticle="geb_plasma_arc";
 		geb_muzzleLightColor[]={0.3,0.7,1};
+		geb_laserParticle="geb_plasma_laser_arc";
 	};
 	class Plasma_Cell_Lance: Plasma_Cell
 	{
-		model="\dz\weapons\projectiles\tracer_yellow.p3d";
+		model="\alieninvasion\data\weapons\geb_plasmaball_lime.p3d";
 		muzzleFlashParticle="geb_plasma_lance";
 		geb_muzzleLightColor[]={0.7,1,0.15};
+		geb_laserParticle="geb_plasma_laser_lance";
 	};
 	class Plasma_Cell_Void: Plasma_Cell
 	{
-		model="\alieninvasion\data\weapons\geb_tracer_violet.p3d";
+		model="\alieninvasion\data\weapons\geb_plasmaball_violet.p3d";
 		muzzleFlashParticle="geb_plasma_void";
 		geb_muzzleLightColor[]={0.7,0.3,1};
+		geb_laserParticle="geb_plasma_laser_void";
 	};
 };
 
@@ -1414,6 +1702,44 @@ class cfgAmmo
 class cfgMagazines
 {
 	class Mag_AKM_30Rnd;
+	class Ammunition_Base;
+	// A loose plasma cell. Nothing spawns it as loot: it's what a chambered cell turns into when the rifle is
+	// cleared (Plasma_Cell spawnPileType), and it loads back into any Montauk Cartridge (ammoItems). Every colour
+	// goes into this one pile and keeps its own round, so it fires in the colour it was loaded as. The cartridge's
+	// model, with the green cell window.
+	class Ammo_Plasma_Cell: Ammunition_Base
+	{
+		scope=2;
+		displayName="$STR_geb_PlasmaCell";
+		descriptionShort="$STR_geb_PlasmaCellDesc";
+		model="\alieninvasion\data\weapons\geb_plasmacartridge.p3d";
+		iconCartridge=1;
+		weight=10;
+		count=15;
+		ammo="Plasma_Cell";
+		hiddenSelections[]=
+		{
+			"camo"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\alieninvasion\data\weapons\geb_plasmacartridge_green_co.paa"
+		};
+		hiddenSelectionsMaterials[]=
+		{
+			"\alieninvasion\data\weapons\geb_plasmacartridge_green.rvmat"
+		};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints=100;
+				};
+			};
+		};
+	};
 	class geb_PlasmaCartridge: Mag_AKM_30Rnd
 	{
 		scope=2;
@@ -1494,5 +1820,95 @@ class cfgMagazines
 		{
 			"\alieninvasion\data\weapons\geb_plasmacartridge_violet.rvmat"
 		};
+	};
+};
+
+// The plasma grenade's blast (tools/plasmagrenade/sounds.py, synthesised): close, mid and distant layers on vanilla's
+// grenade explosion shader bases, so they fade in and out with distance as Grenade_explosion_SoundSet's do, at about
+// the same levels. CfgAmmo geb_PlasmaGrenade_Ammo plays it with vanilla's Grenade_Tail_SoundSet for the echo.
+class CfgSoundShaders
+{
+	class closeExplosionMid_SoundShader;
+	class midExplosionMid_SoundShader;
+	class distExplosionMid_SoundShader;
+	class geb_PlasmaGrenade_closeExplosion_SoundShader: closeExplosionMid_SoundShader
+	{
+		samples[]=
+		{
+			{
+				"alieninvasion\data\plasmagrenade\sounds\geb_plasmagrenade_close_1",
+				1
+			},
+			{
+				"alieninvasion\data\plasmagrenade\sounds\geb_plasmagrenade_close_2",
+				1
+			}
+		};
+		volume=1;
+	};
+	class geb_PlasmaGrenade_midExplosion_SoundShader: midExplosionMid_SoundShader
+	{
+		samples[]=
+		{
+			{
+				"alieninvasion\data\plasmagrenade\sounds\geb_plasmagrenade_mid_1",
+				1
+			},
+			{
+				"alieninvasion\data\plasmagrenade\sounds\geb_plasmagrenade_mid_2",
+				1
+			}
+		};
+		volume=1;
+	};
+	class geb_PlasmaGrenade_distExplosion_SoundShader: distExplosionMid_SoundShader
+	{
+		samples[]=
+		{
+			{
+				"alieninvasion\data\plasmagrenade\sounds\geb_plasmagrenade_dist",
+				1
+			}
+		};
+		volume=1.7782794;
+	};
+};
+
+class CfgSoundSets
+{
+	class Heavy_Explosion_Base_SoundSet;
+	class geb_PlasmaGrenade_explosion_SoundSet: Heavy_Explosion_Base_SoundSet
+	{
+		soundShaders[]=
+		{
+			"geb_PlasmaGrenade_closeExplosion_SoundShader",
+			"geb_PlasmaGrenade_midExplosion_SoundShader",
+			"geb_PlasmaGrenade_distExplosion_SoundShader"
+		};
+	};
+};
+
+// The rifle's fluid attachment (tools/plasmarifle/fluid.py): its proxy in the rifle's model and its hidden slot,
+// set up like vanilla's Magnum cylinder (Proxymagnum_cylinder; Slot_RevolverCylinder has show "false", so no slot
+// shows in the inventory and the fluid can't be taken off).
+class CfgNonAIVehicles
+{
+	class ProxyAttachment;
+	class Proxygeb_plasmarifle_fluid: ProxyAttachment
+	{
+		scope=2;
+		inventorySlot="geb_PlasmaRifleFluid";
+		model="\alieninvasion\data\weapons\geb_plasmarifle_fluid.p3d";
+	};
+};
+
+class CfgSlots
+{
+	class Slot_geb_PlasmaRifleFluid
+	{
+		name="geb_PlasmaRifleFluid";
+		displayName="";
+		ghostIcon="";
+		show="false";
 	};
 };

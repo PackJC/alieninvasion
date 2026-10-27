@@ -35,10 +35,10 @@ class CfgMods
 		// Without this the engine looks for alieninvasion/Anims/cfg/skeletons.anim.xml
 		// and logs "ANIMATION (E): Can't load ..." on every start; point it at vanilla's.
 		skeletonDefinitions="DZ/anims/cfg/skeletons.anim.xml";
-		credits="DayZ Modding Community";
+		credits="Geb";
 		author="Geb";
 		authorID="0";
-		version="1.2.0";
+		version="2.0.0";
 		extra=0;
 		type="mod";
 		dependencies[]=

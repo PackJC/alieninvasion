@@ -39,22 +39,25 @@ class geb_AlienInvasionFiles
 
 		FPrintln(file, "<types>");
 		FPrintln(file, "    <!-- Crash site (StaticAlienCrash event) and the aliens its script spawns -->");
-		WriteType(file, "geb_Aliencrash", 0, 2100, 0, false, "");
-		WriteType(file, "geb_GreenAlien", 0, 1800, 1, false, "");
-		FPrintln(file, "    <!-- Gear (the crash site itself drops the rifle and cartridges) -->");
-		WriteType(file, "geb_PlasmaRifle", 0, 1800, 1, false, "weapons");
+		WriteType(file, "geb_Aliencrash", 2100, false, "");
+		WriteType(file, "geb_GreenAlien", 1800, false, "");
+		FPrintln(file, "    <!-- Gear (the crash site itself drops the rifle, cartridges and plasma grenades) -->");
+		WriteType(file, "geb_PlasmaRifle", 1800, false, "weapons");
 		TStringArray cartridges = geb_PlasmaCartridgeTypes();
 		foreach (string cartridge : cartridges)
-			WriteType(file, cartridge, 0, 1800, 1, false, "weapons");
-		WriteType(file, "geb_FoilHat", 0, 1800, 1, false, "clothes");
+			WriteType(file, cartridge, 1800, false, "weapons");
+		FPrintln(file, "    <!-- A loose plasma cell only comes from clearing a loaded rifle's chamber; it never spawns as loot -->");
+		WriteType(file, "Ammo_Plasma_Cell", 1800, false, "weapons");
+		WriteType(file, "geb_PlasmaGrenade", 1800, false, "explosives");
+		WriteType(file, "geb_FoilHat", 1800, false, "clothes");
 		FPrintln(file, "    <!-- From skinning aliens -->");
-		WriteType(file, "geb_GreenAlienMeat", 0, 14400, 0, true, "food");
-		WriteType(file, "geb_GreenAlienSkin", 0, 28800, 0, true, "tools");
+		WriteType(file, "geb_GreenAlienMeat", 14400, true, "food");
+		WriteType(file, "geb_GreenAlienSkin", 28800, true, "tools");
 		FPrintln(file, "    <!-- Crafted from the Roswell Hide -->");
-		WriteType(file, "geb_GreenAlienLeather", 0, 14400, 0, true, "tools");
-		WriteType(file, "geb_GreenAlienLeatherSack", 0, 28800, 0, true, "clothes");
-		WriteType(file, "geb_GreenAlienCourierBag", 0, 28800, 0, true, "clothes");
-		WriteType(file, "geb_GreenAlienImprovisedBag", 0, 28800, 0, true, "clothes");
+		WriteType(file, "geb_GreenAlienLeather", 14400, true, "tools");
+		WriteType(file, "geb_GreenAlienLeatherSack", 28800, true, "clothes");
+		WriteType(file, "geb_GreenAlienCourierBag", 28800, true, "clothes");
+		WriteType(file, "geb_GreenAlienImprovisedBag", 28800, true, "clothes");
 		FPrintln(file, "</types>");
 
 		EndFile(file, name);
@@ -74,10 +77,13 @@ class geb_AlienInvasionFiles
 		WriteCartridgeItems(file);
 		FPrintln(file, "        </attachments>");
 		FPrintln(file, "    </type>");
-		FPrintln(file, "    <!-- Aliens sometimes carry a spare cell. Full guide: https://packjc.github.io/alieninvasion/ -->");
+		FPrintln(file, "    <!-- Aliens sometimes carry a spare cell or a plasma grenade. Full guide: https://packjc.github.io/alieninvasion/ -->");
 		FPrintln(file, "    <type name=\"geb_GreenAlien\">");
 		FPrintln(file, "        <cargo chance=\"0.10\">");
 		WriteCartridgeItems(file);
+		FPrintln(file, "        </cargo>");
+		FPrintln(file, "        <cargo chance=\"0.10\">");
+		FPrintln(file, "            <item name=\"geb_PlasmaGrenade\" chance=\"1.00\" />");
 		FPrintln(file, "        </cargo>");
 		FPrintln(file, "    </type>");
 		FPrintln(file, "</spawnabletypes>");
@@ -265,17 +271,19 @@ class geb_AlienInvasionFiles
 		return found == VERSION_ALIENINVASION;
 	}
 
-	protected void WriteType(FileHandle file, string typeName, int nominal, int lifetime, int min, bool crafted, string category)
+	// Nothing here spawns as Central Economy loot (crash sites drop their own gear), so nominal and min are 0;
+	// a server that wants these items in its loot raises them.
+	protected void WriteType(FileHandle file, string typeName, int lifetime, bool crafted, string category)
 	{
 		string craftedFlag = "0";
 		if ( crafted )
 			craftedFlag = "1";
 
 		FPrintln(file, "    <type name=\"" + typeName + "\">");
-		FPrintln(file, "        <nominal>" + nominal.ToString() + "</nominal>");
+		FPrintln(file, "        <nominal>0</nominal>");
 		FPrintln(file, "        <lifetime>" + lifetime.ToString() + "</lifetime>");
 		FPrintln(file, "        <restock>0</restock>");
-		FPrintln(file, "        <min>" + min.ToString() + "</min>");
+		FPrintln(file, "        <min>0</min>");
 		FPrintln(file, "        <quantmin>-1</quantmin>");
 		FPrintln(file, "        <quantmax>-1</quantmax>");
 		FPrintln(file, "        <cost>100</cost>");
@@ -368,30 +376,35 @@ class geb_AlienInvasionFiles
 		return spots;
 	}
 
-	// Loot points inside the wreck model ("pos|range|height|flags", flags optional).
+	// Loot points on the crash model ("pos|range|height|flags", flags optional), measured from crash.p3d by
+	// tools/crash_points.py, in its own coordinates (autocenter 0: the origin is at ground level under the hull).
+	// 18 floor points in a ring on the crater's dirt around the hull, at least 0.35 m from it and inside the dirt's
+	// edge, each where the dirt rises less than 25 cm across its range. y is the top of the visible dirt or of the
+	// walkable (Roadway/Geometry) surface, whichever is higher and never below the ground, + 3 cm. flags 32 and the
+	// tall volumes are as vanilla's wreck floor points. None sit on the hull: its only flat part is where the
+	// wreck's fire and smoke burn. Until 2.0.0 these were a copy of vanilla's Mi-8 wreck points, mostly outside the
+	// UFO and 1.9 m underground.
 	protected TStringArray GetCrashLootPoints()
 	{
 		TStringArray points = {
-			"-2.693787 -1.888990 1.671386|0.703328|2.000000|32",
-			"-1.758788 -1.888990 -2.302246|0.597443|1.493607|32",
-			"-5.150909 -1.888990 -4.171387|1.199951|2.000000|32",
-			"-9.951996 -1.888990 -2.661621|0.932135|2.000000|32",
-			"-9.645112 -1.888990 1.531249|1.199951|2.000000|32",
-			"-7.113404 -1.888990 1.797849|1.199951|2.000000|32",
-			"-4.582459 -1.888990 1.906738|1.199951|2.000000|32",
-			"-1.599335 -1.888990 -0.949219|0.764948|1.163458|32",
-			"-3.084625 -1.796867 -1.247071|0.393962|0.169039|",
-			"-4.700715 -1.854195 -1.203125|0.334039|0.211958|",
-			"-7.857819 -1.816639 -0.384278|0.407959|1.019897|",
-			"-6.361786 -1.474339 -0.424318|0.203125|0.507813|",
-			"-5.188050 -1.487791 -0.553956|0.168750|0.421875|",
-			"-3.660218 -1.511133 -0.747803|0.134375|0.335938|",
-			"-3.550293 -1.555975 -2.536621|0.203125|0.507813|",
-			"-6.174928 -1.774635 -1.928222|0.216064|0.540161|",
-			"-6.652740 -1.799643 -1.263429|0.603010|0.139997|",
-			"-5.446472 -1.813892 -1.698241|0.548840|1.410522|",
-			"-2.769746 -1.517029 -2.799561|0.203125|0.507813|",
-			"-3.818542 -1.811153 -1.685303|0.460957|1.302490|"
+			"-1.525000 0.089693 -2.275000|0.910660|2.000000|32",
+			"-0.475000 0.030000 -3.175000|0.300000|1.500000|32",
+			"-0.025000 0.069337 -2.575000|0.302769|1.500000|32",
+			"1.025000 0.049731 -2.875000|0.500000|2.000000|32",
+			"2.225000 0.042519 -3.325000|0.450000|1.500000|32",
+			"3.425000 0.030000 -3.025000|0.504152|2.000000|32",
+			"4.025000 0.107434 -1.975000|0.374621|1.500000|32",
+			"3.275000 0.548738 -1.225000|0.420088|1.500000|32",
+			"4.325000 0.030000 -0.775000|0.450000|1.500000|32",
+			"3.425000 0.453155 -0.025000|0.402268|1.500000|32",
+			"3.875000 0.159272 0.875000|0.324264|1.500000|32",
+			"2.825000 0.617726 1.025000|0.364782|1.500000|32",
+			"2.825000 0.033330 2.225000|0.335410|1.500000|32",
+			"2.075000 0.030000 2.525000|0.338516|1.500000|32",
+			"0.875000 0.082115 2.375000|0.388516|1.500000|32",
+			"-0.325000 0.030000 2.225000|0.409017|1.500000|32",
+			"-1.375000 0.211171 1.475000|0.501920|2.000000|32",
+			"-2.425000 0.061390 -0.175000|1.000000|2.000000|32"
 		};
 		return points;
 	}

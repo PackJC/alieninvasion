@@ -6,7 +6,7 @@ modded class CrashBase
 
 	static bool RegisterAlienCrashSounds()
 	{
-		CrashSoundSets.RegisterSoundSet("AlienCrash_Distant_SoundSet");
+		CrashSoundSets.RegisterSoundSet("geb_AlienCrash_Distant_SoundSet");
 		return true;
 	}
 };

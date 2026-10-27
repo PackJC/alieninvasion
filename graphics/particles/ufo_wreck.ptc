@@ -4,16 +4,17 @@ EffectDef {
    ShapeType Ellipse
    ShapeSize 1 0 1
    ConeAngle 0 0 0
-   MaxNum 75
-   BirthRate 7
+   MaxNum 20
+   BirthRate 1.8
    BirthRateRND 0
+   Offset 0 12 0
    BirthRateVel 0
    Angles 0 0 0
    LocalTransform 0
    Material "{9833D8BE7A512C63}graphics/particles/materials/flash/electric.emat"
    ScaleX 1
    ScaleY 1
-   SizeMultiplier 30
+   SizeMultiplier 20
    SizeRND 0
    RandomRotDir 1
    RotMultiplier 40
@@ -53,14 +54,15 @@ EffectDef {
    ShapeType Ellipse
    ShapeSize 1 0 1
    ConeAngle 0 0 0
-   MaxNum 75
-   BirthRate 5
+   MaxNum 20
+   BirthRate 1.3
    BirthRateRND 0
+   Offset 0 12 0
    Angles 0 0 0
    Material "{17F1336FEF157B35}graphics/particles/materials/smoke/smoke_dust_01_em_spooky.emat"
    ScaleX 1
    ScaleY 1
-   SizeMultiplier 30
+   SizeMultiplier 20
    SizeRND 0
    RandomRotDir 1
    RotMultiplier 40
@@ -96,14 +98,15 @@ EffectDef {
    ShapeType Ellipse
    ShapeSize 1 0 1
    ConeAngle 0 0 0
-   MaxNum 75
-   BirthRate 5
+   MaxNum 20
+   BirthRate 1.3
    BirthRateRND 0
+   Offset 0 12 0
    Angles 0 0 0
    Material "{CB7AF4FD8ACBFDFC}graphics/particles/materials/glow/glow1.emat"
    ScaleX 1
    ScaleY 1
-   SizeMultiplier 30
+   SizeMultiplier 20
    SizeRND 0
    RandomRotDir 1
    RotMultiplier 40

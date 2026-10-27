@@ -1,6 +1,9 @@
 modded class PlayerBase
 {
 	// Hands bloodied by gutting an alien show green blood (geb_PluginLifespan.c). Synced so everyone sees it.
+	// Deliberately not saved with the character: after a relog the hands are still bloody (vanilla saves that)
+	// but red. A mod can only append to the player's save, so adding data there would make characters saved
+	// before it fail to load on servers where another mod that saves player data loads after this one.
 	protected bool m_geb_AlienBloodHands;
 
 	override void Init()
@@ -48,7 +51,7 @@ modded class PlayerBase
 			return false;
 
 		// Hat check first: this runs for every infected evaluating every player, and the hat is the rare case.
-		if ( ai && IsWearingFoilHat() && ai.IsInherited(GreenAlienBase) )
+		if ( ai && IsWearingFoilHat() && ai.IsInherited(geb_GreenAlienBase) )
 			return vector.Distance(ai.GetPosition(), GetPosition()) <= GetAlienInvasionConfig().FoilHatDetectRange;
 
 		return true;

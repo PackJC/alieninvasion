@@ -1,0 +1,121 @@
+EffectDef {
+ Emitors {
+  EmitorDef smoke_middle {
+     ShapeType Box
+     ShapeSize 0.5 0 1.2
+     ConeAngle 360 0 30
+     MaxNum 70
+     BirthRate 1.05
+     BirthRateRND 0
+     Material "{00BEA27443975BEB}Graphics/Particles/materials/smoke/smoke_anim_02.emat"
+     SizeMultiplier 9.75
+     SizeRND 4
+     RandomRotDir 1
+     RotMultiplier 30
+     VelAngle 0
+     RandomAngle 0
+     Velocity 3
+     VelocityRND 0.5
+     AirResistance 0
+     AirResistanceRND 0.08
+     Spring 0
+     Wind 1
+     AnimOnce 0
+     AnimFPS 20
+     LifetimeByAnim 0
+     RandomFrame 0
+     LifeTime 10
+     LifeTimeRND 2
+     Color {
+      0 0.0392 0.0392 0.0392 0.1778 0.1203 0.1203 0.1139 0.3601 0.0506 0.057 0.057 0.5707 0.1772 0.1835 0.1899 1 0.1 0.1 0.1
+     }
+     Alpha {
+      0 0 0.05 0.25 0.125 0.5 0.75 0.45 1 0
+     }
+     RotationSpeed {
+      0 0 0.60937 0.1962 0.89881 0.15823 1 0.0443
+     }
+     Size {
+      0 0.05 1 1
+     }
+    }
+  EmitorDef smoke_middle_normal_01 {
+     ShapeType Box
+     ShapeSize 0.5 0 1.2
+     ConeAngle 360 0 30
+     MaxNum 70
+     BirthRate 1.05
+     BirthRateRND 2
+     Material "{5784934A1C87961A}Graphics/Particles/materials/smoke/smoke_cloud_01_g_heliwreck_01.emat"
+     SizeMultiplier 9.75
+     SizeRND 4
+     RandomRotDir 1
+     RotMultiplier 40
+     VelAngle 0
+     RandomAngle 1
+     Velocity 2.5
+     VelocityRND 0.5
+     AirResistance 0
+     AirResistanceRND 0.08
+     Spring 0
+     Wind 1
+     AnimOnce 0
+     AnimFPS 30
+     LifetimeByAnim 0
+     RandomFrame 1
+     LifeTime 10
+     LifeTimeRND 2
+     Color {
+      0 0.0784 0.0784 0.0784 1 0.0633 0.0696 0.057
+     }
+     Alpha {
+      0 0 0.0744 0.37975 0.37426 0.82278 0.78274 0.77848 1 0.03797
+     }
+     RotationSpeed {
+      0 0 0.60937 0.1962 0.89881 0.15823 1 0.0443
+     }
+     Size {
+      0 0.05 1 1
+     }
+    }
+  EmitorDef smoke_middle_normal_02 {
+     ShapeType Box
+     ShapeSize 0.5 0 1.2
+     ConeAngle 360 0 30
+     MaxNum 70
+     BirthRate 1.05
+     BirthRateRND 1
+     Material "{80F33A254BC889F3}Graphics/Particles/materials/smoke/smoke_cloud_01_b_heliwreck_01.emat"
+     SizeMultiplier 9.75
+     SizeRND 4
+     RandomRotDir 1
+     RotMultiplier 40
+     VelAngle 0
+     RandomAngle 1
+     Velocity 3
+     VelocityRND 0.5
+     AirResistance 0
+     AirResistanceRND 0.08
+     Spring 0
+     Wind 1
+     AnimOnce 0
+     AnimFPS 30
+     LifetimeByAnim 0
+     RandomFrame 1
+     LifeTime 12
+     LifeTimeRND 2
+     Color {
+      0 0.0983 0.0983 0.0983 0.5744 0.4241 0.4177 0.4367 1 0.2021 0.2021 0.2021
+     }
+     Alpha {
+      0 0 0.08185 0.52532 0.325 0.75 0.75223 0.57595 1 0
+     }
+     RotationSpeed {
+      0 0 0.57589 0.41139 0.89732 0.25949 1 0.12025
+     }
+     Size {
+      0 0.05 1 1
+     }
+    }
+ }
+}

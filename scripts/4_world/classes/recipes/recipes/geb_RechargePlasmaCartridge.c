@@ -1,4 +1,5 @@
-// Plasma cells can't be unloaded or found loose, so cartridges are refilled from 9V batteries instead.
+// Cartridges can't be unloaded and loose cells only come from clearing the rifle's chamber, so cartridges are
+// refilled from 9V batteries instead.
 // A full battery refills a full cartridge; a partial one adds as many cells as its charge covers.
 class geb_RechargePlasmaCartridge extends RecipeBase
 {

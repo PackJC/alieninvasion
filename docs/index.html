@@ -3,171 +3,353 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#05090f">
-  <meta name="description" content="Alien Invasion for DayZ — UFO crash encounters, hostile aliens with psychic attacks, toxic crash zones, plasma weaponry, server installation, configuration, and classnames.">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Alien Invasion — DayZ Mod Guide">
-  <meta property="og:description" content="Investigate burning UFO wrecks, survive hostile aliens, and recover experimental plasma technology.">
-  <meta property="og:url" content="https://packjc.github.io/alieninvasion/">
-  <meta property="og:image" content="https://raw.githubusercontent.com/PackJC/alieninvasion/main/docs/assets/alien-invasion-banner.png">
-  <meta property="og:image:alt" content="Alien Invasion banner showing a crashed UFO and approaching aliens">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Alien Invasion — DayZ Mod Guide">
-  <meta name="twitter:description" content="A complete extraterrestrial encounter expansion for DayZ.">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/PackJC/alieninvasion/main/docs/assets/alien-invasion-banner.png">
-  <title>Alien Invasion — DayZ Mod Guide</title>
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <title>Alien Invasion</title>
+  <meta name="description" content="Alien Invasion for DayZ: UFO crash encounters, hostile aliens with psychic attacks, toxic crash zones, plasma weaponry, server installation, configuration and classnames.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Alien Invasion for DayZ">
+  <meta property="og:description" content="Investigate burning UFO wrecks, survive hostile aliens, and recover experimental plasma technology.">
+  <meta property="og:url" content="https://packjc.github.io/alieninvasion/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/PackJC/alieninvasion/master/docs/assets/alien-invasion-banner.png">
+  <meta property="og:image:alt" content="Alien Invasion banner showing a crashed UFO and approaching aliens">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <!-- Bump ?v= whenever styles.css or app.js changes: GitHub Pages lets browsers cache them for
        10 minutes, and fresh HTML paired with a stale stylesheet breaks the layout -->
-  <link rel="stylesheet" href="styles.css?v=20261001e">
-  <script src="app.js?v=20261001e" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261027a">
+  <script src="app.js?v=20261027a" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div class="scanlines" aria-hidden="true"></div>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <header class="hero" id="top">
-    <canvas class="starfield" id="starfield" aria-hidden="true"></canvas>
-    <div class="hero-grid" aria-hidden="true"></div>
-    <div class="signal signal-one" aria-hidden="true"></div>
-    <div class="signal signal-two" aria-hidden="true"></div>
-    <div class="ufo" aria-hidden="true">
-      <svg class="ufo-inner" viewBox="0 0 120 78" width="110" height="72" xmlns="http://www.w3.org/2000/svg">
-        <polygon class="ufo-beam-cone" points="46,26 74,26 92,74 28,74" fill="url(#beamGrad)"/>
-        <defs>
-          <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#75ff9b" stop-opacity=".5"/>
-            <stop offset="1" stop-color="#75ff9b" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <ellipse cx="60" cy="18" rx="14" ry="10" fill="#1b3a2c" stroke="#75ff9b" stroke-width="1.5"/>
-        <ellipse cx="60" cy="26" rx="34" ry="9" fill="#0c1713" stroke="#75ff9b" stroke-width="2"/>
-        <circle cx="38" cy="27" r="2.4" fill="#5ce1e6"/>
-        <circle cx="60" cy="30" r="2.4" fill="#5ce1e6"/>
-        <circle cx="82" cy="27" r="2.4" fill="#5ce1e6"/>
-      </svg>
-    </div>
-    <div class="hero-inner">
-      <p class="eyebrow"><span class="pulse"></span> <span id="decode-line">Signal acquired / Chernarus sector</span></p>
-      <h1 class="glitch" data-text="ALIEN INVASION">ALIEN <span>INVASION</span></h1>
-      <p class="hero-copy">An extraterrestrial encounter expansion for DayZ. Investigate burning UFO wrecks, survive hostile little green men, and recover technology that was never meant to reach Earth.</p>
-      <div class="hero-actions">
-        <a class="button button-primary" href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308">Subscribe on Steam</a>
-        <button class="button button-secondary" type="button" data-open-tab="install">Server installation</button>
-      </div>
-      <div class="badges" aria-label="Project badges">
-        <img src="https://img.shields.io/badge/Mod-v1.2.0-75ff9b?style=for-the-badge&labelColor=13221b" alt="Mod version 1.2.0">
-        <img src="https://img.shields.io/badge/DayZ-v1.30-5ce1e6?style=for-the-badge&labelColor=13221b" alt="DayZ version 1.30">
-        <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><img src="https://img.shields.io/steam/subscriptions/2840597308?style=for-the-badge&color=9678ff&label=Workshop%20Subs&labelColor=13221b" alt="Current Steam Workshop subscribers"></a>
-      </div>
-    </div>
-    <div class="telemetry" aria-hidden="true">
-      <span>AZ 047.22</span><span>EL 13.08</span><span>RANGE UNKNOWN</span>
+  <header class="nav" id="top">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Alien Invasion, back to top">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5c-2.6 0-4.4 1.9-4.8 4.3C3.9 9.6 2 11 2 12.5c0 2.3 4.5 4 10 4s10-1.7 10-4c0-1.5-1.9-2.9-5.2-3.7C16.4 6.4 14.6 4.5 12 4.5Zm-5 9.2a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm5 .8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm5-.8a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM8.6 18l-1.8 3h2.3l1.4-2.6c-.7-.1-1.3-.2-1.9-.4Zm6.8 0c-.6.2-1.2.3-1.9.4l1.4 2.6h2.3l-1.8-3Z"/></svg>
+        <span>Alien Invasion</span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="Sections">
+        <a href="#encounter">Encounter</a>
+        <a href="#arsenal">Arsenal</a>
+        <a href="#install">Setup</a>
+        <a href="#config">Config</a>
+        <a href="#classnames">Classnames</a>
+        <a href="#faq">FAQ</a>
+        <a href="#changelog">Changelog</a>
+      </nav>
+      <a class="pill small" href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308">Subscribe</a>
+      <button class="menu" id="menu" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span><span></span></button>
     </div>
   </header>
 
-  <nav class="site-nav" aria-label="Documentation sections">
-    <div class="nav-inner">
-      <a class="brand" href="#top" aria-label="Alien Invasion home"><span class="brand-mark">AI</span><span>Field Manual</span></a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="tab-list"><span></span><span></span><span></span><span class="sr-only">Toggle navigation</span></button>
-      <div class="tab-list" id="tab-list" role="tablist">
-        <button class="tab-button active" id="overview-tab" role="tab" aria-selected="true" aria-controls="overview" data-tab="overview">Overview</button>
-        <button class="tab-button" id="install-tab" role="tab" aria-selected="false" aria-controls="install" data-tab="install">Install</button>
-        <button class="tab-button" id="encounter-tab" role="tab" aria-selected="false" aria-controls="encounter" data-tab="encounter">Encounter</button>
-        <button class="tab-button" id="arsenal-tab" role="tab" aria-selected="false" aria-controls="arsenal" data-tab="arsenal">Arsenal</button>
-        <button class="tab-button" id="config-tab" role="tab" aria-selected="false" aria-controls="config" data-tab="config">Config</button>
-        <button class="tab-button" id="classnames-tab" role="tab" aria-selected="false" aria-controls="classnames" data-tab="classnames">Classnames</button>
-        <button class="tab-button" id="faq-tab" role="tab" aria-selected="false" aria-controls="faq" data-tab="faq">FAQ</button>
-        <button class="tab-button" id="changelog-tab" role="tab" aria-selected="false" aria-controls="changelog" data-tab="changelog">Changelog</button>
+  <main id="main">
+    <section class="hero">
+      <canvas class="stars" id="starfield" aria-hidden="true"></canvas>
+      <div class="ufo" aria-hidden="true">
+        <svg class="ufo-inner" viewBox="0 0 120 78" width="110" height="72">
+          <defs>
+            <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#75ff9b" stop-opacity=".5"/>
+              <stop offset="1" stop-color="#75ff9b" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <polygon class="ufo-beam" points="46,26 74,26 92,74 28,74" fill="url(#beam)"/>
+          <ellipse cx="60" cy="18" rx="14" ry="10" fill="#1b3a2c" stroke="#75ff9b" stroke-width="1.5"/>
+          <ellipse cx="60" cy="26" rx="34" ry="9" fill="#0c1713" stroke="#75ff9b" stroke-width="2"/>
+          <circle cx="38" cy="27" r="2.4" fill="#5ce1e6"/>
+          <circle cx="60" cy="30" r="2.4" fill="#5ce1e6"/>
+          <circle cx="82" cy="27" r="2.4" fill="#5ce1e6"/>
+        </svg>
       </div>
-    </div>
-  </nav>
-
-  <main id="main-content">
-    <section class="tab-panel active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
-      <div class="section-heading">
-        <p class="kicker">Mission briefing</p>
-        <h2>Something came down in the night.</h2>
-        <p>Alien Invasion adds a UFO crash dynamic event that works exactly like DayZ's vanilla helicopter crashes — the wreck is even built on the same <code>CrashBase</code> class. The difference: the site is wrapped in a toxic cloud, alien technology lies in the wreckage, and when survivors close in, 10–15 hostile aliens crawl out to meet them. Vanilla heli crashes are untouched and keep running alongside it.</p>
+      <p class="eyebrow rise"><span class="pulse" aria-hidden="true"></span><span id="decode-line">Signal acquired / Chernarus sector</span></p>
+      <h1 class="rise">Alien Invasion.</h1>
+      <p class="lede rise">Investigate burning UFO wrecks, survive hostile <b>little green men</b>, and recover technology that was never meant to reach Earth.</p>
+      <div class="cta rise">
+        <a class="pill" href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308">Subscribe on Steam</a>
+        <a class="link-arrow" href="#install">Set up your server</a>
       </div>
-
-      <div class="stat-grid">
-        <article class="stat-card"><strong>10–15</strong><span>Aliens per wreck</span></article>
-        <article class="stat-card"><strong>300 m</strong><span>Contact distance</span></article>
-        <article class="stat-card"><strong>18 m</strong><span>Toxic crash zone</span></article>
-        <article class="stat-card"><strong>13</strong><span>Languages</span></article>
+      <p class="fine rise">Version 2.0.0 for DayZ 1.30. A DayZ mod by Geb.</p>
+      <div class="lineup rise" aria-hidden="true">
+        <img src="items/geb_GreenAlien.webp" alt="" class="l1" width="297" height="420">
+        <img src="items/geb_Aliencrash.webp" alt="" class="l2" width="640" height="311">
+        <img src="items/geb_AlienTank.webp" alt="" class="l3" width="223" height="420">
       </div>
-
-      <div class="feature-grid">
-        <article class="feature-card"><h3>UFO crash site</h3><p>A custom wreck with green light, fire, a smoke column, crackling electrical sparks, mist, distant crash audio, and a toxic gas cloud that demands NBC gear.</p></article>
-        <article class="feature-card"><h3>Hostile visitors</h3><p>Little Green Men with their own voices and footsteps. Up close they claw like infected; in the open they hit you with a psychic zap from up to 80&nbsp;m.</p></article>
-        <article class="feature-card"><h3>Alien technology</h3><p>Salvage the Montauk Rifle and plasma cartridges from the wreck. Cells come in green, blue, lime and violet, and every colour hits aliens twice as hard as earthly bullets.</p></article>
-        <article class="feature-card"><h3>Rechargeable cells</h3><p>Plasma can't be unloaded or found loose — combine a cartridge with a 9V battery to recharge it. A full battery fills a full cartridge.</p></article>
-        <article class="feature-card"><h3>Tin foil hat</h3><p>It works. Aliens lose track of anyone wearing an intact foil hat unless they're within arm's reach, and their psychic zaps can't get through.</p></article>
-        <article class="feature-card"><h3>Alien harvest</h3><p>Skin an alien for Area 51 Steaks and a Roswell Hide. Cooked steak gives 90 seconds of green night vision; the hide tans into green leather for backpacks and bags.</p></article>
-        <article class="feature-card"><h3>Server-tunable</h3><p>Every number — alien counts, loot odds, gas zone, zap range, damage bonuses — lives in <code>$profile:Gebs/alieninvasion.json</code>.</p></article>
-        <article class="feature-card"><h3>Economy files generated</h3><p>The server writes ready-made types, events, crash positions, and loot points into <code>$profile:Gebs/mpmissions/</code> on first start.</p></article>
-      </div>
-
-      <aside class="callout">
-        <div><p class="kicker">No dependency chain</p><h3>Built to stand alone</h3><p>The mod declares no third-party runtime requirement. Load it on the server and every connecting client.</p></div>
-        <a class="text-link" href="https://github.com/PackJC/alieninvasion">Browse the source <span>→</span></a>
-      </aside>
     </section>
 
-    <section class="tab-panel" id="install" role="tabpanel" aria-labelledby="install-tab" hidden>
-      <div class="section-heading"><p class="kicker">Deployment protocol</p><h2>Install Alien Invasion</h2><p>Choose the player path for local use or the server path for a community server. The Workshop remains the authorized distribution source.</p></div>
+    <section class="stats" aria-label="At a glance">
+      <div class="stat reveal"><b>10–15</b><span>aliens per wreck</span></div>
+      <div class="stat reveal"><b>300&nbsp;m</b><span>contact distance</span></div>
+      <div class="stat reveal"><b>8&nbsp;m</b><span>toxic crash zone</span></div>
+      <div class="stat reveal"><b>13</b><span>languages</span></div>
+    </section>
 
-      <div class="install-switch" role="group" aria-label="Installation type">
-        <button class="switch-button" type="button" data-install="player">Player</button>
-        <button class="switch-button active" type="button" data-install="server">Server owner</button>
+    <section class="band" id="overview">
+      <div class="wrap">
+        <header class="head reveal">
+          <p class="eyebrow">Mission briefing</p>
+          <h2>Something came down in the night.</h2>
+          <p class="sub">A UFO crash event that works exactly like DayZ's vanilla helicopter crashes: the wreck is even built on the same <code>CrashBase</code> class. The difference: the site is wrapped in a toxic cloud, alien technology lies in the wreckage, and when survivors close in, <b>10–15 hostile aliens</b> crawl out to meet them. Vanilla heli crashes are untouched and keep running alongside it.</p>
+        </header>
+        <div class="tiles">
+          <article class="tile reveal"><h3>UFO crash site</h3><p>A custom wreck with green light, fire, a smoke column, crackling electrical sparks, mist, distant crash audio, and a toxic gas cloud that demands NBC gear.</p></article>
+          <article class="tile reveal"><h3>Hostile visitors</h3><p>Little Green Men with their own voices and footsteps. Up close they claw like infected; in the open they hit you with a psychic zap from up to 80&nbsp;m.</p></article>
+          <article class="tile reveal"><h3>Alien technology</h3><p>Salvage the Montauk Rifle, plasma cartridges and plasma grenades from the wreck. Cells come in green, blue, lime and violet, and every colour hits aliens twice as hard as earthly bullets.</p></article>
+          <article class="tile reveal"><h3>Rechargeable cells</h3><p>Cartridges can't be unloaded: combine one with a 9V battery to recharge it. A full battery fills a full cartridge, and a cell cleared from the rifle's chamber loads back in.</p></article>
+          <article class="tile reveal"><h3>Tin foil hat</h3><p>It works. Aliens lose track of anyone wearing an intact foil hat unless they're within arm's reach, and their psychic zaps can't get through.</p></article>
+          <article class="tile reveal"><h3>Alien harvest</h3><p>Skin an alien for Area 51 Steaks and a Roswell Hide. Cooked steak gives 90 seconds of green night vision; the hide tans into green leather for backpacks and bags.</p></article>
+          <article class="tile reveal"><h3>Server-tunable</h3><p>Every number, from alien counts and loot odds to the gas zone, zap range and damage bonuses, lives in <code>$profile:Gebs/alieninvasion.json</code>.</p></article>
+          <article class="tile reveal"><h3>Economy files generated</h3><p>The server writes ready-made types, events, crash positions and loot points into <code>$profile:Gebs/mpmissions/</code> on first start.</p></article>
+        </div>
+        <aside class="callout reveal">
+          <div><p class="eyebrow">No dependency chain</p><h3>Built to stand alone.</h3><p>The mod declares no third-party runtime requirement. Load it on the server and every connecting client.</p></div>
+          <a class="link-arrow" href="https://github.com/PackJC/alieninvasion">Browse the source</a>
+        </aside>
       </div>
+    </section>
 
-      <div class="install-panel" data-install-panel="player" hidden>
-        <ol class="steps">
-          <li><span>01</span><div><h3>Open the Workshop page</h3><p>Visit Alien Invasion on Steam and select <strong>Subscribe</strong>.</p></div></li>
-          <li><span>02</span><div><h3>Let Steam download the mod</h3><p>Wait for the DayZ Workshop download to finish before starting the launcher.</p></div></li>
-          <li><span>03</span><div><h3>Join a compatible server</h3><p>The official DayZ launcher can resolve and load the server's required Workshop mods automatically.</p></div></li>
+    <section class="band dark" id="encounter">
+      <div class="wrap">
+        <header class="head reveal">
+          <p class="eyebrow">Contact sequence</p>
+          <h2>How a crash plays out.</h2>
+          <p class="sub">Think of it as a helicopter crash from another world: the Central Economy places the wreck exactly like a vanilla heli crash event, and the wreck then runs the encounter: effects, audio, toxic gas, salvage and its own alien spawns.</p>
+        </header>
+        <ol class="timeline">
+          <li class="reveal"><span class="t-num">01</span><div><h3>Impact</h3><p><code>geb_Aliencrash</code> enters the world through the Central Economy and plays the distant crash sound for everyone in range.</p></div></li>
+          <li class="reveal"><span class="t-num">02</span><div><h3>Visual signal</h3><p>Clients attach green illumination, fire, a smoke column, sparks and ground mist to the crash object.</p></div></li>
+          <li class="reveal"><span class="t-num">03</span><div><h3>Toxic cloud</h3><p>An 8&nbsp;m gas zone settles over the wreck. It uses DayZ's own contaminated-area rules, so NBC gear protects you. It disappears with the wreck.</p></div></li>
+          <li class="reveal"><span class="t-num">04</span><div><h3>Salvage</h3><p>A 35% chance of a Montauk Rifle with a cartridge, up to two partly charged spare cartridges and up to two plasma grenades lie 3–8&nbsp;m from the wreck.</p></div></li>
+          <li class="reveal"><span class="t-num">05</span><div><h3>Contact</h3><p>When a survivor comes within 300&nbsp;m, 10–15 Little Green Men appear 5–25&nbsp;m from the wreck. Until then nothing runs, so idle crash sites cost the server nothing.</p></div></li>
+          <li class="reveal"><span class="t-num">06</span><div><h3>Psychic attack</h3><p>An alien chasing you with a clear line of sight zaps you from 4–80&nbsp;m, at most once a minute each: a green beam from its head and a crackle where it hits. Up close they claw like infected. A foil hat blocks the zaps.</p></div></li>
+          <li class="reveal"><span class="t-num">07</span><div><h3>Recovery</h3><p>Skin dead aliens for Area 51 Steak and Roswell Hide. When the event ends and no one is within 1&nbsp;km, the wreck, its gas cloud and any surviving aliens are cleaned up together.</p></div></li>
         </ol>
-        <a class="button button-primary" href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308">Open Workshop item</a>
+        <article class="panel wreck reveal">
+          <div class="pic"><img src="items/geb_Aliencrash.webp" alt="Render of the crashed UFO wreck" width="640" height="311" loading="lazy"></div>
+          <div class="split">
+            <div>
+              <p class="eyebrow">Active wreck</p>
+              <h3><button class="cls" type="button" data-cls="geb_Aliencrash">geb_Aliencrash</button></h3>
+              <p>Use this classname when you want the complete scripted event: audio, client effects, gas, salvage and alien spawning. On a dedicated server, spawning it with an admin tool runs the full encounter too (everything except the distant crash sound).</p>
+            </div>
+            <div>
+              <p class="eyebrow">Visual prop</p>
+              <h3><button class="cls" type="button" data-cls="StaticObj_geb_Aliencrash">StaticObj_geb_Aliencrash</button></h3>
+              <p>Use this for scenery or custom compositions. It displays the same wreck model without running the encounter script.</p>
+            </div>
+          </div>
+        </article>
       </div>
+    </section>
 
-      <div class="install-panel active" data-install-panel="server">
-        <ol class="steps">
-          <li><span>01</span><div><h3>Download the Workshop item</h3><p>Subscribe with the server's Steam account or retrieve Workshop item <code>2840597308</code> using your normal SteamCMD workflow.</p></div></li>
-          <li><span>02</span><div><h3>Install and key the server</h3><p>Place the published mod folder beside the DayZ server executable. Copy its <code>.bikey</code> file into the server's <code>keys</code> directory.</p></div></li>
-          <li><span>03</span><div><h3>Add the launch parameter</h3><p>Load the mod in your server startup command. Keep the actual installed folder name if it differs from the example.</p><div class="code-block"><code>-mod=@alieninvasion</code><button class="copy-button" type="button" data-copy="-mod=@alieninvasion">Copy</button></div></div></li>
-          <li><span>04</span><div><h3>Start the server once</h3><p>On startup the mod writes its config and Central Economy files into the server profile folder (the one your <code>-profiles=</code> launch parameter points to), next to Gebsfish's files if you run it:</p><div class="xml-block"><div class="code-head"><span>Server profile folder</span></div><pre><code>&lt;profile&gt;/Gebs/
-├── alieninvasion.json                  ← server settings (Config tab)
+    <section class="band soft" id="arsenal">
+      <div class="wrap">
+        <header class="head reveal">
+          <p class="eyebrow">Recovered materials</p>
+          <h2>Field inventory.</h2>
+          <p class="sub">Nineteen public classnames cover the encounter, toxic cloud, creature, specimen tank, weapon, magazine, loose cell, plasma grenade, clothing, food, the Roswell Hide, and what you can make from it.</p>
+        </header>
+        <div class="grid items">
+          <article class="card item reveal">
+            <div class="pic"><img src="items/geb_PlasmaRifle.webp" alt="Render of the Montauk Rifle" width="640" height="187" loading="lazy"></div>
+            <div class="info">
+              <p class="tag">Weapon</p>
+              <h3>Montauk Rifle</h3>
+              <button class="cls" type="button" data-cls="geb_PlasmaRifle">geb_PlasmaRifle</button>
+              <p class="desc">A semi-automatic experimental rifle that fires plasma bolts in the loaded cell's colour. Plasma deals double damage to aliens; every other firearm deals 75%. Skeleton stock with a cheek rest, a shaped pistol grip, hooded iron sights with a glowing dot, a live read-out on the back, purple fluid swirling in the vent tubes, lime fluid flowing behind the glass windows, and electric arcs on the muzzle when it runs hot.</p>
+              <dl class="facts"><div><dt>Fire mode</dt><dd>Semi-auto</dd></div><div><dt>Vs aliens</dt><dd>×2 damage</dd></div></dl>
+            </div>
+          </article>
+          <article class="card item reveal">
+            <div class="pic"><img src="items/geb_PlasmaCartridge.webp" alt="Render of the Montauk Cartridge" width="640" height="377" loading="lazy"></div>
+            <div class="thumbs">
+              <figure><img src="items/geb_PlasmaCartridge_Arc.webp" alt="Render of the blue Montauk Cartridge" loading="lazy"><figcaption>Blue</figcaption></figure>
+              <figure><img src="items/geb_PlasmaCartridge_Lance.webp" alt="Render of the lime Montauk Cartridge" loading="lazy"><figcaption>Lime</figcaption></figure>
+              <figure><img src="items/geb_PlasmaCartridge_Void.webp" alt="Render of the violet Montauk Cartridge" loading="lazy"><figcaption>Violet</figcaption></figure>
+            </div>
+            <div class="info">
+              <p class="tag">Magazine</p>
+              <h3>Montauk Cartridge</h3>
+              <button class="cls" type="button" data-cls="geb_PlasmaCartridge">geb_PlasmaCartridge</button>
+              <p class="desc">A sealed plasma magazine that can't be unloaded. Combine it with a 9V battery to recharge: a full battery fills a full cartridge, a partial one adds what it can. Comes in four colours, each with its own muzzle effect and a cell window that glows in that colour: <code>geb_PlasmaCartridge</code> (green), <code>_Arc</code> (blue), <code>_Lance</code> (lime) and <code>_Void</code> (violet). A cell cleared from the rifle's chamber comes back as a loose Plasma Cell (<code>Ammo_Plasma_Cell</code>) that loads back into any cartridge and keeps its colour.</p>
+              <dl class="facts"><div><dt>Capacity</dt><dd>15</dd></div><div><dt>Recharge</dt><dd>9V battery</dd></div><div><dt>Colours</dt><dd>4</dd></div></dl>
+            </div>
+          </article>
+          <article class="card item reveal">
+            <div class="pic"><img src="items/geb_PlasmaGrenade.webp" alt="Render of the Plasma Grenade" width="420" height="420" loading="lazy"></div>
+            <div class="info">
+              <p class="tag">Explosive</p>
+              <h3>Plasma Grenade</h3>
+              <button class="cls" type="button" data-cls="geb_PlasmaGrenade">geb_PlasmaGrenade</button>
+              <p class="desc">A dark violet alloy ball with a steel band and glowing magenta and cyan lights, held like the M67. Prime it and throw it: it sticks to the first thing it touches, rides along on players, infected, animals and vehicles, and bursts 3&nbsp;s after leaving your hand in a blue plasma blast. Smaller than the M67's blast but twice its damage, and whoever it's stuck to takes all of it. Until it leaves your hand you can disarm it again. Found at crash sites and sometimes on aliens.</p>
+              <dl class="facts"><div><dt>Fuse</dt><dd>3 s</dd></div><div><dt>Radius</dt><dd>4 m</dd></div></dl>
+            </div>
+          </article>
+          <article class="card item reveal">
+            <div class="pic"><img src="items/geb_FoilHat.webp" alt="Render of the Tin Foil Hat" width="400" height="420" loading="lazy"></div>
+            <div class="info">
+              <p class="tag">Clothing</p>
+              <h3>Tin Foil Hat</h3>
+              <button class="cls" type="button" data-cls="geb_FoilHat">geb_FoilHat</button>
+              <p class="desc">Aliens can't track an intact foil hat's wearer beyond 3&nbsp;m, so they can't zap you either. A light 3×2 hat, not a helmet.</p>
+              <dl class="facts"><div><dt>Slot</dt><dd>Headgear</dd></div><div><dt>Protects</dt><dd>Mind</dd></div></dl>
+            </div>
+          </article>
+          <article class="card item reveal">
+            <div class="pic"><img src="items/geb_GreenAlienMeat.webp" alt="Render of a raw Area 51 Steak" width="640" height="365" loading="lazy"></div>
+            <div class="thumbs">
+              <figure><img src="items/geb_GreenAlienMeat_Baked.webp" alt="Render of a baked Area 51 Steak" loading="lazy"><figcaption>Baked</figcaption></figure>
+              <figure><img src="items/geb_GreenAlienMeat_Boiled.webp" alt="Render of a boiled Area 51 Steak" loading="lazy"><figcaption>Boiled</figcaption></figure>
+              <figure><img src="items/geb_GreenAlienMeat_Dried.webp" alt="Render of a dried Area 51 Steak" loading="lazy"><figcaption>Dried</figcaption></figure>
+              <figure><img src="items/geb_GreenAlienMeat_Burnt.webp" alt="Render of a burnt Area 51 Steak" loading="lazy"><figcaption>Burnt</figcaption></figure>
+            </div>
+            <div class="info">
+              <p class="tag">Food</p>
+              <h3>Area 51 Steak</h3>
+              <button class="cls" type="button" data-cls="geb_GreenAlienMeat">geb_GreenAlienMeat</button>
+              <p class="desc">Skinning an alien gives two steaks. Eat it cooked (baked, boiled or dried) for 90 seconds of green night vision; raw, burnt or rotten meat gives food poisoning.</p>
+              <dl class="facts"><div><dt>Source</dt><dd>Alien</dd></div><div><dt>Cooked</dt><dd>Night vision</dd></div></dl>
+            </div>
+          </article>
+          <article class="card item reveal">
+            <div class="pic"><img src="items/geb_GreenAlienSkin.webp" alt="Render of a Roswell Hide" width="640" height="342" loading="lazy"></div>
+            <div class="info">
+              <p class="tag">Material</p>
+              <h3>Roswell Hide</h3>
+              <button class="cls" type="button" data-cls="geb_GreenAlienSkin">geb_GreenAlienSkin</button>
+              <p class="desc">Skinning an alien gives one. Tan it with garden lime into Roswell Leather, or tie it into a courier bag with a rope.</p>
+              <dl class="facts"><div><dt>Source</dt><dd>Alien</dd></div><div><dt>Used for</dt><dd>Leather, bags</dd></div></dl>
+            </div>
+          </article>
+          <article class="card item reveal">
+            <div class="pic"><img src="items/geb_GreenAlien.webp" alt="Render of a Little Green Man" width="297" height="420" loading="lazy"></div>
+            <div class="info">
+              <p class="tag">Creature</p>
+              <h3>Little Green Man</h3>
+              <button class="cls" type="button" data-cls="geb_GreenAlien">geb_GreenAlien</button>
+              <p class="desc">A hostile extraterrestrial with its own voice and footsteps, and green blood. Infected melee up close, a psychic zap at range, and a green burst and scream when it dies.</p>
+              <dl class="facts"><div><dt>Zap range</dt><dd>4–80 m</dd></div><div><dt>Harvestable</dt><dd>Yes</dd></div></dl>
+            </div>
+          </article>
+          <article class="card item reveal">
+            <div class="pic"><img src="items/geb_AlienTank.webp" alt="Render of the Specimen Tank with a sleeping alien in green fluid" width="223" height="420" loading="lazy"></div>
+            <div class="info">
+              <p class="tag">Prop</p>
+              <h3>Specimen Tank</h3>
+              <button class="cls" type="button" data-cls="geb_AlienTank">geb_AlienTank</button>
+              <p class="desc">A sleeping alien floating in glowing green fluid, with rising bubbles, drifting motes, a green glow and a low hum. Decoration for labs and bunkers: place it with an admin tool or a map editor; nothing spawns it.</p>
+              <dl class="facts"><div><dt>Height</dt><dd>3.6 m</dd></div><div><dt>Spawns</dt><dd>Placed only</dd></div></dl>
+            </div>
+          </article>
+        </div>
+
+        <header class="head small reveal">
+          <p class="eyebrow">Crafting</p>
+          <h2>Roswell Hide crafting.</h2>
+          <p class="sub">Green versions of vanilla's leather chain, on vanilla's models. Recipes work like vanilla's: tan the hide in your hands or in a barrel with garden lime, sew with a leather sewing kit, and break items back down with any knife or blade.</p>
+        </header>
+        <div class="grid items">
+          <article class="card item reveal">
+            <div class="pic"><img src="items/geb_GreenAlienLeather.webp" alt="Render of the Roswell Leather" width="538" height="320" loading="lazy"></div>
+            <div class="info">
+              <p class="tag">Material</p>
+              <h3>Roswell Leather</h3>
+              <button class="cls" type="button" data-cls="geb_GreenAlienLeather">geb_GreenAlienLeather</button>
+              <p class="desc">A Roswell Hide tanned with garden lime, by hand or in a barrel. Up to 4 pieces by hand from a hide in pristine condition (fewer from a damaged one), 6 in a barrel.</p>
+              <dl class="facts"><div><dt>Made from</dt><dd>Hide + lime</dd></div><div><dt>Per hide</dt><dd>Up to 4 (6 in a barrel)</dd></div></dl>
+            </div>
+          </article>
+          <article class="card item reveal">
+            <div class="pic duo"><figure><img src="items/geb_GreenAlienLeatherSack.webp" alt="Render of the Roswell Leather Backpack on the ground" width="473" height="420" loading="lazy"><figcaption>Ground</figcaption></figure><figure><img src="items/geb_GreenAlienLeatherSack_Worn.webp" alt="Render of the Roswell Leather Backpack as worn" width="295" height="420" loading="lazy"><figcaption>Worn</figcaption></figure></div>
+            <div class="info">
+              <p class="tag">Backpack</p>
+              <h3>Roswell Leather Backpack</h3>
+              <button class="cls" type="button" data-cls="geb_GreenAlienLeatherSack">geb_GreenAlienLeatherSack</button>
+              <p class="desc">Two Roswell Leather and a leather sewing kit. Holds as much as vanilla's leather backpack; cut it up to get one leather back.</p>
+              <dl class="facts"><div><dt>Recipe</dt><dd>2 leather + sewing kit</dd></div><div><dt>Cargo</dt><dd>6×7</dd></div></dl>
+            </div>
+          </article>
+          <article class="card item reveal">
+            <div class="pic duo"><figure><img src="items/geb_GreenAlienCourierBag.webp" alt="Render of the Roswell Hide Courier Bag on the ground" width="640" height="379" loading="lazy"><figcaption>Ground</figcaption></figure><figure><img src="items/geb_GreenAlienCourierBag_Worn.webp" alt="Render of the Roswell Hide Courier Bag as worn" width="640" height="345" loading="lazy"><figcaption>Worn</figcaption></figure></div>
+            <div class="info">
+              <p class="tag">Backpack</p>
+              <h3>Roswell Hide Courier Bag</h3>
+              <button class="cls" type="button" data-cls="geb_GreenAlienCourierBag">geb_GreenAlienCourierBag</button>
+              <p class="desc">A Roswell Hide and a rope. Breaking it down returns both.</p>
+              <dl class="facts"><div><dt>Recipe</dt><dd>Hide + rope</dd></div><div><dt>Cargo</dt><dd>5×6</dd></div></dl>
+            </div>
+          </article>
+          <article class="card item reveal">
+            <div class="pic duo"><figure><img src="items/geb_GreenAlienImprovisedBag.webp" alt="Render of the Roswell Hide Backpack on the ground" width="640" height="295" loading="lazy"><figcaption>Ground</figcaption></figure><figure><img src="items/geb_GreenAlienImprovisedBag_Worn.webp" alt="Render of the Roswell Hide Backpack as worn" width="560" height="420" loading="lazy"><figcaption>Worn</figcaption></figure></div>
+            <div class="info">
+              <p class="tag">Backpack</p>
+              <h3>Roswell Hide Backpack</h3>
+              <button class="cls" type="button" data-cls="geb_GreenAlienImprovisedBag">geb_GreenAlienImprovisedBag</button>
+              <p class="desc">A Roswell Hide courier bag lashed to a frame of three sticks. Breaking it down returns a stick and the hide.</p>
+              <dl class="facts"><div><dt>Recipe</dt><dd>Courier bag + 3 sticks</dd></div><div><dt>Cargo</dt><dd>7×5</dd></div></dl>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="install">
+      <div class="wrap narrow">
+        <header class="head reveal">
+          <p class="eyebrow">Deployment protocol</p>
+          <h2>Install Alien Invasion.</h2>
+          <p class="sub">Choose the player path for local use or the server path for a community server. The Workshop remains the authorized distribution source.</p>
+        </header>
+        <div class="seg reveal" role="group" aria-label="Installation type" id="install-switch">
+          <button type="button" data-install="player" aria-pressed="false">Player</button>
+          <button type="button" data-install="server" aria-pressed="true">Server owner</button>
+        </div>
+
+        <div data-install-panel="player" hidden>
+          <ol class="steps">
+            <li><span class="num">1</span><div><h3>Open the Workshop page</h3><p>Visit Alien Invasion on Steam and select <b>Subscribe</b>.</p></div></li>
+            <li><span class="num">2</span><div><h3>Let Steam download the mod</h3><p>Wait for the DayZ Workshop download to finish before starting the launcher.</p></div></li>
+            <li><span class="num">3</span><div><h3>Join a compatible server</h3><p>The official DayZ launcher can resolve and load the server's required Workshop mods automatically.</p></div></li>
+          </ol>
+          <p class="center"><a class="pill" href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308">Open Workshop item</a></p>
+        </div>
+
+        <div data-install-panel="server">
+          <ol class="steps">
+            <li><span class="num">1</span><div><h3>Download the Workshop item</h3><p>Subscribe with the server's Steam account or retrieve Workshop item <code>2840597308</code> using your normal SteamCMD workflow.</p></div></li>
+            <li><span class="num">2</span><div><h3>Install and key the server</h3><p>Place the published mod folder beside the DayZ server executable. Copy its <code>.bikey</code> file into the server's <code>keys</code> directory.</p></div></li>
+            <li><span class="num">3</span><div><h3>Add the launch parameter</h3><p>Load the mod in your server startup command. Keep the actual installed folder name if it differs from the example.</p><div class="code"><button class="copy" type="button" data-copy="launch-code">Copy</button><pre><code id="launch-code">-mod=@alieninvasion</code></pre></div></div></li>
+            <li><span class="num">4</span><div><h3>Start the server once</h3><p>On startup the mod writes its config and Central Economy files into the server profile folder (the one your <code>-profiles=</code> launch parameter points to), next to Gebsfish's files if you run it. They are only rewritten when the mod version changes, so your edits survive restarts.</p><div class="code"><pre><code>&lt;profile&gt;/Gebs/
+├── alieninvasion.json                  ← server settings (see Config)
 └── mpmissions/
     ├── alieninvasion-types.xml
     ├── alieninvasion-spawnabletypes.xml
     ├── alieninvasion-events.xml
     ├── alieninvasion-cfgeconomycore.xml
     ├── alieninvasion-cfgeventspawns.xml
-    └── alieninvasion-mapgroupproto.xml</code></pre></div><p>They are only rewritten when the mod version changes, so your edits survive restarts.</p></div></li>
-          <li><span>05</span><div><h3>Register the economy files</h3><p>Copy the <code>types</code>, <code>spawnabletypes</code>, and <code>events</code> files into a new <code>alieninvasion</code> folder inside your mission (<code>mpmissions/dayzOffline.&lt;map&gt;/alieninvasion/</code>), then paste the block from <code>alieninvasion-cfgeconomycore.xml</code> inside <code>&lt;economycore&gt;</code> in the mission's <code>cfgeconomycore.xml</code>. Your own <code>types.xml</code> and <code>events.xml</code> stay untouched.</p></div></li>
-          <li><span>06</span><div><h3>Merge positions and loot points</h3><p>Paste the <code>StaticAlienCrash</code> event from <code>alieninvasion-cfgeventspawns.xml</code> into <code>cfgeventspawns.xml</code>, and the <code>geb_Aliencrash</code> group from <code>alieninvasion-mapgroupproto.xml</code> into <code>mapgroupproto.xml</code>. On Chernarus you get 79 hand-picked crash sites; on any other map the generator borrows that mission's heli-crash positions.</p></div></li>
-          <li><span>07</span><div><h3>Restart and verify</h3><p>Restart, check the script and RPT logs for <code>[AlienInvasion]</code> lines, then visit a crash: loot and gas are there immediately, aliens appear once you're within 300&nbsp;m.</p></div></li>
-        </ol>
-        <a class="button button-secondary" href="server-guide.txt" download>Download the plain-text server guide</a>
-        <section class="ce-guide" aria-labelledby="ce-guide-title">
-          <div class="ce-intro">
-            <p class="kicker">Central Economy reference</p>
-            <h3 id="ce-guide-title">What the generated files contain</h3>
-            <p><strong>If you have ever configured DayZ's <code>StaticHeliCrash</code> event, this is the identical pattern.</strong> The UFO is a helicopter-crash-style dynamic event: the wreck is registered in <code>types.xml</code>, the event is defined in <code>events.xml</code>, and its positions live in <code>cfgeventspawns.xml</code> — exactly like a heli crash. The only difference is what happens on site: the UFO script handles the aliens, loot, and gas itself. You never add alien spawns, infected events, or territories for it.</p>
-            <p>Prefer to paste by hand, or using a hosting panel's economy editor? These are the same entries the generator writes. Stop the server and back up the mission folder before editing it.</p>
-          </div>
+    └── alieninvasion-mapgroupproto.xml</code></pre></div></div></li>
+            <li><span class="num">5</span><div><h3>Register the economy files</h3><p>Copy the <code>types</code>, <code>spawnabletypes</code> and <code>events</code> files into a new <code>alieninvasion</code> folder inside your mission (<code>mpmissions/dayzOffline.&lt;map&gt;/alieninvasion/</code>), then paste the block from <code>alieninvasion-cfgeconomycore.xml</code> inside <code>&lt;economycore&gt;</code> in the mission's <code>cfgeconomycore.xml</code>. Your own <code>types.xml</code> and <code>events.xml</code> stay untouched.</p></div></li>
+            <li><span class="num">6</span><div><h3>Merge positions and loot points</h3><p>Paste the <code>StaticAlienCrash</code> event from <code>alieninvasion-cfgeventspawns.xml</code> into <code>cfgeventspawns.xml</code>, and the <code>geb_Aliencrash</code> group from <code>alieninvasion-mapgroupproto.xml</code> into <code>mapgroupproto.xml</code>. On Chernarus you get 79 hand-picked crash sites; on any other map the generator borrows that mission's heli-crash positions.</p></div></li>
+            <li><span class="num">7</span><div><h3>Restart and verify</h3><p>Restart, check the script and RPT logs for <code>[AlienInvasion]</code> lines, then visit a crash: loot and gas are there immediately, aliens appear once you're within 300&nbsp;m.</p></div></li>
+          </ol>
+          <p class="center"><a class="link-arrow" href="server-guide.txt" download>Download the plain-text server guide</a></p>
 
-          <div class="important-note"><strong>Important update</strong><p>Do not copy the old Steam tutorial's <code>InfectedAlien</code> event or its <code>&lt;secondary&gt;InfectedAlien&lt;/secondary&gt;</code> line. The wreck script already creates 10–15 aliens around each UFO. Keeping the old secondary event can produce duplicate or excessive alien spawns.</p></div>
+          <section class="ce" aria-labelledby="ce-title">
+            <header class="head small reveal">
+              <p class="eyebrow">Central Economy reference</p>
+              <h2 id="ce-title">What the generated files contain.</h2>
+              <p class="sub"><b>If you have ever configured DayZ's <code>StaticHeliCrash</code> event, this is the identical pattern.</b> The wreck is registered in <code>types.xml</code>, the event is defined in <code>events.xml</code>, and its positions live in <code>cfgeventspawns.xml</code>, exactly like a heli crash. The only difference is what happens on site: the UFO script handles the aliens, loot and gas itself. You never add alien spawns, infected events or territories for it.</p>
+            </header>
+            <p class="note-lead">Prefer to paste by hand, or with a hosting panel's economy editor? These are the same entries the generator writes. Stop the server and back up the mission folder before editing it.</p>
+            <div class="note reveal"><b>Important update</b><p>Do not copy the old Steam tutorial's <code>InfectedAlien</code> event or its <code>&lt;secondary&gt;InfectedAlien&lt;/secondary&gt;</code> line. The wreck script already creates 10–15 aliens around each UFO. Keeping the old secondary event can produce duplicate or excessive alien spawns.</p></div>
 
-          <article class="ce-step">
-            <div class="ce-step-heading"><span>CE / 01</span><div><h4>Register the wreck in <code>db/types.xml</code></h4><p>Paste this entry anywhere inside the file's existing <code>&lt;types&gt; ... &lt;/types&gt;</code> element. Do not add a second root element. The generated file also registers every item, the meat, and the hide.</p></div></div>
-            <div class="xml-block"><div class="code-head"><span>db/types.xml</span><button class="copy-button" type="button" data-copy-target="ce-types">Copy</button></div><pre><code id="ce-types" class="language-xml">&lt;type name="geb_Aliencrash"&gt;
+            <ol class="steps ce-steps">
+              <li><span class="num">1</span><div><h3>Register the wreck in <code>db/types.xml</code></h3><p>Paste this entry anywhere inside the file's existing <code>&lt;types&gt; ... &lt;/types&gt;</code> element. Do not add a second root element. The generated file also registers every item, the meat and the hide.</p><div class="code"><span class="code-file">db/types.xml</span><button class="copy" type="button" data-copy="ce-types">Copy</button><pre><code id="ce-types" class="language-xml">&lt;type name="geb_Aliencrash"&gt;
     &lt;nominal&gt;0&lt;/nominal&gt;
     &lt;lifetime&gt;2100&lt;/lifetime&gt;
     &lt;restock&gt;0&lt;/restock&gt;
@@ -176,12 +358,8 @@
     &lt;quantmax&gt;-1&lt;/quantmax&gt;
     &lt;cost&gt;100&lt;/cost&gt;
     &lt;flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/&gt;
-&lt;/type&gt;</code></pre></div>
-          </article>
-
-          <article class="ce-step">
-            <div class="ce-step-heading"><span>CE / 02</span><div><h4>Define the event in <code>db/events.xml</code></h4><p>Paste this inside the existing <code>&lt;events&gt; ... &lt;/events&gt;</code> element. <code>nominal</code> is the target number of active crashes; lower it if three encounters are too many for your server.</p></div></div>
-            <div class="xml-block"><div class="code-head"><span>db/events.xml</span><button class="copy-button" type="button" data-copy-target="ce-events">Copy</button></div><pre><code id="ce-events" class="language-xml">&lt;event name="StaticAlienCrash"&gt;
+&lt;/type&gt;</code></pre></div></div></li>
+              <li><span class="num">2</span><div><h3>Define the event in <code>db/events.xml</code></h3><p>Paste this inside the existing <code>&lt;events&gt; ... &lt;/events&gt;</code> element. <code>nominal</code> is the target number of active crashes; lower it if three encounters are too many for your server.</p><div class="code"><span class="code-file">db/events.xml</span><button class="copy" type="button" data-copy="ce-events">Copy</button><pre><code id="ce-events" class="language-xml">&lt;event name="StaticAlienCrash"&gt;
     &lt;nominal&gt;3&lt;/nominal&gt;
     &lt;min&gt;0&lt;/min&gt;
     &lt;max&gt;0&lt;/max&gt;
@@ -197,193 +375,187 @@
     &lt;children&gt;
         &lt;child lootmax="15" lootmin="10" max="3" min="1" type="geb_Aliencrash"/&gt;
     &lt;/children&gt;
-&lt;/event&gt;</code></pre></div>
-          </article>
-
-          <article class="ce-step">
-            <div class="ce-step-heading"><span>CE / 03</span><div><h4>Add locations to <code>cfgeventspawns.xml</code></h4><p>Paste the event inside <code>&lt;eventposdef&gt;</code>. The generated file already contains real positions; if you write it by hand, replace every example coordinate with a safe, open location from your map. Add as many <code>&lt;pos&gt;</code> lines as you want; <code>x</code> and <code>z</code> are map coordinates and <code>a</code> is rotation.</p></div></div>
-            <div class="xml-block"><div class="code-head"><span>cfgeventspawns.xml</span><button class="copy-button" type="button" data-copy-target="ce-spawns">Copy</button></div><pre><code id="ce-spawns" class="language-xml">&lt;event name="StaticAlienCrash"&gt;
+&lt;/event&gt;</code></pre></div></div></li>
+              <li><span class="num">3</span><div><h3>Add locations to <code>cfgeventspawns.xml</code></h3><p>Paste the event inside <code>&lt;eventposdef&gt;</code>. The generated file already contains real positions; if you write it by hand, replace every example coordinate with a safe, open location from your map. Add as many <code>&lt;pos&gt;</code> lines as you want; <code>x</code> and <code>z</code> are map coordinates and <code>a</code> is rotation.</p><div class="code"><span class="code-file">cfgeventspawns.xml</span><button class="copy" type="button" data-copy="ce-spawns">Copy</button><pre><code id="ce-spawns" class="language-xml">&lt;event name="StaticAlienCrash"&gt;
     &lt;zone smin="1" smax="3" dmin="3" dmax="5" r="45"/&gt;
     &lt;!-- Replace these examples with coordinates for your map. --&gt;
     &lt;pos x="7500.0" z="7500.0" a="0.0"/&gt;
     &lt;pos x="8000.0" z="7200.0" a="90.0"/&gt;
-&lt;/event&gt;</code></pre></div>
-          </article>
-
-          <article class="ce-step compact">
-            <div class="ce-step-heading"><span>CE / 04</span><div><h4>Give the wreck loot points in <code>mapgroupproto.xml</code></h4><p>The event asks for 10–15 loot items at each wreck, and the Central Economy can only place them where the wreck's group defines points. Paste the generated <code>geb_Aliencrash</code> group inside <code>&lt;prototype&gt;</code>. It uses vanilla <code>Military</code> usage (heli-crash loot); its comment explains how to switch to a custom <code>UFO</code> usage instead.</p></div></div>
-          </article>
-
-          <article class="ce-step compact">
-            <div class="ce-step-heading"><span>CE / 05</span><div><h4>Validate, restart, and test</h4><p>Check that each classname and event name matches exactly, validate the XML files, and restart the server. Watch the server RPT/script logs for XML or CE errors. To test quickly, spawn <code>geb_Aliencrash</code> with an admin tool on a dedicated server — it runs the full encounter too — or temporarily set <code>nominal</code> to <code>1</code>.</p></div></div>
-          </article>
-
-          <div class="ce-reference"><p><strong>What each file does:</strong> <code>types.xml</code> registers the spawnable objects, <code>events.xml</code> controls the dynamic event, <code>cfgeventspawns.xml</code> supplies its possible positions, and <code>mapgroupproto.xml</code> gives the wreck its loot points.</p><p>Based on the <a href="https://steamcommunity.com/workshop/filedetails/discussion/2840597308/3453716885189551537/">original Alien Invasion tutorial</a>, updated for the current scripted encounter. See Bohemia's <a href="https://community.bistudio.com/wiki/DayZ%3ACentral_Economy_setup_for_custom_terrains">Central Economy reference</a> for the underlying file format.</p></div>
-        </section>
-        <div class="warning"><strong>Do not repack the Workshop release.</strong><span>Use a Steam Collection to distribute the required mod to your players.</span></div>
-      </div>
-    </section>
-
-    <section class="tab-panel" id="encounter" role="tabpanel" aria-labelledby="encounter-tab" hidden>
-      <div class="section-heading"><p class="kicker">Contact sequence</p><h2>How the crash encounter works</h2><p>Think of it as a helicopter crash from another world: the Central Economy places the wreck exactly like a vanilla heli crash event, and the wreck then runs the encounter — effects, audio, toxic gas, salvage, and its own alien spawns.</p></div>
-      <div class="timeline">
-        <article><span>01</span><div><h3>Impact</h3><p><code>geb_Aliencrash</code> enters the world through the Central Economy and plays the distant crash sound for everyone in range.</p></div></article>
-        <article><span>02</span><div><h3>Visual signal</h3><p>Clients attach green illumination, UFO fire, wreck particles, and ground mist to the crash object.</p></div></article>
-        <article><span>03</span><div><h3>Toxic cloud</h3><p>An 18&nbsp;m gas zone settles over the wreck. It uses DayZ's own contaminated-area rules, so NBC gear protects you. It disappears with the wreck.</p></div></article>
-        <article><span>04</span><div><h3>Salvage</h3><p>A 35% chance of a Montauk Rifle with a cartridge, plus up to two partly charged spare cartridges, lies 3–8&nbsp;m from the wreck.</p></div></article>
-        <article><span>05</span><div><h3>Contact</h3><p>When a survivor comes within 300&nbsp;m, 10–15 Little Green Men appear 5–25&nbsp;m from the wreck. Until then nothing runs, so idle crash sites cost the server nothing.</p></div></article>
-        <article><span>06</span><div><h3>Psychic attack</h3><p>An alien chasing you with a clear line of sight zaps you from 4–80&nbsp;m, at most once a minute each — a green burst and a crackle. Up close they claw like infected. A foil hat blocks the zaps.</p></div></article>
-        <article><span>07</span><div><h3>Recovery</h3><p>Skin dead aliens for Area 51 Steak and Roswell Hide. When the event ends and no one is within 1&nbsp;km, the wreck, its gas cloud, and any surviving aliens are cleaned up together.</p></div></article>
-      </div>
-      <div class="two-column">
-        <article class="info-card"><p class="kicker">Active wreck</p><div class="item-stage"><img src="items/geb_Aliencrash.webp" alt="Render of the crashed UFO wreck" width="640" height="311" loading="lazy"></div><h3><code>geb_Aliencrash</code></h3><p>Use this classname when you want the complete scripted event: audio, client effects, gas, salvage, and alien spawning. On a dedicated server, spawning it with an admin tool runs the full encounter too (everything except the distant crash sound).</p></article>
-        <article class="info-card"><p class="kicker">Visual prop</p><h3><code>StaticObj_geb_Aliencrash</code></h3><p>Use this for scenery or custom compositions. It displays the wreck model without running the encounter script.</p></article>
-      </div>
-    </section>
-
-    <section class="tab-panel" id="arsenal" role="tabpanel" aria-labelledby="arsenal-tab" hidden>
-      <div class="section-heading"><p class="kicker">Recovered materials</p><h2>Field inventory</h2><p>Seventeen public classnames cover the encounter, toxic cloud, creature, specimen tank, weapon, magazine, clothing, food, the Roswell Hide, and what you can make from it.</p></div>
-      <div class="loadout-grid">
-        <article class="loadout-card"><span class="item-tag">Weapon</span><div class="item-stage"><img src="items/geb_PlasmaRifle.webp" alt="Render of the Montauk Rifle" width="640" height="198" loading="lazy"></div><h3>Montauk Rifle</h3><code>geb_PlasmaRifle</code><p>A semi-automatic experimental rifle that fires visible green plasma bolts. Plasma deals double damage to aliens; every other firearm deals 75%.</p><dl><div><dt>Fire mode</dt><dd>Semi-auto</dd></div><div><dt>Vs aliens</dt><dd>×2 damage</dd></div></dl></article>
-        <article class="loadout-card"><span class="item-tag">Magazine</span><div class="item-stage"><img src="items/geb_PlasmaCartridge.webp" alt="Render of the Montauk Cartridge" width="640" height="377" loading="lazy"></div><h3>Montauk Cartridge</h3><code>geb_PlasmaCartridge</code><p>A sealed plasma magazine that can't be unloaded. Combine it with a 9V battery to recharge — a full battery fills a full cartridge, a partial one adds what it can. Comes in four colours, each with its own muzzle effect and a cell window that glows in that colour: <code>geb_PlasmaCartridge</code> (green), <code>_Arc</code> (blue), <code>_Lance</code> (lime) and <code>_Void</code> (violet).</p><dl><div><dt>Capacity</dt><dd>15</dd></div><div><dt>Recharge</dt><dd>9V battery</dd></div><div><dt>Colours</dt><dd>4</dd></div></dl></article>
-        <article class="loadout-card"><span class="item-tag">Clothing</span><div class="item-stage"><img src="items/geb_FoilHat.webp" alt="Render of the Tin Foil Hat" width="400" height="420" loading="lazy"></div><h3>Tin Foil Hat</h3><code>geb_FoilHat</code><p>Aliens can't track an intact foil hat's wearer beyond 3&nbsp;m, so they can't zap you either. A light 3×2 hat, not a helmet.</p><dl><div><dt>Slot</dt><dd>Headgear</dd></div><div><dt>Protects</dt><dd>Mind</dd></div></dl></article>
-        <article class="loadout-card"><span class="item-tag">Food</span><div class="item-stage"><span class="stage-label">Raw</span><img src="items/geb_GreenAlienMeat.webp" alt="Render of a raw Area 51 Steak" width="640" height="365" loading="lazy"></div><div class="stage-row"><figure><img src="items/geb_GreenAlienMeat_Baked.webp" alt="Render of a baked Area 51 Steak" width="640" height="365" loading="lazy"><figcaption>Baked</figcaption></figure><figure><img src="items/geb_GreenAlienMeat_Boiled.webp" alt="Render of a boiled Area 51 Steak" width="640" height="365" loading="lazy"><figcaption>Boiled</figcaption></figure><figure><img src="items/geb_GreenAlienMeat_Dried.webp" alt="Render of a dried Area 51 Steak" width="640" height="365" loading="lazy"><figcaption>Dried</figcaption></figure><figure><img src="items/geb_GreenAlienMeat_Burnt.webp" alt="Render of a burnt Area 51 Steak" width="640" height="365" loading="lazy"><figcaption>Burnt</figcaption></figure></div><h3>Area 51 Steak</h3><code>geb_GreenAlienMeat</code><p>Skinning an alien gives two steaks. Eat it cooked (baked, boiled, or dried) for 90 seconds of green night vision; raw, burnt, or rotten meat gives food poisoning.</p><dl><div><dt>Source</dt><dd>Alien</dd></div><div><dt>Cooked</dt><dd>Night vision</dd></div></dl></article>
-        <article class="loadout-card"><span class="item-tag">Material</span><div class="item-stage"><img src="items/geb_GreenAlienSkin.webp" alt="Render of a Roswell Hide" width="640" height="342" loading="lazy"></div><h3>Roswell Hide</h3><code>geb_GreenAlienSkin</code><p>Skinning an alien gives one. Tan it with garden lime into Roswell Leather, or tie it into a courier bag with a rope.</p><dl><div><dt>Source</dt><dd>Alien</dd></div><div><dt>Used for</dt><dd>Leather, bags</dd></div></dl></article>
-        <article class="loadout-card"><span class="item-tag">Creature</span><div class="item-stage"><img src="items/geb_GreenAlien.webp" alt="Render of a Little Green Man" width="297" height="420" loading="lazy"></div><h3>Little Green Man</h3><code>geb_GreenAlien</code><p>A hostile extraterrestrial with its own voice and footsteps, and green blood. Infected melee up close, a psychic zap at range, and a green burst and scream when it dies.</p><dl><div><dt>Zap range</dt><dd>4–80 m</dd></div><div><dt>Harvestable</dt><dd>Yes</dd></div></dl></article>
-        <article class="loadout-card"><span class="item-tag">Prop</span><div class="item-stage"><img src="items/geb_AlienTank.webp" alt="Render of the Specimen Tank with a sleeping alien in green fluid" width="223" height="420" loading="lazy"></div><h3>Specimen Tank</h3><code>geb_AlienTank</code><p>A sleeping alien floating in glowing green fluid, with rising bubbles, drifting motes, a green glow and a low hum. Decoration for labs and bunkers: place it with an admin tool or a map editor; nothing spawns it.</p><dl><div><dt>Height</dt><dd>3.6 m</dd></div><div><dt>Spawns</dt><dd>Placed only</dd></div></dl></article>
-      </div>
-      <div class="subsection">
-        <div class="section-heading"><p class="kicker">Crafting</p><h3>Roswell Hide crafting</h3><p>Green versions of vanilla's leather chain, on vanilla's models. Recipes work like vanilla's: tan the hide in your hands or in a barrel with garden lime, sew with a leather sewing kit, and break items back down with any knife or blade.</p></div>
-        <div class="loadout-grid">
-        <article class="loadout-card"><span class="item-tag">Material</span><div class="item-stage"><img src="items/geb_GreenAlienLeather.webp" alt="Render of the Roswell Leather" width="538" height="320" loading="lazy"></div><h3>Roswell Leather</h3><code>geb_GreenAlienLeather</code><p>A Roswell Hide tanned with garden lime, by hand or in a barrel. Up to 12 pieces from a hide in pristine condition, fewer from a damaged one.</p><dl><div><dt>Made from</dt><dd>Hide + lime</dd></div><div><dt>Per hide</dt><dd>Up to 12</dd></div></dl></article>
-        <article class="loadout-card"><span class="item-tag">Backpack</span><div class="item-stage item-stage-pair"><figure><img src="items/geb_GreenAlienLeatherSack.webp" alt="Render of the Roswell Leather Backpack on the ground" width="473" height="420" loading="lazy"><figcaption>Ground</figcaption></figure><figure><img src="items/geb_GreenAlienLeatherSack_Worn.webp" alt="Render of the Roswell Leather Backpack as worn" width="295" height="420" loading="lazy"><figcaption>Worn</figcaption></figure></div><h3>Roswell Leather Backpack</h3><code>geb_GreenAlienLeatherSack</code><p>Two Roswell Leather and a leather sewing kit. Holds as much as vanilla's leather backpack; cut it up to get one leather back.</p><dl><div><dt>Recipe</dt><dd>2 leather + sewing kit</dd></div><div><dt>Cargo</dt><dd>6×7</dd></div></dl></article>
-        <article class="loadout-card"><span class="item-tag">Backpack</span><div class="item-stage item-stage-pair"><figure><img src="items/geb_GreenAlienCourierBag.webp" alt="Render of the Roswell Hide Courier Bag on the ground" width="640" height="379" loading="lazy"><figcaption>Ground</figcaption></figure><figure><img src="items/geb_GreenAlienCourierBag_Worn.webp" alt="Render of the Roswell Hide Courier Bag as worn" width="640" height="345" loading="lazy"><figcaption>Worn</figcaption></figure></div><h3>Roswell Hide Courier Bag</h3><code>geb_GreenAlienCourierBag</code><p>A Roswell Hide and a rope. Breaking it down returns both.</p><dl><div><dt>Recipe</dt><dd>Hide + rope</dd></div><div><dt>Cargo</dt><dd>5×6</dd></div></dl></article>
-        <article class="loadout-card"><span class="item-tag">Backpack</span><div class="item-stage item-stage-pair"><figure><img src="items/geb_GreenAlienImprovisedBag.webp" alt="Render of the Roswell Hide Backpack on the ground" width="640" height="295" loading="lazy"><figcaption>Ground</figcaption></figure><figure><img src="items/geb_GreenAlienImprovisedBag_Worn.webp" alt="Render of the Roswell Hide Backpack as worn" width="560" height="420" loading="lazy"><figcaption>Worn</figcaption></figure></div><h3>Roswell Hide Backpack</h3><code>geb_GreenAlienImprovisedBag</code><p>A Roswell Hide courier bag lashed to a frame of three sticks. Breaking it down returns a stick and the hide.</p><dl><div><dt>Recipe</dt><dd>Courier bag + 3 sticks</dd></div><div><dt>Cargo</dt><dd>7×5</dd></div></dl></article>
+&lt;/event&gt;</code></pre></div></div></li>
+              <li><span class="num">4</span><div><h3>Give the wreck loot points in <code>mapgroupproto.xml</code></h3><p>The event asks for 10–15 loot items at each wreck, and the Central Economy can only place them where the wreck's group defines points. Paste the generated <code>geb_Aliencrash</code> group inside <code>&lt;prototype&gt;</code>. It uses vanilla <code>Military</code> usage (heli-crash loot); its comment explains how to switch to a custom <code>UFO</code> usage instead.</p></div></li>
+              <li><span class="num">5</span><div><h3>Validate, restart and test</h3><p>Check that each classname and event name matches exactly, validate the XML files, and restart the server. Watch the server RPT and script logs for XML or CE errors. To test quickly, spawn <code>geb_Aliencrash</code> with an admin tool on a dedicated server (it runs the full encounter too), or temporarily set <code>nominal</code> to <code>1</code>.</p></div></li>
+            </ol>
+            <p class="ref"><b>What each file does:</b> <code>types.xml</code> registers the spawnable objects, <code>events.xml</code> controls the dynamic event, <code>cfgeventspawns.xml</code> supplies its possible positions, and <code>mapgroupproto.xml</code> gives the wreck its loot points. Based on the <a href="https://steamcommunity.com/workshop/filedetails/discussion/2840597308/3453716885189551537/">original Alien Invasion tutorial</a>, updated for the current scripted encounter. See Bohemia's <a href="https://community.bistudio.com/wiki/DayZ%3ACentral_Economy_setup_for_custom_terrains">Central Economy reference</a> for the underlying file format.</p>
+          </section>
+          <div class="note warn reveal"><b>Do not repack the Workshop release.</b><p>Use a Steam Collection to distribute the required mod to your players.</p></div>
         </div>
       </div>
     </section>
 
-    <section class="tab-panel" id="config" role="tabpanel" aria-labelledby="config-tab" hidden>
-      <div class="section-heading"><p class="kicker">Server tuning</p><h2>alieninvasion.json</h2><p>Created on first start at <code>$profile:Gebs/alieninvasion.json</code>, beside Gebsfish's configs. Every value is used on the server only, so nothing needs to be sent to players. Edit it with the server stopped; changes apply on the next start.</p></div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
-          <tbody>
-            <tr><td><code>CrashAliensMin</code> / <code>CrashAliensMax</code></td><td>10 / 15</td><td>How many aliens each wreck spawns.</td></tr>
-            <tr><td><code>CrashAliensSpawnDistance</code></td><td>300</td><td>Metres a player must come within before a wreck's aliens appear. <code>0</code> spawns them as soon as the UFO crashes.</td></tr>
-            <tr><td><code>CrashRifleChance</code></td><td>0.35</td><td>Chance (0–1) a Montauk Rifle with a cartridge lies in the wreckage.</td></tr>
-            <tr><td><code>CrashSpareCartridgesMax</code></td><td>2</td><td>Up to this many partly charged spare cartridges per wreck.</td></tr>
-            <tr><td><code>CrashGasZone</code></td><td>true</td><td>Surround each wreck with an 18&nbsp;m toxic cloud (NBC gear protects).</td></tr>
-            <tr><td><code>PsychicZapEnabled</code></td><td>true</td><td>Aliens zap the player they're chasing from mid range.</td></tr>
-            <tr><td><code>PsychicZapMinRange</code> / <code>PsychicZapRange</code></td><td>4 / 80</td><td>Distance band in metres for the zap. Closer than the minimum they use melee. Needs a clear line of sight.</td></tr>
-            <tr><td><code>PsychicZapCooldown</code></td><td>60</td><td>Seconds between zaps from the same alien.</td></tr>
-            <tr><td><code>PlasmaDamageVsAliens</code></td><td>2.0</td><td>Damage multiplier for plasma bolts against aliens.</td></tr>
-            <tr><td><code>OtherFirearmDamageVsAliens</code></td><td>0.75</td><td>Damage multiplier for every other firearm against aliens.</td></tr>
-            <tr><td><code>FoilHatDetectRange</code></td><td>3</td><td>Aliens can't target a foil hat's wearer beyond this many metres.</td></tr>
-            <tr><td><code>AlienVisionSeconds</code></td><td>90</td><td>Night vision from eating cooked alien meat.</td></tr>
-            <tr><td><code>BadMeatPoison</code></td><td>100</td><td>Food-poisoning agents per bite of raw, burnt, or rotten alien meat.</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="two-column">
-        <article class="info-card"><p class="kicker">Safe to edit</p><h3>Your values are kept</h3><p>A broken file is never overwritten — the server logs the error and uses defaults for that session. The file is only rewritten on a mod update, which adds any new settings without touching yours. Out-of-range values are clamped (minimum never above maximum, chances 0–1).</p></article>
-        <article class="info-card"><p class="kicker">Plain-language notes</p><h3>Built-in help</h3><p>The JSON includes <code>…Info</code> lines explaining each group of settings, so you can tune it without this page open.</p></article>
-      </div>
-    </section>
-
-    <section class="tab-panel" id="classnames" role="tabpanel" aria-labelledby="classnames-tab" hidden>
-      <div class="section-heading"><p class="kicker">Server reference</p><h2>Classname database</h2><p>Search or filter every public classname. Use the copy button to move a value directly into an economy, trader, or admin-tool configuration.</p></div>
-      <div class="table-controls">
-        <label><span class="sr-only">Search classnames</span><input id="classname-search" type="search" placeholder="Search classname or description…" autocomplete="off"></label>
-        <select id="classname-filter" aria-label="Filter by type"><option value="all">All types</option><option value="Encounter">Encounter</option><option value="Creature">Creature</option><option value="Prop">Prop</option><option value="Weapon">Weapon</option><option value="Magazine">Magazine</option><option value="Food">Food</option><option value="Material">Material</option><option value="Backpack">Backpack</option><option value="Clothing">Clothing</option></select>
-        <span class="result-count" id="result-count">17 entries</span>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Classname</th><th>Type</th><th>Description</th><th><span class="sr-only">Copy</span></th></tr></thead>
-          <tbody id="classname-body"></tbody>
-        </table>
-      </div>
-      <p class="empty-state" id="empty-state" hidden>No classnames match that search.</p>
-    </section>
-
-    <section class="tab-panel" id="faq" role="tabpanel" aria-labelledby="faq-tab" hidden>
-      <div class="section-heading"><p class="kicker">Troubleshooting</p><h2>Frequently asked questions</h2><p>Answers for common player and server-owner setup issues.</p></div>
-      <div class="accordion">
-        <details><summary>Does the mod replace vanilla helicopter crashes?<span>+</span></summary><p>No. Alien Invasion adds its own separate event that <em>behaves like</em> a heli crash — same dynamic-event system, same setup files — but with its own UFO wreck class and sound set. Vanilla crash events keep running untouched.</p></details>
-        <details><summary>Where do the aliens come from? Do I configure their spawns?<span>+</span></summary><p>The wreck spawns them itself. Once a player comes within 300&nbsp;m (<code>CrashAliensSpawnDistance</code>), the wreck places 10–15 aliens at random positions 5–25&nbsp;m around it, and removes any survivors when it despawns. Do not add infected events, zombie territories, or any alien spawn configuration — that would only create duplicates.</p></details>
-        <details><summary>Why did I spawn the static wreck and get no aliens?<span>+</span></summary><p><code>StaticObj_geb_Aliencrash</code> is visual scenery only. Use <code>geb_Aliencrash</code> — through the Central Economy, or with an admin tool on a dedicated server — for the scripted encounter.</p></details>
-        <details><summary>Something keeps hitting me from far away. What is it?<span>+</span></summary><p>A psychic zap: an alien chasing you, with a clear line of sight, hits you from 4–80&nbsp;m, at most once a minute each, with a green burst and a crackle. Break line of sight, close the distance, or wear a tin foil hat — it blocks the zaps completely. Server owners can tune or disable it in <code>alieninvasion.json</code>.</p></details>
-        <details><summary>Is the gas around the wreck dangerous?<span>+</span></summary><p>Yes. It's DayZ's own contaminated-area effect, so a gas mask and NBC suit protect you. The salvage lies inside it. Server owners can turn it off with <code>CrashGasZone</code>.</p></details>
-        <details><summary>How do I recharge plasma cartridges?<span>+</span></summary><p>Combine a cartridge with a charged 9V battery (drag one onto the other, or hold one and use the action on the other). A full battery refills a whole cartridge; a partial one adds as many cells as its charge covers.</p></details>
-        <details><summary>Does every player need the mod?<span>+</span></summary><p>Yes. It contains custom models, textures, sounds, particles, scripts, and localization, so it must run on the server and all clients.</p></details>
-        <details><summary>Does Alien Invasion require Community Framework?<span>+</span></summary><p>No third-party mod is declared as a runtime dependency in the source.</p></details>
-        <details><summary>Where are the mission XML files?<span>+</span></summary><p>The server writes them on first start into <code>$profile:Gebs/mpmissions/</code> (see the Install tab). The mod never edits your mission folder itself — you copy the files in, so your own balance stays yours.</p></details>
-        <details><summary>I changed alieninvasion.json and nothing happened.<span>+</span></summary><p>The file is read when the server starts, so restart after editing. If the server log shows <code>[AlienInvasion] alieninvasion.json failed to load</code>, the JSON has a syntax error (often a missing comma); the server runs on defaults until it's fixed, and your file is left untouched.</p></details>
-        <details><summary>Can I include this in a server pack?<span>+</span></summary><p>No. Subscribe to the authorized Workshop release and use a Steam Collection for your server's mod list.</p></details>
-      </div>
-      <div class="support-grid">
-        <a href="https://discord.gg/G8uSGZ8yyf"><span>Community support</span><strong>Join Discord →</strong></a>
-        <a href="https://github.com/PackJC/alieninvasion/issues"><span>Found a code issue?</span><strong>Open a GitHub issue →</strong></a>
-        <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><span>Published release</span><strong>Visit Workshop →</strong></a>
+    <section class="band soft" id="config">
+      <div class="wrap">
+        <header class="head reveal">
+          <p class="eyebrow">Server tuning</p>
+          <h2>alieninvasion.json</h2>
+          <p class="sub">Created on first start at <code>$profile:Gebs/alieninvasion.json</code>, beside Gebsfish's configs. Every value is used on the server only, so nothing needs to be sent to players. Edit it with the server stopped; changes apply on the next start.</p>
+        </header>
+        <div class="table reveal">
+          <table>
+            <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td><code>CrashAliensMin</code> / <code>CrashAliensMax</code></td><td>10 / 15</td><td>How many aliens each wreck spawns.</td></tr>
+              <tr><td><code>CrashAliensSpawnDistance</code></td><td>300</td><td>Metres a player must come within before a wreck's aliens appear. <code>0</code> spawns them as soon as the UFO crashes.</td></tr>
+              <tr><td><code>CrashRifleChance</code></td><td>0.35</td><td>Chance (0–1) a Montauk Rifle with a cartridge lies in the wreckage.</td></tr>
+              <tr><td><code>CrashSpareCartridgesMax</code></td><td>2</td><td>Up to this many partly charged spare cartridges per wreck.</td></tr>
+              <tr><td><code>CrashPlasmaGrenadesMax</code></td><td>2</td><td>Up to this many plasma grenades per wreck.</td></tr>
+              <tr><td><code>CrashGasZone</code></td><td>true</td><td>Surround each wreck with an 8&nbsp;m toxic cloud (NBC gear protects).</td></tr>
+              <tr><td><code>PsychicZapEnabled</code></td><td>true</td><td>Aliens zap the player they're chasing from mid range.</td></tr>
+              <tr><td><code>PsychicZapMinRange</code> / <code>PsychicZapRange</code></td><td>4 / 80</td><td>Distance band in metres for the zap. Closer than the minimum they use melee. Needs a clear line of sight.</td></tr>
+              <tr><td><code>PsychicZapCooldown</code></td><td>60</td><td>Seconds between zaps from the same alien.</td></tr>
+              <tr><td><code>PlasmaDamageVsAliens</code></td><td>2.0</td><td>Damage multiplier for plasma bolts against aliens.</td></tr>
+              <tr><td><code>OtherFirearmDamageVsAliens</code></td><td>0.75</td><td>Damage multiplier for every other firearm against aliens.</td></tr>
+              <tr><td><code>FoilHatDetectRange</code></td><td>3</td><td>Aliens can't target a foil hat's wearer beyond this many metres.</td></tr>
+              <tr><td><code>AlienVisionSeconds</code></td><td>90</td><td>Night vision from eating cooked alien meat.</td></tr>
+              <tr><td><code>BadMeatPoison</code></td><td>100</td><td>Food-poisoning agents per bite of raw, burnt or rotten alien meat.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pair">
+          <article class="panel reveal"><p class="eyebrow">Safe to edit</p><h3>Your values are kept.</h3><p>A broken file is never overwritten: the server logs the error and uses defaults for that session. The file is only rewritten on a mod update, which adds any new settings without touching yours. Out-of-range values are clamped (minimum never above maximum, chances 0–1).</p></article>
+          <article class="panel reveal"><p class="eyebrow">Plain-language notes</p><h3>Built-in help.</h3><p>The JSON includes <code>…Info</code> lines explaining each group of settings, so you can tune it without this page open.</p></article>
+        </div>
       </div>
     </section>
 
-    <section class="tab-panel" id="changelog" role="tabpanel" aria-labelledby="changelog-tab" hidden>
-      <div class="section-heading"><p class="kicker">Transmission log</p><h2>Changelog</h2><p>What changed in each release. Server owners: 1.2.0 rewrites the generated economy files with the new items — copy the new types file into your mission again.</p></div>
-      <div class="timeline">
-        <article><span>1.2</span><div><h3>Version 1.2.0 — Roswell Hide crafting</h3><ul>
-          <li>The Roswell Hide tans into green Roswell Leather with garden lime, by hand or in a barrel. (It used to give ordinary brown leather.)</li>
-          <li>Roswell Leather sews into a green Roswell Leather Backpack; the hide and a rope make a Roswell Hide Courier Bag, which takes three sticks to become a Roswell Hide Backpack. All of them break back down like vanilla's.</li>
-          <li>Reworked textures: the hide looks like the alien's skin, the steak is green at every cooking stage (it turned back into beef when cooked), the Montauk Rifle is twice the resolution, and the tin foil hat reflects silver instead of gold.</li>
-          <li>Four new items in the generated types file; new strings translated into all 13 languages.</li>
-        </ul>
-          <div class="compare-grid">
-            <figure class="compare"><div class="compare-pair"><div><img src="items/compare/steak_1.1.webp" alt="Area 51 Steak in 1.1" width="480" height="274" loading="lazy"><span>1.1</span></div><div><img src="items/compare/steak_1.2.webp" alt="Area 51 Steak in 1.2" width="480" height="274" loading="lazy"><span>1.2</span></div></div><figcaption>Area 51 Steak, raw</figcaption></figure>
-            <figure class="compare"><div class="compare-pair"><div><img src="items/compare/steak_cooked_1.1.webp" alt="Area 51 Steak in 1.1" width="480" height="274" loading="lazy"><span>1.1</span></div><div><img src="items/compare/steak_cooked_1.2.webp" alt="Area 51 Steak in 1.2" width="480" height="274" loading="lazy"><span>1.2</span></div></div><figcaption>Area 51 Steak, baked: cooked steak used to turn back into vanilla beef</figcaption></figure>
-            <figure class="compare"><div class="compare-pair"><div><img src="items/compare/hide_1.1.webp" alt="Roswell Hide in 1.1" width="480" height="257" loading="lazy"><span>1.1</span></div><div><img src="items/compare/hide_1.2.webp" alt="Roswell Hide in 1.2" width="480" height="257" loading="lazy"><span>1.2</span></div></div><figcaption>Roswell Hide: now the alien's own skin tone</figcaption></figure>
-            <figure class="compare"><div class="compare-pair"><div><img src="items/compare/foilhat_1.1.webp" alt="Tin Foil Hat in 1.1" width="286" height="300" loading="lazy"><span>1.1</span></div><div><img src="items/compare/foilhat_1.2.webp" alt="Tin Foil Hat in 1.2" width="286" height="300" loading="lazy"><span>1.2</span></div></div><figcaption>Tin Foil Hat: its reflection map was a gold sunset</figcaption></figure>
-            <figure class="compare wide"><div class="compare-pair"><div><img src="items/compare/rifle_1.1.webp" alt="Montauk Rifle close-up in 1.1" width="480" height="213" loading="lazy"><span>1.1</span></div><div><img src="items/compare/rifle_1.2.webp" alt="Montauk Rifle close-up in 1.2" width="480" height="213" loading="lazy"><span>1.2</span></div></div><figcaption>Montauk Rifle close-up: texture and normal map doubled to 1024</figcaption></figure>
-          </div></div></article>
-        <article><span>1.1</span><div><h3>Version 1.1.0 — fixes</h3><ul>
-          <li>Montauk Rifle no longer locks up after the last shot in a cartridge. The script ran the FAL's bolt-lock logic on the Ruger 10/22 animations the config uses.</li>
-          <li>Aliens have voices and footsteps. They were silent and filled server logs with "No sound callback" warnings.</li>
-          <li>Alien attacks no longer land invisible hits from 100&nbsp;m every 100 seconds: up close they use normal infected melee, at range the new visible psychic zap.</li>
-          <li>Surviving aliens are removed with their wreck instead of piling up for the whole server uptime.</li>
-          <li>Vanilla helicopter and sleigh crashes keep their distant crash sound with the mod loaded.</li>
-          <li>The wreck's green light and fire/mist effects are removed when it despawns.</li>
-          <li>Aliens spawn on the ground, in the configured 10–15 count.</li>
-          <li>Skinning an alien now gives the Roswell Hide (the config named a class that didn't exist).</li>
-          <li>The tin foil hat shows its name instead of its description, is hat-sized (3×2, 60&nbsp;g), and no longer loads missing damage materials.</li>
-          <li>The UFO wreck no longer needs another mod's Mi-8 textures.</li>
-          <li>Plasma shots play one muzzle effect instead of two and stop logging "Plasma_Shot" warnings.</li>
-          <li>Config patches no longer reuse a vanilla patch name and load after every vanilla class they extend.</li>
-          <li>Removed the alien preparation recipe, which could never run (recipes can't use a corpse); skinning gives the steaks.</li>
-        </ul></div></article>
-        <article><span>1.1</span><div><h3>Version 1.1.0 — new</h3><ul>
-          <li>Psychic zap: aliens hit their target from 4–80&nbsp;m in line of sight, with a green burst and crackle.</li>
-          <li>Tin foil hat works: aliens can't track you beyond 3&nbsp;m and can't zap you.</li>
-          <li>Toxic gas zone around each wreck; salvage (35% rifle, up to two spare cartridges) in the wreckage.</li>
-          <li>Aliens appear when a player comes within 300&nbsp;m, so idle crash sites cost nothing.</li>
-          <li>Admin-spawned wrecks run the full encounter on dedicated servers.</li>
-          <li>Recharge cartridges with a 9V battery.</li>
-          <li>Green plasma bolts; plasma deals double damage to aliens, other firearms 75%.</li>
-          <li>Alien death burst and scream.</li>
-          <li>Cooked alien meat gives 90 seconds of green night vision; bad meat gives food poisoning.</li>
-          <li><code>$profile:Gebs/alieninvasion.json</code> with every setting, and generated economy files in <code>$profile:Gebs/mpmissions/</code>.</li>
-          <li>New strings translated into all 13 languages.</li>
-        </ul></div></article>
-        <article><span>1.0</span><div><h3>Version 1.0</h3><p>First release: the UFO crash event, Little Green Men, the Montauk Rifle and Cartridge, the tin foil hat, Area 51 Steak and Roswell Hide.</p></div></article>
+    <section class="band" id="classnames">
+      <div class="wrap">
+        <header class="head reveal">
+          <p class="eyebrow">Reference</p>
+          <h2>Every classname.</h2>
+          <p class="sub">All public classes, for spawning, trader lists and loot tables. Click a name to copy it.</p>
+        </header>
+        <div class="tools reveal">
+          <label class="search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><input id="classname-search" type="search" placeholder="Search classnames" autocomplete="off" aria-label="Search classnames"></label>
+          <label class="select"><span class="sr">Type</span><select id="classname-filter"><option value="all">All types</option><option value="Encounter">Encounter</option><option value="Creature">Creature</option><option value="Prop">Prop</option><option value="Weapon">Weapon</option><option value="Magazine">Magazine</option><option value="Ammunition">Ammunition</option><option value="Explosive">Explosive</option><option value="Food">Food</option><option value="Material">Material</option><option value="Backpack">Backpack</option><option value="Clothing">Clothing</option></select></label>
+          <span class="count" id="result-count"></span>
+        </div>
+        <div class="table reveal" id="classname-table"><table><thead><tr><th>Classname</th><th>Type</th><th>Description</th></tr></thead><tbody id="classname-body"></tbody></table></div>
+        <p class="empty" id="empty-state" hidden>No classnames match that search.</p>
+      </div>
+    </section>
+
+    <section class="band soft" id="faq">
+      <div class="wrap narrow">
+        <header class="head reveal"><p class="eyebrow">Troubleshooting</p><h2>Questions.</h2></header>
+        <div class="faq reveal">
+          <details><summary>Does the mod replace vanilla helicopter crashes?</summary><p>No. Alien Invasion adds its own separate event that <em>behaves like</em> a heli crash (same dynamic-event system, same setup files) but with its own UFO wreck class and sound set. Vanilla crash events keep running untouched.</p></details>
+          <details><summary>Where do the aliens come from? Do I configure their spawns?</summary><p>The wreck spawns them itself. Once a player comes within 300&nbsp;m (<code>CrashAliensSpawnDistance</code>), the wreck places 10–15 aliens at random positions 5–25&nbsp;m around it, and removes any survivors when it despawns. Do not add infected events, zombie territories or any alien spawn configuration: that would only create duplicates.</p></details>
+          <details><summary>Why did I spawn the static wreck and get no aliens?</summary><p><code>StaticObj_geb_Aliencrash</code> is visual scenery only. Use <code>geb_Aliencrash</code>, through the Central Economy or with an admin tool on a dedicated server, for the scripted encounter.</p></details>
+          <details><summary>Something keeps hitting me from far away. What is it?</summary><p>A psychic zap: an alien chasing you, with a clear line of sight, hits you from 4–80&nbsp;m, at most once a minute each: a green beam from the alien's head and a crackle where it lands. Break line of sight, close the distance, or wear a tin foil hat, which blocks the zaps completely. Server owners can tune or disable it in <code>alieninvasion.json</code>.</p></details>
+          <details><summary>Is the gas around the wreck dangerous?</summary><p>Yes. It's DayZ's own contaminated-area effect, so a gas mask and NBC suit protect you. The salvage lies inside it. Server owners can turn it off with <code>CrashGasZone</code>.</p></details>
+          <details><summary>How do I recharge plasma cartridges?</summary><p>Combine a cartridge with a charged 9V battery (drag one onto the other, or hold one and use the action on the other). A full battery refills a whole cartridge; a partial one adds as many cells as its charge covers.</p></details>
+          <details><summary>Does every player need the mod?</summary><p>Yes. It contains custom models, textures, sounds, particles, scripts and localization, so it must run on the server and all clients.</p></details>
+          <details><summary>Does Alien Invasion require Community Framework?</summary><p>No third-party mod is declared as a runtime dependency in the source.</p></details>
+          <details><summary>Where are the mission XML files?</summary><p>The server writes them on first start into <code>$profile:Gebs/mpmissions/</code> (see <a href="#install">Setup</a>). The mod never edits your mission folder itself: you copy the files in, so your own balance stays yours.</p></details>
+          <details><summary>I changed alieninvasion.json and nothing happened.</summary><p>The file is read when the server starts, so restart after editing. If the server log shows <code>[AlienInvasion] alieninvasion.json failed to load</code>, the JSON has a syntax error (often a missing comma); the server runs on defaults until it's fixed, and your file is left untouched.</p></details>
+          <details><summary>Can I include this in a server pack?</summary><p>No. Subscribe to the authorized Workshop release and use a Steam Collection for your server's mod list.</p></details>
+        </div>
+        <div class="support reveal">
+          <a href="https://discord.gg/G8uSGZ8yyf"><span>Community support</span><b>Join Discord</b></a>
+          <a href="https://github.com/PackJC/alieninvasion/issues"><span>Found a code issue?</span><b>Open a GitHub issue</b></a>
+          <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308"><span>Published release</span><b>Visit Workshop</b></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="changelog">
+      <div class="wrap narrow">
+        <header class="head reveal">
+          <p class="eyebrow">Transmission log</p>
+          <h2>What's new.</h2>
+          <p class="sub">What changed in each release. Server owners: 2.0.0 rewrites the generated economy files. Copy the new types file into your mission again and replace the <code>geb_Aliencrash</code> group in mapgroupproto.xml.</p>
+        </header>
+        <div class="releases">
+          <article class="release reveal"><span class="ver">2.0</span><div><h3>Version 2.0.0: new</h3><ul>
+            <li>Plasma Grenade (<code>geb_PlasmaGrenade</code>): an alien sticky grenade that clings to whatever it hits and bursts in a blue plasma blast 3 seconds after leaving the hand. Found at crash sites and sometimes on aliens.</li>
+            <li>Specimen Tank (<code>geb_AlienTank</code>): a sleeping alien in a tank of glowing green fluid, with bubbles, motes, a green glow and a hum. A prop for admins and map makers.</li>
+            <li>Four plasma colours: Montauk Cartridges come in green, blue, lime and violet, each with its own muzzle effect, plasma ball, light and a glowing window on the cartridge.</li>
+            <li>Montauk Rifle rebuilt: a skeleton stock, a shaped pistol grip and trigger guard, hooded iron sights, an animated read-out on the back, purple fluid in the vent tubes, lime fluid behind the glass windows, new detailed textures, and blue-white arcs on the muzzle when it runs hot.</li>
+            <li>The aliens' psychic zap is a green beam from the alien's head to you; a dying alien bursts green instead of firing a laser.</li>
+            <li>Crash sites smoke like a heli crash and crackle with electrical sparks; aliens bleed green and have a fuller voice of 75 takes.</li>
+            <li>Plasma Cell (<code>Ammo_Plasma_Cell</code>): clearing a loaded rifle's chamber gives the cell back, and it loads into any cartridge. It never spawns as loot.</li>
+          </ul></div></article>
+          <article class="release reveal"><span class="ver">2.0</span><div><h3>Version 2.0.0: fixes</h3><ul>
+            <li>Aliens can be skinned. They inherited vanilla's infected rule that bodies can't be, so there were no steaks or hides. A frozen alien can't be skinned, and anything an alien carries drops beside it.</li>
+            <li>Aliens have their hit zones back: headshots do extra damage and can kill outright. The Little Green Man's config threw the zones away when it changed its health.</li>
+            <li>The Roswell Hide's condition follows the alien's torso (it read two animal zones the alien doesn't have), and it is wolf-pelt sized: 6&nbsp;kg, 5×3, up to 4 leather by hand or 6 in a barrel instead of a bear's 15&nbsp;kg and 12.</li>
+            <li>Crash loot lies on the crater around the UFO. The loot points were copied from vanilla's Mi-8 wreck, mostly outside the UFO and underground.</li>
+            <li>The 10% spare cartridge aliens can carry now spawns.</li>
+            <li>Server crash fixed when a loaded Montauk Rifle showed a chambered round (admin spawns with ammo, restarts with a loaded rifle in storage).</li>
+            <li>Montauk Rifle: no more invisible Ruger scope, suppressor and wrap; weighs 3.4&nbsp;kg instead of 350&nbsp;g, lies properly on the ground, and its shots carry 2&nbsp;km like other rifles'.</li>
+            <li>Plasma shots show their cell's colour: the laser stayed green for every cell. The cloud of glowing dots that sprayed from a hot rifle is gone.</li>
+            <li>Aliens, the crash site and the rifle cast shadows; models step down in detail with distance; the hull, rifle and cartridge show their surface detail.</li>
+            <li>Aliens move, sound and get hit like infected (rebuilt rig, vanilla swing and footstep sounds, flesh hit sounds). The Tin Foil Hat lies on the ground properly.</li>
+            <li>Sound and ammo-type classes renamed with the <code>geb_</code> prefix so other mods can't clash with them; new strings translated into all 13 languages.</li>
+            <li>Aliens&rsquo; resistance to firearms applies before a hit lands, so it also saves them from shots that would otherwise kill. A multiplier of zero makes them immune to firearms, and the plasma multipliers keep the hit zone and the impact speed.</li>          </ul></div></article>
+          <article class="release reveal"><span class="ver">1.2</span><div><h3>Version 1.2.0: Roswell Hide crafting</h3><ul>
+            <li>The Roswell Hide tans into green Roswell Leather with garden lime, by hand or in a barrel. (It used to give ordinary brown leather.)</li>
+            <li>Roswell Leather sews into a green Roswell Leather Backpack; the hide and a rope make a Roswell Hide Courier Bag, which takes three sticks to become a Roswell Hide Backpack. All of them break back down like vanilla's.</li>
+            <li>Reworked textures: the hide looks like the alien's skin, the steak is green at every cooking stage (it turned back into beef when cooked), the Montauk Rifle is twice the resolution, and the tin foil hat reflects silver instead of gold.</li>
+            <li>Four new items in the generated types file; new strings translated into all 13 languages.</li>
+          </ul>
+            <div class="compare-grid">
+              <figure class="compare"><div class="compare-pair"><div><img src="items/compare/steak_1.1.webp" alt="Area 51 Steak in 1.1" width="480" height="274" loading="lazy"><span>1.1</span></div><div><img src="items/compare/steak_1.2.webp" alt="Area 51 Steak in 1.2" width="480" height="274" loading="lazy"><span>1.2</span></div></div><figcaption>Area 51 Steak, raw</figcaption></figure>
+              <figure class="compare"><div class="compare-pair"><div><img src="items/compare/steak_cooked_1.1.webp" alt="Area 51 Steak in 1.1" width="480" height="274" loading="lazy"><span>1.1</span></div><div><img src="items/compare/steak_cooked_1.2.webp" alt="Area 51 Steak in 1.2" width="480" height="274" loading="lazy"><span>1.2</span></div></div><figcaption>Area 51 Steak, baked: cooked steak used to turn back into vanilla beef</figcaption></figure>
+              <figure class="compare"><div class="compare-pair"><div><img src="items/compare/hide_1.1.webp" alt="Roswell Hide in 1.1" width="480" height="257" loading="lazy"><span>1.1</span></div><div><img src="items/compare/hide_1.2.webp" alt="Roswell Hide in 1.2" width="480" height="257" loading="lazy"><span>1.2</span></div></div><figcaption>Roswell Hide: now the alien's own skin tone</figcaption></figure>
+              <figure class="compare"><div class="compare-pair"><div><img src="items/compare/foilhat_1.1.webp" alt="Tin Foil Hat in 1.1" width="286" height="300" loading="lazy"><span>1.1</span></div><div><img src="items/compare/foilhat_1.2.webp" alt="Tin Foil Hat in 1.2" width="286" height="300" loading="lazy"><span>1.2</span></div></div><figcaption>Tin Foil Hat: its reflection map was a gold sunset</figcaption></figure>
+              <figure class="compare wide"><div class="compare-pair"><div><img src="items/compare/rifle_1.1.webp" alt="Montauk Rifle close-up in 1.1" width="480" height="213" loading="lazy"><span>1.1</span></div><div><img src="items/compare/rifle_1.2.webp" alt="Montauk Rifle close-up in 1.2" width="480" height="213" loading="lazy"><span>1.2</span></div></div><figcaption>Montauk Rifle close-up: texture and normal map doubled to 1024</figcaption></figure>
+            </div></div></article>
+          <article class="release reveal"><span class="ver">1.1</span><div><h3>Version 1.1.0: fixes</h3><ul>
+            <li>Montauk Rifle no longer locks up after the last shot in a cartridge. The script ran the FAL's bolt-lock logic on the Ruger 10/22 animations the config uses.</li>
+            <li>Aliens have voices and footsteps. They were silent and filled server logs with "No sound callback" warnings.</li>
+            <li>Alien attacks no longer land invisible hits from 100&nbsp;m every 100 seconds: up close they use normal infected melee, at range the new visible psychic zap.</li>
+            <li>Surviving aliens are removed with their wreck instead of piling up for the whole server uptime.</li>
+            <li>Vanilla helicopter and sleigh crashes keep their distant crash sound with the mod loaded.</li>
+            <li>The wreck's green light and fire/mist effects are removed when it despawns.</li>
+            <li>Aliens spawn on the ground, in the configured 10–15 count.</li>
+            <li>Skinning an alien now gives the Roswell Hide (the config named a class that didn't exist).</li>
+            <li>The tin foil hat shows its name instead of its description, is hat-sized (3×2, 60&nbsp;g), and no longer loads missing damage materials.</li>
+            <li>The UFO wreck no longer needs another mod's Mi-8 textures.</li>
+            <li>Plasma shots play one muzzle effect instead of two and stop logging "Plasma_Shot" warnings.</li>
+            <li>Config patches no longer reuse a vanilla patch name and load after every vanilla class they extend.</li>
+            <li>Removed the alien preparation recipe, which could never run (recipes can't use a corpse); skinning gives the steaks.</li>
+          </ul></div></article>
+          <article class="release reveal"><span class="ver">1.1</span><div><h3>Version 1.1.0: new</h3><ul>
+            <li>Psychic zap: aliens hit their target from 4–80&nbsp;m in line of sight, with a green burst and crackle.</li>
+            <li>Tin foil hat works: aliens can't track you beyond 3&nbsp;m and can't zap you.</li>
+            <li>Toxic gas zone around each wreck; salvage (35% rifle, up to two spare cartridges) in the wreckage.</li>
+            <li>Aliens appear when a player comes within 300&nbsp;m, so idle crash sites cost nothing.</li>
+            <li>Admin-spawned wrecks run the full encounter on dedicated servers.</li>
+            <li>Recharge cartridges with a 9V battery.</li>
+            <li>Green plasma bolts; plasma deals double damage to aliens, other firearms 75%.</li>
+            <li>Alien death burst and scream.</li>
+            <li>Cooked alien meat gives 90 seconds of green night vision; bad meat gives food poisoning.</li>
+            <li><code>$profile:Gebs/alieninvasion.json</code> with every setting, and generated economy files in <code>$profile:Gebs/mpmissions/</code>.</li>
+            <li>New strings translated into all 13 languages.</li>
+          </ul></div></article>
+          <article class="release reveal"><span class="ver">1.0</span><div><h3>Version 1.0</h3><p>First release: the UFO crash event, Little Green Men, the Montauk Rifle and Cartridge, the tin foil hat, Area 51 Steak and Roswell Hide.</p></div></article>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div><strong>ALIEN INVASION</strong><span>A DayZ community mod by Geb / Cole</span></div>
-    <div class="footer-links"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308">Steam Workshop</a><a href="https://github.com/PackJC/alieninvasion">GitHub</a><a href="https://discord.gg/G8uSGZ8yyf">Discord</a></div>
-    <p>DayZ and Bohemia Interactive are trademarks or registered trademarks of Bohemia Interactive. This project is not affiliated with or endorsed by Bohemia Interactive.</p>
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-top">
+        <span class="brand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5c-2.6 0-4.4 1.9-4.8 4.3C3.9 9.6 2 11 2 12.5c0 2.3 4.5 4 10 4s10-1.7 10-4c0-1.5-1.9-2.9-5.2-3.7C16.4 6.4 14.6 4.5 12 4.5Zm-5 9.2a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm5 .8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm5-.8a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM8.6 18l-1.8 3h2.3l1.4-2.6c-.7-.1-1.3-.2-1.9-.4Zm6.8 0c-.6.2-1.2.3-1.9.4l1.4 2.6h2.3l-1.8-3Z"/></svg><span>Alien Invasion</span></span>
+        <nav aria-label="Elsewhere"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2840597308">Steam Workshop</a><a href="https://github.com/PackJC/alieninvasion">GitHub</a><a href="https://discord.gg/G8uSGZ8yyf">Discord</a></nav>
+      </div>
+      <nav class="family" aria-label="More mods by Geb"><span>More by Geb:</span><a href="https://packjc.github.io/gebsfish/">Gebsfish</a><a href="https://packjc.github.io/gebsanimals/">Geb's Animals</a><a href="https://packjc.github.io/gebsplants/">Geb's Plants</a><a href="https://packjc.github.io/gebsmushrooms/">Geb's Mushrooms</a><a href="https://packjc.github.io/alieninvasion/" aria-current="page">Alien Invasion</a><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2886269800">Thanksgiving</a><a href="https://github.com/PackJC/greatsmokymountains">Great Smoky Mountains</a></nav>
+      <p>A DayZ community mod by Geb / Cole. DayZ and Bohemia Interactive are trademarks of Bohemia Interactive. This project is not affiliated with or endorsed by Bohemia Interactive.</p>
+    </div>
   </footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite">Copied to clipboard</div>
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
 </body>
 </html>
