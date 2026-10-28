@@ -223,9 +223,147 @@ class geb_PlasmaRifle : Ruger1022_Base
 			return;
 
 		vector frame[4];
-		geb_BallFrame(geb_BallDirection(muzzle, barrel), muzzle, frame);
+		vector dir = geb_BallDirection(muzzle, barrel);
+		geb_BallFrame(dir, muzzle, frame);
 		ball.SetTransform(frame);
 		ball.PlayParticle();
+
+		// A cell that shoots lightning names its bolt (CfgAmmo <cell> geb_boltParticle); its laser is only the puff
+		string boltName;
+		GetGame().ConfigGetText("CfgAmmo " + ammoType + " geb_boltParticle", boltName);
+		if ( boltName == "" )
+			return;
+
+		int bolt = ParticleList.GetParticleIDByName(boltName);
+		if ( !ParticleList.IsValidId(bolt) )
+			return;
+
+		int landing = -1;
+		string landingName;
+		GetGame().ConfigGetText("CfgAmmo " + ammoType + " geb_boltHitParticle", landingName);
+		if ( landingName != "" && ParticleList.IsValidId(ParticleList.GetParticleIDByName(landingName)) )
+			landing = ParticleList.GetParticleIDByName(landingName);
+
+		geb_PlayLightning(ammoType, muzzle, dir, bolt, landing);
+	}
+
+	// The violet cell's lightning (tools/plasmashots/shots.py LIGHTNING): a jagged bolt from the muzzle along the
+	// shot to what it hits, or GEB_BOLT_RANGE on. It strikes GEB_BOLT_STRIKES times, GEB_BOLT_GAP_MS apart, on a new
+	// path each time, the first with a few forks, and flashes where it lands. Each segment is one bolt effect at the
+	// segment's middle, turned onto it as the ball is and stretched to its length (the effect is made for 1 m).
+	static const float GEB_BOLT_RANGE = 100.0;			// m
+	static const float GEB_BOLT_STEP = 2.0;				// m: about this long per segment (longer past 48 m)
+	static const int GEB_BOLT_MAX_SEGMENTS = 24;
+	static const float GEB_BOLT_JAG = 0.7;				// m: how far a joint can stray off the straight line
+	static const int GEB_BOLT_FORKS = 3;
+	static const int GEB_BOLT_STRIKES = 3;
+	static const int GEB_BOLT_GAP_MS = 70;
+
+	protected void geb_PlayLightning(string ammoType, vector muzzle, vector dir, int bolt, int landing)
+	{
+		vector to = muzzle + dir * GEB_BOLT_RANGE;
+		vector hitPos;
+		vector hitNormal;
+		int hitComponent;
+		set<Object> hits = new set<Object>;
+		bool landed = DayZPhysics.RaycastRV(muzzle + dir * 0.05, to, hitPos, hitNormal, hitComponent, hits, null, GetHierarchyRootPlayer(), false, false, ObjIntersectFire);
+		if ( landed )
+			to = hitPos;
+
+		geb_Strike(muzzle, to, bolt, GEB_BOLT_FORKS);
+		for ( int s = 1; s < GEB_BOLT_STRIKES; s++ )
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(geb_Strike, s * GEB_BOLT_GAP_MS, false, muzzle, to, bolt, 0);
+
+		if ( !landed )
+			return;
+
+		if ( landing != -1 )
+			ParticleManager.GetInstance().PlayInWorld(landing, to);
+
+		// The landing lights up in the cell's colour too
+		geb_PlasmaFlashLight light = geb_PlasmaFlashLight.Cast(ScriptedLightBase.CreateLight(geb_PlasmaFlashLight, to + hitNormal * 0.3));
+		TFloatArray colour = new TFloatArray;
+		GetGame().ConfigGetFloatArray("CfgAmmo " + ammoType + " geb_muzzleLightColor", colour);
+		if ( light && colour.Count() == 3 )
+			light.geb_SetColour(Vector(colour[0], colour[1], colour[2]));
+	}
+
+	// One strike: the straight line from `from` to `to` cut into segments whose joints stray to either side (none at
+	// the ends, little near the muzzle, so it leaves the barrel cleanly), and `forks` short branches off random joints
+	protected void geb_Strike(vector from, vector to, int bolt, int forks)
+	{
+		vector line = vector.Direction(from, to);
+		float dist = line.Length();
+		if ( dist < 1 )
+			return;
+
+		vector dir = line.Normalized();
+		vector up = "0 1 0";
+		vector across = "1 0 0";
+		vector u = dir * up;								// cross products: two directions across the bolt
+		if ( u.Length() < 0.1 )
+			u = dir * across;
+		u.Normalize();
+		vector v = u * dir;
+
+		int count = Math.Ceil(dist / GEB_BOLT_STEP);
+		count = Math.Clamp(count, 2, GEB_BOLT_MAX_SEGMENTS);
+		float jag = Math.Min(GEB_BOLT_JAG, dist * 0.05);
+		array<vector> joints = new array<vector>;
+		vector last = from;
+		for ( int i = 1; i <= count; i++ )
+		{
+			float t = i;
+			t = t / count;
+			vector joint = from + line * t;
+			if ( i < count )
+			{
+				float taper = Math.Min(1.0, i * 0.5);
+				joint = joint + (u * Math.RandomFloat(-1, 1) + v * Math.RandomFloat(-1, 1)) * (jag * taper);
+				joints.Insert(joint);
+			}
+			geb_BoltSegment(last, joint, bolt);
+			last = joint;
+		}
+
+		for ( int k = 0; k < forks && joints.Count() > 2; k++ )
+		{
+			vector start = joints[Math.RandomInt(1, joints.Count())];
+			vector side = u * Math.RandomFloat(-1, 1) + v * Math.RandomFloat(-1, 1);
+			side.Normalize();
+			vector forkDir = dir + side * Math.RandomFloat(0.6, 1.2);
+			forkDir.Normalize();
+			float len = Math.RandomFloat(2.0, 3.2);
+			vector a = start;
+			for ( int j = 0; j < 3; j++ )
+			{
+				vector b = a + forkDir * len;
+				geb_BoltSegment(a, b, bolt);
+				a = b;
+				len = len * 0.6;
+				forkDir = forkDir + side * Math.RandomFloat(-0.5, 0.5);
+				forkDir.Normalize();
+			}
+		}
+	}
+
+	protected void geb_BoltSegment(vector a, vector b, int bolt)
+	{
+		vector seg = vector.Direction(a, b);
+		float len = seg.Length();
+		if ( len < 0.05 )
+			return;
+
+		vector mid = (a + b) * 0.5;
+		ParticleSource p = ParticleManager.GetInstance().CreateInWorld(bolt, mid);
+		if ( !p )
+			return;
+
+		vector frame[4];
+		geb_BallFrame(seg.Normalized(), mid, frame);
+		p.SetTransform(frame);
+		p.ScaleParticleParamFromOriginal(EmitorParam.SIZE, len);
+		p.PlayParticle();
 	}
 
 	// The muzzle light, in the fired cell's colour. Config turns vanilla's light off (illuminateWorld=0 under

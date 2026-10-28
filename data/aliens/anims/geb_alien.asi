@@ -1,0 +1,721 @@
+AnimSetInstanceSource {
+ Template "{0F9B2A38DA6C0C92}DZ/anims/workspaces/infected/infected_main/infected.ast"
+ ParentTemplates {
+ }
+ Lines {
+  AnimSetInstanceSource_Line "Attack.Center.Attack Left Heavy" {
+   Resource "{9180CD64C6CB4252}alieninvasion/data/aliens/anims/geb_alien_attack_grab.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Center.Attack Left Light" {
+   Resource "{79CF5171E5DEE38F}alieninvasion/data/aliens/anims/geb_alien_attack_slash_l.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Center.Attack Right Heavy" {
+   Resource "{B7D5D639B88B454A}alieninvasion/data/aliens/anims/geb_alien_attack_stab.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Center.Attack Right Light" {
+   Resource "{5AC1A2AEAE95A994}alieninvasion/data/aliens/anims/geb_alien_attack_slash_r.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Down.Attack Left Heavy" {
+   Resource "{96BD276339119E06}DZ/anims/anm/infected/attacks/erected/z_erc_attack_down_LR01.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Down.Attack Left Light" {
+   Resource "{F9BA84D5F9D9A372}DZ/anims/anm/infected/attacks/erected/z_erc_attack_swingL_short_down01.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Down.Attack Right Heavy" {
+   Resource "{96BD276339119E06}DZ/anims/anm/infected/attacks/erected/z_erc_attack_down_LR01.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Down.Attack Right Light" {
+   Resource "{C5BD46C282DA30E4}DZ/anims/anm/infected/attacks/erected/z_erc_attack_swingR_short_down01.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Down.Crawl Attack" {
+   Resource "{F80F64B8E8C53DC5}DZ/anims/anm/infected/attacks/crawl/z_crwl_attack_R02.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Down.Crawl Attack Combo" {
+   Resource "{8FC4A611B0E60CA1}DZ/anims/anm/infected/attacks/crawl/z_crwl_attack_combo01.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Down.Crawl Attack Run" {
+   Resource "{F80FCC167886650A}DZ/anims/anm/infected/attacks/crawl/z_crwl_wlk_attack_R01.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Run.Attack Left Heavy" {
+   Resource "{216F89DB7199558B}DZ/anims/anm/infected/attacks/erected/z_erc_run_attackL_Heavy.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Run.Attack Left Light" {
+   Resource "{34AF78539DE6BE4D}DZ/anims/anm/infected/attacks/erected/z_erc_run_attackL_Light.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Run.Attack Right Heavy" {
+   Resource "{66F61A6882DC9E3E}DZ/anims/anm/infected/attacks/erected/z_erc_run_attackR_Heavy.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Run.Attack Right Light" {
+   Resource "{7336EBE06EA375F8}DZ/anims/anm/infected/attacks/erected/z_erc_run_attackR_Light.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Up.Attack Left Light" {
+   Resource "{74BD0C193A198CF8}DZ/anims/anm/infected/attacks/erected/z_erc_attack_up_L01.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Up.Attack Right Light" {
+   Resource "{34DD2EEFE6BFF7CE}DZ/anims/anm/infected/attacks/erected/z_erc_attack_up_R01.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Up.Crawl Attack" {
+   Resource "{633CF1D0D8117959}DZ/anims/anm/infected/attacks/crawl/z_crwl_attack_Up.anm"
+  }
+  AnimSetInstanceSource_Line "Attack.Up.Crawl Attack Combo" {
+   Resource "{A673B33A504CD36F}DZ/anims/anm/infected/attacks/crawl/z_crwl_attack_Up_combo.anm"
+  }
+  AnimSetInstanceSource_Line "Attack Door.Charge.Attack Door Charge 01" {
+   Resource "{7C2CA5B01A3C6BC5}DZ/anims/anm/infected/attacks/doors/z_doorAttack_charge_1.anm"
+  }
+  AnimSetInstanceSource_Line "Attack Door.Charge.Attack Door Charge 02" {
+   Resource "{E5321C2907DB5A55}DZ/anims/anm/infected/attacks/doors/z_doorAttack_charge_2.anm"
+  }
+  AnimSetInstanceSource_Line "Attack Door.Erc.Attack Door Head" {
+   Resource "{08CBB84CB092212A}DZ/anims/anm/infected/attacks/doors/z_doorAttack_head.anm"
+  }
+  AnimSetInstanceSource_Line "Attack Door.Erc.Attack Door Kick" {
+   Resource "{548971CFC711AE35}DZ/anims/anm/infected/attacks/doors/z_doorAtttack_kick.anm"
+  }
+  AnimSetInstanceSource_Line "Attack Door.Erc.Attack Door LR 01" {
+   Resource "{DCC966CE2520C569}DZ/anims/anm/infected/attacks/doors/z_doorAttack_LR_1.anm"
+  }
+  AnimSetInstanceSource_Line "Attack Door.Erc.Attack Door LR 02" {
+   Resource "{398677721F6C9936}DZ/anims/anm/infected/attacks/doors/z_doorAttack_LR_short.anm"
+  }
+  AnimSetInstanceSource_Line "Attack Door.Erc.Attack Door Push" {
+   Resource "{259531B30EBFC68E}DZ/anims/anm/infected/attacks/doors/z_doorAttack_push.anm"
+  }
+  AnimSetInstanceSource_Line "Attack Door.Erc.Attack Door Shoulder L" {
+   Resource "{6E3A80DF9FE9CB85}DZ/anims/anm/infected/attacks/doors/z_doorAttack_L_shoulder.anm"
+  }
+  AnimSetInstanceSource_Line "Attack Door.Erc.Attack Door Shoulder R" {
+   Resource "{83F9CBC36610ED16}DZ/anims/anm/infected/attacks/doors/z_doorAttack_R_shoulder.anm"
+  }
+  AnimSetInstanceSource_Line "Crawl.A.Death" {
+   Resource "{92D79B4E8B3F5608}DZ/anims/anm/infected/moves/crawl/z_crwl_death.anm"
+  }
+  AnimSetInstanceSource_Line "Crawl.A.Hit Back" {
+   Resource "{D164D2E34A455D44}DZ/anims/anm/infected/hits/z_hit_crawl_light_B.anm"
+  }
+  AnimSetInstanceSource_Line "Crawl.A.Hit Forward" {
+   Resource "{4FBD912B3124D617}DZ/anims/anm/infected/hits/z_hit_crawl_light_F.anm"
+  }
+  AnimSetInstanceSource_Line "Crawl.A.Hit Left" {
+   Resource "{DEEB2641874828C2}DZ/anims/anm/infected/hits/z_hit_crawl_light_L.anm"
+  }
+  AnimSetInstanceSource_Line "Crawl.A.Hit Right" {
+   Resource "{2FE01E15F4171D2E}DZ/anims/anm/infected/hits/z_hit_crawl_light_R.anm"
+  }
+  AnimSetInstanceSource_Line "Crawl.A.z_crwl_idle01" {
+   Resource "{147156D1A704AB5F}DZ/anims/anm/infected/moves/crawl/z_crwl_idle01.anm"
+  }
+  AnimSetInstanceSource_Line "Crawl.A.z_crwl_idle02" {
+   Resource "{8D6FEF48BAE39ACF}DZ/anims/anm/infected/moves/crawl/z_crwl_idle02.anm"
+  }
+  AnimSetInstanceSource_Line "Crawl.A.z_crwl_runF" {
+   Resource "{C833724B20B4D695}DZ/anims/anm/infected/moves/crawl/z_crwl_runF.anm"
+  }
+  AnimSetInstanceSource_Line "Crawl.A.z_crwl_walkF" {
+   Resource "{E1FF422B42ECEFA3}DZ/anims/anm/infected/moves/crawl/z_crwl_walkF.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Fast.Death Back" {
+   Resource "{4FBF2AB6E5847EAC}alieninvasion/data/aliens/anims/geb_alien_death_fast_b.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Fast.Death Front" {
+   Resource "{1B0ABF0D79787FD2}alieninvasion/data/aliens/anims/geb_alien_death_fast_f.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Fast.Death Left" {
+   Resource "{4E7A5F58DB484A9C}alieninvasion/data/aliens/anims/geb_alien_death_fast_l.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Fast.Death Right" {
+   Resource "{F7CB98B66CCE3F03}alieninvasion/data/aliens/anims/geb_alien_death_fast_r.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Idle.Death Back" {
+   Resource "{80176427B55CE4CD}alieninvasion/data/aliens/anims/geb_alien_death_b.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Idle.Death Front" {
+   Resource "{9BB0E5895037E8E1}alieninvasion/data/aliens/anims/geb_alien_death_f.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Idle.Death Left" {
+   Resource "{049AC22F7BBF08A4}alieninvasion/data/aliens/anims/geb_alien_death_l.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Idle.Death Right" {
+   Resource "{8A50D3FF3BB5C9D0}alieninvasion/data/aliens/anims/geb_alien_death_r.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Idle.Death_Stealth_Liver" {
+   Resource "{3FE9E3B3C911A585}DZ/anims/anm/infected/death/z_death_stealth_liver.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Idle.Death_Stealth_Neck" {
+   Resource "{0C47B785E0C85821}DZ/anims/anm/infected/death/z_death_stealth_neck.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Run.Death Back" {
+   Resource "{4B9F4DFEA34E6264}DZ/anims/anm/infected/death/z_death_run_B.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Run.Death Front" {
+   Resource "{D5460E36D82FE937}DZ/anims/anm/infected/death/z_death_run_F.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Run.Death Left" {
+   Resource "{4410B95C6E4317E2}DZ/anims/anm/infected/death/z_death_run_L.anm"
+  }
+  AnimSetInstanceSource_Line "Death.Run.Death Right" {
+   Resource "{B51B81081D1C220E}DZ/anims/anm/infected/death/z_death_run_R.anm"
+  }
+  AnimSetInstanceSource_Line "Default.Normal.Knuckle Run" {
+   Resource "{2FA2E787F314EB52}DZ/anims/anm/infected/moves/erected/z_knuckleRun.anm"
+  }
+  AnimSetInstanceSource_Line "Default.Normal.Knuckle Trans" {
+   Resource "{5563033EAE4AEF2A}DZ/anims/anm/infected/moves/erected/z_knuckleRun_Trans.anm"
+  }
+  AnimSetInstanceSource_Line "Default.Normal.LookAt Crawl" {
+   Resource "{6BA7BBDA7133BDB1}DZ/anims/anm/infected/moves/crawl/z_crawl_lookAt.anm"
+  }
+  AnimSetInstanceSource_Line "Default.Normal.LookAt Erc" {
+   Resource "{975AC96F5D5997D6}DZ/anims/anm/infected/moves/erected/z_erc_lookAt.anm"
+  }
+  AnimSetInstanceSource_Line "Default.Normal.LookAt Move" {
+   Resource "{C223F3ABEA6C6F03}DZ/anims/anm/infected/moves/crawl/z_erc_MoveLookAt.anm"
+  }
+  AnimSetInstanceSource_Line "Default.Normal.LookAt Move Crawl" {
+   Resource "{20FF991DDB11A618}DZ/anims/anm/infected/moves/crawl/z_crawl_MoveLookAt.anm"
+  }
+  AnimSetInstanceSource_Line "Default.Normal.zA_erc_lookat_gradual" {
+   Resource "{45C5DDAD64B5DF01}DZ/anims/anm/infected/moves/erected/zA_erc_lookat_gradual.anm"
+  }
+  AnimSetInstanceSource_Line "Default.Normal.zAggroLookAt" {
+   Resource "{4EB48DB9A16F4ABF}DZ/anims/anm/infected/moves/erected/zAggro_erc_lookAt.anm"
+  }
+  AnimSetInstanceSource_Line "Default.Normal.z_erc_attack_up_combo03" {
+   Resource "{F7A0975C960D0134}DZ/anims/anm/infected/attacks/erected/z_erc_attack_up_combo03.anm"
+  }
+  AnimSetInstanceSource_Line "Default.Normal.z_erc_idle_fight01" {
+   Resource "{F866CEFFD4C501B4}DZ/anims/anm/infected/moves/erected/z_erc_idle_fight01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Belly_B" {
+   Resource "{F52DA295A6FFF014}DZ/anims/anm/infected/hits/z_hit_body_heavyB01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Belly_F" {
+   Resource "{2D0EC2DE8998A791}DZ/anims/anm/infected/hits/z_hit_body_heavyF01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Belly_L" {
+   Resource "{52B10185E15CF5B5}DZ/anims/anm/infected/hits/z_hit_body_heavyR01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Belly_R" {
+   Resource "{12D123733DFA8E83}DZ/anims/anm/infected/hits/z_hit_body_heavyL01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Body_B" {
+   Resource "{F52DA295A6FFF014}DZ/anims/anm/infected/hits/z_hit_body_heavyB01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Body_F" {
+   Resource "{2D0EC2DE8998A791}DZ/anims/anm/infected/hits/z_hit_body_heavyF01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Body_L" {
+   Resource "{52B10185E15CF5B5}DZ/anims/anm/infected/hits/z_hit_body_heavyR01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Body_R" {
+   Resource "{12D123733DFA8E83}DZ/anims/anm/infected/hits/z_hit_body_heavyL01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Foot_LB" {
+   Resource "{405535CD8741D99C}DZ/anims/anm/infected/hits/z_hit_footR_heavyB01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Foot_LF" {
+   Resource "{75B51E9A51DFA88A}DZ/anims/anm/infected/hits/z_hit_footL_heavyF01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Foot_RB" {
+   Resource "{AD967ED17EB8FF0F}DZ/anims/anm/infected/hits/z_hit_footL_heavyB01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Foot_RF" {
+   Resource "{98765586A8268E19}DZ/anims/anm/infected/hits/z_hit_footR_heavyF01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Head_B" {
+   Resource "{F52DA295A6FFF014}DZ/anims/anm/infected/hits/z_hit_body_heavyB01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Head_F" {
+   Resource "{2D0EC2DE8998A791}DZ/anims/anm/infected/hits/z_hit_body_heavyF01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Head_L" {
+   Resource "{52B10185E15CF5B5}DZ/anims/anm/infected/hits/z_hit_body_heavyR01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Heavy.Hit_Head_R" {
+   Resource "{12D123733DFA8E83}DZ/anims/anm/infected/hits/z_hit_body_heavyL01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Knuckle.Hit_Body_B" {
+   Resource "{AA9D44D1648B8265}DZ/anims/anm/infected/hits/z_knuckle_body_lightB01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Knuckle.Hit_Body_F" {
+   Resource "{72BE249A4BECD5E0}DZ/anims/anm/infected/hits/z_knuckle_body_lightF01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Knuckle.Hit_Body_L" {
+   Resource "{4D61C537FF8EFCF2}DZ/anims/anm/infected/hits/z_knuckle_body_lightL01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Knuckle.Hit_Body_R" {
+   Resource "{0D01E7C1232887C4}DZ/anims/anm/infected/hits/z_knuckle_body_lightR01.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Light.Hit_Belly_B" {
+   Resource "{E4A41EB91A2C2D0D}alieninvasion/data/aliens/anims/geb_alien_hit_belly_b.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Light.Hit_Belly_F" {
+   Resource "{6CE3FA8E6EF3DF4B}alieninvasion/data/aliens/anims/geb_alien_hit_belly_f.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Light.Hit_Belly_L" {
+   Resource "{10214ABEAA70C82D}alieninvasion/data/aliens/anims/geb_alien_hit_belly_l.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Light.Hit_Belly_R" {
+   Resource "{C7638914D8E64F9B}alieninvasion/data/aliens/anims/geb_alien_hit_belly_r.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Light.Hit_Body_B" {
+   Resource "{A7C30D84891DD67C}alieninvasion/data/aliens/anims/geb_alien_hit_body_b.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Light.Hit_Body_F" {
+   Resource "{618D05B3D35D5763}alieninvasion/data/aliens/anims/geb_alien_hit_body_f.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Light.Hit_Body_L" {
+   Resource "{D4EE71C11B67A8DD}alieninvasion/data/aliens/anims/geb_alien_hit_body_l.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Light.Hit_Body_R" {
+   Resource "{85B75C113EB4703C}alieninvasion/data/aliens/anims/geb_alien_hit_body_r.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Light.Hit_Head_B" {
+   Resource "{5CB6557DC70B491C}alieninvasion/data/aliens/anims/geb_alien_hit_head_b.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Light.Hit_Head_F" {
+   Resource "{00B8E670EC8327FB}alieninvasion/data/aliens/anims/geb_alien_hit_head_f.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Light.Hit_Head_L" {
+   Resource "{0845338E0887C12C}alieninvasion/data/aliens/anims/geb_alien_hit_head_l.anm"
+  }
+  AnimSetInstanceSource_Line "Hits.Light.Hit_Head_R" {
+   Resource "{A6107FC1D17A5E7E}alieninvasion/data/aliens/anims/geb_alien_hit_head_r.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarA.AggroToAlert" {
+   Resource "{A7A17793C771792F}DZ/anims/anm/infected/moves/erected/zA_AggroToAlert.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarA.Idle01" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarA.Idle02" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarA.Idle03" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarA.Idle04" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarA.Idle05" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarA.IdleAggro" {
+   Resource "{B0AD4527AE8F1161}DZ/anims/anm/infected/moves/erected/zAggro_erc_Idle01.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarA.IdleToAlert" {
+   Resource "{5D4412361E3413BE}DZ/anims/anm/infected/moves/erected/zA_Alert_Idle01.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarA.ToAggro" {
+   Resource "{71B6A4357A9B4CE8}DZ/anims/anm/infected/moves/erected/zA_AlertToAggro.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarB.AggroToAlert" {
+   Resource "{E13B22F3C36CE097}DZ/anims/anm/infected/moves/erected/zB_AggroToAlert.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarB.Idle01" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarB.Idle02" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarB.Idle03" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarB.Idle04" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarB.Idle05" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarB.IdleAggro" {
+   Resource "{B0AD4527AE8F1161}DZ/anims/anm/infected/moves/erected/zAggro_erc_Idle01.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarB.IdleToAlert" {
+   Resource "{1BDE47561A298A06}DZ/anims/anm/infected/moves/erected/zB_Alert_Idle01.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarB.ToAggro" {
+   Resource "{372CF1557E86D550}DZ/anims/anm/infected/moves/erected/zB_AlertToAggro.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarC.AggroToAlert" {
+   Resource "{DCB2EE2C3F6797FF}DZ/anims/anm/infected/moves/erected/zC_AggroToAlert.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarC.Idle01" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarC.Idle02" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarC.Idle03" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarC.Idle04" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarC.Idle05" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarC.IdleAggro" {
+   Resource "{B0AD4527AE8F1161}DZ/anims/anm/infected/moves/erected/zAggro_erc_Idle01.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarC.IdleToAlert" {
+   Resource "{26578B89E622FD6E}DZ/anims/anm/infected/moves/erected/zC_Alert_Idle01.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarC.ToAggro" {
+   Resource "{0AA53D8A828DA238}DZ/anims/anm/infected/moves/erected/zC_AlertToAggro.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarD.AggroToAlert" {
+   Resource "{6C0F8833CB57D3E7}DZ/anims/anm/infected/moves/erected/zD_AggroToAlert.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarD.Idle01" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarD.Idle02" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarD.Idle03" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarD.Idle04" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarD.Idle05" {
+   Resource "{148F4E6E0318EA78}alieninvasion/data/aliens/anims/geb_alien_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarD.IdleAggro" {
+   Resource "{B0AD4527AE8F1161}DZ/anims/anm/infected/moves/erected/zAggro_erc_Idle01.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarD.IdleToAlert" {
+   Resource "{96EAED961212B976}DZ/anims/anm/infected/moves/erected/zD_Alert_Idle01.anm"
+  }
+  AnimSetInstanceSource_Line "Idles.VarD.ToAggro" {
+   Resource "{BA185B9576BDE620}DZ/anims/anm/infected/moves/erected/zD_AlertToAggro.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarA.RunF" {
+   Resource "{3BD14DCFCE8061C5}DZ/anims/anm/infected/moves/erected/zA_erc_runF.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarA.SprintF" {
+   Resource "{D4484F506B1C2D9D}DZ/anims/anm/infected/moves/erected/zA_erc_sprintF.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarA.SprintFL" {
+   Resource "{772A6BC1F6E68A0C}DZ/anims/anm/infected/moves/erected/zA_erc_sprintFL.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarA.SprintFR" {
+   Resource "{8621539585B9BFE0}DZ/anims/anm/infected/moves/erected/zA_erc_sprintFR.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarA.WalkF" {
+   Resource "{A727FE4F5E77D80B}alieninvasion/data/aliens/anims/geb_alien_walk.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarB.RunF" {
+   Resource "{4066E9E0311F47EA}DZ/anims/anm/infected/moves/erected/zB_erc_runF.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarB.SprintF" {
+   Resource "{078306B81DE5B18F}DZ/anims/anm/infected/moves/erected/zB_erc_sprintF.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarB.SprintFL" {
+   Resource "{31B03EA1F2FB13B4}DZ/anims/anm/infected/moves/erected/zB_erc_sprintFL.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarB.SprintFR" {
+   Resource "{C0BB06F581A42658}DZ/anims/anm/infected/moves/erected/zB_erc_sprintFR.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarB.WalkF" {
+   Resource "{C0DFE6031AC1CC4C}alieninvasion/data/aliens/anims/geb_alien_walk_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarC.RunF" {
+   Resource "{690B8A05646A5A0F}DZ/anims/anm/infected/moves/erected/zC_erc_runF.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarC.SprintF" {
+   Resource "{493A3E1FCFB2C581}DZ/anims/anm/infected/moves/erected/zC_erc_sprintF.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarC.SprintFL" {
+   Resource "{0C39F27E0EF064DC}DZ/anims/anm/infected/moves/erected/zC_erc_sprintFL.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarC.SprintFR" {
+   Resource "{FD32CA2A7DAF5130}DZ/anims/anm/infected/moves/erected/zC_erc_sprintFR.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarC.WalkF" {
+   Resource "{A727FE4F5E77D80B}alieninvasion/data/aliens/anims/geb_alien_walk.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarD.RunF" {
+   Resource "{B709A1BFCE210BB4}DZ/anims/anm/infected/moves/erected/zD_erc_runF.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarD.SprintF" {
+   Resource "{E2E5748359FCBF38}DZ/anims/anm/infected/moves/erected/zD_erc_sprintF.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarD.SprintFL" {
+   Resource "{BC849461FAC020C4}DZ/anims/anm/infected/moves/erected/zD_erc_sprintFL.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarD.SprintFR" {
+   Resource "{4D8FAC35899F1528}DZ/anims/anm/infected/moves/erected/zD_erc_sprintFR.anm"
+  }
+  AnimSetInstanceSource_Line "Locomotions.VarD.WalkF" {
+   Resource "{A727FE4F5E77D80B}alieninvasion/data/aliens/anims/geb_alien_walk.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.Crawl.180L" {
+   Resource "{5E4478EEFF4C4FCE}DZ/anims/anm/infected/moves/crawl/z_crwl_turnL_180.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.Crawl.180R" {
+   Resource "{328AD23F6B1A2EAA}DZ/anims/anm/infected/moves/crawl/z_crwl_turnR_180.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.Crawl.90L" {
+   Resource "{7B06D706E9801F23}DZ/anims/anm/infected/moves/crawl/z_crwl_turnL_90.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.Crawl.90R" {
+   Resource "{C12123CFA597080C}DZ/anims/anm/infected/moves/crawl/z_crwl_turnR_90.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.180L" {
+   Resource "{48EDFE6D6350FE6C}DZ/anims/anm/infected/moves/erected/zA_erc_turn180L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.180L Aggro" {
+   Resource "{86E169E8574BE8DC}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.180L Aggro Fast" {
+   Resource "{74034706349E8423}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.180L Fast" {
+   Resource "{92078DF9166A5599}DZ/anims/anm/infected/moves/erected/zA_erc_turn180L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.180L Run" {
+   Resource "{FC0CC3B89333D296}DZ/anims/anm/infected/moves/erected/z_cro_turn180L_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.180R" {
+   Resource "{B9E6C639100FCB80}DZ/anims/anm/infected/moves/erected/zA_erc_turn180R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.180R Aggro" {
+   Resource "{77EA51BC2414DD30}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.180R Aggro Fast" {
+   Resource "{7783CFB7BB97FFB3}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.180R Fast" {
+   Resource "{9187054899632E09}DZ/anims/anm/infected/moves/erected/zA_erc_turn180R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.180R Run" {
+   Resource "{90C269690765B3F2}DZ/anims/anm/infected/moves/erected/z_cro_turn180R_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.90L" {
+   Resource "{BD1B4D999324B73E}DZ/anims/anm/infected/moves/erected/zA_erc_turn90L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.90L Aggro" {
+   Resource "{08823FE5787B1408}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.90L Aggro Fast" {
+   Resource "{6194EA701594FE3C}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.90L Fast" {
+   Resource "{FBF5AE28881488A8}DZ/anims/anm/infected/moves/erected/zA_erc_turn90L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.90L Run" {
+   Resource "{AE14673C82B23126}DZ/anims/anm/infected/moves/erected/z_cro_turn90L_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.90R" {
+   Resource "{4C1075CDE07B82D2}DZ/anims/anm/infected/moves/erected/zA_erc_turn90R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.90R Aggro" {
+   Resource "{F98907B10B2421E4}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.90R Aggro Fast" {
+   Resource "{621462C19A9D85AC}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.90R Fast" {
+   Resource "{F8752699071DF338}DZ/anims/anm/infected/moves/erected/zA_erc_turn90R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarA.90R Run" {
+   Resource "{C2DACDED16E45042}DZ/anims/anm/infected/moves/erected/z_cro_turn90R_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.180L" {
+   Resource "{0E77AB0D674D67D4}DZ/anims/anm/infected/moves/erected/zB_erc_turn180L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.180L Aggro" {
+   Resource "{86E169E8574BE8DC}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.180L Aggro Fast" {
+   Resource "{74034706349E8423}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.180L Fast" {
+   Resource "{370396C2BB217C35}DZ/anims/anm/infected/moves/erected/zB_erc_turn180L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.180L Run" {
+   Resource "{FC0CC3B89333D296}DZ/anims/anm/infected/moves/erected/z_cro_turn180L_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.180R" {
+   Resource "{FF7C935914125238}DZ/anims/anm/infected/moves/erected/zB_erc_turn180R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.180R Aggro" {
+   Resource "{77EA51BC2414DD30}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.180R Aggro Fast" {
+   Resource "{7783CFB7BB97FFB3}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.180R Fast" {
+   Resource "{34831E73342807A5}DZ/anims/anm/infected/moves/erected/zB_erc_turn180R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.180R Run" {
+   Resource "{90C269690765B3F2}DZ/anims/anm/infected/moves/erected/z_cro_turn180R_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.90L" {
+   Resource "{6ED00471E5DD2B2C}DZ/anims/anm/infected/moves/erected/zB_erc_turn90L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.90L Aggro" {
+   Resource "{08823FE5787B1408}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.90L Aggro Fast" {
+   Resource "{6194EA701594FE3C}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.90L Fast" {
+   Resource "{777D057CBCD636C0}DZ/anims/anm/infected/moves/erected/zB_erc_turn90L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.90L Run" {
+   Resource "{AE14673C82B23126}DZ/anims/anm/infected/moves/erected/z_cro_turn90L_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.90R" {
+   Resource "{9FDB3C2596821EC0}DZ/anims/anm/infected/moves/erected/zB_erc_turn90R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.90R Aggro" {
+   Resource "{F98907B10B2421E4}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.90R Aggro Fast" {
+   Resource "{621462C19A9D85AC}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.90R Fast" {
+   Resource "{74FD8DCD33DF4D50}DZ/anims/anm/infected/moves/erected/zB_erc_turn90R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarB.90R Run" {
+   Resource "{C2DACDED16E45042}DZ/anims/anm/infected/moves/erected/z_cro_turn90R_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.180L" {
+   Resource "{33FE67D29B4610BC}DZ/anims/anm/infected/moves/erected/zC_erc_turn180L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.180L Aggro" {
+   Resource "{86E169E8574BE8DC}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.180L Aggro Fast" {
+   Resource "{74034706349E8423}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.180L Fast" {
+   Resource "{5400602BDFE79B51}DZ/anims/anm/infected/moves/erected/zC_erc_turn180L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.180L Run" {
+   Resource "{FC0CC3B89333D296}DZ/anims/anm/infected/moves/erected/z_cro_turn180L_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.180R" {
+   Resource "{C2F55F86E8192550}DZ/anims/anm/infected/moves/erected/zC_erc_turn180R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.180R Aggro" {
+   Resource "{77EA51BC2414DD30}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.180R Aggro Fast" {
+   Resource "{7783CFB7BB97FFB3}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.180R Fast" {
+   Resource "{5780E89A50EEE0C1}DZ/anims/anm/infected/moves/erected/zC_erc_turn180R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.180R Run" {
+   Resource "{90C269690765B3F2}DZ/anims/anm/infected/moves/erected/z_cro_turn180R_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.90L" {
+   Resource "{20693CD6378A5F22}DZ/anims/anm/infected/moves/erected/zC_erc_turn90L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.90L Aggro" {
+   Resource "{08823FE5787B1408}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.90L Aggro Fast" {
+   Resource "{6194EA701594FE3C}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.90L Fast" {
+   Resource "{CD553CE9C831B169}DZ/anims/anm/infected/moves/erected/zC_erc_turn90L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.90L Run" {
+   Resource "{AE14673C82B23126}DZ/anims/anm/infected/moves/erected/z_cro_turn90L_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.90R" {
+   Resource "{D162048244D56ACE}DZ/anims/anm/infected/moves/erected/zC_erc_turn90R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.90R Aggro" {
+   Resource "{F98907B10B2421E4}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.90R Aggro Fast" {
+   Resource "{621462C19A9D85AC}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.90R Fast" {
+   Resource "{CED5B4584738CAF9}DZ/anims/anm/infected/moves/erected/zC_erc_turn90R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarC.90R Run" {
+   Resource "{C2DACDED16E45042}DZ/anims/anm/infected/moves/erected/z_cro_turn90R_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.180L" {
+   Resource "{834301CD6F7654A4}DZ/anims/anm/infected/moves/erected/zD_erc_turn180L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.180L Aggro" {
+   Resource "{86E169E8574BE8DC}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.180L Aggro Fast" {
+   Resource "{74034706349E8423}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.180L Fast" {
+   Resource "{3FFB415E485D19FE}DZ/anims/anm/infected/moves/erected/zD_erc_turn180L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.180L Run" {
+   Resource "{FC0CC3B89333D296}DZ/anims/anm/infected/moves/erected/z_cro_turn180L_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.180R" {
+   Resource "{724839991C296148}DZ/anims/anm/infected/moves/erected/zD_erc_turn180R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.180R Aggro" {
+   Resource "{77EA51BC2414DD30}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.180R Aggro Fast" {
+   Resource "{7783CFB7BB97FFB3}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn180R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.180R Fast" {
+   Resource "{3C7BC9EFC754626E}DZ/anims/anm/infected/moves/erected/zD_erc_turn180R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.180R Run" {
+   Resource "{90C269690765B3F2}DZ/anims/anm/infected/moves/erected/z_cro_turn180R_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.90L" {
+   Resource "{8BB6764AA1C4259B}DZ/anims/anm/infected/moves/erected/zD_erc_turn90L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.90L Aggro" {
+   Resource "{08823FE5787B1408}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90L.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.90L Aggro Fast" {
+   Resource "{6194EA701594FE3C}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.90L Fast" {
+   Resource "{2C9CB23F7CB97C83}DZ/anims/anm/infected/moves/erected/zD_erc_turn90L_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.90L Run" {
+   Resource "{AE14673C82B23126}DZ/anims/anm/infected/moves/erected/z_cro_turn90L_run.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.90R" {
+   Resource "{7ABD4E1ED29B1077}DZ/anims/anm/infected/moves/erected/zD_erc_turn90R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.90R Aggro" {
+   Resource "{F98907B10B2421E4}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90R.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.90R Aggro Fast" {
+   Resource "{621462C19A9D85AC}DZ/anims/anm/infected/moves/erected/zAggro_erc_turn90R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.90R Fast" {
+   Resource "{2F1C3A8EF3B00713}DZ/anims/anm/infected/moves/erected/zD_erc_turn90R_fast.anm"
+  }
+  AnimSetInstanceSource_Line "Turn.VarD.90R Run" {
+   Resource "{C2DACDED16E45042}DZ/anims/anm/infected/moves/erected/z_cro_turn90R_run.anm"
+  }
+  AnimSetInstanceSource_Line "Vault.A.Vault 110cm" {
+   Resource "{D91C21D639E8D6D1}DZ/anims/anm/infected/moves/obstacles/z_obstacle_110cm.anm"
+  }
+  AnimSetInstanceSource_Line "Vault.A.Vault 160cm" {
+   Resource "{900F7BB21A2769FA}DZ/anims/anm/infected/moves/obstacles/z_obstacle_160cm.anm"
+  }
+  AnimSetInstanceSource_Line "Vault.A.Vault 210cm" {
+   Resource "{D702659E041FD90B}DZ/anims/anm/infected/moves/obstacles/z_obstacle_210cm.anm"
+  }
+  AnimSetInstanceSource_Line "Vault.A.Vault 50cm" {
+   Resource "{C5E4F7EB98F96BC1}DZ/anims/anm/infected/moves/obstacles/z_obstacle_50cm.anm"
+  }
+  AnimSetInstanceSource_Line "Vault.A.Vault 50cm Inplace" {
+   Resource "{9E579E044D9665A6}DZ/anims/anm/infected/moves/obstacles/z_obstacle_50cm_inplace.anm"
+  }
+ }
+}

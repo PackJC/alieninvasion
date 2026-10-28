@@ -1,0 +1,104 @@
+EffectDef {
+ Emitors {
+  EmitorDef dark {
+   ShapeType Ellipse
+   ShapeSize 0.35 0 0.35
+   ConeAngle 360 0 20
+   MaxNum 60
+   BirthRate 6
+   BirthRateRND 2
+   BirthRateVel 0
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{0BEA27443975BE0B}Graphics/Particles/materials/smoke/smoke_anim_02.emat"
+   CenterX -0.167
+   CenterY -0.213
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 2.2
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 20
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0.8
+   VelocityRND 0.3
+   VelAffect 0
+   AirResistance 0.3
+   GravityMultiply -0.15
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 4
+   LifeTimeRND 1
+   Color {
+    0 0.06 0.06 0.06 1 0.12 0.12 0.12
+   }
+   Alpha {
+    0 0 0.1 0.45 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.3 1 1.6
+   }
+   EffectTime 10
+   Repeat 1
+  }
+  EmitorDef light {
+   ShapeType Ellipse
+   ShapeSize 0.35 0 0.35
+   ConeAngle 360 0 25
+   MaxNum 40
+   BirthRate 4
+   BirthRateRND 1
+   BirthRateVel 0
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{0BEA27443975BE0B}Graphics/Particles/materials/smoke/smoke_anim_02.emat"
+   CenterX -0.167
+   CenterY -0.213
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 2.6
+   SizeRND 0.6
+   RandomRotDir 1
+   RotMultiplier 20
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 0.6
+   VelocityRND 0.2
+   VelAffect 0
+   AirResistance 0.3
+   GravityMultiply -0.12
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 4.5
+   LifeTimeRND 1
+   Color {
+    0 0.16 0.17 0.16 1 0.22 0.22 0.23
+   }
+   Alpha {
+    0 0 0.15 0.3 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.3 1 1.8
+   }
+   EffectTime 10
+   Repeat 1
+  }
+ }
+}

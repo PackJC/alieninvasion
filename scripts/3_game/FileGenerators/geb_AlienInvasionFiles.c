@@ -58,6 +58,8 @@ class geb_AlienInvasionFiles
 		WriteType(file, "geb_GreenAlienLeatherSack", 28800, true, "clothes");
 		WriteType(file, "geb_GreenAlienCourierBag", 28800, true, "clothes");
 		WriteType(file, "geb_GreenAlienImprovisedBag", 28800, true, "clothes");
+		FPrintln(file, "    <!-- The flyable UFO: admins place it. A vehicle's lifetime is a few seconds, as vanilla's cars have -->");
+		WriteType(file, "geb_UFO", 3, false, "");
 		FPrintln(file, "</types>");
 
 		EndFile(file, name);

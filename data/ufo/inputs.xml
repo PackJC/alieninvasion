@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!--
+	Flyable UFO controls (scripts/4_world/entities/vehicles/geb_UFO.c). They show up under
+	Settings > Controls > Alien Invasion UFO and can be rebound there. They are only read while
+	you fly a UFO, so sharing keys with walking and driving does no harm.
+
+	A player's profile keeps the keys it has saved for an input over these defaults, so moving a
+	default later means a new input name.
+
+	W/S       forward / back        A/D     turn left / right
+	Q/E       slide left / right    Space   up      C   down
+	Shift     boost (held)          G       landing gear up / down
+-->
+<modded_inputs>
+	<inputs>
+		<actions>
+			<input name="UAgebUFOForward" loc="STR_geb_UFOForward" />
+			<input name="UAgebUFOBack" loc="STR_geb_UFOBack" />
+			<input name="UAgebUFOTurnLeft" loc="STR_geb_UFOTurnLeft" />
+			<input name="UAgebUFOTurnRight" loc="STR_geb_UFOTurnRight" />
+			<input name="UAgebUFOStrafeLeft" loc="STR_geb_UFOStrafeLeft" />
+			<input name="UAgebUFOStrafeRight" loc="STR_geb_UFOStrafeRight" />
+			<input name="UAgebUFOUp" loc="STR_geb_UFOUp" />
+			<input name="UAgebUFODown" loc="STR_geb_UFODown" />
+			<input name="UAgebUFOBoost" loc="STR_geb_UFOBoost" />
+			<input name="UAgebUFOGear" loc="STR_geb_UFOGear" />
+		</actions>
+		<sorting name="geb_ufo" loc="STR_geb_UFOControls">
+			<input name="UAgebUFOForward" />
+			<input name="UAgebUFOBack" />
+			<input name="UAgebUFOTurnLeft" />
+			<input name="UAgebUFOTurnRight" />
+			<input name="UAgebUFOStrafeLeft" />
+			<input name="UAgebUFOStrafeRight" />
+			<input name="UAgebUFOUp" />
+			<input name="UAgebUFODown" />
+			<input name="UAgebUFOBoost" />
+			<input name="UAgebUFOGear" />
+		</sorting>
+	</inputs>
+	<preset>
+		<input name="UAgebUFOForward">
+			<btn name="kW" />
+		</input>
+		<input name="UAgebUFOBack">
+			<btn name="kS" />
+		</input>
+		<input name="UAgebUFOTurnLeft">
+			<btn name="kA" />
+		</input>
+		<input name="UAgebUFOTurnRight">
+			<btn name="kD" />
+		</input>
+		<input name="UAgebUFOStrafeLeft">
+			<btn name="kQ" />
+		</input>
+		<input name="UAgebUFOStrafeRight">
+			<btn name="kE" />
+		</input>
+		<input name="UAgebUFOUp">
+			<btn name="kSpace" />
+		</input>
+		<input name="UAgebUFODown">
+			<btn name="kC" />
+		</input>
+		<input name="UAgebUFOBoost">
+			<btn name="kLShift" />
+		</input>
+		<input name="UAgebUFOGear">
+			<btn name="kG" />
+		</input>
+	</preset>
+</modded_inputs>

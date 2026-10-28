@@ -207,6 +207,17 @@ Contributions and bug reports are welcome through this repository's issues and p
 
 ## License
 
-Alien Invasion is distributed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html). You may use, study, modify, and redistribute the source under the terms of that license.
+[Attribution-NonCommercial-NoDerivatives 4.0 International](https://github.com/PackJC/alieninvasion/blob/master/LICENSE)
+
+## Usage & Terms
+This item is NOT authorized (strictly forbidden) for any of these conditions:
+- posting on Steam, except under the Steam account Cole.
+- hosting on any download server other than Alien Invasion current workshop download.
+- hosting on any launcher for distribution other than Alien Invasion current workshop download.
+- to be packaged in any form other than Alien Invasion current workshop download.
+- to create derivative works.
+
+## PERMISSION IS NOT GRANTED FOR THIS MOD TO BE INCLUDED IN A "SERVER PACK" or "MOD PACK" DO NOT EVEN ASK TO REPACK. NO. NOT ALLOWED.
+Use a Collection if you want to include this mod on your server for your users.
 
 DayZ and Bohemia Interactive are trademarks or registered trademarks of Bohemia Interactive. This community project is not affiliated with or endorsed by Bohemia Interactive.

@@ -35,6 +35,8 @@ class CfgMods
 		// Without this the engine looks for alieninvasion/Anims/cfg/skeletons.anim.xml
 		// and logs "ANIMATION (E): Can't load ..." on every start; point it at vanilla's.
 		skeletonDefinitions="DZ/anims/cfg/skeletons.anim.xml";
+		// the flyable UFO's keys, under Settings > Controls (scripts/4_world/entities/vehicles/geb_UFO.c)
+		inputs="alieninvasion/data/ufo/inputs.xml";
 		credits="Geb";
 		author="Geb";
 		authorID="0";

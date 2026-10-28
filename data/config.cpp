@@ -216,6 +216,17 @@ class cfgVehicles
 		{
 			"\alieninvasion\data\aliens\greenalien.rvmat"
 		};
+		// The infected's animation setup with the alien's own set: geb_alien.asi is vanilla's infected_main.asi
+		// with some lines on the alien's own clips (data/aliens/anims, written by tools/alienrig/game_anims.py);
+		// the other lines still play vanilla's. The rest is ZombieBase's.
+		class enfanimsys
+		{
+			meshObject = "dz\characters\zombies\z_hermit_m.xob";
+			graphname = "dz\anims\workspaces\infected\infected_main\infected.agr";
+			defaultinstance = "alieninvasion\data\aliens\anims\geb_alien.asi";
+			skeletonName = "hermit_newbindpose.xob";
+			startnode = "MasterControl";
+		};
 
 		class DamageSystem
 		{
@@ -1675,9 +1686,11 @@ class cfgAmmo
 	};
 	// The other cell colours: same round, own muzzle effect, light and bolt (a plasma ball in the cell's colour,
 	// tools/plasmashots/tracers.py). Scripts test IsKindOf(ammo, "Plasma_Cell").
+	// The blue cell fires rings like a ray gun: its bolt is a glowing ring round the flight line and its visible
+	// shot a ring with a stream of smaller rings behind it (tracers.py ring_lod, shots.py plasma_rings).
 	class Plasma_Cell_Arc: Plasma_Cell
 	{
-		model="\alieninvasion\data\weapons\geb_plasmaball_blue.p3d";
+		model="\alieninvasion\data\weapons\geb_plasmaring_blue.p3d";
 		muzzleFlashParticle="geb_plasma_arc";
 		geb_muzzleLightColor[]={0.3,0.7,1};
 		geb_laserParticle="geb_plasma_laser_arc";
@@ -1689,12 +1702,16 @@ class cfgAmmo
 		geb_muzzleLightColor[]={0.7,1,0.15};
 		geb_laserParticle="geb_plasma_laser_lance";
 	};
+	// The violet cell shoots lightning: geb_PlasmaRifle.c draws a jagged bolt from the muzzle to what the shot hits
+	// (geb_boltParticle segments, geb_boltHitParticle where it lands); its laser is only the muzzle puff and fumes.
 	class Plasma_Cell_Void: Plasma_Cell
 	{
 		model="\alieninvasion\data\weapons\geb_plasmaball_violet.p3d";
 		muzzleFlashParticle="geb_plasma_void";
 		geb_muzzleLightColor[]={0.7,0.3,1};
 		geb_laserParticle="geb_plasma_laser_void";
+		geb_boltParticle="geb_plasma_bolt_void";
+		geb_boltHitParticle="geb_plasma_bolt_void_hit";
 	};
 };
 

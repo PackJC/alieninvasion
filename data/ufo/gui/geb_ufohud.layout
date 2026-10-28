@@ -1,0 +1,135 @@
+PanelWidgetClass geb_UFOPanel {
+ visible 0
+ clipchildren 0
+ position 10 10
+ size 330 192
+ halign right_ref
+ valign bottom_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ priority 1
+ style blank
+ {
+  TextWidgetClass Speed {
+   position 0 0
+   size 330 34
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   color 0.55 1 0.7 1
+   style None
+   text "0 km/h"
+   font "gui/fonts/sdf_MetronBook72"
+   "shadow offset" 1 1
+   "exact text" 1
+   "exact text size" 30
+   "text halign" right
+   "text valign" center
+  }
+  TextWidgetClass Altitude {
+   position 0 36
+   size 330 24
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   color 0.55 1 0.7 1
+   style None
+   text "ALT 0 m   AGL 0 m"
+   font "gui/fonts/sdf_MetronBook72"
+   "shadow offset" 1 1
+   "exact text" 1
+   "exact text size" 20
+   "text halign" right
+   "text valign" center
+  }
+  TextWidgetClass Climb {
+   position 0 62
+   size 330 24
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   color 0.55 1 0.7 1
+   style None
+   text "CLIMB 0.0 m/s"
+   font "gui/fonts/sdf_MetronBook72"
+   "shadow offset" 1 1
+   "exact text" 1
+   "exact text size" 20
+   "text halign" right
+   "text valign" center
+  }
+  TextWidgetClass Drive {
+   position 0 88
+   size 330 24
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   color 0.55 1 0.7 1
+   style None
+   text "DRIVE OFF"
+   font "gui/fonts/sdf_MetronBook72"
+   "shadow offset" 1 1
+   "exact text" 1
+   "exact text size" 20
+   "text halign" right
+   "text valign" center
+  }
+  TextWidgetClass Gear {
+   position 0 114
+   size 330 24
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   color 0.55 1 0.7 1
+   style None
+   text "GEAR DOWN"
+   font "gui/fonts/sdf_MetronBook72"
+   "shadow offset" 1 1
+   "exact text" 1
+   "exact text size" 20
+   "text halign" right
+   "text valign" center
+  }
+  TextWidgetClass Canopy {
+   position 0 140
+   size 330 24
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   color 0.55 1 0.7 1
+   style None
+   text "CANOPY SHUT"
+   font "gui/fonts/sdf_MetronBook72"
+   "shadow offset" 1 1
+   "exact text" 1
+   "exact text size" 20
+   "text halign" right
+   "text valign" center
+  }
+  TextWidgetClass Condition {
+   position 0 166
+   size 330 24
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   color 0.55 1 0.7 1
+   style None
+   text "HULL PRISTINE   GLASS PRISTINE"
+   font "gui/fonts/sdf_MetronBook72"
+   "shadow offset" 1 1
+   "exact text" 1
+   "exact text size" 20
+   "text halign" right
+   "text valign" center
+  }
+ }
+}

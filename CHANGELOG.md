@@ -4,11 +4,24 @@
 
 Works on DayZ 1.30 (scripts, configs and mission files checked against the 1.30 release; nothing needed changing).
 
-Server owners: the generated economy files are rewritten on the first start after the update. Copy `alieninvasion-types.xml` and `alieninvasion-spawnabletypes.xml` into your mission's `alieninvasion` folder again (they gain `Ammo_Plasma_Cell` and the plasma grenade), and replace the `geb_Aliencrash` group in your mission's `mapgroupproto.xml` with the new one from `alieninvasion-mapgroupproto.xml` (new loot points).
+Server owners: the generated economy files are rewritten on the first start after the update. Copy `alieninvasion-types.xml` and `alieninvasion-spawnabletypes.xml` into your mission's `alieninvasion` folder again (they gain `Ammo_Plasma_Cell`, the plasma grenade and the flying saucer), and replace the `geb_Aliencrash` group in your mission's `mapgroupproto.xml` with the new one from `alieninvasion-mapgroupproto.xml` (new loot points).
 
 Stored Montauk Rifles: the rifle now takes 8×3 slots instead of 5×3 and has no buttstock wrap, hunting scope or suppressor slot. On the first restart after the update, a rifle saved in a tent, container or backpack where it no longer fits is put on the ground next to it, and any wrap, scope or suppressor fitted to a rifle is put on the ground beside it. Nothing is deleted; the server log notes each one as "dropped ... because of invalid location".
 
 ### Added
+- **Flying Saucer** (`geb_UFO`), a UFO you can fly.
+  - A six-metre saucer of polished black metal trimmed in lime light, with a glass dome over a one-seat cockpit: a contoured, quilted pilot's seat with glowing control orbs, a flight yoke your hands rest on, and a curved piano-black dash with two live displays (the craft's systems, alien readouts) and a turning radar table with a hologram globe floating over it. Glass pipes of glowing lime fluid run round the cockpit's back wall, up the back of the seat and coil round its pedestal. Outside, chrome ribs with light lines run over the top between the lamps, with vents and antennas; heat-sink fins and three glowing thrusters sit underneath. Switched off, its trim keeps a faint standby glow.
+  - The canopy swings up from its hinge at the back. Open and close it from outside or from the seat (F). You climb in and out over the left rim, and only with the canopy open: look at the rim there, or at the seat over the rim from anywhere round the craft.
+  - Hold the start action to power up: the trim and lamps light, the screens wake, a green glow spreads underneath and the drive starts to hum. A glowing hex field comes up inside the glass dome and slowly turns, and green sparks fall from the emitter under its belly. Click to power down once you're on the ground.
+  - Low over land, its downwash throws dust out across the ground below, more the lower and harder it works.
+  - It has its own controls, which you can rebind under Settings > Controls > Alien Invasion UFO: W/S forward and back, A/D turn, Q/E slide sideways, Space/C up and down, Shift boost, G landing gear. It tops out around 200 km/h, or 320 km/h with boost, and climbs at 10 m/s.
+  - Let go of the keys and it brakes to a hover and holds its height. It leans into its own acceleration, banks into turns and levels itself. The light ring round its belly spins faster the harder it works.
+  - Three landing legs fold flat into the hull and back down (G), on springs that soak up a landing. With the gear up it rests on its hull. The legs won't fold while it's standing on them, and sitting on them it has to lift off before it can move or turn.
+  - Switched off in the air, it falls. Get out with the drive on and it keeps running, as a car does: in the air it lowers its legs and settles to the ground, then idles there until someone flies it again. Left alone for 10 minutes, it switches itself off.
+  - Its own sounds: a pulsing alien hum, the classic wavering flying-saucer whine that climbs with speed, rushing air, power-up and power-down sweeps, the canopy's servo and the legs' hydraulics with a beep as they lock.
+  - A HUD panel shows the speed, height, climb, drive, gear and canopy, and the hull's and glass's condition in the usual condition colours.
+  - Hard knocks damage the hull, and a wrecked saucer won't power up. Damage shows: the hull gets scratched and scorched, then burnt black with soot, and smokes once it's badly damaged. The glass cracks (the hex field stutters) and, ruined, frosts over.
+  - Nothing spawns it: place it with an admin tool. It's saved with the server's vehicles.
 - **Plasma Grenade** (`geb_PlasmaGrenade`), an alien sticky grenade.
   - A dark violet alloy ball the size of vanilla's M67, with a raised steel band, panel seams, magenta slit lights and cyan pin lights, a recessed disc with a cross of lights, a hub and two small ports. It's held like the M67.
   - Prime it and throw it: it sticks to the first thing it touches. On players, infected and animals it sits on the outside of the body and rides the part it hit; on cars and boats it rides along; anywhere else it stays put. It can't stick to the hand that threw it.
@@ -26,10 +39,10 @@ Stored Montauk Rifles: the rifle now takes 8×3 slots instead of 5×3 and has no
   - Nothing spawns it: place it with an admin tool or a map editor.
 - **Four plasma colours.** Montauk Cartridges now come in green, blue, lime and violet (`geb_PlasmaCartridge`, `_Arc`, `_Lance`, `_Void`). The loaded cell decides how each shot looks, and a window along each side of the cartridge glows in its colour.
   - Green: a white-hot core, a short jet and green crackle.
-  - Blue: lightning flickering on the muzzle and a wide flash.
+  - Blue: lightning flickering on the muzzle and a wide flash. It fires rings like a ray gun: a glowing blue ring with a white-hot inner edge, trailed by a stream of smaller rings, and its tracer is a ring too.
   - Lime: a two-metre lance, three shock diamonds and a shock ring.
-  - Violet: a spinning arc vortex, violet crackle and a wide ring.
-  - Every shot fires a plasma ball in the cell's colour that you can watch fly: a white-hot core in a crackling glow half a metre across, with a soft tail that stretches out behind it, 90 m in a second. It's round from every side, and it flies where the round goes: your own ball aims at what your crosshair is on, other players' follow their barrels. It replaces the original plasma laser's streak, a flat electric strip. The round itself still flies at full speed, with a small plasma-ball tracer in place of vanilla's flat tracer strip.
+  - Violet: a spinning arc vortex, violet crackle and a wide ring. It shoots lightning: a jagged violet bolt with forks leaps from the muzzle to whatever the shot hits (up to 100 m), strikes again twice on new paths in a fifth of a second, and crackles and flashes where it lands.
+  - Green and lime shots fire a plasma ball in the cell's colour that you can watch fly: a white-hot core in a crackling glow half a metre across, with a soft tail that stretches out behind it, 90 m in a second. It's round from every side, and it flies where the round goes: your own ball aims at what your crosshair is on, other players' follow their barrels. It replaces the original plasma laser's streak, a flat electric strip. The round itself still flies at full speed, with a small plasma-ball tracer in place of vanilla's flat tracer strip.
   - A cartridge can't be split any more (R or right-click in the inventory): it used to share its cells out into a second cartridge. Tapping R with the rifle in hand no longer throws the chambered cell on the ground; with an empty chamber it still loads the next cell.
   - The muzzle effect is over in a fraction of a second; only the plasma ball flies on.
   - The muzzle light takes the cell's colour instead of vanilla's orange.
@@ -51,7 +64,14 @@ Stored Montauk Rifles: the rifle now takes 8×3 slots instead of 5×3 and has no
   - The smoke is vanilla's heli-crash column thinned to about a quarter of the smoke, which was one of the biggest frame-rate costs near a crash.
   - The green aurora over the wreck starts 12 m up instead of at ground level, with about a quarter of the glow sprites at two-thirds the size. You no longer stand inside some two hundred 30 m sprites at the wreck, the main cause of frame drops near crash sites.
 - Aliens bleed green. Bullet and melee hits spray green blood and leave green splatter on the ground. Gutting one leaves green blood on bare hands; gutting anything else turns the blood red again.
-- Aliens have a fuller voice. Their two old sounds are cut, pitched and stretched into 75 takes, mixed with vanilla's skinny infected voice. They cover idling, noticing, hunting, chasing, attacking, getting hit, jumping, landing and calling others in, plus five death screams. Every take is levelled like vanilla's infected, and the scream no longer clips.
+- Aliens have a fuller voice. Their two old sounds are cut, pitched and stretched into 75 takes of their own, with no infected voice mixed in. They cover idling, noticing, hunting, chasing, attacking, getting hit, jumping, landing and calling others in, plus five death screams. Every take is levelled like vanilla's infected, and the scream no longer clips.
+- Aliens have animations of their own:
+  - Idle: instead of swaying like an infected, an alien stands dead still and stares, arms hanging. Its head slowly creeps over to one side and snaps back upright in jerks, a shoulder twitches, and its fingers roll one after another.
+  - Walk: it stalks, crouched and up on its toes, chest square and head locked ahead, arms hanging still. It walks at the infected's pace, and one in four scurries at twice that, as one in four infected walks faster.
+  - Attacks: a claw slash from over its head with either hand, a slow, curious finger reach that suddenly stabs, and a crouch into a lunge that grabs you, drags you in and snaps a bite. Each lands on the same frame as the infected attack it replaces, so it hits as often and as hard.
+  - Getting shot: it jolts away from the shot, flickers side to side like a bad signal, then turns back and glares.
+  - Death: it clutches its head, drops to its knees and falls (backward, forward or to the side, away from the killing shot). A sudden death skips the clutching.
+  - It attacks, flinches and dies on the spot: it no longer steps forward as it attacks. Running, sprinting, turning, running attacks and deaths, the stagger from heavy melee hits, and climbing and crawling are still the infected's.
 - **Plasma Cell** (`Ammo_Plasma_Cell`). Clearing a loaded Montauk Rifle's chamber gives the cell back as a loose Plasma Cell, which loads back into any Montauk Cartridge and fires in the colour it was loaded as. It never spawns as loot.
   - The plasma round always named this class for a cleared cell, but it never existed, so the cell was lost with a "cannot store cartridge" error.
   - New strings translated into all 13 languages.
@@ -98,6 +118,7 @@ Stored Montauk Rifles: the rifle now takes 8×3 slots instead of 5×3 and has no
 - Aliens' resistance to firearms applies before a hit lands, so it also saves them from shots that would otherwise kill. A multiplier of zero makes them immune to firearms, and the plasma multipliers keep the hit zone and the impact speed.
 
 ### Changed
+- Alien Invasion now uses the same licence as Geb's other mods, Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 (the LICENSE file), instead of the GNU GPL v3: no re-uploads, repacks, server packs or derivative works. Use a Steam Collection for your server.
 - The toxic cloud around a wreck reaches 8 m from it instead of 18 m, with one ring of gas like vanilla's gas grenade instead of three: it covers the wreck and costs far less frame rate. The spooky mist stays.
 - The Roswell Hide is the size of a wolf pelt instead of a bear's: 6 kg and 5×3 instead of 15 kg and 8×4, and it tans into up to 4 Roswell Leather by hand or 6 in a barrel instead of 12 and 10. Each crash leaves 10–15 aliens to skin.
 - Classes another mod could also use are renamed with the `geb_` prefix: the plasma shot sounds (`geb_Plasma_Shot_SoundSet` and the `geb_Plasma_*_SoundShader`s; `Plasma_SoundSet` before), the distant crash sound (`geb_AlienCrash_Distant*`), the plasma ammo types (`geb_AType_Plasma_Cell*`) and the base alien (`geb_GreenAlienBase`; the old `GreenAlienBase` stays as an alias). Items, ammo and the Little Green Man keep their names, so saved items still load (the Montauk Rifle's new size can move some to the ground: see the note for server owners at the top).

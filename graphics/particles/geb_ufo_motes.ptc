@@ -1,0 +1,104 @@
+EffectDef {
+ Emitors {
+  EmitorDef motes {
+   ShapeType Ellipse
+   ShapeSize 0.55 0 0.55
+   ConeAngle 360 150 180
+   MaxNum 140
+   BirthRate 30
+   BirthRateRND 8
+   BirthRateVel 0
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterX -0.167
+   CenterY -0.213
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.05
+   SizeRND 0.03
+   RandomRotDir 1
+   RotMultiplier 30
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 2.2
+   VelocityRND 0.8
+   VelAffect 0
+   AirResistance 0.6
+   GravityMultiply 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 1.8
+   LifeTimeRND 0.6
+   Color {
+    0 0.55 1 0.12 1 0.42 1 0.06
+   }
+   Alpha {
+    0 0 0.1 1 0.7 0.8 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 1 1 0.4
+   }
+   EffectTime 10
+   Repeat 1
+  }
+  EmitorDef haze {
+   ShapeType Ellipse
+   ShapeSize 0.5 0 0.5
+   ConeAngle 360 165 180
+   MaxNum 30
+   BirthRate 6
+   BirthRateRND 2
+   BirthRateVel 0
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{CB7AF4FD8ACBFDFC}Graphics/Particles/materials/glow/glow1.emat"
+   CenterX -0.167
+   CenterY -0.213
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 0.9
+   SizeRND 0.3
+   RandomRotDir 1
+   RotMultiplier 10
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 1.4
+   VelocityRND 0.3
+   VelAffect 0
+   AirResistance 0.4
+   GravityMultiply 0
+   Spring 0
+   Wind 0
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 2.2
+   LifeTimeRND 0.5
+   Color {
+    0 0.42 1 0.08 1 0.35 0.9 0.05
+   }
+   Alpha {
+    0 0 0.2 0.16 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.6 1 1.8
+   }
+   EffectTime 10
+   Repeat 1
+  }
+ }
+}

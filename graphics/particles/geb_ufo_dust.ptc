@@ -1,0 +1,104 @@
+EffectDef {
+ Emitors {
+  EmitorDef ring {
+   ShapeType Ellipse
+   ShapeSize 1.6 0 1.6
+   ConeAngle 360 80 92
+   MaxNum 160
+   BirthRate 26
+   BirthRateRND 6
+   BirthRateVel 0
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{DD4F6AF883F92F41}Graphics/Particles/materials/smoke/smoke_dust_01b.emat"
+   CenterX -0.167
+   CenterY -0.213
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 1.6
+   SizeRND 0.5
+   RandomRotDir 1
+   RotMultiplier 30
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 9
+   VelocityRND 3
+   VelAffect 0
+   AirResistance 2.2
+   GravityMultiply -0.03
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 2.6
+   LifeTimeRND 0.8
+   Color {
+    0 0.47 0.4 0.29 1 0.42 0.37 0.27
+   }
+   Alpha {
+    0 0 0.12 0.38 0.6 0.22 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.6 1 2.6
+   }
+   EffectTime 10
+   Repeat 1
+  }
+  EmitorDef billow {
+   ShapeType Ellipse
+   ShapeSize 2.5 0 2.5
+   ConeAngle 360 0 40
+   MaxNum 30
+   BirthRate 5
+   BirthRateRND 2
+   BirthRateVel 0
+   Offset 0 0 0
+   LocalTransform 0
+   Material "{70CE85062FA7388F}Graphics/Particles/materials/smoke/smoke_dust_05.emat"
+   CenterX -0.167
+   CenterY -0.213
+   ScaleX 1
+   ScaleY 1
+   SizeMultiplier 3
+   SizeRND 0.8
+   RandomRotDir 1
+   RotMultiplier 15
+   StreakFullUV 0
+   VelAngle 0
+   RandomAngle 1
+   Sort 0
+   Velocity 1.2
+   VelocityRND 0.5
+   VelAffect 0
+   AirResistance 1
+   GravityMultiply -0.05
+   Spring 0
+   Wind 1
+   AnimOnce 0
+   AnimFPS 30
+   LifetimeByAnim 0
+   LifeTime 3.5
+   LifeTimeRND 1
+   Color {
+    0 0.47 0.4 0.29 1 0.42 0.37 0.27
+   }
+   Alpha {
+    0 0 0.2 0.18 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.8 1 2
+   }
+   EffectTime 10
+   Repeat 1
+  }
+ }
+}

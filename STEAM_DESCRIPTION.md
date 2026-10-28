@@ -71,9 +71,17 @@ Every mod by Geb stands on its own, so a server can run the ones it wants:
 [/list]
 
 [h1]Usage & Terms[/h1]
-Alien Invasion's source is published on GitHub under the GNU General Public License v3.0: [url=https://github.com/PackJC/alieninvasion]github.com/PackJC/alieninvasion[/url]. You may study, modify, and share it under that license, as long as you keep the license and credit the original.
+Licensed under [url=https://github.com/PackJC/alieninvasion/blob/master/LICENSE]Attribution-NonCommercial-NoDerivatives 4.0 International[/url]. This item is NOT authorized (strictly forbidden) for any of these conditions:
+[list]
+[*] posting on Steam, except under the Steam account Cole.
+[*] hosting on any download server other than Alien Invasion current workshop download.
+[*] hosting on any launcher for distribution other than Alien Invasion current workshop download.
+[*] to be packaged in any form other than Alien Invasion current workshop download.
+[*] to create derivative works.
+[/list]
 
-Please do not put this mod in a "server pack" or "mod pack". Use a Collection if you want to include it on your server, so your players always get the latest version from this page.
+[h1]PERMISSION IS NOT GRANTED FOR THIS MOD TO BE INCLUDED IN A "SERVER PACK" or "MOD PACK" DO NOT EVEN ASK TO REPACK. NO. NOT ALLOWED.[/h1]
+Use a Collection if you want to include this mod on your server for your users.
 
 [h1]Monetization[/h1]
 You are hereby given monetization approval under the conditions that you follow the DayZ Server Monetization agreement and have obtained permission from Bohemia. Read more here https://www.bohemia.net/monetization

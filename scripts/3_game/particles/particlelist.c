@@ -17,6 +17,9 @@ modded class ParticleList
 	static const int GEB_PLASMA_LASER_ARC = RegisterParticle( "alieninvasion/graphics/particles/" , "geb_plasma_laser_arc");
 	static const int GEB_PLASMA_LASER_LANCE = RegisterParticle( "alieninvasion/graphics/particles/" , "geb_plasma_laser_lance");
 	static const int GEB_PLASMA_LASER_VOID = RegisterParticle( "alieninvasion/graphics/particles/" , "geb_plasma_laser_void");
+	// The violet cell's lightning (tools/plasmashots/shots.py): one bolt segment, and where the bolt lands, played by geb_PlasmaRifle.c
+	static const int GEB_PLASMA_BOLT_VOID = RegisterParticle( "alieninvasion/graphics/particles/" , "geb_plasma_bolt_void");
+	static const int GEB_PLASMA_BOLT_VOID_HIT = RegisterParticle( "alieninvasion/graphics/particles/" , "geb_plasma_bolt_void_hit");
 	// Looping arcs on a hot muzzle (tools/plasmashots/shots.py), named by the rifle's Particles > OnOverheating entries
 	static const int GEB_PLASMA_OVERHEAT = RegisterParticle( "alieninvasion/graphics/particles/" , "geb_plasma_overheat");
 	static const int GEB_PLASMA_OVERHEAT_HEAVY = RegisterParticle( "alieninvasion/graphics/particles/" , "geb_plasma_overheat_heavy");
@@ -39,4 +42,9 @@ modded class ParticleList
 	// the blast, named by CfgAmmo geb_PlasmaGrenade_Ammo particle
 	static const int GEB_PLASMAGRENADE_ARMED = RegisterParticle( "alieninvasion/graphics/particles/" , "geb_plasmagrenade_armed");
 	static const int GEB_PLASMAGRENADE_BLAST = RegisterParticle( "alieninvasion/graphics/particles/" , "geb_plasmagrenade_blast");
+	// Flyable UFO (tools/alienufo/effects.py), played by geb_UFO.c: the downwash's dust, the green sparks under the
+	// pod and the damaged hull's smoke
+	static const int GEB_UFO_DUST = RegisterParticle( "alieninvasion/graphics/particles/" , "geb_ufo_dust");
+	static const int GEB_UFO_MOTES = RegisterParticle( "alieninvasion/graphics/particles/" , "geb_ufo_motes");
+	static const int GEB_UFO_SMOKE = RegisterParticle( "alieninvasion/graphics/particles/" , "geb_ufo_smoke");
 }
