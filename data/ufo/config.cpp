@@ -203,15 +203,14 @@ class CfgVehicles
 			inertiaYaw=6150;	// kg m2 about its own up
 			dragArea=2.6;		// m2 of air drag while it falls unpowered
 			gearTime=2.2;		// s to fold the legs up or down
-			autoLandSink=0.35;	// nobody flying it: sink at this share of sinkRate until it sits on its legs
-			idleOffTime=600;	// s it idles on the ground with nobody flying it before it switches itself off (0: never)
 			// a knock harder than this (N s; a hard landing that bottoms the legs is about 6,000) damages the
 			// hull, by crashDamage health per N s past it
 			crashImpulse=9000;
 			crashDamage=0.12;
-			// while testing: once a second with the drive on, a line in the pilot's script log with the drive,
-			// speed, climb, height, attitude, gear, legs and controls. 0 turns it off
-			debugLog=1;
+			// for testing: 1 writes a line a second with the drive on into the pilot's and the server's script logs
+			// (the drive, speed, climb, height, attitude, gear, legs and controls), and notes as the drive, canopy
+			// and gear change. Off for release
+			debugLog=0;
 
 			/*
 				The legs: each casts a ray down the craft's axis from the bottom of its pad (hub, a memory point),

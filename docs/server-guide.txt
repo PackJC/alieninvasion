@@ -120,6 +120,8 @@ defaults until you fix it.
   geb_FoilHat               Tin Foil Hat
   geb_AlienTank             Specimen Tank, a lit prop for admins and map makers
                             (nothing spawns it)
+  geb_UFO                   Flying Saucer you can fly; place it with an admin
+                            tool (nothing spawns it), saved with the vehicles
 
 
 7. CUSTOM ALIEN LOOT (optional)

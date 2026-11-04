@@ -38,11 +38,13 @@ The mod includes custom models, textures, sounds, particles, localized item name
 ## Key Features
 
 - A custom UFO crash site with green light, fire, a smoke column, crackling electrical sparks, mist, wreck particles, distant crash audio, and an 8 m **toxic gas zone** (NBC gear protects).
-- **Crash salvage:** a 35% chance of a Montauk Rifle with a cartridge, plus up to two spare cartridges.
-- Hostile **Little Green Men** with their own voices and footsteps, and green blood. Infected melee up close, a **psychic zap** from 4–80 m in line of sight that you see as a green beam from the alien's head, and a green burst and scream when they die.
+- **Crash salvage:** a 35% chance of a Montauk Rifle with a cartridge, plus up to two spare cartridges and up to two plasma grenades.
+- Hostile **Little Green Men** with their own voices and footsteps, and green blood, and animations of their own: a dead-still stare, a crouched stalk on their toes, claw slashes, a finger stab and a lunging grab, a flicker when they're shot, and deaths that clutch the head. Infected melee up close, a **psychic zap** from 4–80 m in line of sight that you see as a green beam from the alien's head, and a green burst and scream when they die.
 - Aliens appear when a player comes within 300 m, so unvisited crash sites cost the server nothing.
-- **Montauk Rifle**, a semi-automatic plasma weapon whose bolts deal double damage to aliens (other firearms deal 75%). Its cartridges come in green, blue, lime and violet, and each colour has its own muzzle effect, plasma ball and light. It has a skeleton stock with a cheek rest and a rubber pad, a shaped pistol grip and trigger guard, hooded iron sights with a glowing front dot, an animated read-out on the back, purple fluid swirling in its vent tubes, lime fluid flowing behind its glass windows, and electric arcs on the muzzle when it runs hot.
+- **Montauk Rifle**, a semi-automatic plasma weapon whose bolts deal double damage to aliens (other firearms deal 75%). Its cartridges come in green, blue, lime and violet, and each colour has its own muzzle effect and light: green and lime fire a plasma ball you can watch fly, blue fires rings like a ray gun, and violet shoots forked lightning. It has a skeleton stock with a cheek rest and a rubber pad, a shaped pistol grip and trigger guard, hooded iron sights with a glowing front dot, an animated read-out on the back, purple fluid swirling in its vent tubes, lime fluid flowing behind its glass windows, and electric arcs on the muzzle when it runs hot.
 - **Montauk Cartridge**, a 15-round plasma magazine that can't be unloaded — recharge it with a 9V battery.
+- **Plasma Grenade:** an alien sticky grenade that clings to whatever it hits (players, infected, animals, vehicles) and bursts 3 s after leaving your hand in a blue plasma blast.
+- **Flying Saucer** for admins to place (`geb_UFO`): a one-seat UFO you can fly, with an opening glass canopy, folding landing legs, its own rebindable keys, sounds and HUD. It falls out of the sky if nobody is at the controls.
 - **Tin Foil Hat:** aliens can't track the wearer beyond 3 m and can't zap them.
 - **Area 51 Steak** and **Roswell Hide** from skinning aliens. Cooked steak gives 90 s of green night vision; bad meat gives food poisoning.
 - **Roswell Hide crafting:** tan the hide into green **Roswell Leather**, then sew a **Roswell Leather Backpack**, or make a **Roswell Hide Courier Bag** and **Roswell Hide Backpack**.
@@ -66,7 +68,7 @@ The wreck is the encounter anchor; you never configure alien spawns separately.
 
 ### Little Green Man
 
-The alien is based on DayZ's infected behavior and uses its own model, voice, and footsteps. Up close it fights like an infected; when it's chasing you in the open it zaps you from range. It can be skinned with any knife or cutting tool, producing two Area 51 Steaks, a Roswell Hide, and vanilla gutting materials.
+The alien is based on DayZ's infected behavior and uses its own model, voice, footsteps, and animations: it stands dead still and stares, stalks crouched on its toes, slashes, stabs and lunges, flickers when it's shot, and clutches its head as it dies. Up close it fights like an infected; when it's chasing you in the open it zaps you from range. It can be skinned with any knife or cutting tool, producing two Area 51 Steaks, a Roswell Hide, and vanilla gutting materials.
 
 ### Montauk Rifle
 
@@ -82,6 +84,21 @@ The plasma rifle is a semi-automatic firearm built on the Ruger 10/22 weapon bas
 ### Montauk Cartridge
 
 A sealed 15-round plasma magazine. It can't be unloaded; combine it with a 9V battery to recharge it. A full battery fills a full cartridge. Clearing a cell from the rifle's chamber gives it back as a loose **Plasma Cell**, which loads back into any cartridge and keeps its colour.
+
+It comes in four colours, and the loaded cell decides how each shot looks: green (`geb_PlasmaCartridge`) and lime (`_Lance`) fire a glowing plasma ball you can watch fly, blue (`_Arc`) fires rings like a ray gun, and violet (`_Void`) shoots a forked lightning bolt that strikes three times. All four hit aliens just as hard.
+
+### Plasma Grenade
+
+A dark violet alloy ball held like the M67. Prime it and throw it: it sticks to the first thing it touches and rides along on players, infected, animals and vehicles. It bursts 3 seconds after leaving your hand in a blue plasma blast: a smaller radius than the M67's (4 m) but twice its damage, and whoever it's stuck to takes all of it. Until it leaves your hand you can disarm it again. Found at crash sites (`CrashPlasmaGrenadesMax`) and sometimes on aliens.
+
+### Flying Saucer
+
+A six-metre black saucer trimmed in lime light, with a glass dome over a one-seat cockpit. Nothing spawns it: place `geb_UFO` with an admin tool, and it's saved with the server's vehicles.
+
+- Open the canopy (F) from outside and climb in over the left rim. Hold the start action to power up; click to power down once you're on the ground.
+- Fly with W/S (forward, back), A/D (turn), Q/E (slide), Space/C (up, down), Shift (boost) and G (landing legs), rebindable under Settings > Controls > Alien Invasion UFO. It tops out around 200 km/h, or 320 km/h with boost; let go and it brakes to a hover.
+- Switched off, or left with nobody at the controls in mid-air, it falls. Hard knocks scorch the hull and crack the glass, and a wreck won't power up.
+- A HUD shows the speed, height, climb, drive, gear, canopy and condition.
 
 ### Alien Materials
 
@@ -156,6 +173,7 @@ A file that fails to parse is never overwritten; the server logs the error and r
 | `geb_AlienRadiationArea` | Effect area | The wreck's toxic cloud (created and removed by the wreck) |
 | `geb_GreenAlien` | Creature | Hostile Little Green Man |
 | `geb_AlienTank` | Prop | Specimen Tank with a sleeping alien; place it with an admin tool or editor |
+| `geb_UFO` | Vehicle | Flying Saucer you can fly; place it with an admin tool |
 | `geb_GreenAlienMeat` | Food | Area 51 Steak harvested from an alien |
 | `geb_GreenAlienSkin` | Material | Roswell Hide harvested from an alien |
 | `geb_GreenAlienLeather` | Material | Roswell Leather, tanned from the hide |
@@ -168,6 +186,7 @@ A file that fails to parse is never overwritten; the server logs the error and r
 | `geb_PlasmaCartridge_Lance` | Magazine | Montauk Cartridge (Lime): lime lance plasma |
 | `geb_PlasmaCartridge_Void` | Magazine | Montauk Cartridge (Violet): violet void plasma |
 | `Ammo_Plasma_Cell` | Ammunition | Loose Plasma Cell, from clearing a loaded rifle's chamber (never spawns as loot) |
+| `geb_PlasmaGrenade` | Explosive | Plasma Grenade that sticks to what it hits |
 | `geb_FoilHat` | Clothing | Tin Foil Hat |
 
 ## Project Structure
@@ -182,8 +201,8 @@ alieninvasion/
 |-- mod.cpp             # Launcher entry: name, logos, version, Discord link
 `-- scripts/
     |-- 3_game/         # Version, server config, file generator, alien-vision tint
-    |-- 4_world/        # Wreck, aliens, specimen tank, gas zone, rifle, items, recipes, player hooks
-    `-- 5_mission/      # Server startup: loads the config, writes the Gebs files
+    |-- 4_world/        # Wreck, aliens, specimen tank, flying saucer, gas zone, rifle, grenade, items, recipes, player hooks
+    `-- 5_mission/      # Server startup (loads the config, writes the Gebs files) and the saucer's HUD
 ```
 
 ## The Geb's family

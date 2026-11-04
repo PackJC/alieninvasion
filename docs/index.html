@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <title>Alien Invasion</title>
-  <meta name="description" content="Alien Invasion for DayZ: UFO crash encounters, hostile aliens with psychic attacks, toxic crash zones, plasma weaponry, server installation, configuration and classnames.">
+  <meta name="description" content="Alien Invasion for DayZ: UFO crash encounters, hostile aliens with psychic attacks, toxic crash zones, plasma weaponry, a flyable flying saucer, server installation, configuration and classnames.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Alien Invasion for DayZ">
   <meta property="og:description" content="Investigate burning UFO wrecks, survive hostile aliens, and recover experimental plasma technology.">
@@ -23,7 +23,7 @@
   <!-- Bump ?v= whenever styles.css or app.js changes: GitHub Pages lets browsers cache them for
        10 minutes, and fresh HTML paired with a stale stylesheet breaks the layout -->
   <link rel="stylesheet" href="styles.css?v=20261027a">
-  <script src="app.js?v=20261027a" defer></script>
+  <script src="app.js?v=20261104a" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -103,6 +103,7 @@
           <article class="tile reveal"><h3>Rechargeable cells</h3><p>Cartridges can't be unloaded: combine one with a 9V battery to recharge it. A full battery fills a full cartridge, and a cell cleared from the rifle's chamber loads back in.</p></article>
           <article class="tile reveal"><h3>Tin foil hat</h3><p>It works. Aliens lose track of anyone wearing an intact foil hat unless they're within arm's reach, and their psychic zaps can't get through.</p></article>
           <article class="tile reveal"><h3>Alien harvest</h3><p>Skin an alien for Area 51 Steaks and a Roswell Hide. Cooked steak gives 90 seconds of green night vision; the hide tans into green leather for backpacks and bags.</p></article>
+          <article class="tile reveal"><h3>Fly a saucer</h3><p>Admins can place a one-seat flying saucer. Power it up, fold its legs and fly it with its own keys at up to 320&nbsp;km/h. Nobody at the controls, and it drops out of the sky.</p></article>
           <article class="tile reveal"><h3>Server-tunable</h3><p>Every number, from alien counts and loot odds to the gas zone, zap range and damage bonuses, lives in <code>$profile:Gebs/alieninvasion.json</code>.</p></article>
           <article class="tile reveal"><h3>Economy files generated</h3><p>The server writes ready-made types, events, crash positions and loot points into <code>$profile:Gebs/mpmissions/</code> on first start.</p></article>
         </div>
@@ -152,7 +153,7 @@
         <header class="head reveal">
           <p class="eyebrow">Recovered materials</p>
           <h2>Field inventory.</h2>
-          <p class="sub">Nineteen public classnames cover the encounter, toxic cloud, creature, specimen tank, weapon, magazine, loose cell, plasma grenade, clothing, food, the Roswell Hide, and what you can make from it.</p>
+          <p class="sub">Twenty public classnames cover the encounter, toxic cloud, creature, specimen tank, flying saucer, weapon, magazine, loose cell, plasma grenade, clothing, food, the Roswell Hide, and what you can make from it.</p>
         </header>
         <div class="grid items">
           <article class="card item reveal">
@@ -176,7 +177,7 @@
               <p class="tag">Magazine</p>
               <h3>Montauk Cartridge</h3>
               <button class="cls" type="button" data-cls="geb_PlasmaCartridge">geb_PlasmaCartridge</button>
-              <p class="desc">A sealed plasma magazine that can't be unloaded. Combine it with a 9V battery to recharge: a full battery fills a full cartridge, a partial one adds what it can. Comes in four colours, each with its own muzzle effect and a cell window that glows in that colour: <code>geb_PlasmaCartridge</code> (green), <code>_Arc</code> (blue), <code>_Lance</code> (lime) and <code>_Void</code> (violet). A cell cleared from the rifle's chamber comes back as a loose Plasma Cell (<code>Ammo_Plasma_Cell</code>) that loads back into any cartridge and keeps its colour.</p>
+              <p class="desc">A sealed plasma magazine that can't be unloaded. Combine it with a 9V battery to recharge: a full battery fills a full cartridge, a partial one adds what it can. Comes in four colours, each with its own muzzle effect and a cell window that glows in that colour: <code>geb_PlasmaCartridge</code> (green) and <code>_Lance</code> (lime) fire a glowing plasma ball you can watch fly, <code>_Arc</code> (blue) fires rings like a ray gun, and <code>_Void</code> (violet) shoots a forked lightning bolt that strikes three times. A cell cleared from the rifle's chamber comes back as a loose Plasma Cell (<code>Ammo_Plasma_Cell</code>) that loads back into any cartridge and keeps its colour.</p>
               <dl class="facts"><div><dt>Capacity</dt><dd>15</dd></div><div><dt>Recharge</dt><dd>9V battery</dd></div><div><dt>Colours</dt><dd>4</dd></div></dl>
             </div>
           </article>
@@ -232,7 +233,7 @@
               <p class="tag">Creature</p>
               <h3>Little Green Man</h3>
               <button class="cls" type="button" data-cls="geb_GreenAlien">geb_GreenAlien</button>
-              <p class="desc">A hostile extraterrestrial with its own voice and footsteps, and green blood. Infected melee up close, a psychic zap at range, and a green burst and scream when it dies.</p>
+              <p class="desc">A hostile extraterrestrial with its own voice, footsteps, green blood and animations: it stands dead still and stares, stalks on its toes, slashes, stabs and lunges, flickers when shot and clutches its head as it dies. Infected melee up close, a psychic zap at range, and a green burst and scream when it dies.</p>
               <dl class="facts"><div><dt>Zap range</dt><dd>4–80 m</dd></div><div><dt>Harvestable</dt><dd>Yes</dd></div></dl>
             </div>
           </article>
@@ -244,6 +245,16 @@
               <button class="cls" type="button" data-cls="geb_AlienTank">geb_AlienTank</button>
               <p class="desc">A sleeping alien floating in glowing green fluid, with rising bubbles, drifting motes, a green glow and a low hum. Decoration for labs and bunkers: place it with an admin tool or a map editor; nothing spawns it.</p>
               <dl class="facts"><div><dt>Height</dt><dd>3.6 m</dd></div><div><dt>Spawns</dt><dd>Placed only</dd></div></dl>
+            </div>
+          </article>
+          <article class="card item reveal">
+            <div class="pic"><img src="items/geb_UFO.webp" alt="Render of the Flying Saucer on its landing legs, lit up" width="640" height="370" loading="lazy"></div>
+            <div class="info">
+              <p class="tag">Vehicle</p>
+              <h3>Flying Saucer</h3>
+              <button class="cls" type="button" data-cls="geb_UFO">geb_UFO</button>
+              <p class="desc">A six-metre black saucer trimmed in lime light, with a glass dome over a one-seat cockpit: a yoke, live displays and a radar table with a hologram globe. Open the canopy (F) and climb in over the left rim. Hold the start action to power up, then fly with W/S, A/D, Q/E, Space/C, Shift to boost and G for the folding legs. Let go and it brakes to a hover. Switched off or left without a pilot in the air, it falls. Hard knocks scorch the hull and crack the glass; a wreck won't power up. Saved with the server's vehicles; place it with an admin tool.</p>
+              <dl class="facts"><div><dt>Top speed</dt><dd>200 km/h</dd></div><div><dt>Boosted</dt><dd>320 km/h</dd></div><div><dt>Seats</dt><dd>1</dd></div></dl>
             </div>
           </article>
         </div>
@@ -436,7 +447,7 @@
         </header>
         <div class="tools reveal">
           <label class="search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><input id="classname-search" type="search" placeholder="Search classnames" autocomplete="off" aria-label="Search classnames"></label>
-          <label class="select"><span class="sr">Type</span><select id="classname-filter"><option value="all">All types</option><option value="Encounter">Encounter</option><option value="Creature">Creature</option><option value="Prop">Prop</option><option value="Weapon">Weapon</option><option value="Magazine">Magazine</option><option value="Ammunition">Ammunition</option><option value="Explosive">Explosive</option><option value="Food">Food</option><option value="Material">Material</option><option value="Backpack">Backpack</option><option value="Clothing">Clothing</option></select></label>
+          <label class="select"><span class="sr">Type</span><select id="classname-filter"><option value="all">All types</option><option value="Encounter">Encounter</option><option value="Creature">Creature</option><option value="Prop">Prop</option><option value="Vehicle">Vehicle</option><option value="Weapon">Weapon</option><option value="Magazine">Magazine</option><option value="Ammunition">Ammunition</option><option value="Explosive">Explosive</option><option value="Food">Food</option><option value="Material">Material</option><option value="Backpack">Backpack</option><option value="Clothing">Clothing</option></select></label>
           <span class="count" id="result-count"></span>
         </div>
         <div class="table reveal" id="classname-table"><table><thead><tr><th>Classname</th><th>Type</th><th>Description</th></tr></thead><tbody id="classname-body"></tbody></table></div>
@@ -453,6 +464,7 @@
           <details><summary>Why did I spawn the static wreck and get no aliens?</summary><p><code>StaticObj_geb_Aliencrash</code> is visual scenery only. Use <code>geb_Aliencrash</code>, through the Central Economy or with an admin tool on a dedicated server, for the scripted encounter.</p></details>
           <details><summary>Something keeps hitting me from far away. What is it?</summary><p>A psychic zap: an alien chasing you, with a clear line of sight, hits you from 4–80&nbsp;m, at most once a minute each: a green beam from the alien's head and a crackle where it lands. Break line of sight, close the distance, or wear a tin foil hat, which blocks the zaps completely. Server owners can tune or disable it in <code>alieninvasion.json</code>.</p></details>
           <details><summary>Is the gas around the wreck dangerous?</summary><p>Yes. It's DayZ's own contaminated-area effect, so a gas mask and NBC suit protect you. The salvage lies inside it. Server owners can turn it off with <code>CrashGasZone</code>.</p></details>
+          <details><summary>How do I fly the saucer?</summary><p>Place <code>geb_UFO</code> with an admin tool: nothing spawns it. Open the canopy (F) from outside, climb in over the left rim, hold the start action to power up, and fly with W/S (forward, back), A/D (turn), Q/E (slide), Space/C (up, down), Shift (boost) and G (legs). Rebind them under Settings &gt; Controls &gt; Alien Invasion UFO. Land and click to power down; get out in mid-air and it switches off and falls.</p></details>
           <details><summary>How do I recharge plasma cartridges?</summary><p>Combine a cartridge with a charged 9V battery (drag one onto the other, or hold one and use the action on the other). A full battery refills a whole cartridge; a partial one adds as many cells as its charge covers.</p></details>
           <details><summary>Does every player need the mod?</summary><p>Yes. It contains custom models, textures, sounds, particles, scripts and localization, so it must run on the server and all clients.</p></details>
           <details><summary>Does Alien Invasion require Community Framework?</summary><p>No third-party mod is declared as a runtime dependency in the source.</p></details>
@@ -477,10 +489,12 @@
         </header>
         <div class="releases">
           <article class="release reveal"><span class="ver">2.0</span><div><h3>Version 2.0.0: new</h3><ul>
+            <li>Flying Saucer (<code>geb_UFO</code>): a one-seat UFO you can fly, with an opening glass canopy, folding landing legs, its own keys, sounds and HUD. Admins place it; it's saved with the server's vehicles.</li>
             <li>Plasma Grenade (<code>geb_PlasmaGrenade</code>): an alien sticky grenade that clings to whatever it hits and bursts in a blue plasma blast 3 seconds after leaving the hand. Found at crash sites and sometimes on aliens.</li>
             <li>Specimen Tank (<code>geb_AlienTank</code>): a sleeping alien in a tank of glowing green fluid, with bubbles, motes, a green glow and a hum. A prop for admins and map makers.</li>
-            <li>Four plasma colours: Montauk Cartridges come in green, blue, lime and violet, each with its own muzzle effect, plasma ball, light and a glowing window on the cartridge.</li>
+            <li>Four plasma colours: Montauk Cartridges come in green, blue, lime and violet, each with its own muzzle effect, light and a glowing window on the cartridge. Green and lime fire a plasma ball you can watch fly, blue fires rings like a ray gun, and violet shoots forked lightning.</li>
             <li>Montauk Rifle rebuilt: a skeleton stock, a shaped pistol grip and trigger guard, hooded iron sights, an animated read-out on the back, purple fluid in the vent tubes, lime fluid behind the glass windows, new detailed textures, and blue-white arcs on the muzzle when it runs hot.</li>
+            <li>Aliens have animations of their own: a dead-still stare, a crouched stalk on their toes, a claw slash, a finger stab and a lunging grab, a flicker when they're shot, and deaths that clutch the head and fall.</li>
             <li>The aliens' psychic zap is a green beam from the alien's head to you; a dying alien bursts green instead of firing a laser.</li>
             <li>Crash sites smoke like a heli crash and crackle with electrical sparks; aliens bleed green and have a fuller voice of 75 takes.</li>
             <li>Plasma Cell (<code>Ammo_Plasma_Cell</code>): clearing a loaded rifle's chamber gives the cell back, and it loads into any cartridge. It never spawns as loot.</li>
@@ -490,6 +504,7 @@
             <li>Aliens have their hit zones back: headshots do extra damage and can kill outright. The Little Green Man's config threw the zones away when it changed its health.</li>
             <li>The Roswell Hide's condition follows the alien's torso (it read two animal zones the alien doesn't have), and it is wolf-pelt sized: 6&nbsp;kg, 5×3, up to 4 leather by hand or 6 in a barrel instead of a bear's 15&nbsp;kg and 12.</li>
             <li>Crash loot lies on the crater around the UFO. The loot points were copied from vanilla's Mi-8 wreck, mostly outside the UFO and underground.</li>
+            <li>A wreck that comes back after a server restart no longer drops a second set of loot beside the first.</li>
             <li>The 10% spare cartridge aliens can carry now spawns.</li>
             <li>Server crash fixed when a loaded Montauk Rifle showed a chambered round (admin spawns with ammo, restarts with a loaded rifle in storage).</li>
             <li>Montauk Rifle: no more invisible Ruger scope, suppressor and wrap; weighs 3.4&nbsp;kg instead of 350&nbsp;g, lies properly on the ground, and its shots carry 2&nbsp;km like other rifles'.</li>

@@ -15,9 +15,8 @@
 	  its pad grips the ground. Up, the craft rests on its hull;
 	- unpowered, it falls like a stone with a little air drag.
 
-	Nobody at the controls with the drive on (the pilot jumped out, or left it
-	running), it lowers its legs, settles to the ground and idles there, as a
-	car left running does, until geb_UFOFlight idleOffTime switches it off.
+	Nobody at the controls (the pilot got out, died or left the game), the
+	drive switches off: in the air it falls out of the sky.
 
 	Multiplayer: as with every DayZ vehicle, the pilot's client simulates the
 	craft and so does the server, from the same moves, correcting the pilot's
@@ -61,13 +60,19 @@ class geb_UFOControls
 
 	void ResetSticks()
 	{
+		CentreSticks();
+		m_Starter = false;
+		m_StarterLatched = false;
+	}
+
+	//! The sticks let go: no push, turn or climb asked for, no boost.
+	void CentreSticks()
+	{
 		m_Forward = 0;
 		m_Strafe = 0;
 		m_Yaw = 0;
 		m_Climb = 0;
 		m_Boost = false;
-		m_Starter = false;
-		m_StarterLatched = false;
 	}
 };
 
@@ -139,7 +144,6 @@ class geb_UFOOwnerState : TransportOwnerState
 	float m_SpoolTime;
 	float m_Power;
 	float m_GearPhase;
-	float m_SettledTime;
 
 	protected override event void Write(PawnStateWriter ctx)
 	{
@@ -149,7 +153,6 @@ class geb_UFOOwnerState : TransportOwnerState
 		ctx.Write(m_SpoolTime);
 		ctx.Write(m_Power);
 		ctx.Write(m_GearPhase);
-		ctx.Write(m_SettledTime);
 	}
 
 	protected override event void Read(PawnStateReader ctx)
@@ -160,7 +163,6 @@ class geb_UFOOwnerState : TransportOwnerState
 		ctx.Read(m_SpoolTime);
 		ctx.Read(m_Power);
 		ctx.Read(m_GearPhase);
-		ctx.Read(m_SettledTime);
 	}
 
 	protected override event int EstimateMaximumSize()
@@ -213,9 +215,13 @@ class geb_UFO : Transport
 	static const int GLASS_IN_INDEX = 5;		//!< the glass's inside faces: plain tint, cracking with the rest
 	static const float FIELD_TURN_TIME = 40;	//!< s for the hex field to turn once round inside the glass
 	static const float DUST_HEIGHT = 14;		//!< m above the ground: no downwash dust higher than this
+	static const float UNPILOTED_POWER_LAG = 0.15;	//!< s for the power to drain once the pilot is gone
 	static const float LOOK_REFRESH_TIME = 0.5;	//!< s of setting the materials again after the canopy stops or a hit
+	static const float LOOK_RECHECK_TIME = 1.0;	//!< s between setting them again anyway
+	static const float MOVE_TIMEOUT = 1.0;		//!< s without a move from the pilot before the server lets the sticks go
 
 	protected bool m_FlightLoaded;
+	protected vector m_SimTm[4];		//!< the physics body's world transform this step (SimPoint, SimDir; EOnSimulate)
 	protected vector m_Fwd;			//!< model axes: forward (the nose, -Z), up, and to the right
 	protected vector m_Up;
 	protected vector m_Side;
@@ -251,8 +257,6 @@ class geb_UFO : Transport
 	protected float m_InertiaYaw;
 	protected float m_DragArea;
 	protected float m_GearTime;
-	protected float m_AutoLandSink;
-	protected float m_IdleOffTime;
 	protected float m_CrashImpulse;
 	protected float m_CrashDamage;
 
@@ -265,7 +269,6 @@ class geb_UFO : Transport
 	protected float m_SpoolTime;
 	protected float m_Power;			//!< 0 .. 1, how much the drive is giving
 	protected float m_GearPhase;		//!< 0 down .. 1 folded up
-	protected float m_SettledTime;		//!< s idling on the ground, drive on, with nobody flying it
 	protected float m_GroundShare;		//!< share of the weight the legs carry, this step
 	protected float m_Effort;			//!< 0 .. 1, how hard the drive is working (for the sound)
 	protected float m_SyncTimer;
@@ -301,6 +304,10 @@ class geb_UFO : Transport
 	protected float m_CanopyShown;		//!< the canopy's phase last frame: moving, it resets the materials
 	protected float m_LookRefreshTime;	//!< s left of setting the materials again every frame (RefreshLooks)
 	protected int m_LookRefreshSeen;
+	protected float m_LookRecheckTime;
+	protected int m_ServerHullLook = -1;	//!< server: the materials it has on the hidden selections (UpdateServerLooks; -1: to set)
+	protected int m_ServerGlassLook = -1;
+	protected int m_ServerLitLook = -1;
 	protected bool m_FieldFlickerOn;
 	protected float m_FieldFlickerTime;
 	protected ParticleSource m_DustFx;
@@ -313,6 +320,7 @@ class geb_UFO : Transport
 	protected bool m_HeardGearDown = true;
 	protected bool m_HeardSet;
 	protected ref geb_UFOSound m_LoopSound;
+	protected int m_LoopRestartsSeen;	//!< the loops' restarts already in the debug log
 	protected ref TStringArray m_LoopSoundSets;
 	protected string m_PowerUpSound;
 	protected string m_PowerDownSound;
@@ -334,6 +342,7 @@ class geb_UFO : Transport
 	protected int m_DebugSteps;			//!< simulation steps since the last line
 	protected int m_DebugMovesOut;		//!< moves this machine sent (the pilot's)
 	protected int m_DebugMovesIn;		//!< moves this machine flew from the pilot (the server)
+	protected float m_SinceMove;		//!< server: s since the pilot's last move arrived (ConsumeMove)
 
 	void geb_UFO()
 	{
@@ -468,8 +477,6 @@ class geb_UFO : Transport
 		m_InertiaYaw = FlightFloat("inertiaYaw");
 		m_DragArea = FlightFloat("dragArea");
 		m_GearTime = Math.Max(FlightFloat("gearTime"), 0.1);
-		m_AutoLandSink = FlightFloat("autoLandSink");
-		m_IdleOffTime = FlightFloat("idleOffTime");
 		m_CrashImpulse = FlightFloat("crashImpulse");
 		m_CrashDamage = FlightFloat("crashDamage");
 		m_DebugLog = g_Game.ConfigGetInt(path + " debugLog") != 0;
@@ -559,6 +566,14 @@ class geb_UFO : Transport
 		return driver && driver == g_Game.GetPlayer() && driver.IsControllingVehicle();
 	}
 
+	//! Someone alive and awake at the controls. A pilot killed or knocked out stays in the seat (vanilla's
+	//! CrewDeath), so a body there counts as nobody: the craft switches off and, in the air, falls.
+	bool HasLivePilot()
+	{
+		Human driver = CrewDriver();
+		return driver && driver.IsAlive() && !driver.IsUnconscious();
+	}
+
 	protected float InputValue(string name)
 	{
 		UAInput input;
@@ -589,23 +604,46 @@ class geb_UFO : Transport
 		return current - step;
 	}
 
+	/*!
+		The chat, a menu or the inventory is open: the craft's keys do nothing, and the sticks spring back as if
+		let go. Those put vanilla's input excludes on, which hold back vanilla's own vehicle keys but not a mod's,
+		so typing W, C or G into the chat flew the craft or worked its legs.
+	*/
+	protected bool InputsBlocked()
+	{
+		if (g_Game.GetUIManager() && g_Game.GetUIManager().GetMenu())
+			return true;
+
+		return g_Game.GetMission() && g_Game.GetMission().IsControlDisabled();
+	}
+
 	protected void ReadPilotInput(float dt)
 	{
 		geb_UFOControls c = m_FlightControls;
 
-		float fwd = InputValue("UAgebUFOForward") - InputValue("UAgebUFOBack");
-		float strafe = InputValue("UAgebUFOStrafeRight") - InputValue("UAgebUFOStrafeLeft");
-		float yaw = InputValue("UAgebUFOTurnRight") - InputValue("UAgebUFOTurnLeft");
-		float climb = InputValue("UAgebUFOUp") - InputValue("UAgebUFODown");
+		float fwd = 0;
+		float strafe = 0;
+		float yaw = 0;
+		float climb = 0;
+		bool boost = false;
+		bool gearKey = false;
+		if (!InputsBlocked())
+		{
+			fwd = InputValue("UAgebUFOForward") - InputValue("UAgebUFOBack");
+			strafe = InputValue("UAgebUFOStrafeRight") - InputValue("UAgebUFOStrafeLeft");
+			yaw = InputValue("UAgebUFOTurnRight") - InputValue("UAgebUFOTurnLeft");
+			climb = InputValue("UAgebUFOUp") - InputValue("UAgebUFODown");
+			boost = InputValue("UAgebUFOBoost") > 0.5;
+			gearKey = InputValue("UAgebUFOGear") > 0.5;
+		}
 
 		c.m_Forward = MoveStick(c.m_Forward, Math.Clamp(fwd, -1, 1), dt);
 		c.m_Strafe = MoveStick(c.m_Strafe, Math.Clamp(strafe, -1, 1), dt);
 		c.m_Yaw = MoveStick(c.m_Yaw, Math.Clamp(yaw, -1, 1), dt);
 		c.m_Climb = MoveStick(c.m_Climb, Math.Clamp(climb, -1, 1), dt);
-		c.m_Boost = InputValue("UAgebUFOBoost") > 0.5;
+		c.m_Boost = boost;
 
 		// the gear: one toggle per press. The legs won't fold while they carry the craft
-		bool gearKey = InputValue("UAgebUFOGear") > 0.5;
 		if (gearKey && !m_GearKeyHeld)
 		{
 			if (!c.m_GearDown)
@@ -671,12 +709,36 @@ class geb_UFO : Transport
 		DebugNote("switched off");
 	}
 
-	//! The pilot gone: the sticks centre. The drive stays on, so the craft can land itself (AutoLand).
+	//! The pilot gone: the sticks centre and the drive switches off (SimulatePower makes sure of it on the
+	//! machines that simulate the craft), so in the air it falls.
 	override void OnDriverExit(Human player)
 	{
 		super.OnDriverExit(player);
 
+		LosePilot();
+	}
+
+	//! The pilot killed or knocked out in the seat: the same as getting out (vanilla's cars stop their engine here)
+	override void MarkCrewMemberDead(int crewMemberIndex)
+	{
+		super.MarkCrewMemberDead(crewMemberIndex);
+
+		if (crewMemberIndex == DayZPlayerConstants.VEHICLESEAT_DRIVER)
+			LosePilot();
+	}
+
+	override void MarkCrewMemberUnconscious(int crewMemberIndex)
+	{
+		super.MarkCrewMemberUnconscious(crewMemberIndex);
+
+		if (crewMemberIndex == DayZPlayerConstants.VEHICLESEAT_DRIVER)
+			LosePilot();
+	}
+
+	protected void LosePilot()
+	{
 		m_FlightControls.ResetSticks();
+		SwitchOff();
 	}
 
 	//--------------------------------------------------------------------------
@@ -711,6 +773,7 @@ class geb_UFO : Transport
 		if (move)
 			move.Restore(m_FlightControls);
 		m_DebugMovesIn++;
+		m_SinceMove = 0;
 	}
 
 	protected override event bool ReplayMove(PawnMove pMove)
@@ -744,7 +807,6 @@ class geb_UFO : Transport
 			state.m_SpoolTime = m_SpoolTime;
 			state.m_Power = m_Power;
 			state.m_GearPhase = m_GearPhase;
-			state.m_SettledTime = m_SettledTime;
 		}
 	}
 
@@ -764,7 +826,6 @@ class geb_UFO : Transport
 			m_SpoolTime = state.m_SpoolTime;
 			m_Power = state.m_Power;
 			m_GearPhase = state.m_GearPhase;
-			m_SettledTime = state.m_SettledTime;
 		}
 	}
 
@@ -782,8 +843,26 @@ class geb_UFO : Transport
 
 		m_DebugSteps++;
 
-		if (!CrewDriver())
-			AutoLand();
+		// where the body is this step, read from the physics: in a step replayed after a network correction
+		// the entity's own transform (GetPosition, VectorToParent, ModelToWorld) still shows where it was, so
+		// the legs and the drive would work from a stale pose and the pilot's craft jolt a little at every
+		// correction. The Bf 109 bounced and skipped from this (GebsPlanes, 2026-11-03); vanilla's boat reads its
+		// position in EOnSimulate the same way
+		dBodyGetWorldTransform(this, m_SimTm);
+
+		if (!HasLivePilot())
+			m_FlightControls.ResetSticks();
+
+		// the server, with the pilot's moves no longer coming (they lost their connection or quit, and their
+		// character sits on in the seat until the game takes it away): the sticks are let go, so the craft brakes
+		// to a hover rather than flying on on the last keys held. It falls once the seat is empty (SimulatePower).
+		// A move comes every step while they fly (40 a second), so a second without one is no ordinary lag
+		if (g_Game.IsDedicatedServer())
+		{
+			m_SinceMove += dt;
+			if (m_SinceMove > MOVE_TIMEOUT)
+				m_FlightControls.CentreSticks();
+		}
 
 		SimulatePower(dt);
 		SimulateGear(dt);
@@ -797,22 +876,22 @@ class geb_UFO : Transport
 		return !IsDamageDestroyed() && GetHealthLevel("") < GameConstants.STATE_RUINED;
 	}
 
-	//! Nobody flying it with the drive on: sticks centred, legs down, sink to the ground and idle there
-	//! (SimulatePower switches it off after idleOffTime).
-	protected void AutoLand()
-	{
-		geb_UFOControls c = m_FlightControls;
-		c.ResetSticks();
-		if (m_PowerState == geb_UFOPowerState.ON)
-		{
-			c.m_GearDown = true;
-			c.m_Climb = -m_AutoLandSink;
-		}
-	}
-
 	protected void SimulatePower(float dt)
 	{
 		geb_UFOControls c = m_FlightControls;
+
+		// nobody at the controls (the pilot got out, left the game, or died or was knocked out in the seat): the
+		// drive is off, whatever this machine heard of the switch, and its power drains in UNPILOTED_POWER_LAG,
+		// so in the air it drops
+		bool pilot = HasLivePilot();
+		if (!pilot && (c.m_Power || m_PowerState != geb_UFOPowerState.OFF))
+		{
+			c.m_Power = false;
+			c.m_Starter = false;
+			c.m_StarterLatched = false;
+			DebugNote("nobody at the controls: switched off");
+		}
+
 		switch (m_PowerState)
 		{
 			case geb_UFOPowerState.OFF:
@@ -848,30 +927,16 @@ class geb_UFO : Transport
 				break;
 		}
 
-		// left running with nobody at the controls, it idles where it has landed (on its legs, which carry
-		// 1 - groundHold of it parked, or on its hull), as a car left running does; it switches itself off after
-		// idleOffTime of that, so forgotten ones don't hum on for good
-		if (m_PowerState == geb_UFOPowerState.ON && !CrewDriver() && IsLanded() && GetVelocity(this).LengthSq() < 0.25)
-		{
-			m_SettledTime += dt;
-			if (m_IdleOffTime > 0 && m_SettledTime > m_IdleOffTime)
-			{
-				c.m_Power = false;
-				m_PowerState = geb_UFOPowerState.OFF;
-			}
-		}
-		else
-		{
-			m_SettledTime = 0;
-		}
-
 		float target = 0;
 		if (m_PowerState == geb_UFOPowerState.ON)
 			target = 1;
 		else if (m_PowerState == geb_UFOPowerState.STARTING)
 			target = 0.25 * m_SpoolTime / m_SpoolDuration;
 
-		m_Power += (target - m_Power) * Math.Clamp(dt / m_PowerLag, 0, 1);
+		float lag = m_PowerLag;
+		if (!pilot)
+			lag = UNPILOTED_POWER_LAG;
+		m_Power += (target - m_Power) * Math.Clamp(dt / lag, 0, 1);
 		if (target == 0 && m_Power < 0.002)
 			m_Power = 0;
 	}
@@ -895,15 +960,28 @@ class geb_UFO : Transport
 			m_GearPhase -= step;
 	}
 
-	bool IsGearDown()
+	//! A model-space point in the world, as the physics body stands this step (m_SimTm, see EOnSimulate).
+	vector SimPoint(vector modelPos)
 	{
-		return GetGearPhase() < 0.02;
+		return m_SimTm[3] + SimDir(modelPos);
+	}
+
+	//! A model-space direction in the world, as the physics body stands this step.
+	vector SimDir(vector modelDir)
+	{
+		return m_SimTm[0] * modelDir[0] + m_SimTm[1] * modelDir[1] + m_SimTm[2] * modelDir[2];
+	}
+
+	//! The body's velocity (the entity's own can lag it, as its transform does in a replayed step).
+	vector SimVelocity()
+	{
+		return dBodyGetVelocityAt(this, SimPoint(dBodyGetCenterOfMass(this)));
 	}
 
 	protected void SimulateLegs(float dt)
 	{
 		m_GroundShare = 0;
-		vector upW = VectorToParent(m_Up);
+		vector upW = SimDir(m_Up);
 		float load = 0;
 		bool down = m_GearPhase < 0.02;
 		foreach (geb_UFOLeg leg : m_Legs)
@@ -933,10 +1011,11 @@ class geb_UFO : Transport
 	{
 		geb_UFOControls c = m_FlightControls;
 		float mass = dBodyGetMass(this);
-		vector vel = GetVelocity(this);
-		vector upW = VectorToParent(m_Up);
-		vector fwdW = VectorToParent(m_Fwd);
-		vector sideW = VectorToParent(m_Side);
+		vector vel = SimVelocity();
+		vector upW = SimDir(m_Up);
+		vector fwdW = SimDir(m_Fwd);
+		vector sideW = SimDir(m_Side);
+		vector at = m_SimTm[3];
 		float p = m_Power;
 		m_Effort = 0;
 
@@ -983,7 +1062,7 @@ class geb_UFO : Transport
 		float climbWant = c.m_Climb * m_SinkRate;
 		if (c.m_Climb > 0)
 			climbWant = c.m_Climb * climbRate;
-		if (GetPosition()[1] > m_Ceiling && climbWant > 0)
+		if (at[1] > m_Ceiling && climbWant > 0)
 			climbWant = 0;
 		float aV = Math.Clamp((climbWant - vel[1]) * m_ClimbGain, -m_VertAccel, m_VertAccel);
 		float lift = mass * (GRAVITY + aV);
@@ -1315,6 +1394,8 @@ class geb_UFO : Transport
 		UpdateSleep();
 		if (m_DebugLog)
 			DebugReadout(timeSlice);
+		if (g_Game.IsServer() && m_FlightLoaded)
+			UpdateServerLooks();
 
 		#ifndef SERVER
 		UpdateVisuals(timeSlice);
@@ -1323,9 +1404,9 @@ class geb_UFO : Transport
 	}
 
 	/*!
-		This client has just taken the seat. Until now the server flew the craft (it idled where it was left,
-		or someone else had it), so this machine's drive and gear are stale: start from the server's. The
-		drive's switch matters most, as it isn't in the move: a craft left running stays running.
+		This client has just taken the seat. Until now the server flew the craft (it sat where it was left, or
+		someone else had it), so this machine's drive and gear are stale: start from the server's. The drive's
+		switch matters most, as it isn't in the move.
 	*/
 	protected void TakeOver()
 	{
@@ -1352,7 +1433,7 @@ class geb_UFO : Transport
 	protected void UpdateSleep()
 	{
 		bool simulates = g_Game.IsServer() || IsLocalPilot();
-		bool awake = simulates && (CrewDriver() != null || m_PowerState != geb_UFOPowerState.OFF);
+		bool awake = simulates && (HasLivePilot() || m_PowerState != geb_UFOPowerState.OFF);
 		if (awake)
 		{
 			// checked every frame, not just when it should change: the engine puts the body to sleep itself when
@@ -1429,6 +1510,14 @@ class geb_UFO : Transport
 		if (m_LookRefreshTime > 0)
 		{
 			m_LookRefreshTime -= dt;
+			RefreshLooks();
+		}
+
+		// and once a second anyway, for whatever else puts them back (the server keeps them too: UpdateServerLooks)
+		m_LookRecheckTime += dt;
+		if (m_LookRecheckTime >= LOOK_RECHECK_TIME)
+		{
+			m_LookRecheckTime = 0;
 			RefreshLooks();
 		}
 
@@ -1612,6 +1701,9 @@ class geb_UFO : Transport
 		super.EEHealthLevelChanged(oldLevel, newLevel, zone);
 
 		RefreshLooks();
+		m_ServerHullLook = -1;		// and the server sets its own again (UpdateServerLooks)
+		m_ServerGlassLook = -1;
+		m_ServerLitLook = -1;
 	}
 
 	//! As vanilla's cars: pristine and worn look new, damaged and badly damaged show it, ruined is burnt out.
@@ -1625,6 +1717,26 @@ class geb_UFO : Transport
 		return 0;
 	}
 
+	protected static string HullMaterial(int look)
+	{
+		if (look == 1)
+			return HULL_DAMAGE_MATERIAL;
+		if (look == 2)
+			return HULL_DESTRUCT_MATERIAL;
+
+		return HULL_MATERIAL;
+	}
+
+	protected static string GlassMaterial(int look)
+	{
+		if (look == 1)
+			return GLASS_DAMAGE_MATERIAL;
+		if (look == 2)
+			return GLASS_DESTRUCT_MATERIAL;
+
+		return GLASS_MATERIAL;
+	}
+
 	//! The hull scorched and the canopy's glass cracked as the Hull and Canopy zones wear down.
 	protected void UpdateDamageLook()
 	{
@@ -1632,25 +1744,15 @@ class geb_UFO : Transport
 		if (hull != m_HullLook)
 		{
 			m_HullLook = hull;
-			string hullMaterial = HULL_MATERIAL;
-			if (hull == 1)
-				hullMaterial = HULL_DAMAGE_MATERIAL;
-			else if (hull == 2)
-				hullMaterial = HULL_DESTRUCT_MATERIAL;
-			SetObjectMaterial(CAMO_INDEX, hullMaterial);
+			SetObjectMaterial(CAMO_INDEX, HullMaterial(hull));
 		}
 
 		int glass = DamageLook(GetHealthLevel("Canopy"));
 		if (glass != m_GlassLook)
 		{
 			m_GlassLook = glass;
-			string glassMaterial = GLASS_MATERIAL;
-			if (glass == 1)
-				glassMaterial = GLASS_DAMAGE_MATERIAL;
-			else if (glass == 2)
-				glassMaterial = GLASS_DESTRUCT_MATERIAL;
-			SetObjectMaterial(GLASS_INDEX, glassMaterial);
-			SetObjectMaterial(GLASS_IN_INDEX, glassMaterial);
+			SetObjectMaterial(GLASS_INDEX, GlassMaterial(glass));
+			SetObjectMaterial(GLASS_IN_INDEX, GlassMaterial(glass));
 		}
 	}
 
@@ -1662,11 +1764,16 @@ class geb_UFO : Transport
 
 		m_LitSet = true;
 		m_LitShown = lit;
+		SetLitLook(lit, m_ScreenFrame);
+	}
+
+	protected void SetLitLook(bool lit, int screenFrame)
+	{
 		if (lit)
 		{
 			SetObjectTexture(GLOW_INDEX, GLOW_LIT_TEXTURE);
 			SetObjectMaterial(GLOW_INDEX, GLOW_LIT_MATERIAL);
-			SetObjectTexture(SCREENS_INDEX, string.Format(SCREEN_FRAME_TEXTURE, m_ScreenFrame.ToStringLen(2)));
+			SetObjectTexture(SCREENS_INDEX, string.Format(SCREEN_FRAME_TEXTURE, screenFrame.ToStringLen(2)));
 			SetObjectMaterial(SCREENS_INDEX, SCREENS_LIT_MATERIAL);
 		}
 		else
@@ -1675,6 +1782,46 @@ class geb_UFO : Transport
 			SetObjectMaterial(GLOW_INDEX, GLOW_DARK_MATERIAL);
 			SetObjectTexture(SCREENS_INDEX, SCREENS_DARK_TEXTURE);
 			SetObjectMaterial(SCREENS_INDEX, SCREENS_DARK_MATERIAL);
+		}
+	}
+
+	/*!
+		The server keeps the hidden selections' materials too, as vanilla's cars keep their lights'
+		(CarScript.UpdateLightsServer): now and then the engine puts what the server has back on each client's
+		craft (the canopy moving, a hit, ...), and with nothing set there the hull came back flat black, without
+		its shine, until the canopy next moved (Cole, 2026-10-28), and the glow dark. Clients still set their own
+		(UpdateVisuals): the displays' frames and the field's flicker are theirs alone.
+	*/
+	protected void UpdateServerLooks()
+	{
+		int hull = DamageLook(GetHealthLevel("Hull"));
+		if (hull != m_ServerHullLook)
+		{
+			m_ServerHullLook = hull;
+			SetObjectMaterial(CAMO_INDEX, HullMaterial(hull));
+		}
+
+		int glass = DamageLook(GetHealthLevel("Canopy"));
+		bool lit = GetPowerLevel() > LIT_POWER;
+		int litLook = 0;
+		if (lit)
+			litLook = 1;
+		if (glass != m_ServerGlassLook || litLook != m_ServerLitLook)
+		{
+			if (glass != m_ServerGlassLook)
+			{
+				SetObjectMaterial(GLASS_INDEX, GlassMaterial(glass));
+				SetObjectMaterial(GLASS_IN_INDEX, GlassMaterial(glass));
+			}
+			if (litLook != m_ServerLitLook)
+				SetLitLook(lit, 0);
+
+			m_ServerGlassLook = glass;
+			m_ServerLitLook = litLook;
+			if (lit && glass < 2)
+				SetObjectTexture(FIELD_INDEX, FIELD_TEXTURE);
+			else
+				SetObjectTexture(FIELD_INDEX, "");
 		}
 	}
 
@@ -1778,12 +1925,27 @@ class geb_UFO : Transport
 			canopy = GetAnimationPhase(m_CanopySource);
 
 		m_LoopSound.Update(running, power * (700 + 300 * effort), effort, GetSpeedKmh(), canopy, campos);
+
+		// the game stopped a loop and geb_UFOSound started it again: worth a line while testing
+		int restarts = m_LoopSound.Restarts();
+		if (restarts != m_LoopRestartsSeen)
+		{
+			m_LoopRestartsSeen = restarts;
+			bool inside = campos == 0;
+			DebugNote("a drive sound stopped and was started again (" + restarts.ToString() + " so far; canopy " + canopy.ToString() + ", camera inside " + inside.ToString() + ")");
+		}
 	}
 
 	protected void PlayOnce(string soundSet)
 	{
-		if (soundSet != "")
-			SEffectManager.PlaySoundOnObject(soundSet, this);
+		if (soundSet == "")
+			return;
+
+		// freed once it has played (an EffectSound isn't by default: every switch, canopy and gear sound stayed
+		// registered with SEffectManager for the rest of the session)
+		EffectSound sound = SEffectManager.PlaySoundOnObject(soundSet, this);
+		if (sound)
+			sound.SetAutodestroy(true);
 	}
 
 	//! The canopy's servo, as a car door's sound: opening from shut, closing from open.

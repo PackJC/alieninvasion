@@ -21,6 +21,7 @@ class geb_Aliencrash extends CrashBase
 	// when it despawns (CE only removes the wreck with no players inside the event's cleanup radius).
 	protected ref array<EntityAI> m_Aliens = new array<EntityAI>;
 	protected bool m_SiteInitialized;
+	protected bool m_Restored;		//!< loaded from the server's storage after a restart (OnStoreLoad)
 
 	void geb_Aliencrash()
 	{
@@ -75,13 +76,23 @@ class geb_Aliencrash extends CrashBase
 		InitCrashSite();
 	}
 
+	// A wreck is saved like vanilla's Mi-8 wreck (storageCategory 4), so it comes back after a restart, and the
+	// salvage it dropped comes back with it as saved items. Without this it dropped a fresh rifle chance,
+	// cartridges and grenades beside them at every restart. Nothing is written, so the save format is unchanged.
+	override bool OnStoreLoad(ParamsReadContext ctx, int version)
+	{
+		m_Restored = true;
+		return super.OnStoreLoad(ctx, version);
+	}
+
 	protected void InitCrashSite()
 	{
 		if ( m_SiteInitialized || !GetGame().IsServer() )
 			return;
 
 		m_SiteInitialized = true;
-		SpawnLoot();
+		if ( !m_Restored )
+			SpawnLoot();
 		SpawnRadiationArea();
 
 		// Aliens only exist while someone is close enough to meet them, instead of idling at every crash site
@@ -214,6 +225,19 @@ class geb_Aliencrash extends CrashBase
 	{
 		if ( !GetAlienInvasionConfig().CrashGasZone )
 			return;
+
+		// a wreck back after a restart keeps a cloud that came back with it, if one did, rather than making a second
+		array<Object> nearby = new array<Object>;
+		GetGame().GetObjectsAtPosition(GetPosition(), 2, nearby, null);
+		foreach (Object obj : nearby)
+		{
+			geb_AlienRadiationArea area = geb_AlienRadiationArea.Cast(obj);
+			if ( area )
+			{
+				m_RadiationArea = area;
+				return;
+			}
+		}
 
 		m_RadiationArea = geb_AlienRadiationArea.Cast(GetGame().CreateObject("geb_AlienRadiationArea", GetPosition()));
 	}
