@@ -36,8 +36,9 @@ class geb_PlasmaGrenadeGlow extends PointLightBase
 // geb_PlasmaGrenade (data/config.cpp; model tools/plasmagrenade/build.py): an alien sticky grenade.
 //  - Prime and disarm it like any grenade's unpin and pin (geb_ActionPlasmaGrenade.c, vanilla Grenade_Base rules):
 //    the fuse starts when it leaves the hand primed and runs GEB_FUSE seconds.
-//  - Thrown (or dropped) unpinned, the first thing it touches holds it (server, EOnContact): the ball presses
-//    against the surface where it hit. Players, infected and animals carry it on their skin, on the bone of the
+//  - Thrown (or dropped) unpinned, the first thing it touches holds it (server: EOnContact keeps the touch, and
+//    the next frame geb_StickServer works out the stick, out of the physics step): the ball presses against the
+//    surface where it hit. Players, infected and animals carry it on their skin, on the bone of the
 //    body part it hit (geb_FindBodySurface: their contact shape is a movement capsule, not the body); cars and boats
 //    carry it on their body; anything else (ground, walls, trees, items) holds it where it is. It ignores its
 //    thrower for the first half second, so it can't stick to the throwing hand.
@@ -70,6 +71,14 @@ class geb_PlasmaGrenade : Grenade_Base
 	protected bool m_geb_StickQueued;
 	protected bool m_geb_HasHolder;
 	protected Object m_geb_Holder;			// what holds it; null when the world does
+
+	// The touch, as EOnContact saw it, for geb_StickServer: in the holder's model space when something holds it,
+	// else in the world's, so a holder that moves on before the next frame still gets it in the right place
+	protected vector m_geb_HitPos;			// where it touched
+	protected vector m_geb_HitNormal;		// the contact normal
+	protected vector m_geb_HitTravel;		// which way it was flying
+	protected vector m_geb_HitDir;			// which way it faced
+	protected vector m_geb_HitCentre;		// where its centre was
 
 	// The stick, synced: the holder's network id (both 0 when the world holds it), the bone (-1: the holder's
 	// origin) and the transform, local to that bone or holder (else in the world), as position and quaternion
@@ -184,37 +193,91 @@ class geb_PlasmaGrenade : Grenade_Base
 	// Sticking
 	// ------------------------------------------------------------------------------------------------------------
 
+	/*!
+		The first touch after leaving a hand unpinned. Only the touch itself is kept here; where it sticks (rays at
+		a body's fire geometry, its bones, the transform) is worked out on the next frame, out of the physics step
+		(geb_StickServer). Which way it was flying is the faster of the two bodies' velocities before the touch:
+		what it hits is static, or slower than a throw. It used to pick by matching Contact.Physics1 to
+		GetPhysics(), and a thrown grenade landing on the ground or anything static crashed there (a player's
+		report against 2.0.0, geb_plasmagrenade.c:191): that side of the contact has no physics body.
+	*/
 	override void EOnContact(IEntity other, Contact extra)
 	{
 		super.EOnContact(other, extra);
 
-		if ( !GetGame().IsServer() || !m_geb_Thrown || m_geb_Stuck || m_geb_StickQueued || IsPinned() )
+		if ( !GetGame().IsServer() || !m_geb_Thrown || m_geb_Stuck || m_geb_StickQueued || IsPinned() || !extra )
 			return;
 		if ( other && other == m_geb_Thrower && GetGame().GetTime() - m_geb_ThrowTime < GEB_THROWER_GRACE_MS )
 			return;
 
-		// Which way it was flying when it hit (the contact's other body is what it hit)
-		vector travel = extra.VelocityBefore2;
-		if ( extra.Physics1 == GetPhysics() )
-			travel = extra.VelocityBefore1;
+		vector travel = extra.VelocityBefore1;
+		vector travel2 = extra.VelocityBefore2;
+		if ( travel2.LengthSq() > travel.LengthSq() )
+			travel = travel2;
+		vector hitPos = extra.Position;
+		vector hitNormal = extra.Normal;
+		vector centre = ModelToWorld(m_geb_Centre);
+		vector facing = GetDirection();
 
 		Object holder = Object.Cast(other);
 		if ( !geb_CanHold(holder) )
 			holder = null;
 
+		m_geb_Holder = holder;
+		m_geb_HasHolder = holder != null;
+		if ( holder )
+		{
+			m_geb_HitPos = holder.WorldToModel(hitPos);
+			m_geb_HitNormal = holder.VectorToLocal(hitNormal);
+			m_geb_HitTravel = holder.VectorToLocal(travel);
+			m_geb_HitDir = holder.VectorToLocal(facing);
+			m_geb_HitCentre = holder.WorldToModel(centre);
+		}
+		else
+		{
+			m_geb_HitPos = hitPos;
+			m_geb_HitNormal = hitNormal;
+			m_geb_HitTravel = travel;
+			m_geb_HitDir = facing;
+			m_geb_HitCentre = centre;
+		}
+		m_geb_StickQueued = true;
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Call(geb_StickServer);
+	}
+
+	/*!
+		Where it sticks, from the touch EOnContact kept: mat is its transform, local to the bone (pivot) or the
+		holder it rides, else in the world.
+	*/
+	protected void geb_PlaceStick(Object holder, inout vector mat[4], out int pivot)
+	{
+		// the touch, back in the world as the holder stands now
+		vector hit = m_geb_HitPos;
+		vector normal = m_geb_HitNormal;
+		vector travel = m_geb_HitTravel;
+		vector facing = m_geb_HitDir;
+		vector centreWas = m_geb_HitCentre;
+		if ( holder )
+		{
+			hit = holder.ModelToWorld(m_geb_HitPos);
+			normal = holder.VectorToParent(m_geb_HitNormal);
+			travel = holder.VectorToParent(m_geb_HitTravel);
+			facing = holder.VectorToParent(m_geb_HitDir);
+			centreWas = holder.ModelToWorld(m_geb_HitCentre);
+		}
+
 		// On a body: the skin and the bone of the part it hit. Anywhere else: where it touched, the contact normal
 		// turned to face back the way it came (a fast throw can be a little past the surface by the time the
 		// contact comes, so the ball's own position can't tell the sides apart), or toward the ball if it was
 		// only dropped.
-		vector spot = extra.Position;
-		vector normal = extra.Normal;
+		vector spot = hit;
 		float sink = GEB_SINK;
 		bool onBody = false;
-		int pivot = -1;
+		pivot = -1;
 		if ( holder && geb_IsBody(holder) )
 		{
 			int component = -1;
-			onBody = geb_FindBodySurface(holder, extra.Position, travel, spot, normal, component);
+			onBody = geb_FindBodySurface(holder, hit, travel, spot, normal, component);
 			if ( onBody )
 			{
 				sink = GEB_SINK_BODY;
@@ -230,21 +293,22 @@ class geb_PlasmaGrenade : Grenade_Base
 				if ( vector.Dot(normal, travel) > 0 )
 					normal = -normal;
 			}
-			else if ( vector.Dot(normal, ModelToWorld(m_geb_Centre) - spot) < 0 )
+			else if ( vector.Dot(normal, centreWas - spot) < 0 )
 			{
 				normal = -normal;
 			}
 		}
+		if ( normal.LengthSq() < 0.0001 )
+			normal = vector.Up;
 		normal.Normalize();
 
 		// The ball pressed against the surface, turned about the normal the way it flew
-		vector dir = geb_Flatten(GetDirection(), normal);
+		vector dir = geb_Flatten(facing, normal);
 		if ( dir.LengthSq() < 0.01 )
 			dir = geb_Flatten(vector.Forward, normal);
 		if ( dir.LengthSq() < 0.01 )
 			dir = geb_Flatten(vector.Aside, normal);
 		dir.Normalize();
-		vector mat[4];
 		Math3D.DirectionAndUpMatrix(dir, normal, mat);
 		vector centre = spot + normal * (GEB_RADIUS - sink);
 		mat[3] = centre - mat[0] * m_geb_Centre[0] - mat[1] * m_geb_Centre[1] - mat[2] * m_geb_Centre[2];
@@ -260,14 +324,6 @@ class geb_PlasmaGrenade : Grenade_Base
 			Math3D.MatrixInvMultiply4(parentMat, mat, mat);
 			Math3D.MatrixOrthogonalize4(mat);
 		}
-
-		m_geb_Holder = holder;
-		m_geb_HasHolder = holder != null;
-		m_geb_Pivot = pivot;
-		geb_StoreTransform(mat);
-		m_geb_StickQueued = true;
-		// Physics can't be changed inside its own contact callback: stick on the next frame
-		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Call(geb_StickServer);
 	}
 
 	protected vector geb_Flatten(vector v, vector normal)
@@ -442,6 +498,12 @@ class geb_PlasmaGrenade : Grenade_Base
 		// What it hit went away in the meantime: the next touch sticks it instead
 		if ( m_geb_HasHolder && !m_geb_Holder )
 			return;
+
+		vector mat[4];
+		int pivot = -1;
+		geb_PlaceStick(m_geb_Holder, mat, pivot);
+		m_geb_Pivot = pivot;
+		geb_StoreTransform(mat);
 
 		int low = 0;
 		int high = 0;

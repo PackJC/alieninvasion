@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+- **Throwing a primed Plasma Grenade no longer crashes the game.** Thrown after priming, it crashed as it landed on the ground or anything else that doesn't move (a script error in `EOnContact`). Where it sticks is now worked out on the next frame, outside the physics step.
+
 ## 2.0.0
 
 Works on DayZ 1.30 (scripts, configs and mission files checked against the 1.30 release; nothing needed changing).

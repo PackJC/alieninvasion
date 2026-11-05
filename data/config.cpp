@@ -1115,6 +1115,7 @@ class cfgVehicles
 		model="\alieninvasion\data\plasmagrenade\geb_plasmagrenade.p3d";
 		ammoType="geb_PlasmaGrenade_Ammo";
 		weight=400;
+		itemSize[]={1,1};
 		// The glowing slits (magenta) and pin lights (cyan), model.cfg sections: the script gives them the
 		// blue-white _armed texture and the brighter _light_armed material while the grenade is armed
 		hiddenSelections[]=
