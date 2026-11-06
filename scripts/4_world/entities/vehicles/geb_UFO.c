@@ -331,8 +331,9 @@ class geb_UFO : Transport
 	protected geb_UFOLight m_UnderLight;
 	protected geb_UFOCockpitLight m_CockpitLight;
 
-	// vehicle actions (get in, the canopy), shared by every craft of a type
+	// vehicle actions, shared by every craft of a type (it has none of its own: SetActions)
 	static ref map<typename, ref TInputActionMap> s_geb_UFOActionMaps = new map<typename, ref TInputActionMap>();
+	protected static ref array<geb_UFO> s_geb_All = new array<geb_UFO>();	//!< every UFO on this machine (GetAll)
 	protected TInputActionMap m_InputActionMap;
 	protected bool m_ActionsInitialized;
 
@@ -378,11 +379,19 @@ class geb_UFO : Transport
 	{
 		super.EEInit();
 
+		s_geb_All.Insert(this);
 		LoadFlight();
+	}
+
+	//! Every UFO on this machine (the outside actions look for the one beside the player: geb_UFOActions)
+	static array<geb_UFO> GetAll()
+	{
+		return s_geb_All;
 	}
 
 	override void EEDelete(EntityAI parent)
 	{
+		s_geb_All.RemoveItem(this);
 		DestroyLights();
 		StopEffects();
 		if (m_LoopSound)
@@ -605,16 +614,20 @@ class geb_UFO : Transport
 	}
 
 	/*!
-		The chat, a menu or the inventory is open: the craft's keys do nothing, and the sticks spring back as if
-		let go. Those put vanilla's input excludes on, which hold back vanilla's own vehicle keys but not a mod's,
-		so typing W, C or G into the chat flew the craft or worked its legs.
+		The chat, a menu, the inventory or the map is open (each is a scripted menu): the craft's keys do nothing,
+		and the sticks spring back as if let go. Vanilla's input excludes hold back its own vehicle keys there but
+		not a mod's, so typing W, C or G into the chat flew the craft or worked its legs.
+		Not Mission.IsControlDisabled(): it counts every active exclude, and sitting in any vehicle turns on
+		vanilla's "vehicledriving" one (PlayerBase.OnCommandVehicleStart), so no key worked and the craft
+		wouldn't lift off at all (Cole, 2026-11-05).
 	*/
 	protected bool InputsBlocked()
 	{
-		if (g_Game.GetUIManager() && g_Game.GetUIManager().GetMenu())
+		UIManager ui = g_Game.GetUIManager();
+		if (ui && ui.GetMenu())
 			return true;
 
-		return g_Game.GetMission() && g_Game.GetMission().IsControlDisabled();
+		return false;
 	}
 
 	protected void ReadPilotInput(float dt)
@@ -1985,18 +1998,6 @@ class geb_UFO : Transport
 		return vector.Distance(here, pos) <= m_Reach;
 	}
 
-	//! Whether someone standing at pos is at the boarding place on the left rim.
-	bool IsAtDoor(vector pos, float distance)
-	{
-		if (m_DoorPoint == "" || !MemoryPointExists(m_DoorPoint))
-			return false;
-
-		vector door = ModelToWorld(GetMemoryPointPos(m_DoorPoint));
-		door[1] = 0;
-		pos[1] = 0;
-		return vector.Distance(door, pos) <= distance;
-	}
-
 	/*!
 		Puts someone who has just got out on the ground beside the left rim: the driver's get-out animation
 		leaves them standing on the hull. Jumping out in the air, they fall from beside the rim.
@@ -2018,21 +2019,6 @@ class geb_UFO : Transport
 	override bool CrewCanGetThrough(int posIdx)
 	{
 		return IsCanopyOpen();
-	}
-
-	/*!
-		Getting in: from the boarding place on the left rim looking at the rim, or from anywhere round the craft
-		looking at the seat itself over the rim (the View Geometry block "seat_view" on its back and headrest,
-		in sight with the canopy open). The get-in animation starts from the boarding place either way.
-	*/
-	override bool CanReachSeatFromDoors(string pSeatSelection, vector pFromPos, float pDistance = 1.0)
-	{
-		string selection = pSeatSelection;
-		selection.ToLower();
-		if (selection == "seat_view")
-			return IsWithinReach(pFromPos);
-
-		return IsAtDoor(pFromPos, pDistance + 1.0);
 	}
 
 	override bool CanReachDoorsFromSeat(string pDoorsSelection, int pCurrentSeat)
@@ -2083,11 +2069,10 @@ class geb_UFO : Transport
 		actions = none;
 	}
 
+	//! None of its own: opening the canopy, getting in and closing it are the player's actions, which find the
+	//! craft themselves (geb_ActionUFO.c), as from the seat
 	void SetActions()
 	{
-		AddAction(ActionGetInTransport);
-		AddAction(geb_ActionOpenUFOCanopy);
-		AddAction(geb_ActionCloseUFOCanopy);
 	}
 
 	void AddAction(typename actionName)

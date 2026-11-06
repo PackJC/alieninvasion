@@ -1,9 +1,10 @@
 /*
 	The pilot of a flyable UFO (geb_UFO.c).
 
-	What they can do from the seat - power up and down, open and close the
-	canopy - are the player's actions, as vanilla's start-engine and car door
-	actions are (geb_ActionUFO.c).
+	What they can do with a UFO are the player's actions (geb_ActionUFO.c):
+	from beside it, open the canopy, get in and close it; from the seat, power
+	up and down and open and close the canopy, as vanilla's start-engine and
+	car door actions are.
 
 	Getting out: the pilot's seat uses a car driver's animations, and a car
 	driver climbs out to the left, which on a six-metre saucer leaves them
@@ -21,6 +22,9 @@ modded class PlayerBase
 	{
 		super.SetActions(InputActionMap);
 
+		AddAction(geb_ActionOpenUFOCanopy, InputActionMap);
+		AddAction(geb_ActionGetInUFO, InputActionMap);
+		AddAction(geb_ActionCloseUFOCanopy, InputActionMap);
 		AddAction(geb_ActionUFOPowerOn, InputActionMap);
 		AddAction(geb_ActionUFOPowerOff, InputActionMap);
 		AddAction(geb_ActionOpenUFOCanopyInside, InputActionMap);

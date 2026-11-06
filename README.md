@@ -95,7 +95,7 @@ A dark violet alloy ball held like the M67. Prime it and throw it: it sticks to 
 
 A six-metre black saucer trimmed in lime light, with a glass dome over a one-seat cockpit. Nothing spawns it: place `geb_UFO` with an admin tool, and it's saved with the server's vehicles.
 
-- Open the canopy (F) from outside and climb in over the left rim. Hold the start action to power up; click to power down once you're on the ground.
+- Stand beside it and look at any part of it to open the canopy (F), and with it open to climb in. Close it by looking at the canopy itself, or from the seat. Hold the start action to power up; click to power down once you're on the ground.
 - Fly with W/S (forward, back), A/D (turn), Q/E (slide), Space/C (up, down), Shift (boost) and G (landing legs), rebindable under Settings > Controls > Alien Invasion UFO. It tops out around 200 km/h, or 320 km/h with boost; let go and it brakes to a hover.
 - Switched off, or left with nobody at the controls in mid-air, it falls. Hard knocks scorch the hull and crack the glass, and a wreck won't power up.
 - A HUD shows the speed, height, climb, drive, gear, canopy and condition.

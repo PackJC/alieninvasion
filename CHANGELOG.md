@@ -3,7 +3,9 @@
 ## Unreleased
 
 ### Fixed
-- **Throwing a primed Plasma Grenade no longer crashes the game.** Thrown after priming, it crashed as it landed on the ground or anything else that doesn't move (a script error in `EOnContact`). Where it sticks is now worked out on the next frame, outside the physics step.
+- **The Flying Saucer flies again.** In 2.0.0 none of its flight keys worked once you were in the seat, so it powered up but wouldn't lift off. A check meant to stop chat typing from flying it also counted the input block the game sets for anyone sitting in a vehicle.
+- **Getting into the Flying Saucer and opening its canopy are easier.** Stand beside it and look at any part of it: you can open the canopy, and with it open, get in. You no longer have to find one spot on the left rim, and looking at the dome or the seat works now: they were too high for the game's 3 m reach for actions, so looking at them offered nothing. To close the canopy, look at the canopy itself or close it from the seat, so closing no longer gets in the way of climbing in.
+- **Throwing a primed Plasma Grenade no longer crashes the game or the server.** Thrown after priming, it crashed as it touched something, reading part of the collision data the game doesn't reliably fill in (which way the bodies were moving). It now remembers its own speed and direction as it flies, and works out where it sticks on the next frame, outside the physics step.
 
 ## 2.0.0
 
@@ -16,7 +18,7 @@ Stored Montauk Rifles: the rifle now takes 8×3 slots instead of 5×3 and has no
 ### Added
 - **Flying Saucer** (`geb_UFO`), a UFO you can fly.
   - A six-metre saucer of polished black metal trimmed in lime light, with a glass dome over a one-seat cockpit: a contoured, quilted pilot's seat with glowing control orbs, a flight yoke your hands rest on, and a curved piano-black dash with two live displays (the craft's systems, alien readouts) and a turning radar table with a hologram globe floating over it. Glass pipes of glowing lime fluid run round the cockpit's back wall, up the back of the seat and coil round its pedestal. Outside, chrome ribs with light lines run over the top between the lamps, with vents and antennas; heat-sink fins and three glowing thrusters sit underneath. Switched off, its trim keeps a faint standby glow.
-  - The canopy swings up from its hinge at the back. Open and close it from outside or from the seat (F). You climb in and out over the left rim, and only with the canopy open: look at the rim there, or at the seat over the rim from anywhere round the craft.
+  - The canopy swings up from its hinge at the back. Stand beside the saucer and look at any part of it to open the canopy (F), and with it open to climb in. To close it, look at the canopy itself, or close it from the seat.
   - Hold the start action to power up: the trim and lamps light, the screens wake, a green glow spreads underneath and the drive starts to hum. A glowing hex field comes up inside the glass dome and slowly turns, and green sparks fall from the emitter under its belly. Click to power down once you're on the ground.
   - Low over land, its downwash throws dust out across the ground below, more the lower and harder it works.
   - It has its own controls, which you can rebind under Settings > Controls > Alien Invasion UFO: W/S forward and back, A/D turn, Q/E slide sideways, Space/C up and down, Shift boost, G landing gear. It tops out around 200 km/h, or 320 km/h with boost, and climbs at 10 m/s.

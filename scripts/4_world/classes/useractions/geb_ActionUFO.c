@@ -2,9 +2,19 @@
 	The flyable UFO's actions (geb_UFO.c).
 
 	The canopy is an animation on the craft, not a door item, and the craft is
-	not a car, so vanilla's car door actions never see it. Outside, the canopy
-	actions are the craft's own (geb_UFO.SetActions); from the seat they, and
-	powering up and down, are the player's (geb_UFOCrew.c).
+	not a car, so vanilla's car door actions never see it. All of these are the
+	player's own actions (geb_UFOCrew.c): outside, opening the canopy, getting in
+	and closing it; from the seat, opening and closing it and powering up and
+	down.
+
+	Outside, they find the craft themselves (geb_UFOActions.LookedAt). Vanilla's
+	action targets only count what you look at within 3 m of your feet
+	(ActionTargets.ComputeUtility), and on a six-metre saucer the dome, the open
+	canopy and the seat stand higher than that, so looking at them offered
+	nothing, and getting in meant finding one block on the left rim (Cole,
+	2026-11-05: players had trouble getting in and opening it). Now, from beside
+	the craft: look at any part of it to open the canopy, or with it open to get
+	in; look at the canopy itself to close it.
 
 	Power works the drive's switch on the server and on the pilot's client
 	alike (OnStart, OnEnd, OnExecute run on both), as vanilla's engine actions
@@ -14,6 +24,102 @@
 */
 class geb_UFOActions
 {
+	static const float LOOK_RANGE = 8;		//!< m from the camera an outside action sees the craft
+	static const int PILOT_SEAT = 0;		//!< crew position of the craft's one seat (data/ufo/config.cpp Crew Driver)
+
+	// LookedAt, worked out once a frame however many actions ask
+	protected static int s_LookTime = -1;
+	protected static PlayerBase s_LookPlayer;
+	protected static geb_UFO s_LookUFO;
+	protected static bool s_LookCanopy;
+
+	//! The closest UFO the player can reach from where they stand (geb_UFO.IsWithinReach), or null.
+	static geb_UFO NearestUFO(PlayerBase player)
+	{
+		if (!player)
+			return null;
+
+		geb_UFO best;
+		float bestDistSq = 1000000;
+		vector pos = player.GetPosition();
+		array<geb_UFO> all = geb_UFO.GetAll();
+		foreach (geb_UFO ufo : all)
+		{
+			if (!ufo || !ufo.IsWithinReach(pos))
+				continue;
+
+			float distSq = vector.DistanceSq(ufo.GetPosition(), pos);
+			if (distSq < bestDistSq)
+			{
+				bestDistSq = distSq;
+				best = ufo;
+			}
+		}
+		return best;
+	}
+
+	/*!
+		The UFO an outside action works on: the one beside the player that they're looking at, and whether they're
+		looking at its canopy (the View Geometry block "canopy", which swings up with it). Their own machine casts
+		a ray from the camera at the craft's View Geometry, as far as LOOK_RANGE. The server has no camera: it
+		takes the craft beside them, the player's machine having checked what they look at.
+	*/
+	static geb_UFO LookedAt(PlayerBase player, out bool atCanopy)
+	{
+		int now = g_Game.GetTime();
+		if (now != s_LookTime || player != s_LookPlayer)
+		{
+			s_LookTime = now;
+			s_LookPlayer = player;
+			s_LookUFO = FindLookedAt(player, s_LookCanopy);
+		}
+
+		atCanopy = s_LookCanopy;
+		return s_LookUFO;
+	}
+
+	protected static geb_UFO FindLookedAt(PlayerBase player, out bool atCanopy)
+	{
+		atCanopy = false;
+		geb_UFO near = NearestUFO(player);
+		if (!near)
+			return null;
+
+		if (g_Game.IsDedicatedServer())
+		{
+			atCanopy = true;
+			return near;
+		}
+
+		vector from = g_Game.GetCurrentCameraPosition();
+		vector to = from + g_Game.GetCurrentCameraDirection() * LOOK_RANGE;
+		vector hitPos;
+		vector hitDir;
+		int component = -1;
+		set<Object> hits = new set<Object>;
+		if (!DayZPhysics.RaycastRV(from, to, hitPos, hitDir, component, hits, null, player, false, false, ObjIntersectView))
+			return null;
+
+		// the first thing the ray meets: the craft itself, or someone sitting in it
+		for (int i = 0; i < hits.Count(); i++)
+		{
+			Object hit = hits.Get(i);
+			if (!hit)
+				continue;
+
+			if (hit == near)
+			{
+				atCanopy = near.IsActionComponentPartOfSelection(component, "canopy", "view");
+				return near;
+			}
+			if (hit.GetParent() == near)
+				return near;
+
+			return null;
+		}
+		return null;
+	}
+
 	//! The UFO the player is flying, or null.
 	static geb_UFO GetPilotedUFO(PlayerBase player)
 	{
@@ -62,16 +168,17 @@ class geb_ActionUFOCanopyBase : ActionInteractBase
 		m_ConditionTarget = new CCTNone();
 	}
 
-	protected geb_UFO GetUFO(ActionTarget target)
+	//! The craft finds itself (geb_UFOActions.LookedAt), out of vanilla's 3 m reach for action targets
+	override bool HasTarget()
 	{
-		if (!target)
-			return null;
+		return false;
+	}
 
-		geb_UFO ufo = geb_UFO.Cast(target.GetObject());
-		if (!ufo)
-			ufo = geb_UFO.Cast(target.GetParent());
-
-		return ufo;
+	//! The craft whose canopy it swings: outside, the one the player looks at
+	protected geb_UFO ActionUFO(PlayerBase player)
+	{
+		bool atCanopy;
+		return geb_UFOActions.LookedAt(player, atCanopy);
 	}
 
 	protected bool IsSwingNeeded(geb_UFO ufo)
@@ -82,17 +189,20 @@ class geb_ActionUFOCanopyBase : ActionInteractBase
 		return !ufo.IsCanopyShut();
 	}
 
+	//! It opens looking at any part of the craft, and closes only looking at the canopy itself: anywhere, it
+	//! would stand in the way of getting in as you look at the craft to climb in.
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
 	{
 		// from the seat, the inside actions below
 		if (player.GetCommand_Vehicle())
 			return false;
 
-		geb_UFO ufo = GetUFO(target);
+		bool atCanopy;
+		geb_UFO ufo = geb_UFOActions.LookedAt(player, atCanopy);
 		if (!ufo || ufo.GetCanopySource() == "")
 			return false;
 
-		if (!ufo.IsWithinReach(player.GetPosition()))
+		if (!m_IsOpening && !atCanopy)
 			return false;
 
 		return IsSwingNeeded(ufo);
@@ -102,7 +212,7 @@ class geb_ActionUFOCanopyBase : ActionInteractBase
 	{
 		super.OnStartServer(action_data);
 
-		SwingCanopy(GetUFO(action_data.m_Target));
+		SwingCanopy(ActionUFO(action_data.m_Player));
 	}
 
 	protected void SwingCanopy(geb_UFO ufo)
@@ -156,22 +266,15 @@ class geb_ActionUFOCanopyInsideBase : geb_ActionUFOCanopyBase
 		return IsSwingNeeded(ufo);
 	}
 
-	override void OnStartServer(ActionData action_data)
+	//! From the seat, the craft they sit in
+	override protected geb_UFO ActionUFO(PlayerBase player)
 	{
-		// the outside action's swing finds no UFO at a target from the seat
-		super.OnStartServer(action_data);
-
-		SwingCanopy(geb_UFOActions.GetRiddenUFO(action_data.m_Player));
+		return geb_UFOActions.GetRiddenUFO(player);
 	}
 
 	override bool CanBeUsedInVehicle()
 	{
 		return true;
-	}
-
-	override bool HasTarget()
-	{
-		return false;
 	}
 };
 
@@ -192,6 +295,128 @@ class geb_ActionCloseUFOCanopyInside : geb_ActionUFOCanopyInsideBase
 		m_IsOpening = false;
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_DRIVER_DOOR_CLOSE;
 		m_Text = "#close";
+	}
+};
+
+/*!
+	Getting in: looking at any part of the craft from beside it, with the canopy open. Vanilla's
+	ActionGetInTransport takes the seat from the part you look at (Crew actionSel), so it only came up on one block
+	on the left rim, or the seat over it out of its 3 m reach. Otherwise it is vanilla's: the get-in animation
+	from the boarding place, and the seat taken through an inventory juncture.
+*/
+class geb_ActionGetInUFO : ActionBase
+{
+	void geb_ActionGetInUFO()
+	{
+		m_StanceMask = DayZPlayerConstants.STANCEMASK_CROUCH | DayZPlayerConstants.STANCEMASK_ERECT;
+		m_Text = "#get_in_vehicle";
+	}
+
+	override void CreateConditionComponents()
+	{
+		m_ConditionItem = new CCINone();
+		m_ConditionTarget = new CCTNone();
+	}
+
+	override typename GetInputType()
+	{
+		return ContinuousInteractActionInput;
+	}
+
+	override bool HasProgress()
+	{
+		return false;
+	}
+
+	override bool HasTarget()
+	{
+		return false;
+	}
+
+	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
+	{
+		if (player.GetCommand_Vehicle())
+			return false;
+
+		if (player.GetItemInHands() && player.GetItemInHands().IsHeavyBehaviour())
+			return false;
+
+		bool atCanopy;
+		geb_UFO ufo = geb_UFOActions.LookedAt(player, atCanopy);
+		if (!ufo || !ufo.CanGetIn())
+			return false;
+
+		int seat = geb_UFOActions.PILOT_SEAT;
+		if (ufo.CrewMember(seat))
+			return false;
+
+		return ufo.CrewCanGetThrough(seat) && ufo.IsAreaAtDoorFreeDiag(seat);
+	}
+
+	//! The craft they get into: the one they look at, else (the server) the one beside them
+	protected geb_UFO ActionUFO(PlayerBase player)
+	{
+		bool atCanopy;
+		geb_UFO ufo = geb_UFOActions.LookedAt(player, atCanopy);
+		if (!ufo)
+			ufo = geb_UFOActions.NearestUFO(player);
+		return ufo;
+	}
+
+	override void Start(ActionData action_data)
+	{
+		super.Start(action_data);
+
+		geb_UFO ufo = ActionUFO(action_data.m_Player);
+		if (!ufo)
+			return;
+
+		int seat = geb_UFOActions.PILOT_SEAT;
+		HumanCommandVehicle vehCommand = action_data.m_Player.StartCommand_Vehicle(ufo, seat, ufo.GetSeatAnimationType(seat));
+		if (vehCommand)
+		{
+			vehCommand.SetVehicleType(ufo.GetAnimInstance());
+			GetDayZGame().GetBacklit().OnEnterCar();
+		}
+	}
+
+	override bool CanBeUsedInRestrain()
+	{
+		return true;
+	}
+
+	override void OnUpdate(ActionData action_data)
+	{
+		if (action_data.m_State == UA_START)
+		{
+			if (!action_data.m_Player.GetCommand_Vehicle() || !action_data.m_Player.GetCommand_Vehicle().IsGettingIn())
+				End(action_data);
+		}
+	}
+
+	override int GetActionCategory()
+	{
+		return AC_INTERACT;
+	}
+
+	override void OnEnd(ActionData action_data)
+	{
+	}
+
+	//! The seat, reserved on the server before anyone else can take it
+	override bool AddActionJuncture(ActionData action_data)
+	{
+		geb_UFO ufo = ActionUFO(action_data.m_Player);
+		if (!ufo)
+			return false;
+
+		InventoryLocation il = new InventoryLocation;
+		il.SetVehicle(ufo, action_data.m_Player, geb_UFOActions.PILOT_SEAT);
+		if (!g_Game.AddInventoryJunctureEx(action_data.m_Player, action_data.m_Player, il, true, 10000, action_data))
+			return false;
+
+		action_data.m_ReservedInventoryLocations.Insert(il);
+		return true;
 	}
 };
 
@@ -336,6 +561,7 @@ modded class ActionConstructor
 	{
 		super.RegisterActions(actions);
 
+		actions.Insert(geb_ActionGetInUFO);
 		actions.Insert(geb_ActionOpenUFOCanopy);
 		actions.Insert(geb_ActionCloseUFOCanopy);
 		actions.Insert(geb_ActionOpenUFOCanopyInside);

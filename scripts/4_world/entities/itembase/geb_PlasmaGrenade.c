@@ -79,6 +79,7 @@ class geb_PlasmaGrenade : Grenade_Base
 	protected vector m_geb_HitTravel;		// which way it was flying
 	protected vector m_geb_HitDir;			// which way it faced
 	protected vector m_geb_HitCentre;		// where its centre was
+	protected vector m_geb_FlightVelocity;	// server: its velocity last frame while it flew (EOnFrame)
 
 	// The stick, synced: the holder's network id (both 0 when the world holds it), the bone (-1: the holder's
 	// origin) and the transform, local to that bone or holder (else in the world), as position and quaternion
@@ -182,6 +183,9 @@ class geb_PlasmaGrenade : Grenade_Base
 			m_geb_Thrown = true;
 			m_geb_Thrower = oldLoc.GetParent();
 			m_geb_ThrowTime = GetGame().GetTime();
+			m_geb_FlightVelocity = vector.Zero;
+			if ( GetGame().IsServer() )
+				SetEventMask(EntityEvent.FRAME);
 		}
 
 		// the armed look shows in hands and out in the world, not inside a bag
@@ -196,10 +200,11 @@ class geb_PlasmaGrenade : Grenade_Base
 	/*!
 		The first touch after leaving a hand unpinned. Only the touch itself is kept here; where it sticks (rays at
 		a body's fire geometry, its bones, the transform) is worked out on the next frame, out of the physics step
-		(geb_StickServer). Which way it was flying is the faster of the two bodies' velocities before the touch:
-		what it hits is static, or slower than a throw. It used to pick by matching Contact.Physics1 to
-		GetPhysics(), and a thrown grenade landing on the ground or anything static crashed there (a player's
-		report against 2.0.0, geb_plasmagrenade.c:191): that side of the contact has no physics body.
+		(geb_StickServer). Of the contact it reads only Position and Normal, as vanilla's handlers do: reading its
+		velocity fields (VelocityBefore1/2, further into it) crashed the game itself, an access violation copying
+		a vector, which the script log puts on the early-return line (a player's report against 2.0.0 at line 191,
+		then Cole's server at line 208, 2026-11-05). Which way it was flying is its own velocity in the frame
+		before the touch (EOnFrame).
 	*/
 	override void EOnContact(IEntity other, Contact extra)
 	{
@@ -210,10 +215,7 @@ class geb_PlasmaGrenade : Grenade_Base
 		if ( other && other == m_geb_Thrower && GetGame().GetTime() - m_geb_ThrowTime < GEB_THROWER_GRACE_MS )
 			return;
 
-		vector travel = extra.VelocityBefore1;
-		vector travel2 = extra.VelocityBefore2;
-		if ( travel2.LengthSq() > travel.LengthSq() )
-			travel = travel2;
+		vector travel = m_geb_FlightVelocity;
 		vector hitPos = extra.Position;
 		vector hitNormal = extra.Normal;
 		vector centre = ModelToWorld(m_geb_Centre);
@@ -324,6 +326,26 @@ class geb_PlasmaGrenade : Grenade_Base
 			Math3D.MatrixInvMultiply4(parentMat, mat, mat);
 			Math3D.MatrixOrthogonalize4(mat);
 		}
+	}
+
+	//! Server, while it flies after leaving a hand unpinned: its velocity, for which way it was going when it
+	//! touches something (EOnContact). Stops once it has stuck or is pinned again.
+	override void EOnFrame(IEntity other, float timeSlice)
+	{
+		super.EOnFrame(other, timeSlice);
+
+		if ( !GetGame().IsServer() )
+			return;
+
+		if ( !m_geb_Thrown || m_geb_Stuck || IsPinned() )
+		{
+			ClearEventMask(EntityEvent.FRAME);
+			return;
+		}
+
+		// the throw makes its physics body a moment after it leaves the hand
+		if ( dBodyIsSet(this) )
+			m_geb_FlightVelocity = GetVelocity(this);
 	}
 
 	protected vector geb_Flatten(vector v, vector normal)
